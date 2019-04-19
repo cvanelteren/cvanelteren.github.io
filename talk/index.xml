@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks on Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/talk/</link>
+    <description>Recent content in Recent &amp; Upcoming Talks on Casper van Elteren</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 14 Apr 2019 14:28:47 +0200</lastBuildDate>
+    
+	<atom:link href="https://cvanelteren.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>What node is most important?</title>
+      <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
+      <description>I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks. Additionally, the same slides were shown at the simulation based science group at the institute for advanced studies (IAS) at the university of Amsterdam. The talk concerned my research on the identification of driver-nodes in complex dynamical systems.</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,71 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Casper van Elteren on Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/</link>
+    <description>Recent content in Casper van Elteren on Casper van Elteren</description>
+    <generator>Source Themes Academic (https://sourcethemes.com/academic/)</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
+    <atom:link href="/" rel="self" type="application/rss+xml" />
+    
+    <item>
+      <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
+      <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What node is most important?</title>
+      <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
+      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
+Additionally, the same slides were shown at the simulation based science group at the institute
+for advanced studies (IAS) at the university of Amsterdam.
+The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Information impact</title>
+      <link>https://cvanelteren.github.io/project/information_impact/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://cvanelteren.github.io/project/information_impact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>FishViewer</title>
+      <link>https://cvanelteren.github.io/project/fishviewer/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistical machine learning</title>
+      <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Toy dynamical systems</title>
+      <link>https://cvanelteren.github.io/project/toymodels/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/project/toymodels/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>
