@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>signal analysis on Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/tags/signal-analysis/</link>
+    <description>Recent content in signal analysis on Casper van Elteren</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    <lastBuildDate>Sat, 06 Jul 2019 14:00:00 +0200</lastBuildDate>
+    
+	<atom:link href="https://cvanelteren.github.io/tags/signal-analysis/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title>Interview at INRIA institute</title>
+      <link>https://cvanelteren.github.io/post/nicolas/</link>
+      <pubDate>Sat, 06 Jul 2019 14:00:00 +0200</pubDate>
+      
+      <guid>https://cvanelteren.github.io/post/nicolas/</guid>
+      <description>PhD application with Nicolas Brodu</description>
+    </item>
+    
+  </channel>
+</rss>

@@ -17,7 +17,7 @@
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://cvanelteren.github.io/project/information_impact/</guid>
-      <description></description>
+      <description>A general toolbox for analyzing discrete complex dynamic systems using information theory.</description>
     </item>
     
     <item>
@@ -26,7 +26,7 @@
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
-      <description></description>
+      <description>A fast 3D viewer for analyzing large scale brain data.</description>
     </item>
     
     <item>
@@ -35,7 +35,7 @@
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
-      <description></description>
+      <description>Some lab reports part of master the course statistical machine learning.</description>
     </item>
     
     <item>
@@ -44,7 +44,7 @@
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://cvanelteren.github.io/project/toymodels/</guid>
-      <description></description>
+      <description>Various simple computational models ranging from Ising model, cellular automatons (1D and 2D), Izhikevich neurons, and the Nubian sandpile.</description>
     </item>
     
   </channel>

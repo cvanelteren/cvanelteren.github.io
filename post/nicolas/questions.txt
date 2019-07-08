@@ -1,0 +1,14 @@
+Question 1: The file "series.txt" contains 20 time series, one per column, with values on each line. Perform a principal component analysis on all the series, so as to retain only their projections onto a small set of principal components. Plot the proportion of variance retained on each of the first 5 components. Plot the series associated with the first 3 components in 3D. What do you observe ? Bonus: name this object.
+
+Question 2: Here are two signals, one acquired at 0.5Hz by a temperature sensor inside a volcano fumarole, one produced by a model of steam propagation in the volcano. Plot the power spectrum of each signal, represented as power vs period, for periods between 4s and 15min. Show that the real data has a power peak in a range that you should determine, which is absent in the model. Bonus: an hypothesis for what kind of geophysical process may act at this time scale.
+
+Question 3: These two series are generated using stochastic differential equations of the form dX = f(X)dt + g(X)dW. One of these series has a cubic drift as a function of X, the other has a linear drift. Which is which? Assuming one could have infinite precision: for each series, would we see discontinuities (and why)? Bonus: show the drift as a function of X with data analysis.
+
+Question4: Complexity and entropy are important concepts for this project. There are many definitions of these and the idea to represent the data in an entropy (H) / complexity (C) plane is not new. References are provided for the "permutation entropy" and the associated complexity measure. In this HC plane, why do the min and max curve join at (0,0) and (1,0)? Give an interpretation for points in each region: near (0,0), near (1,0) and near (intermediate H, Cmax). In order to compute the permutation entropy and complexity, some C++ code is provided, that can be built into a Python module. Documentation is provided in the source code. Use this code in order to compute the entropy and complexity values of the following series, then plot them in the HC plane:
+- The projection on the 3 principal components of Question 1.
+- The two series of Question 3.
+- The signal and the model output of Question 2. For these, use subsamplings from 1 to 30 and plot each point in the HC plane.
+Based on the reference papers, what can you say of each for these series ? What is the effect of the subsampling ? Give an explanation why the model and the real signal differ at some point. Bonus: give other definitions of complexity and entropy, which may be better suited depending on the system being studied.
+
+
+Please provide your Python scripts together with your answers.

@@ -17,7 +17,7 @@
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
       
       <guid>https://cvanelteren.github.io/project/toymodels/</guid>
-      <description></description>
+      <description>Various simple computational models ranging from Ising model, cellular automatons (1D and 2D), Izhikevich neurons, and the Nubian sandpile.</description>
     </item>
     
   </channel>

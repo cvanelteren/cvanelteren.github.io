@@ -1,10 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/</loc>
+      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/post/nicolas/</loc>
+      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/</loc>
+      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/information-theory/</loc>
+      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/signal-analysis/</loc>
+      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/publication_types/3/</loc>
+      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/authors/</loc>
+      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/publication_types/</loc>
+      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/source-themes/</loc>
+      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
+      <priority>0</priority>
+    </url>
   
     <url>
     
       <loc>https://cvanelteren.github.io/publication/dynamic_importance2019/</loc>
       <lastmod>2019-04-16T09:53:00+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/authors/admin/</loc>
+      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
+      <priority>0</priority>
     </url>
   
     <url>
@@ -21,8 +89,36 @@
   
     <url>
     
+      <loc>https://cvanelteren.github.io/project/</loc>
+      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/dynamic-importance/</loc>
+      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/fishviewer/</loc>
+      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
       <loc>https://cvanelteren.github.io/project/fishviewer/</loc>
       <lastmod>2019-04-14T23:15:27+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/sm/</loc>
+      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
+      <priority>0</priority>
     </url>
   
     <url>
@@ -39,33 +135,20 @@
   
     <url>
     
-      <loc>https://cvanelteren.github.io/author/admin/</loc>
-      <lastmod>2019-04-19T22:02:42+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/tags/toymodels/</loc>
+      <lastmod>2019-04-17T09:17:13+02:00</lastmod>
+      <priority>0</priority>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/publication_types/3/</loc>
-      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
-      <priority>0</priority>
+      <loc>https://cvanelteren.github.io/author/admin/</loc>
+      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
     </url>
   
     <url>
     
       <loc>https://cvanelteren.github.io/author/</loc>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/authors/</loc>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/</loc>
-      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
       <priority>0</priority>
     </url>
   
@@ -77,29 +160,8 @@
   
     <url>
     
-      <loc>https://cvanelteren.github.io/tags/fishviewer/</loc>
-      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
       <loc>https://cvanelteren.github.io/post/</loc>
       <lastmod>2019-02-04T22:42:51+00:00</lastmod>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/project/</loc>
-      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/publication_types/</loc>
-      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
-      <priority>0</priority>
     </url>
   
     <url>
@@ -112,48 +174,6 @@
     
       <loc>https://cvanelteren.github.io/talk/</loc>
       <lastmod>2019-04-14T14:28:47+02:00</lastmod>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/tags/sm/</loc>
-      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/tags/source-themes/</loc>
-      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/tags/</loc>
-      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/tags/toymodels/</loc>
-      <lastmod>2019-04-17T09:17:13+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/authors/admin/</loc>
-      <lastmod>2019-04-16T09:53:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/tags/dynamic-importance/</loc>
-      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
-      <priority>0</priority>
     </url>
   
 </urlset>
