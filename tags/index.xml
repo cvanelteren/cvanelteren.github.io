@@ -6,26 +6,17 @@
     <description>Recent content in Tags on Casper van Elteren</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Sat, 06 Jul 2019 14:00:00 +0200</lastBuildDate>
+    <lastBuildDate>Tue, 09 Jul 2019 09:00:00 +0200</lastBuildDate>
     
 	<atom:link href="https://cvanelteren.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
     
     
     <item>
-      <title>information theory</title>
+      <title>Information theory</title>
       <link>https://cvanelteren.github.io/tags/information-theory/</link>
-      <pubDate>Sat, 06 Jul 2019 14:00:00 +0200</pubDate>
+      <pubDate>Tue, 09 Jul 2019 09:00:00 +0200</pubDate>
       
       <guid>https://cvanelteren.github.io/tags/information-theory/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>signal analysis</title>
-      <link>https://cvanelteren.github.io/tags/signal-analysis/</link>
-      <pubDate>Sat, 06 Jul 2019 14:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/signal-analysis/</guid>
       <description></description>
     </item>
     
@@ -39,11 +30,29 @@
     </item>
     
     <item>
+      <title>woningnet</title>
+      <link>https://cvanelteren.github.io/tags/woningnet/</link>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
+      
+      <guid>https://cvanelteren.github.io/tags/woningnet/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>dynamic-importance</title>
       <link>https://cvanelteren.github.io/tags/dynamic-importance/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
       
       <guid>https://cvanelteren.github.io/tags/dynamic-importance/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>tss</title>
+      <link>https://cvanelteren.github.io/tags/tss/</link>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
+      
+      <guid>https://cvanelteren.github.io/tags/tss/</guid>
       <description></description>
     </item>
     

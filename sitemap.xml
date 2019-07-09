@@ -2,35 +2,56 @@
   
     <url>
     
-      <loc>https://cvanelteren.github.io/</loc>
-      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/categories/applications/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
       <priority>0</priority>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/post/nicolas/</loc>
-      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/authors/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
+      <priority>0</priority>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/tags/</loc>
-      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/authors/casper-van-elteren/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/categories/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
       <priority>0</priority>
     </url>
   
     <url>
     
       <loc>https://cvanelteren.github.io/tags/information-theory/</loc>
-      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
       <priority>0</priority>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/tags/signal-analysis/</loc>
-      <lastmod>2019-07-06T14:00:00+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/post/interview/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/</loc>
+      <lastmod>2019-07-09T10:20:17+02:00</lastmod>
       <priority>0</priority>
     </url>
   
@@ -38,13 +59,6 @@
     
       <loc>https://cvanelteren.github.io/publication_types/3/</loc>
       <lastmod>2019-04-16T09:53:00+02:00</lastmod>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
-      <loc>https://cvanelteren.github.io/authors/</loc>
-      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
       <priority>0</priority>
     </url>
   
@@ -71,7 +85,7 @@
     <url>
     
       <loc>https://cvanelteren.github.io/authors/admin/</loc>
-      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
+      <lastmod>2019-07-08T19:22:23+02:00</lastmod>
       <priority>0</priority>
     </url>
   
@@ -83,21 +97,47 @@
   
     <url>
     
+      <loc>https://cvanelteren.github.io/project/</loc>
+      <lastmod>2019-04-23T22:00:47+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/project/woningnet/</loc>
+      <lastmod>2019-04-23T21:38:55+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/woningnet/</loc>
+      <lastmod>2019-04-23T21:38:55+02:00</lastmod>
+      <priority>0</priority>
+    </url>
+  
+    <url>
+    
       <loc>https://cvanelteren.github.io/project/information_impact/</loc>
       <lastmod>2019-04-14T23:15:27+02:00</lastmod>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/project/</loc>
-      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/tags/dynamic-importance/</loc>
+      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
       <priority>0</priority>
     </url>
   
     <url>
     
-      <loc>https://cvanelteren.github.io/tags/dynamic-importance/</loc>
-      <lastmod>2019-04-14T23:15:27+02:00</lastmod>
+      <loc>https://cvanelteren.github.io/project/tssclient/</loc>
+      <lastmod>2019-04-23T22:00:47+02:00</lastmod>
+    </url>
+  
+    <url>
+    
+      <loc>https://cvanelteren.github.io/tags/tss/</loc>
+      <lastmod>2019-04-23T22:00:47+02:00</lastmod>
       <priority>0</priority>
     </url>
   
@@ -117,14 +157,14 @@
     <url>
     
       <loc>https://cvanelteren.github.io/tags/sm/</loc>
-      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
+      <lastmod>2019-04-21T12:50:05+02:00</lastmod>
       <priority>0</priority>
     </url>
   
     <url>
     
       <loc>https://cvanelteren.github.io/project/statistical_machinelearning/</loc>
-      <lastmod>2019-04-17T09:26:36+02:00</lastmod>
+      <lastmod>2019-04-21T12:50:05+02:00</lastmod>
     </url>
   
     <url>
@@ -143,7 +183,7 @@
     <url>
     
       <loc>https://cvanelteren.github.io/author/admin/</loc>
-      <lastmod>2019-04-19T23:14:18+02:00</lastmod>
+      <lastmod>2019-07-08T19:22:23+02:00</lastmod>
     </url>
   
     <url>
@@ -154,14 +194,8 @@
   
     <url>
     
-      <loc>https://cvanelteren.github.io/categories/</loc>
-      <priority>0</priority>
-    </url>
-  
-    <url>
-    
       <loc>https://cvanelteren.github.io/post/</loc>
-      <lastmod>2019-02-04T22:42:51+00:00</lastmod>
+      <lastmod>2019-07-08T16:57:18+02:00</lastmod>
     </url>
   
     <url>
