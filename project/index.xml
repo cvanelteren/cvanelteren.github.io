@@ -6,10 +6,19 @@
     <description>Recent content in Projects on Casper van Elteren</description>
     <generator>Hugo -- gohugo.io</generator>
     <language>en-us</language>
-    <lastBuildDate>Fri, 01 Mar 2019 00:00:00 +0100</lastBuildDate>
+    <lastBuildDate>Sat, 30 Nov 2019 01:52:49 +0100</lastBuildDate>
     
 	<atom:link href="https://cvanelteren.github.io/project/index.xml" rel="self" type="application/rss+xml" />
     
+    
+    <item>
+      <title>PlexSim</title>
+      <link>https://cvanelteren.github.io/project/plexsim/</link>
+      <pubDate>Sat, 30 Nov 2019 01:52:49 +0100</pubDate>
+      
+      <guid>https://cvanelteren.github.io/project/plexsim/</guid>
+      <description>Fast computational framework for complex adaptive systems simulations</description>
+    </item>
     
     <item>
       <title>Woningnet</title>
