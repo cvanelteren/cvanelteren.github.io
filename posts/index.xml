@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Hugo is weird on Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/posts/</link>
+    <description>Recent content in Hugo is weird on Casper van Elteren</description>
+    <generator>Hugo -- gohugo.io</generator>
+    <language>en-us</language>
+    
+	<atom:link href="https://cvanelteren.github.io/posts/index.xml" rel="self" type="application/rss+xml" />
+    
+    
+    <item>
+      <title></title>
+      <link>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      
+      <guid>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</guid>
+      <description>Fix your matplotlib animations! Some time ago I saw a post on fixing matplotlib colorbars by Joseph Lang. One of the major problems with matplotlib is that it works quite well out of the box, until it doesn&amp;rsquo;t. Making figures for publication just right can become tedious as shown by Joseph Lang as it requires one deep into the docs and figuring something simple like aligning colorbars to axes.
+After browsing stackoverflow I was triggered by a post that seemed to achieve something somewhat trivial but the proposed solution seemed too difficult.</description>
+    </item>
+    
+  </channel>
+</rss>
