@@ -1,22 +1,23 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Publications on Casper van Elteren</title>
+    <title>Publications | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/publication/</link>
-    <description>Recent content in Publications on Casper van Elteren</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://cvanelteren.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://cvanelteren.github.io/publication/index.xml" rel="self" type="application/rss+xml" />
+    <description>Publications</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/images/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <title>Publications</title>
+      <link>https://cvanelteren.github.io/publication/</link>
+    </image>
     
     <item>
       <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
       <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
       <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
-      
       <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
-      <description>A common assumption is that well-connectedness of agents translates to dynamic importance. In this paper I show how this assertion is in fact false, and we cannot abstract away from dynamics before analyzing complex systems</description>
+      <description></description>
     </item>
     
   </channel>

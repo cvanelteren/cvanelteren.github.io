@@ -1,77 +1,78 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Projects on Casper van Elteren</title>
+    <title>Projects | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/project/</link>
-    <description>Recent content in Projects on Casper van Elteren</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sat, 30 Nov 2019 01:52:49 +0100</lastBuildDate>
-    
-	<atom:link href="https://cvanelteren.github.io/project/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://cvanelteren.github.io/project/index.xml" rel="self" type="application/rss+xml" />
+    <description>Projects</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 30 Nov 2019 01:52:49 +0100</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/images/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <title>Projects</title>
+      <link>https://cvanelteren.github.io/project/</link>
+    </image>
     
     <item>
       <title>PlexSim</title>
       <link>https://cvanelteren.github.io/project/plexsim/</link>
       <pubDate>Sat, 30 Nov 2019 01:52:49 +0100</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/plexsim/</guid>
-      <description>Fast computational framework for complex adaptive systems simulations</description>
+      <description>&lt;p&gt;Fast, general computational framework for complex adaptive systems.&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Woningnet</title>
       <link>https://cvanelteren.github.io/project/woningnet/</link>
       <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/woningnet/</guid>
-      <description>A great interface to view houses! Click for gif</description>
+      <description>&lt;p&gt;I got tired of clicking on woningnet so I made this viewer that puts the houses
+on a map! It offers a nice interface which allows you to reduce time spent on woningnet.
+See gif for small example.
+&lt;img src=&#34;featured.gif&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>Information impact</title>
       <link>https://cvanelteren.github.io/project/information_impact/</link>
       <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/information_impact/</guid>
-      <description>A general toolbox for analyzing discrete complex dynamic systems using information theory.</description>
+      <description></description>
     </item>
     
     <item>
       <title>Apple tss-saver daemon</title>
       <link>https://cvanelteren.github.io/project/tssclient/</link>
       <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/tssclient/</guid>
-      <description>A python daemon around tss-saver</description>
+      <description>&lt;p&gt;I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
+the latest shsh2 blobs from apple servers.&lt;/p&gt;
+</description>
     </item>
     
     <item>
       <title>FishViewer</title>
       <link>https://cvanelteren.github.io/project/fishviewer/</link>
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
-      <description>A fast 3D viewer for analyzing large scale brain data.</description>
+      <description></description>
     </item>
     
     <item>
       <title>Statistical machine learning</title>
       <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
-      <description>Some lab reports part of master the course statistical machine learning.</description>
+      <description></description>
     </item>
     
     <item>
       <title>Toy dynamical systems</title>
       <link>https://cvanelteren.github.io/project/toymodels/</link>
       <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
       <guid>https://cvanelteren.github.io/project/toymodels/</guid>
-      <description>Various simple computational models ranging from Ising model, cellular automatons (1D and 2D), Izhikevich neurons, and the Nubian sandpile.</description>
+      <description></description>
     </item>
     
   </channel>

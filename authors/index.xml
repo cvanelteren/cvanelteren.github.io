@@ -1,24 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Authors on Casper van Elteren</title>
+    <title>Authors | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/authors/</link>
-    <description>Recent content in Authors on Casper van Elteren</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://cvanelteren.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>admin</title>
-      <link>https://cvanelteren.github.io/authors/admin/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/authors/admin/</guid>
-      <description></description>
-    </item>
+      <atom:link href="https://cvanelteren.github.io/authors/index.xml" rel="self" type="application/rss+xml" />
+    <description>Authors</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/images/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <title>Authors</title>
+      <link>https://cvanelteren.github.io/authors/</link>
+    </image>
     
   </channel>
 </rss>

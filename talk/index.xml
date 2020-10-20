@@ -1,22 +1,27 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Recent &amp; Upcoming Talks on Casper van Elteren</title>
+    <title>Recent &amp; Upcoming Talks | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/talk/</link>
-    <description>Recent content in Recent &amp; Upcoming Talks on Casper van Elteren</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    
-	<atom:link href="https://cvanelteren.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
-    
+      <atom:link href="https://cvanelteren.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 02 Apr 2019 16:45:00 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/network_big.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://cvanelteren.github.io/talk/</link>
+    </image>
     
     <item>
       <title>What node is most important?</title>
       <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
       <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
-      
       <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
-      <description>I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks. Additionally, the same slides were shown at the simulation based science group at the institute for advanced studies (IAS) at the university of Amsterdam. The talk concerned my research on the identification of driver-nodes in complex dynamical systems.</description>
+      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
+Additionally, the same slides were shown at the simulation based science group at the institute
+for advanced studies (IAS) at the university of Amsterdam.
+The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
+</description>
     </item>
     
   </channel>

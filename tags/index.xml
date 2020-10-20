@@ -1,78 +1,16 @@
-<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Tags on Casper van Elteren</title>
+    <title>Tags | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/tags/</link>
-    <description>Recent content in Tags on Casper van Elteren</description>
-    <generator>Hugo -- gohugo.io</generator>
-    <language>en-us</language>
-    <lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
-    
-	<atom:link href="https://cvanelteren.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
-    
-    
-    <item>
-      <title>Source Themes</title>
-      <link>https://cvanelteren.github.io/tags/source-themes/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/source-themes/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>woningnet</title>
-      <link>https://cvanelteren.github.io/tags/woningnet/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/woningnet/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>dynamic-importance</title>
-      <link>https://cvanelteren.github.io/tags/dynamic-importance/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/dynamic-importance/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>tss</title>
-      <link>https://cvanelteren.github.io/tags/tss/</link>
-      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/tss/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>FishViewer</title>
-      <link>https://cvanelteren.github.io/tags/fishviewer/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/fishviewer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>SM</title>
-      <link>https://cvanelteren.github.io/tags/sm/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/sm/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>ToyModels</title>
-      <link>https://cvanelteren.github.io/tags/toymodels/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      
-      <guid>https://cvanelteren.github.io/tags/toymodels/</guid>
-      <description></description>
-    </item>
+      <atom:link href="https://cvanelteren.github.io/tags/index.xml" rel="self" type="application/rss+xml" />
+    <description>Tags</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/images/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <title>Tags</title>
+      <link>https://cvanelteren.github.io/tags/</link>
+    </image>
     
   </channel>
 </rss>
