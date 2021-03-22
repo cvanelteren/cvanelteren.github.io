@@ -1,142 +1,86 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
-  
   <url>
     <loc>https://cvanelteren.github.io/</loc>
     <lastmod>2019-11-30T01:52:49+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/plexsim/</loc>
     <lastmod>2019-11-30T01:52:49+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/</loc>
     <lastmod>2019-11-30T01:52:49+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/author/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/publication-type/3/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/authors/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/publication_types/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/publication/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/source-themes/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tags/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/publication/dynamic_importance2019/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/talk/</loc>
     <lastmod>2019-04-02T16:45:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/talk/ias_tu_delft/</loc>
     <lastmod>2019-04-02T16:45:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/woningnet/</loc>
     <lastmod>2019-03-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/woningnet/</loc>
     <lastmod>2019-03-01T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/dynamic-importance/</loc>
     <lastmod>2018-12-10T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/information_impact/</loc>
     <lastmod>2018-12-10T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/tssclient/</loc>
     <lastmod>2018-03-10T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/tss/</loc>
     <lastmod>2018-03-10T00:00:00+01:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/fishviewer/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/fishviewer/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/sm/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/statistical_machinelearning/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/project/toymodels/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/toymodels/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/categories/</loc>
-  </url>
-  
-  <url>
+  </url><url>
     <loc>https://cvanelteren.github.io/posts/</loc>
   </url>
-  
 </urlset>
