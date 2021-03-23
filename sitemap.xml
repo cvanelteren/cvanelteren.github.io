@@ -2,8 +2,32 @@
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9"
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
+    <loc>https://cvanelteren.github.io/post/coffee/</loc>
+    <lastmod>2021-03-22T23:19:35+01:00</lastmod>
+  </url><url>
     <loc>https://cvanelteren.github.io/</loc>
-    <lastmod>2019-11-30T01:52:49+01:00</lastmod>
+    <lastmod>2021-03-22T23:19:35+01:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/</loc>
+    <lastmod>2021-03-22T23:19:35+01:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/author/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/tag/animation/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/authors/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/tag/coding/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/matplotlib_colorbar/matplotlib_colorbar_fix/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
+  </url><url>
+    <loc>https://cvanelteren.github.io/tags/</loc>
+    <lastmod>2020-12-13T00:00:00+00:00</lastmod>
   </url><url>
     <loc>https://cvanelteren.github.io/project/plexsim/</loc>
     <lastmod>2019-11-30T01:52:49+01:00</lastmod>
@@ -11,13 +35,7 @@
     <loc>https://cvanelteren.github.io/project/</loc>
     <lastmod>2019-11-30T01:52:49+01:00</lastmod>
   </url><url>
-    <loc>https://cvanelteren.github.io/author/</loc>
-    <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url><url>
     <loc>https://cvanelteren.github.io/publication-type/3/</loc>
-    <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://cvanelteren.github.io/authors/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://cvanelteren.github.io/publication_types/</loc>
@@ -27,9 +45,6 @@
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://cvanelteren.github.io/tag/source-themes/</loc>
-    <lastmod>2019-04-07T00:00:00+02:00</lastmod>
-  </url><url>
-    <loc>https://cvanelteren.github.io/tags/</loc>
     <lastmod>2019-04-07T00:00:00+02:00</lastmod>
   </url><url>
     <loc>https://cvanelteren.github.io/publication/dynamic_importance2019/</loc>
@@ -77,10 +92,6 @@
     <loc>https://cvanelteren.github.io/tag/toymodels/</loc>
     <lastmod>2017-10-27T00:00:00+02:00</lastmod>
   </url><url>
-    <loc>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</loc>
-  </url><url>
     <loc>https://cvanelteren.github.io/categories/</loc>
-  </url><url>
-    <loc>https://cvanelteren.github.io/posts/</loc>
   </url>
 </urlset>

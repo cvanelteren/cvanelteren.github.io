@@ -5,101 +5,29 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 30 Nov 2019 01:52:49 +0100</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 22 Mar 2021 23:19:35 +0100</lastBuildDate>
     <image>
-      <url>https://cvanelteren.github.io/images/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <url>https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
     
     <item>
-      <title>PlexSim</title>
-      <link>https://cvanelteren.github.io/project/plexsim/</link>
-      <pubDate>Sat, 30 Nov 2019 01:52:49 +0100</pubDate>
-      <guid>https://cvanelteren.github.io/project/plexsim/</guid>
-      <description>&lt;p&gt;Fast, general computational framework for complex adaptive systems.&lt;/p&gt;
+      <title>Are bubbles power law distributed?</title>
+      <link>https://cvanelteren.github.io/post/coffee/</link>
+      <pubDate>Mon, 22 Mar 2021 23:19:35 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/post/coffee/</guid>
+      <description>&lt;p&gt;Power laws are everywhere, even in your coffee! One lazy sunday morning I wondered whether the bubbles in the milk of my coffee was power law distributed; a little bit of coding and a few moments later we had an answer!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://cvanelteren.github.io/post/coffee/coffee.png&#34; alt=&#34;logo&#34;&gt;&lt;/p&gt;
+Unforutnately, the process is not perfect. It was fun making this regardless.
 </description>
     </item>
     
     <item>
-      <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
-      <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>What node is most important?</title>
-      <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
-      <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
-      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
-Additionally, the same slides were shown at the simulation based science group at the institute
-for advanced studies (IAS) at the university of Amsterdam.
-The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Woningnet</title>
-      <link>https://cvanelteren.github.io/project/woningnet/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
-      <guid>https://cvanelteren.github.io/project/woningnet/</guid>
-      <description>&lt;p&gt;I got tired of clicking on woningnet so I made this viewer that puts the houses
-on a map! It offers a nice interface which allows you to reduce time spent on woningnet.
-See gif for small example.
-&lt;img src=&#34;featured.gif&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>Information impact</title>
-      <link>https://cvanelteren.github.io/project/information_impact/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
-      <guid>https://cvanelteren.github.io/project/information_impact/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Apple tss-saver daemon</title>
-      <link>https://cvanelteren.github.io/project/tssclient/</link>
-      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
-      <guid>https://cvanelteren.github.io/project/tssclient/</guid>
-      <description>&lt;p&gt;I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
-the latest shsh2 blobs from apple servers.&lt;/p&gt;
-</description>
-    </item>
-    
-    <item>
-      <title>FishViewer</title>
-      <link>https://cvanelteren.github.io/project/fishviewer/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Statistical machine learning</title>
-      <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title>Toy dynamical systems</title>
-      <link>https://cvanelteren.github.io/project/toymodels/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/project/toymodels/</guid>
-      <description></description>
-    </item>
-    
-    <item>
-      <title></title>
-      <link>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</link>
-      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
-      <guid>https://cvanelteren.github.io/posts/matplotlib_colorbar_fix/</guid>
+      <title>Fix your matplotlib colorbars</title>
+      <link>https://cvanelteren.github.io/post/matplotlib_colorbar/matplotlib_colorbar_fix/</link>
+      <pubDate>Sun, 13 Dec 2020 00:00:00 +0000</pubDate>
+      <guid>https://cvanelteren.github.io/post/matplotlib_colorbar/matplotlib_colorbar_fix/</guid>
       <description>&lt;h1 id=&#34;fix-your-matplotlib-animations&#34;&gt;Fix your matplotlib animations!&lt;/h1&gt;
 &lt;p&gt;Some time ago I saw a post on fixing &lt;a href=&#34;https://joseph-long.com/writing/colorbars/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;matplotlib colorbars&lt;/a&gt; by Joseph Lang. One of the major problems with matplotlib is that it works quite well out of the box, until it doesn&amp;rsquo;t. Making figures for publication just right can become tedious as shown by Joseph Lang as it requires one deep into the docs and figuring something simple like aligning colorbars to axes.&lt;/p&gt;
 &lt;p&gt;After browsing stackoverflow I was triggered by a post that seemed to achieve something somewhat trivial but the proposed solution seemed too difficult. The problem posted by &lt;a href=&#34;https://stackoverflow.com/questions/60641147/matplotlib-plot-matrix-in-a-loop-while-updating-colorbar-value-range/60651223#60651223&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;original poster&lt;/a&gt; described how the goal was to update the colorbar in animations of a heatmap. Animating in matplotlib can be super slow, if some tricks are not known to the end-user. Examples include blitting, preventing large object reconstruction, setting data structures manually, drawing canvas etc.&lt;/p&gt;
@@ -1291,6 +1219,89 @@ HWRhdGEAAAABAAAAAExhdmY1OC4yOS4xMDA=
 &lt;/video&gt;
 &lt;p&gt;&lt;img src=&#34;./matplotlib_colorbar_fix_1_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
 </description>
+    </item>
+    
+    <item>
+      <title>PlexSim</title>
+      <link>https://cvanelteren.github.io/project/plexsim/</link>
+      <pubDate>Sat, 30 Nov 2019 01:52:49 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/project/plexsim/</guid>
+      <description>&lt;p&gt;Fast, general computational framework for complex adaptive systems.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
+      <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What node is most important?</title>
+      <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
+      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
+Additionally, the same slides were shown at the simulation based science group at the institute
+for advanced studies (IAS) at the university of Amsterdam.
+The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Woningnet</title>
+      <link>https://cvanelteren.github.io/project/woningnet/</link>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/project/woningnet/</guid>
+      <description>&lt;p&gt;I got tired of clicking on woningnet so I made this viewer that puts the houses
+on a map! It offers a nice interface which allows you to reduce time spent on woningnet.
+See gif for small example.
+&lt;img src=&#34;featured.gif&#34; alt=&#34;test&#34;&gt;&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Information impact</title>
+      <link>https://cvanelteren.github.io/project/information_impact/</link>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/project/information_impact/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Apple tss-saver daemon</title>
+      <link>https://cvanelteren.github.io/project/tssclient/</link>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/project/tssclient/</guid>
+      <description>&lt;p&gt;I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
+the latest shsh2 blobs from apple servers.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>FishViewer</title>
+      <link>https://cvanelteren.github.io/project/fishviewer/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Statistical machine learning</title>
+      <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Toy dynamical systems</title>
+      <link>https://cvanelteren.github.io/project/toymodels/</link>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/project/toymodels/</guid>
+      <description></description>
     </item>
     
   </channel>
