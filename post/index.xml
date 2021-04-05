@@ -23,10 +23,10 @@ effects  on  biodiversity.  I  got  inspired by  the  excellent  website  of  &l
 href=&#34;https://www.complexity-explorables.org/explorables/cycledelic/&#34;&gt;Dirck
 Brockmann  &lt;/a&gt;   and  decided   to  implement   it  myself   in  the   &lt;a  href
 url=&#34;https://github.com/cvanelteren/Plexsim&#34;&gt; the computational  toolbox I wrote
-&lt;/a&gt;.  Below I  simulated  the  rock-paper-scissor model  and  created a  novel
-agent-based  inspired version  of it.  The model  produces beautiful  fluid-like
-patterns as  can be seen  in the  video below simulated  on a 100x100  grid with
-Moore neighborhood.&lt;/p&gt;
+&lt;/a&gt;. Below  I simulated  the rock-paper-scissor model  and created  a (possibly
+novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
+fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
+grid with Moore neighborhood.&lt;/p&gt;
 &lt;figure&gt;    &lt;video    width=&#34;320&#34;    height   =    &#34;240&#34;    controls&gt;    &lt;source
 src=&#34;rock_paper_scissor_dynamics.mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
 rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
