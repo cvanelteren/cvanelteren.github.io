@@ -871,8 +871,7 @@ values constant.</p>
 an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).</p>
 <p>We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:</p>
 <figure>
-<video      width="320"      height      =     "240"      controls autoplay type="video/mp4">      <source
-src="rock_paper_scissor_dynamics_abm.mp4"> </video>
+<video  width="320" height="240" controls autoplay>      <source src="rock_paper_scissor_dynamics_abm.mov"> </video>
 <figcaption> Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
 </figure>
 <p>This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.</p>
