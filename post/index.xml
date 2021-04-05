@@ -28,7 +28,7 @@ novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
 fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
 grid with Moore neighborhood.&lt;/p&gt;
 &lt;figure&gt;    &lt;video    width=&#34;320&#34;    height   =    &#34;240&#34;    controls autoplay&gt;    &lt;source
-src=&#34;rock_paper_scissor_dynamics.mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
+src=&#34;rock_paper_scissor_dynamics.mp4&#34; type=&#34;video/mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
 rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
 starts with all  vertices having a random  value in $[0, 1]$. The  color of each
 vertex is proportional to the density of the species (red, green or blue). White
