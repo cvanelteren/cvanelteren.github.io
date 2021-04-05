@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ." />
+  <meta name="description" content="How roschambo can generate to fluid-like pattern." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/rps/" />
@@ -297,7 +297,7 @@
   <meta property="og:site_name" content="Casper van Elteren" />
   <meta property="og:url" content="https://cvanelteren.github.io/post/rps/" />
   <meta property="og:title" content="Rock-paper-scissor dynamics to study biodiversity | Casper van Elteren" />
-  <meta property="og:description" content="Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ." /><meta property="og:image" content="https://cvanelteren.github.io/post/rps/featured.png" />
+  <meta property="og:description" content="How roschambo can generate to fluid-like pattern." /><meta property="og:image" content="https://cvanelteren.github.io/post/rps/featured.png" />
     <meta property="twitter:image" content="https://cvanelteren.github.io/post/rps/featured.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -349,7 +349,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ."
+  "description": "How roschambo can generate to fluid-like pattern."
 }
 </script>
 
@@ -741,6 +741,45 @@
 
 
 
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary btn-page-header" href="/project/plexsim/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
 
 </div>
 
@@ -767,7 +806,7 @@ url="https://github.com/cvanelteren/Plexsim"> the computational  toolbox I wrote
 novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
 fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
 grid with Moore neighborhood.</p>
-<figure>    <video    width="320"    height   =    "240"    controls>    <source
+<figure>    <video    width="320"    height   =    "240"    controls autoplay>    <source
 src="rock_paper_scissor_dynamics.mp4">   </video>  <figcaption>   Simulation  of
 rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
 starts with all  vertices having a random  value in $[0, 1]$. The  color of each
@@ -821,7 +860,7 @@ values constant.</p>
 <li>Reproduction $R \in [0, 1]$</li>
 <li>Selection $S \in [0, 1]$</li>
 </ul>
-<p>An agent can only reproduce if an adjecent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:</p>
+<p>An agent can only reproduce if an adjacent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:</p>
 <ol start="0">
 <li>Dead state</li>
 <li>&ldquo;Rock&rdquo; state</li>
@@ -832,7 +871,7 @@ values constant.</p>
 an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).</p>
 <p>We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:</p>
 <figure>
-<video      width="320"      height      =     "240"      controls>      <source
+<video      width="320"      height      =     "240"      controls autoplay type="video/mp4">      <source
 src="rock_paper_scissor_dynamics_abm.mp4"> </video>
 <figcaption> Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
 </figure>
