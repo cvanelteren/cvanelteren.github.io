@@ -1,0 +1,1221 @@
+<!DOCTYPE html><html lang="en-us" >
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.0.0-beta.3 for Hugo" />
+  
+
+  
+
+  
+  
+
+  
+  
+  
+  
+  
+    
+    
+    
+  
+  
+
+  
+
+  
+  
+  
+    
+  
+  <meta name="description" content="Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ." />
+
+  
+  <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/rps/" />
+
+  
+
+
+
+
+
+
+
+  
+
+
+
+
+  
+  
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    <meta name="theme-color" content="#1565c0" />
+  
+
+  
+  
+    
+    <script src="/js/mathjax-config.js"></script>
+  
+
+  
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/academicons/1.9.0/css/academicons.min.css" integrity="sha512-W4yqoT1+8NLkinBLBZko+dFB2ZbHsYLDdr50VElllRcNt2Q4/GSs6u71UHKxB7S6JEMCp5Ve4xjh3eGQl/HRvg==" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css" integrity="sha256-FMvZuGapsJLjouA6k7Eo2lusoAX9i0ShlWFG6qt7SLc=" crossorigin="anonymous">
+
+    
+    
+
+    
+    
+    
+      
+    
+    
+      
+      
+        
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+        
+      
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+        <script src="https://cdn.jsdelivr.net/npm/mathjax@3/es5/tex-chtml.js" integrity="" crossorigin="anonymous" async></script>
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.05597aa6a76faca3096d08b97f4872b8.css" />
+
+  
+
+
+
+  
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+
+  
+    <link rel="manifest" href="/index.webmanifest" />
+  
+
+  <link rel="icon" type="image/png" href="/media/icon_hu977510b180e05bb584cef654dc28acf8_734_32x32_fill_lanczos_center_2.png" />
+  <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu977510b180e05bb584cef654dc28acf8_734_180x180_fill_lanczos_center_2.png" />
+
+  <link rel="canonical" href="https://cvanelteren.github.io/post/rps/" />
+
+  
+  
+  
+  
+  
+  
+  
+  
+    
+    
+  
+  
+  <meta property="twitter:card" content="summary" />
+  
+  <meta property="og:site_name" content="Casper van Elteren" />
+  <meta property="og:url" content="https://cvanelteren.github.io/post/rps/" />
+  <meta property="og:title" content="Rock-paper-scissor dynamics to study biodiversity | Casper van Elteren" />
+  <meta property="og:description" content="Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ." /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png" />
+    <meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  
+    
+      <meta
+        property="article:published_time"
+        content="2021-04-05T14:57:08&#43;02:00"
+      />
+    
+    <meta property="article:modified_time" content="2021-04-05T14:57:08&#43;02:00">
+  
+
+  
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cvanelteren.github.io/post/rps/"
+  },
+  "headline": "Rock-paper-scissor dynamics to study biodiversity",
+  
+  "datePublished": "2021-04-05T14:57:08+02:00",
+  "dateModified": "2021-04-05T14:57:08+02:00",
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_192x192_fill_lanczos_center_2.png"
+    }
+  },
+  "description": "Some years ago an article  was published using rock-paper-scissor dynamics to study the effects on biodiversity. I got inspired by the excellent website of Dirck Brockmann  and decided to implement it myself in the the computational toolbox I wrote ."
+}
+</script>
+
+  
+
+  
+
+  
+
+  
+
+
+
+
+
+  <title>Rock-paper-scissor dynamics to study biodiversity | Casper van Elteren</title>
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="34c14f69ffba95b24c0542dd4d47f375" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.b024895df05e271929739bb54886c674.js"></script>
+
+  
+
+
+
+
+  <div class="page-header">
+    
+
+
+
+
+
+
+
+
+
+
+
+
+<nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+  <div class="container-xl">
+
+    
+    <div class="d-none d-lg-inline-flex">
+      <a class="navbar-brand" href="/">Casper van Elteren</a>
+    </div>
+    
+
+    
+    <button type="button" class="navbar-toggler" data-toggle="collapse"
+            data-target="#navbar-content" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
+    <span><i class="fas fa-bars"></i></span>
+    </button>
+    
+
+    
+    <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+      <a class="navbar-brand" href="/">Casper van Elteren</a>
+    </div>
+    
+
+    
+    
+    <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+      
+      <ul class="navbar-nav d-md-inline-flex">
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#about"><span>Home</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#posts"><span>Posts</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#projects"><span>Projects</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#featured"><span>Publications</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+          
+        
+
+        
+
+        
+        
+        
+        
+
+        
+          
+            
+            
+          
+          
+            
+            
+            
+              
+            
+            
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="/#contact"><span>Contact</span></a>
+        </li>
+
+        
+        
+
+      
+
+        
+      </ul>
+    </div>
+
+    <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+      
+      
+        
+      
+
+      
+      
+
+      
+      
+      <li class="nav-item dropdown theme-dropdown">
+        <a href="#" class="nav-link" data-toggle="dropdown" aria-haspopup="true" aria-label="Display preferences">
+          <i class="fas fa-moon" aria-hidden="true"></i>
+        </a>
+        <div class="dropdown-menu">
+          <a href="#" class="dropdown-item js-set-theme-light">
+            <span>Light</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-dark">
+            <span>Dark</span>
+          </a>
+          <a href="#" class="dropdown-item js-set-theme-auto">
+            <span>Automatic</span>
+          </a>
+        </div>
+      </li>
+      
+
+      
+      
+
+    </ul>
+
+  </div>
+</nav>
+
+
+  </div>
+
+  <div class="page-body">
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Rock-paper-scissor dynamics to study biodiversity</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 5, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    4 min read
+  </span>
+  
+
+  
+  
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>Some  years ago  an  <a href  url="https://www.nature.com/articles/nature06095">
+article  </a>  was published  using  rock-paper-scissor  dynamics to  study  the
+effects  on  biodiversity.  I  got  inspired by  the  excellent  website  of  <a
+href="https://www.complexity-explorables.org/explorables/cycledelic/">Dirck
+Brockmann  </a>   and  decided   to  implement   it  myself   in  the   <a  href
+url="https://github.com/cvanelteren/Plexsim"> the computational  toolbox I wrote
+</a>.  Below I  simulated  the  rock-paper-scissor model  and  created a  novel
+agent-based  inspired version  of it.  The model  produces beautiful  fluid-like
+patterns as  can be seen  in the  video below simulated  on a 100x100  grid with
+Moore neighborhood.</p>
+<figure>    <video    width="320"    height   =    "240"    controls>    <source
+src="rock_paper_scissor_dynamics.mp4">   </video>  <figcaption>   Simulation  of
+rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
+starts with all  vertices having a random  value in $[0, 1]$. The  color of each
+vertex is proportional to the density of the species (red, green or blue). White
+would indicate low values of all  species whereas black indicates high values of
+all species.  Over time  larger patches  of similar  states appear  and interact
+according to rock-paper-scissor dynamics. </figure>
+<h1 id="the-model">The model</h1>
+<p>The model was designed to understand the co-existance of interacting species in a spatially extended ecosystem. Each vertex point represents the locus of three species.
+The color (red, green, blue) are proportional to the density
+of the three species at each pixel (vertex point).</p>
+<p>The  model produces  a wide  range of  different patterns  based on  three input
+parameters</p>
+<ul>
+<li>Diffusion ($D$): mobility of species.</li>
+<li>Predation ($P$): competition between the tree different species.</li>
+<li>Competition ($C$): Competition among different specifies.</li>
+</ul>
+<p>Each vertex in the system $\sigma_i  \in \sigma :=${ $\sigma_0, \dots, \sigma_n$
+} contains a  vector with the density  of the three &ldquo;species&rdquo;,  i.e. rock ($r$),
+paper ($g$), or scissor ($b$). The concentration of each specie at vertex $i$ is
+updated according to</p>
+<p>$$
+\frac{d \sigma_i}{dt} = \scriptstyle \begin{cases}
+\frac{dr_i}{dt}&amp; = ((\underbrace{P  (g_i - b_i)  + r_i}_{\textrm{predation}} - \underbrace{C  (g_i + b_i) - r_i^2}_{\textrm{Competition}})r_i - \underbrace{D(\sum_{&lt;i,j&gt;} r_j r_i)}_{\textrm{mobility}}) \delta t \\\<br>
+\frac{dg_i}{dt}&amp; = ((P  (b_i - r_i)  + g_i - C  (r_i + b_i) - g_i^2)g_i - D(\sum_{&lt;i,j&gt;} g_j g_i)) \delta t \\\<br>
+\frac{db_i}{dt}&amp; = ((P  (r_i - g_i)  + b_i - C  (r_i + g_i) - b_i^2)b_i - D(\sum_{&lt;i,j&gt;} b_j b_i)) \delta t, \end{cases}
+$$</p>
+<p>where $&lt;i,j&gt;$ indicates the nearest neighbors of variable $i$.</p>
+<p>In order to see  the effect of the three parameters,  I simulated $T=1000$ steps
+and visualized  the last system  state while varying predation,  competition and
+diffusion while keeping the rest constant.  It is fascinating to see
+how each parameter causes different spatially extended patterns. The simulations
+over time exhibit  fluid-like behavior, and the observed  patterns are distinct
+on the set of input parameters.  Most notably, the diffusion parameter can cause
+large extended  patches similar to  what can  be observed in  Ising/Potts model.
+Predation on  the other hand tends  to cause fragmentation of  species for lower
+values, but  for higher values  create similar larger patterns.  The interaction
+among the variables shows a non-linear  effect with each other. This can readily
+be seen in the competition parameters.  That is, the competition parameter shows
+larger patches  only for  a small range  (1.89 - 2.17)  while keeping  all other
+values constant.</p>
+<img src="diffusion.png" alt ="effect of mobility">
+<img src="predation.png" alt ="effect of predation">
+<img src="competition.png" alt ="effect of competition">
+<h1 id="agent-based-implementation">Agent-based implementation</h1>
+<p>In the original paper, the authors apply a so-called Gillspie algorithm to efficiently sample the reaction between the different density. I was interested whether one can get away with &ldquo;tradtiional&rdquo; Monte-Carlo methods and implemented and agent-based approach to the model above.</p>
+<p>Each agent updates stochastically with parameters</p>
+<ul>
+<li>Mobility $M \in [0, 1]$</li>
+<li>Reproduction $R \in [0, 1]$</li>
+<li>Selection $S \in [0, 1]$</li>
+</ul>
+<p>An agent can only reproduce if an adjecent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:</p>
+<ol start="0">
+<li>Dead state</li>
+<li>&ldquo;Rock&rdquo; state</li>
+<li>&ldquo;Paper&rdquo; state</li>
+<li>&ldquo;Scissor&rdquo; state</li>
+</ol>
+<p>Each update step an agent interacts  with a random neighbor and randomly chooses
+an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).</p>
+<p>We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:</p>
+<figure>
+<video      width="320"      height      =     "240"      controls>      <source
+src="rock_paper_scissor_dynamics_abm.mp4"> </video>
+<figcaption> Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
+</figure>
+<p>This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.</p>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+
+<div class="share-box" aria-hidden="true">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/rps/&amp;text=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity" target="_blank" rel="noopener" class="share-btn-twitter">
+          <i class="fab fa-twitter"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/rps/&amp;t=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity" target="_blank" rel="noopener" class="share-btn-facebook">
+          <i class="fab fa-facebook"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="mailto:?subject=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity&amp;body=https://cvanelteren.github.io/post/rps/" target="_blank" rel="noopener" class="share-btn-email">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/rps/&amp;title=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity" target="_blank" rel="noopener" class="share-btn-linkedin">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="whatsapp://send?text=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity%20https://cvanelteren.github.io/post/rps/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+          <i class="fab fa-whatsapp"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      <li>
+        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/rps/&amp;title=Rock-paper-scissor%20dynamics%20to%20study%20biodiversity" target="_blank" rel="noopener" class="share-btn-weibo">
+          <i class="fab fa-weibo"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://cvanelteren.github.io"><img class="avatar mr-3 avatar-circle" src="/author/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q90_lanczos_center.jpg" alt=""></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://cvanelteren.github.io"></a></h5>
+      <h6 class="card-subtitle">Phd candidate Computational science</h6>
+      <p class="card-text">My research interests pertain to providing causal explanations to natural phenomena.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/files/cv.pdf" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+  
+
+  <p class="powered-by">
+    
+  </p>
+
+  
+  
+
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-modules" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        <pre><code class="tex hljs"></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+      
+
+    
+    
+    
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.5.1/jquery.min.js" integrity="sha256-9/aliU8dGd2tb6OSsuzixeV4y/faTqgFtohetphbbj0=" crossorigin="anonymous"></script>
+      <script src="https://cdnjs.cloudflare.com/ajax/libs/instant.page/5.1.0/instantpage.min.js" integrity="sha512-1+qUtKoh9XZW7j+6LhRMAyOrgSQKenQ4mluTR+cvxXjP1Z54RxZuzstR/H9kgPXQsVB8IW7DMDFUJpzLjvhGSQ==" crossorigin="anonymous"></script>
+
+      
+      
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.imagesloaded/4.1.4/imagesloaded.pkgd.min.js" integrity="sha256-lqvxZrPLtfffUl2G/e7szqSvPBILGbwmsGE1MKlOi0Q=" crossorigin="anonymous"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery.isotope/3.0.6/isotope.pkgd.min.js" integrity="sha256-CBrpuqrMhXwcLLUd5tvQ4euBHCdh7wGlDfNz8vbu/iI=" crossorigin="anonymous"></script>
+      
+
+      
+      
+
+      
+
+      
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/highlight.min.js" integrity="sha512-TDKKr+IvoqZnPzc3l35hdjpHD0m+b2EC2SrLEgKDRWpxf2rFCxemkgvJ5kfU48ip+Y+m2XVKyOCD85ybtlZDmw==" crossorigin="anonymous"></script>
+        
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/languages/r.min.js"></script>
+        
+      
+
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+
+    
+    
+
+    
+    
+    
+    
+
+    
+    <script src="/js/bootstrap.bundle.min.6aed84840afc03ab4d5750157f69c120.js"></script>
+
+    
+    
+
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    <script src="/en/js/wowchemy.min.a94e2b666e233f67b55ae8de46781f71.js"></script>
+
+    
+
+
+
+
+
+
+</body>
+</html>
