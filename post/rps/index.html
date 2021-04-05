@@ -90,8 +90,8 @@
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/github.min.css" crossorigin="anonymous" title="hl-light" media="print" onload="this.media='all'" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/10.2.0/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" media="print" onload="this.media='all'">
         
       
     
@@ -251,7 +251,7 @@
   
   
   
-  <link rel="stylesheet" href="/css/wowchemy.05597aa6a76faca3096d08b97f4872b8.css" />
+  <link rel="stylesheet" href="/css/wowchemy.3a42066a093aead38be9f21ca41a1aa4.css" />
 
   
 
@@ -369,7 +369,7 @@
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="34c14f69ffba95b24c0542dd4d47f375" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper  dark " data-wc-page-id="34c14f69ffba95b24c0542dd4d47f375" >
 
   
   
@@ -379,7 +379,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.b024895df05e271929739bb54886c674.js"></script>
+  <script src="/js/wowchemy-init.min.28ba6cb10c3e885456e7fb9b3744405b.js"></script>
 
   
 
@@ -806,7 +806,7 @@ url="https://github.com/cvanelteren/Plexsim"> the computational  toolbox I wrote
 novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
 fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
 grid with Moore neighborhood.</p>
-<figure>    <video    width="320"    height   =    "240"    controls autoplay>    <source
+<figure>    <video    width="auto"    height="auto"    controls loop autoplay>    <source
 src="rock_paper_scissor_dynamics.mp4" type="video/mp4">   </video>  <figcaption>   Simulation  of
 rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
 starts with all  vertices having a random  value in $[0, 1]$. The  color of each
@@ -871,7 +871,7 @@ values constant.</p>
 an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).</p>
 <p>We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:</p>
 <figure>
-<video  width="320" height="240" controls autoplay>  <source src="rock_paper_scissor_dynamics_abm.mp4"> </video>
+<video  width="auto" height="auto" controls autoplay loop>  <source src="rock_paper_scissor_dynamics_abm.mp4"> </video>
 <figcaption> Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
 </figure>
 <p>This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.</p>
