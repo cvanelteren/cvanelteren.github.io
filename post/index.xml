@@ -96,6 +96,10 @@ an interaction strategy random. That is, if the adjacent neighbor is empty, it c
 &lt;figcaption&gt; Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
 &lt;/figure&gt;
 &lt;p&gt;This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.&lt;/p&gt;
+&lt;!-- &lt;video id=&#34;video&#34; controls autplay loop&gt; --&gt;
+&lt;!-- &lt;source src=&#34;test.webm&#34;&gt;  --&gt;
+&lt;!-- &lt;/video&gt; --&gt;
+&lt;!-- here --&gt;
 </description>
     </item>
     
