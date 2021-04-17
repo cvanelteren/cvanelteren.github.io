@@ -17,7 +17,7 @@
       <link>https://cvanelteren.github.io/post/covid/</link>
       <pubDate>Thu, 15 Apr 2021 19:38:11 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/covid/</guid>
-      <description>&lt;p&gt;&lt;video autoplay controls loop&gt; &lt;source src = &#34;covid_anim.webm&#34;&gt;&lt;/video&gt;
+      <description>&lt;p&gt;&lt;video playsinline autoplay controls loop&gt; &lt;source src = &#34;covid_anim.webm&#34;&gt;&lt;/video&gt;
 Covid &amp;ldquo;dashboard&amp;rdquo; I made over the winter. Data is sourced from the &lt;a href=&#34;https://coronadashboard.rijksoverheid.nl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dutch national corona dashboard&lt;/a&gt;.&lt;/p&gt;
 </description>
     </item>
