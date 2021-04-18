@@ -19,7 +19,7 @@
       <guid>https://cvanelteren.github.io/post/covid/</guid>
       <description>&lt;video playsinline autoplay controls mute loop&gt;
  &lt;source src = &#34;covid_anim.webm&#34; type = &#34;video/webm&#34;&gt;
- &lt;source src = &#34;covid_anim_apple.webm&#34; type = &#34;video/webm&#34;&gt;
+ &lt;source src = &#34;covid_anim_apple.mp4&#34; type = &#34;video/webm&#34;&gt;
  &lt;!-- &lt;source src = &#34;covid_anim.mp4&#34; type = &#34;video/mp4&#34;&gt; --&gt;
 &lt;/video&gt;
 &lt;p&gt;Covid &amp;ldquo;dashboard&amp;rdquo; I made over the winter. Data is sourced from the &lt;a href=&#34;https://coronadashboard.rijksoverheid.nl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dutch national corona dashboard&lt;/a&gt;. The
