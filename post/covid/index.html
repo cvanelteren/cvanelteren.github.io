@@ -33,7 +33,7 @@
   
     
   
-  <meta name="description" content="Covid &ldquo;dashboard&rdquo; I made over the winter. Data is sourced from the Dutch national corona dashboard." />
+  <meta name="description" content="--  Covid &#34;dashboard&#34; I made over the winter. Data is sourced from the [Dutch national corona dashboard](https://coronadashboard.rijksoverheid.nl/). The relative severity is computed here as $$ R_j(s_i^t) = \frac{1}{Z_j \sum_k R_k}\sum_{\tau =0}^t s_i^{\tau}, $$ where $Z_j$ is the number of people living in municipality $j$, $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $\tau$." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/covid/" />
@@ -297,7 +297,7 @@
   <meta property="og:site_name" content="Casper van Elteren" />
   <meta property="og:url" content="https://cvanelteren.github.io/post/covid/" />
   <meta property="og:title" content="Covid | Casper van Elteren" />
-  <meta property="og:description" content="Covid &ldquo;dashboard&rdquo; I made over the winter. Data is sourced from the Dutch national corona dashboard." /><meta property="og:image" content="https://cvanelteren.github.io/post/covid/featured.png" />
+  <meta property="og:description" content="--  Covid &#34;dashboard&#34; I made over the winter. Data is sourced from the [Dutch national corona dashboard](https://coronadashboard.rijksoverheid.nl/). The relative severity is computed here as $$ R_j(s_i^t) = \frac{1}{Z_j \sum_k R_k}\sum_{\tau =0}^t s_i^{\tau}, $$ where $Z_j$ is the number of people living in municipality $j$, $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $\tau$." /><meta property="og:image" content="https://cvanelteren.github.io/post/covid/featured.png" />
     <meta property="twitter:image" content="https://cvanelteren.github.io/post/covid/featured.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -349,7 +349,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Covid \u0026ldquo;dashboard\u0026rdquo; I made over the winter. Data is sourced from the Dutch national corona dashboard."
+  "description": "--  Covid \"dashboard\" I made over the winter. Data is sourced from the [Dutch national corona dashboard](https://coronadashboard.rijksoverheid.nl/). The relative severity is computed here as $$ R_j(s_i^t) = \\frac{1}{Z_j \\sum_k R_k}\\sum_{\\tau =0}^t s_i^{\\tau}, $$ where $Z_j$ is the number of people living in municipality $j$, $s_i \\in \\{\\textrm{total reported, hospitalized, deceased}\\}$ at time $\\tau$."
 }
 </script>
 
@@ -725,8 +725,14 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p><video playsinline autoplay controls loop> <source src = "covid_anim.webm"></video>
-Covid &ldquo;dashboard&rdquo; I made over the winter. Data is sourced from the <a href="https://coronadashboard.rijksoverheid.nl/" target="_blank" rel="noopener">Dutch national corona dashboard</a>.</p>
+      <video playsinline autoplay controls loop>
+ <source src = "covid_anim.webm" type = "video/webm">
+ <!-- <source src = "covid_anim.mp4" type = "video/mp4"> -->
+</video>
+Covid "dashboard" I made over the winter. Data is sourced from the [Dutch national corona dashboard](https://coronadashboard.rijksoverheid.nl/). The 
+relative severity is computed here as
+<p>$$ R_j(s_i^t) = \frac{1}{Z_j \sum_k R_k}\sum_{\tau =0}^t s_i^{\tau}, $$
+where $Z_j$ is the number of people living in municipality $j$, $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $\tau$. Intuitively, the measure reflects the relative contribution to the number of cases, number of people hospitalized, and deceased repectively per capita; municipality with high contributions at time $t = \tau$ will score higher than municipalities with lower contributions.</p>
 
     </div>
 
