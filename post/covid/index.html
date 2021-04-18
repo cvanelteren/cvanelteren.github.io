@@ -729,10 +729,11 @@
  <source src = "covid_anim.webm" type = "video/webm">
  <source src = "test.mp4" type = "video/mp4">
 </video>
-<p>Covid &ldquo;dashboard&rdquo; I made over the winter. Data is sourced from the <a href="https://coronadashboard.rijksoverheid.nl/" target="_blank" rel="noopener">Dutch national corona dashboard</a>. The
+<p>Covid &ldquo;dashboard&rdquo; I made over the winter. Data is sourced from the <a href="https://coronadashboard.rijksoverheid.nl/" target="_blank" rel="noopener">Dutch national corona dashboard</a>.
+Intuitively, the relative severity reflects the relative contribution to the number of cases, number of people hospitalized, and deceased repectively per capita; municipality with high contributions at time $t$ will score higher than municipalities with lower contributions. The
 relative severity for municipality $j$ is computed here as</p>
-<p>$$ R_j(s_i^t) = \frac{1}{Z_j \sum_k R_k(s_i^t)}\sum_{\tau =0}^t s_i^{\tau}, $$
-where $Z_j$ is the number of people living in municipality $j$, $s_i^\tau$ with $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $\tau$. The percentile at each time $t$ is then computed and plotted above. The percentile at each time $t$ is then computed and plotted above.   Intuitively, the measure reflects the relative contribution to the number of cases, number of people hospitalized, and deceased repectively per capita; municipality with high contributions at time $t = \tau$ will score higher than municipalities with lower contributions.</p>
+<p>$$ R_j(s_i^t) = \frac{1}{\sum_k R_k(s_i^t)}\sum_{\tau =0}^t s_{ij}^{\tau}, $$
+$s_i^\tau$ with $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $\tau$ in municipality $j$. Each $s_{ij}$  is normalized by its population, i.e. $s_{ij}= \frac{s'_{ij}}{Z_j}$, where $Z_j$ is the number of people living in municipality $j$. The percentile at each time $t$ is then computed and plotted above.</p>
 
     </div>
 
