@@ -17,7 +17,7 @@
       <link>https://cvanelteren.github.io/post/mu4e/</link>
       <pubDate>Fri, 23 Apr 2021 10:12:27 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/mu4e/</guid>
-      <description>&lt;p&gt;A few months ago, my work email switched from outlook to office365 and with it came &lt;code&gt;OAUTH2&lt;/code&gt;. The transition was coupled with a lack of initial support for receiving email with this security protocol yielding some email clients useless. The goal of this post is to provide future users with some insights on setting up &lt;code&gt;OAUTH2&lt;/code&gt; on &lt;code&gt;mu4e&lt;/code&gt;.&lt;/p&gt;
+      <description>&lt;p&gt;A few months ago, my work email switched from outlook to office365 and with it came &lt;code&gt;OAUTH2&lt;/code&gt;. The transition was coupled with a lack of initial support for receiving email with this security protocol yielding some email clients useless. The goal of this post is to provide future users with some insights on setting up &lt;code&gt;OAUTH2&lt;/code&gt; and &lt;code&gt;mu4e&lt;/code&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;what-is-oauth2&#34;&gt;What is &lt;code&gt;OAUTH2&lt;/code&gt;?&lt;/h1&gt;
 &lt;p&gt;In brief, &lt;code&gt;OAUTH2&lt;/code&gt; is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.&lt;/p&gt;
 &lt;h1 id=&#34;setting-up-oauth2-in-emacs&#34;&gt;Setting up &lt;code&gt;OAUTH2&lt;/code&gt; in &lt;code&gt;emacs&lt;/code&gt;&lt;/h1&gt;
