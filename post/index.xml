@@ -101,7 +101,7 @@ passwordeval   &amp;lt;Password retrieval command&amp;gt;
 # Set a default account (optional)
 account default : outlook
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;We can now receive and send email. As coup de grâce we have to setup mu4e to start using email from emacs&lt;/p&gt;
+&lt;p&gt;We can now receive and send email. As coup de grâce we have to setup mu4e to start using email from emacs.&lt;/p&gt;
 &lt;h1 id=&#34;mu4e&#34;&gt;Mu4e&lt;/h1&gt;
 &lt;p&gt;At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &amp;ldquo;Modern&amp;rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell &lt;code&gt;mu&lt;/code&gt; use &lt;code&gt;mbsync&lt;/code&gt; to retrieve emails and &lt;code&gt;msmtp&lt;/code&gt; to send emails.&lt;/p&gt;
 &lt;script src=&#34;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js&#34;&gt;&lt;/script&gt;
