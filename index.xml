@@ -34,7 +34,7 @@ ClientSecret = &amp;quot;TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82&amp;quot;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Acquire &lt;code&gt;mutt_oauth2.py&lt;/code&gt; and edit the code with this info. Running the file will then give you a token after logging in with the through your SSO of your company. Now this token is put in a public file, anyone who has acces to this token could theoretically scoop your email. It is therefore crucial to setup a password manager to protect this secret.&lt;/p&gt;
 &lt;h2 id=&#34;email-receiving&#34;&gt;Email receiving&lt;/h2&gt;
-&lt;p&gt;I use &lt;code&gt;mbsync&lt;/code&gt; for receiving emails and &lt;code&gt;mstmp&lt;/code&gt; for sending emails. I again defer to respective tutorials for setting these up, but I will mention what is important for &lt;code&gt;XOAUTH2&lt;/code&gt;. A common setup for &lt;code&gt;mbsync&lt;/code&gt; could look something like this&lt;/p&gt;
+&lt;p&gt;I use &lt;code&gt;mbsync&lt;/code&gt; for receiving emails and &lt;code&gt;mstmp&lt;/code&gt; for sending emails. I again defer to the respective tutorials for setting these up, but I will mention what is important for &lt;code&gt;XOAUTH2&lt;/code&gt;. A common setup for &lt;code&gt;mbsync&lt;/code&gt; could look something like this&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;#file: ~/.mbsyncrc
 # mbsyncrc based on
 # http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
