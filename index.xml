@@ -5,12 +5,155 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 19:38:11 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Apr 2021 10:12:27 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
+    
+    <item>
+      <title>Growing pains</title>
+      <link>https://cvanelteren.github.io/post/mu4e/</link>
+      <pubDate>Fri, 23 Apr 2021 10:12:27 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/mu4e/</guid>
+      <description>&lt;p&gt;A few months ago, my work email switched from outlook to office365 and with it came &lt;code&gt;OAUTH2&lt;/code&gt;. The transition was coupled with a lack of initial support for receiving email with this security protocol yielding some email clients useless. The goal of this post is to provide future users with some insights on setting up &lt;code&gt;OAUTH2&lt;/code&gt; on &lt;code&gt;mu4e&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;what-is-oauth2&#34;&gt;What is &lt;code&gt;OAUTH2&lt;/code&gt;?&lt;/h1&gt;
+&lt;p&gt;In brief, &lt;code&gt;OAUTH2&lt;/code&gt; is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.&lt;/p&gt;
+&lt;h1 id=&#34;setting-up-oauth2-in-emacs&#34;&gt;Setting up &lt;code&gt;OAUTH2&lt;/code&gt; in &lt;code&gt;emacs&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;In order to setup email, we need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to setup some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.&lt;/p&gt;
+&lt;h2 id=&#34;acquiring-the-secret&#34;&gt;Acquiring the secret&lt;/h2&gt;
+&lt;p&gt;Acquiring the  secret may  differ depending  on the service  you are  using. For
+gmail                    for                     example                    look
+&lt;a href=&#34;https://support.google.com/googleapi/answer/6158849?hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.   For  office
+365 however, it proved a bit more difficult as I did not have access directly to
+the api to setup  these keys through azure. In order to acquire  a secret I used
+&lt;a href=&#34;https://gitlab.com/muttmua/mutt/-/blob/master/contrib/mutt_oauth2.py.README&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mutt_oauth2.py&lt;/a&gt;, and I used the publically available application id for thunderbird which can be found &lt;a href=&#34;https://hg.mozilla.org/comm-central/file/tip/mailnews/base/src/OAuth2Providers.jsm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. At the time of writing these are&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AppID = &amp;quot;08162f7c-0fd2-4200-a84a-f25a4db0b584&amp;quot;
+ClientSecret = &amp;quot;TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Acquire &lt;code&gt;mutt_oauth2.py&lt;/code&gt; and edit the code with this info. Running the file will then give you a token after logging in with the through your SSO of your company. Now this token is put in a public file, anyone who has acces to this token could theoretically scoop your email. It is therefore crucial to setup a password manager to protect this secret.&lt;/p&gt;
+&lt;h2 id=&#34;email-receiving&#34;&gt;Email receiving&lt;/h2&gt;
+&lt;p&gt;I use &lt;code&gt;mbsync&lt;/code&gt; for receiving emails and &lt;code&gt;mstmp&lt;/code&gt; for sending emails. I again defer to respective tutorials for setting these up, but I will mention what is important for &lt;code&gt;XOAUTH2&lt;/code&gt;. A common setup for &lt;code&gt;mbsync&lt;/code&gt; could look something like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#file: ~/.mbsyncrc
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+# ACCOUNT INFORMATION
+IMAPAccount office365
+# Address to connect to
+Host smtp.office365.com
+User &amp;lt;EMAIL_HERE&amp;gt;
+PassCmd &amp;quot;gpg2 -q --for-your-eyes-only --no-tty -d ~/.emacs.d/mu4e/.mbsyncpass-&amp;lt;EMAIL_HERE&amp;gt;.gpg&amp;quot;
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.3
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+IMAPStore office365
+Account office365
+
+MaildirStore office365-local
+SubFolders Verbatim
+# The trailing &amp;quot;/&amp;quot; is important
+Path ~/Mail/
+Inbox ~/Mail/office365/inbox
+
+Channel office365
+Far :office365-remote:
+Near :office365-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+Patterns * ![office365]* &amp;quot;[office365]/Sent Mail&amp;quot; &amp;quot;[office365]/Starred&amp;quot; &amp;quot;[office365]/All Mail&amp;quot;
+# Or include everything
+#Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;PassCmd&lt;/code&gt; is used to obtain your client secret setup above and &lt;code&gt;Authmechs&lt;/code&gt; needs to be set to &lt;code&gt;XOAUTH2&lt;/code&gt; for office365 but oddly to &lt;code&gt;LOGIN&lt;/code&gt; for gmail. One could also fill in a bare string password to prevent the hassle of setting up password managers, or use &lt;code&gt;python mutt_oauth2.py TOKENFILE&lt;/code&gt; to acquire the secret but this is not recommended. We can check whether it works by running &lt;code&gt;mbsync -a&lt;/code&gt; from your favorite terminal.&lt;/p&gt;
+&lt;h1 id=&#34;email-sending&#34;&gt;Email sending&lt;/h1&gt;
+&lt;p&gt;Similar to the setup of &lt;code&gt;mbsync&lt;/code&gt;, &lt;code&gt;msmtp&lt;/code&gt; can be setup to use a password command
+to  insert the  token.  Note that  you  need  to have  a  version that  supports
+&lt;code&gt;xoauth2&lt;/code&gt;, on AUR you can use &lt;code&gt;mstmp-oauth2&lt;/code&gt;. A typical setup looks like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#file : ~/.mstmprc 
+# Set default values for all following accounts.
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.msmtp.log
+
+# Outlook
+account        outlook
+host           smtp.office365.com
+port           587
+auth           xoauth2
+from           username@outlook.com
+# not necessary
+# user           username
+# not recommended
+password       plain-text-password
+# recommended
+passwordeval   &amp;lt;Password retrieval command&amp;gt;
+...
+
+# Set a default account (optional)
+account default : outlook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can now receive and send email. As de coup de grace we have to setup mu4e to start using email from emacs&lt;/p&gt;
+&lt;h1 id=&#34;mu4e&#34;&gt;Mu4e&lt;/h1&gt;
+&lt;p&gt;At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &amp;ldquo;Modern&amp;rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell &lt;code&gt;mu&lt;/code&gt; use &lt;code&gt;mbsync&lt;/code&gt; to retriev emails and &lt;code&gt;msmtp&lt;/code&gt; to send emails.&lt;/p&gt;
+&lt;script src=&#34;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/elisp.min.js&#34;&gt;&lt;/script&gt;
+&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;(after! mu4e
+ (setq
+   ;; set correct path
+   sendmail-program &amp;quot;/usr/sbin/msmtp&amp;quot;
+mu4e-root-maildir &amp;quot;~/Mail&amp;quot;
+   mu4e-mu4e-mail-path &amp;quot;~/Mail&amp;quot;
+   send-mail-function  &#39;smtpmail-send-it
+   ;; remove adding username --&amp;gt; msmtp takes care of this
+   message-sendmail-f-is-evil t
+   ;; read who is sending the email 
+   message-sendmail-extra-arguments &#39;(&amp;quot;--read-envelope-from&amp;quot;)
+    (make-mu4e-context
+     :name  &amp;quot;office365&amp;quot;
+     :match-func (lambda (msg)
+                   (when msg
+                     (string-prefix-p &amp;quot;/office365&amp;quot; (mu4e-message-field msg :maildir)
+                                      )
+                     )
+                   )
+     :enter-func (lambda () (mu4e-message &amp;quot;Entering work contenxt&amp;quot;))
+     ;; relevant bits
+     :vars &#39;(
+             (mu4e-sent-folder . &amp;quot;/office365/Sent Items&amp;quot;)
+             (mu4e-drafts-folder . &amp;quot;/office365/Drafts&amp;quot;)
+             (mu4e-inbox-folder . &amp;quot;/office365/inbox&amp;quot;)
+             (smtpmail-local-domain . &amp;quot;uva&amp;quot;)
+             (smtpmail-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
+             (smtpmail-default-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
+             (user-mail-address . &amp;quot;&amp;lt;user email address&amp;quot;)
+             ;; name setup in mbsync
+             (mu4e-get-mail-command . &amp;quot;mbsync office365&amp;quot;)
+             )
+    )
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As a final step, we need to setup &lt;code&gt;mu&lt;/code&gt; itself. From your favorite shell write:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mu init --maildir ~/Mail --my-address=&amp;lt;User address&amp;gt; &amp;amp;&amp;amp; mu index
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;hellip;and we are done! You can now use mu4e to send and receive emails from emacs, happy hacking 😉!&lt;/p&gt;
+&lt;!-- # Setting up password manager --&gt;
+&lt;!-- https://avaldes.co/2020/01/28/secret-service-keepassxc.html --&gt;
+&lt;!-- # Using msmtp --&gt;
+&lt;!-- https://tushartyagi.com/blog/configure-mu4e-and-msmtp/ --&gt;
+&lt;!-- # Setting up different accounts  --&gt;
+&lt;!-- https://www.djcbsoftware.nl/code/mu/mu4e/Contexts.html --&gt;
+</description>
+    </item>
     
     <item>
       <title>Covid dashboard</title>
