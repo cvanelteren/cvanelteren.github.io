@@ -131,7 +131,7 @@ mu4e-root-maildir &amp;quot;~/Mail&amp;quot;
              (mu4e-sent-folder . &amp;quot;/office365/Sent Items&amp;quot;)
              (mu4e-drafts-folder . &amp;quot;/office365/Drafts&amp;quot;)
              (mu4e-inbox-folder . &amp;quot;/office365/inbox&amp;quot;)
-             (smtpmail-local-domain . &amp;quot;uva&amp;quot;)
+             (smtpmail-local-domain . &amp;quot;office365&amp;quot;)
              (smtpmail-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
              (smtpmail-default-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
              (user-mail-address . &amp;quot;&amp;lt;user email address&amp;quot;)
