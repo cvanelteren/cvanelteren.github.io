@@ -21,7 +21,7 @@
 &lt;h1 id=&#34;what-is-oauth2&#34;&gt;What is &lt;code&gt;OAUTH2&lt;/code&gt;?&lt;/h1&gt;
 &lt;p&gt;In brief, &lt;code&gt;OAUTH2&lt;/code&gt; is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.&lt;/p&gt;
 &lt;h1 id=&#34;setting-up-oauth2-in-emacs&#34;&gt;Setting up &lt;code&gt;OAUTH2&lt;/code&gt; in &lt;code&gt;emacs&lt;/code&gt;&lt;/h1&gt;
-&lt;p&gt;In order to setup email, we need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to setup some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.&lt;/p&gt;
+&lt;p&gt;We need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to setup some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.&lt;/p&gt;
 &lt;h2 id=&#34;acquiring-the-secret&#34;&gt;Acquiring the secret&lt;/h2&gt;
 &lt;p&gt;Acquiring the  secret may  differ depending  on the service  you are  using. For
 gmail                    for                     example                    look
