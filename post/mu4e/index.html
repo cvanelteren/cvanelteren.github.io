@@ -726,7 +726,7 @@
 <h1 id="what-is-oauth2">What is <code>OAUTH2</code>?</h1>
 <p>In brief, <code>OAUTH2</code> is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.</p>
 <h1 id="setting-up-oauth2-in-emacs">Setting up <code>OAUTH2</code> in <code>emacs</code></h1>
-<p>We need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to setup some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.</p>
+<p>We need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to set up some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.</p>
 <h2 id="acquiring-the-secret">Acquiring the secret</h2>
 <p>Acquiring the  secret may  differ depending  on the service  you are  using. For
 gmail                    for                     example                    look
@@ -806,9 +806,9 @@ passwordeval   &lt;Password retrieval command&gt;
 # Set a default account (optional)
 account default : outlook
 </code></pre>
-<p>We can now receive and send email. As de coup de grace we have to setup mu4e to start using email from emacs</p>
+<p>We can now receive and send email. As the coup de grace we have to setup mu4e to start using email from emacs</p>
 <h1 id="mu4e">Mu4e</h1>
-<p>At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &ldquo;Modern&rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell <code>mu</code> use <code>mbsync</code> to retriev emails and <code>msmtp</code> to send emails.</p>
+<p>At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &ldquo;Modern&rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell <code>mu</code> use <code>mbsync</code> to retrieve emails and <code>msmtp</code> to send emails.</p>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/elisp.min.js"></script>
 <pre><code class="language-lisp">(after! mu4e
