@@ -110,7 +110,7 @@ account default : outlook
  (setq
    ;; set correct path
    sendmail-program &amp;quot;/usr/sbin/msmtp&amp;quot;
-mu4e-root-maildir &amp;quot;~/Mail&amp;quot;
+   mu4e-root-maildir &amp;quot;~/Mail&amp;quot;
    mu4e-mu4e-mail-path &amp;quot;~/Mail&amp;quot;
    send-mail-function  &#39;smtpmail-send-it
    ;; remove adding username --&amp;gt; msmtp takes care of this
