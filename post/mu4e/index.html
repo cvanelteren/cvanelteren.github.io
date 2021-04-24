@@ -776,7 +776,7 @@ Create Both
 # Save the synchronization state files in the relevant directory
 SyncState *
 </code></pre>
-<p><code>PassCmd</code> is used to obtain your client secret setup above and <code>Authmechs</code> needs to be set to <code>XOAUTH2</code> for office365 but oddly to <code>LOGIN</code> for gmail. One could also fill in a bare string password to prevent the hassle of setting up password managers, or use <code>python mutt_oauth2.py TOKENFILE</code> to acquire the secret but this is not recommended. We can check whether it works by running <code>mbsync -a</code> from your favorite terminal.</p>
+<p><code>PassCmd</code> is used to obtain your client secret setup above and <code>Authmechs</code> needs to be set to <code>XOAUTH2</code> for office365 but oddly to <code>LOGIN</code> for gmail. One could also fill in a bare string password to prevent the hassle of setting up password managers, or use <code>python mutt_oauth2.py TOKENFILE</code> to acquire the secret but this is not recommended. We can check whether it works by running <code>mbsync -a</code> from your favorite shell.</p>
 <h1 id="email-sending">Email sending</h1>
 <p>Similar to the setup of <code>mbsync</code>, <code>msmtp</code> can be setup to use a password command
 to  insert the  token.  Note that  you  need  to have  a  version that  supports
@@ -806,7 +806,7 @@ passwordeval   &lt;Password retrieval command&gt;
 # Set a default account (optional)
 account default : outlook
 </code></pre>
-<p>We can now receive and send email. As the coup de grace we have to setup mu4e to start using email from emacs</p>
+<p>We can now receive and send email. As coup de grâce we have to setup mu4e to start using email from emacs</p>
 <h1 id="mu4e">Mu4e</h1>
 <p>At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &ldquo;Modern&rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell <code>mu</code> use <code>mbsync</code> to retrieve emails and <code>msmtp</code> to send emails.</p>
 <script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
