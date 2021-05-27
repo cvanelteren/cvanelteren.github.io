@@ -5,12 +5,41 @@
     <link>https://cvanelteren.github.io/post/</link>
       <atom:link href="https://cvanelteren.github.io/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 23 Apr 2021 10:12:27 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 10 May 2021 18:53:16 +0200</lastBuildDate>
     <image>
-      <url>https://cvanelteren.github.io/media/icon_hu977510b180e05bb584cef654dc28acf8_734_512x512_fill_lanczos_center_2.png</url>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Posts</title>
       <link>https://cvanelteren.github.io/post/</link>
     </image>
+    
+    <item>
+      <title>How many value networks can be formed on a social network?</title>
+      <link>https://cvanelteren.github.io/post/vn_node_coloring/</link>
+      <pubDate>Mon, 10 May 2021 18:53:16 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/vn_node_coloring/</guid>
+      <description>&lt;p&gt;A value network is a set of roles  that connect together to form a network. Take
+a coffee company for example, in order for a customer to buy a bag of beans, the
+coffee company  has to go  through a series  of steps to  get the coffee  to its
+customers. In the case of actual goods, these networks are called supply chains.
+In a  general sense,  one can  dub the  divions of  role within  some functional
+context as  a value network. That  is, a value network  is a graph in  which the
+vertices represent an abstract role. The connectivity between these roles are an
+abstract embodiment of how these roles interact together.&lt;/p&gt;
+&lt;p&gt;A value  network by  itself can  form a  valuable tool  in analysis  in business
+decomposing how  a business is organized.  However, I wondered, can  we get more
+out  of this  tool? In  particular,  can this  concept  can be  used for  complex
+systems? Complex systems that most notable lack a central controller and are often
+associated with &amp;ldquo;emergent behavior&amp;rdquo; (more on in some future post). Entities in a
+complex system interact together, but their  roles may not be represented simply
+by its &amp;ldquo;self-ness&amp;rdquo;. Rather,  it is possible that the entity  operates as a role,
+which in &amp;ldquo;role space&amp;rdquo; has specific known interactions.&lt;/p&gt;
+&lt;p&gt;This idea, I employed in social settings. Given a social network, one can encode
+a particular known value network and look for its temporal properties.&lt;/p&gt;
+&lt;video playsinline autoplay controls mute loop&gt;
+ &lt;source src = &#34;vn_coloring.mp4&#34;&gt;
+&lt;/video&gt;
+</description>
+    </item>
     
     <item>
       <title>Growing pains</title>
