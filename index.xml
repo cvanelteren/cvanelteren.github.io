@@ -5,12 +5,21 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 10 May 2021 18:53:16 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 May 2021 12:14:53 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
+    
+    <item>
+      <title>Through the looking glass</title>
+      <link>https://cvanelteren.github.io/talk/diep2021/</link>
+      <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
+      <description>&lt;p&gt;Since the birth of classical physics, we have come to regard physics as the asnwer to our question on what reality &amp;ldquo;is&amp;rdquo;. Yet many systems we experience every day devies these laws of physics. In many of these systems systemic properties emerge through local interactions of its parts. These parts behind interact to bring forth something besides the parts. In this talk I will explore the tension between the parts and the whole through the lens information theory.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How many value networks can be formed on a social network?</title>

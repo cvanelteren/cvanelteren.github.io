@@ -5,12 +5,21 @@
     <link>https://cvanelteren.github.io/talk/</link>
       <atom:link href="https://cvanelteren.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 02 Apr 2019 16:45:00 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 May 2021 12:14:53 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/network_big.png</url>
       <title>Recent &amp; Upcoming Talks</title>
       <link>https://cvanelteren.github.io/talk/</link>
     </image>
+    
+    <item>
+      <title>Through the looking glass</title>
+      <link>https://cvanelteren.github.io/talk/diep2021/</link>
+      <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
+      <description>&lt;p&gt;Since the birth of classical physics, we have come to regard physics as the asnwer to our question on what reality &amp;ldquo;is&amp;rdquo;. Yet many systems we experience every day devies these laws of physics. In many of these systems systemic properties emerge through local interactions of its parts. These parts behind interact to bring forth something besides the parts. In this talk I will explore the tension between the parts and the whole through the lens information theory.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>What node is most important?</title>
