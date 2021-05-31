@@ -17,17 +17,17 @@
       <link>https://cvanelteren.github.io/talk/diep2021/</link>
       <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
       <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
-      <description>&lt;p&gt;Understanding dynamical systems is a fundamental  problem for the 21st century .
+      <description>&lt;p&gt;Understanding dynamical systems is a fundamental  problem for the 21st century.
 Despite  theprima faciedifferences  and  purposes of  many real-world  networks,
-previous research shows several  universal characteristics innetworks properties
+previous research shows several  universal characteristics in networks properties
 such as the small-world phenomenon, fat-tail degree and feedback loops. This has
-lead to thecommon but often implicit assumption that the connectedness of a node
-in  the network  is proportional  to  its dynamic  importance .  For example  in
+lead to the common but often implicit assumption that the connectedness of a node
+in  the network  is proportional  to  its dynamic  importance.  For example  in
 epidemic  research, high  degree nodes  or “super-spreaders”  are associated  to
 dominant epidemic  risk  and  therefore  deserve  special  attention.  Yet  prior
 research shows  that the shared  universality in network characteristics  is not
 shared in the dynamic or functional properties of many real-world systems.&lt;/p&gt;
-&lt;p&gt;In this talk I will explore the relation between local interactions and macroscopic properties of a system through the lens of statistical physics and information theory. In particular I will show novel methods on determining the so-called driver node in complex systems, and how tipping point can be studied from an information theoretical perspective.&lt;/p&gt;
+&lt;p&gt;In this talk I will explore the relation between local interactions and macroscopic properties of a system through the lens of statistical physics and information theory. In particular, I will show novel methods on determining the so-called driver node in complex systems, and how tipping point can be studied from an information theoretical perspective.&lt;/p&gt;
 </description>
     </item>
     
