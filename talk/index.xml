@@ -17,18 +17,17 @@
       <link>https://cvanelteren.github.io/talk/diep2021/</link>
       <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
       <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
-      <description>&lt;p&gt;Since the  birth of  classical physics, we  have come to  regard physics  as the
-asnwer to  our question  on what  reality &amp;ldquo;is&amp;rdquo;. Yet  many systems  we experience
-every day, resist traditional  reductionistic approaches. These so-called complex
-systems are crucial to the functioning of  the world around us; ranging from the
-creation of life and the inner-workings  of cells, the surivival and propagation
-of ecosystems, the creation of the  mind from neural interactions, to the social
-structures of society, and so on. In this talk, I will explore the relationships
-between  the parts  of a  system, and  the whole,  and unravel  insights in  how
-systemic properties are created through  local interactions. I will view complex
-systems  through the  lens  of  information theory  and  show  novel methods  to
-determine  driver nodes  in  complex  systems, and  how  tipping  points may  be
-understood from an information theoretical perspective.&lt;/p&gt;
+      <description>&lt;p&gt;Understanding dynamical systems is a fundamental  problem for the 21st century .
+Despite  theprima faciedifferences  and  purposes of  many real-world  networks,
+previous research shows several  universal characteristics innetworks properties
+such as the small-world phenomenon, fat-tail degree and feedback loops. This has
+lead to thecommon but often implicit assumption that the connectedness of a node
+in  the network  is proportional  to  its dynamic  importance .  For example  in
+epidemic  research, high  degree nodes  or “super-spreaders”  are associated  to
+dominantepidemic  risk  and  therefore  deserve  special  attention.  Yet  prior
+research shows  that the shared  universality in network characteristics  is not
+shared in the dynamic or functional properties of many real-world systems.&lt;/p&gt;
+&lt;p&gt;In this talk I will explore the relation between local interactions and macroscopic properties of a system through the lens of statistical physics and information theory. In particular I will show novel methods on determining the so-called driver node in complex systems, and how tipping point can be studied from an information theoretical perspective.&lt;/p&gt;
 </description>
     </item>
     
