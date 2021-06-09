@@ -24,7 +24,7 @@
     <item>
       <title>Woningnet</title>
       <link>https://cvanelteren.github.io/project/woningnet/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/woningnet/</guid>
       <description>&lt;p&gt;I got tired of clicking on woningnet so I made this viewer that puts the houses
 on a map! It offers a nice interface which allows you to reduce time spent on woningnet.
@@ -36,7 +36,7 @@ See gif for small example.
     <item>
       <title>Information impact</title>
       <link>https://cvanelteren.github.io/project/information_impact/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/information_impact/</guid>
       <description></description>
     </item>
@@ -44,7 +44,7 @@ See gif for small example.
     <item>
       <title>Apple tss-saver daemon</title>
       <link>https://cvanelteren.github.io/project/tssclient/</link>
-      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/tssclient/</guid>
       <description>&lt;p&gt;I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
 the latest shsh2 blobs from apple servers.&lt;/p&gt;
@@ -54,7 +54,7 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>FishViewer</title>
       <link>https://cvanelteren.github.io/project/fishviewer/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
       <description></description>
     </item>
@@ -62,7 +62,7 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>Statistical machine learning</title>
       <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
       <description></description>
     </item>
@@ -70,7 +70,7 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>Toy dynamical systems</title>
       <link>https://cvanelteren.github.io/project/toymodels/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/toymodels/</guid>
       <description></description>
     </item>

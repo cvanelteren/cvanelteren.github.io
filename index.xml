@@ -5,7 +5,7 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 May 2021 12:14:53 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 09 Jun 2021 08:34:46 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
@@ -13,11 +13,20 @@
     </image>
     
     <item>
+      <title>F Strings</title>
+      <link>https://cvanelteren.github.io/post/f-strings/</link>
+      <pubDate>Wed, 09 Jun 2021 08:34:46 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/f-strings/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>Through the looking glass</title>
       <link>https://cvanelteren.github.io/talk/diep2021/</link>
       <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
       <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
-      <description>&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
+      <description>&lt;p&gt;tldr; when: 10 June 2021 @ 11-13 A.M. GMT:+1&lt;/p&gt;
+&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
 Despite the &lt;em&gt;prima facie&lt;/em&gt; differences  and purposes of many real-world networks,
 previous research shows several universal characteristics in networks properties
 such as the small-world phenomenon, fat-tail degree and feedback loops. This has
@@ -1513,15 +1522,27 @@ HWRhdGEAAAABAAAAAExhdmY1OC4yOS4xMDA=
     <item>
       <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
       <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
-      <pubDate>Sun, 07 Apr 2019 00:00:00 +0200</pubDate>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
       <description></description>
     </item>
     
     <item>
       <title>What node is most important?</title>
+      <link>https://cvanelteren.github.io/event/ias_tu_delft/</link>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0000</pubDate>
+      <guid>https://cvanelteren.github.io/event/ias_tu_delft/</guid>
+      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
+Additionally, the same slides were shown at the simulation based science group at the institute
+for advanced studies (IAS) at the university of Amsterdam.
+The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>What node is most important?</title>
       <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
-      <pubDate>Tue, 02 Apr 2019 16:45:00 +0200</pubDate>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
       <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
 Additionally, the same slides were shown at the simulation based science group at the institute
@@ -1533,7 +1554,7 @@ The talk concerned my research on the identification of driver-nodes in complex 
     <item>
       <title>Woningnet</title>
       <link>https://cvanelteren.github.io/project/woningnet/</link>
-      <pubDate>Fri, 01 Mar 2019 00:00:00 +0100</pubDate>
+      <pubDate>Fri, 01 Mar 2019 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/woningnet/</guid>
       <description>&lt;p&gt;I got tired of clicking on woningnet so I made this viewer that puts the houses
 on a map! It offers a nice interface which allows you to reduce time spent on woningnet.
@@ -1545,7 +1566,7 @@ See gif for small example.
     <item>
       <title>Information impact</title>
       <link>https://cvanelteren.github.io/project/information_impact/</link>
-      <pubDate>Mon, 10 Dec 2018 00:00:00 +0100</pubDate>
+      <pubDate>Mon, 10 Dec 2018 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/information_impact/</guid>
       <description></description>
     </item>
@@ -1553,7 +1574,7 @@ See gif for small example.
     <item>
       <title>Apple tss-saver daemon</title>
       <link>https://cvanelteren.github.io/project/tssclient/</link>
-      <pubDate>Sat, 10 Mar 2018 00:00:00 +0100</pubDate>
+      <pubDate>Sat, 10 Mar 2018 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/tssclient/</guid>
       <description>&lt;p&gt;I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
 the latest shsh2 blobs from apple servers.&lt;/p&gt;
@@ -1563,7 +1584,7 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>FishViewer</title>
       <link>https://cvanelteren.github.io/project/fishviewer/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/fishviewer/</guid>
       <description></description>
     </item>
@@ -1571,7 +1592,7 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>Statistical machine learning</title>
       <link>https://cvanelteren.github.io/project/statistical_machinelearning/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/statistical_machinelearning/</guid>
       <description></description>
     </item>
@@ -1579,9 +1600,33 @@ the latest shsh2 blobs from apple servers.&lt;/p&gt;
     <item>
       <title>Toy dynamical systems</title>
       <link>https://cvanelteren.github.io/project/toymodels/</link>
-      <pubDate>Fri, 27 Oct 2017 00:00:00 +0200</pubDate>
+      <pubDate>Fri, 27 Oct 2017 00:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/project/toymodels/</guid>
       <description></description>
+    </item>
+    
+    <item>
+      <title>Through the looking glass</title>
+      <link>https://cvanelteren.github.io/event/diep2021/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://cvanelteren.github.io/event/diep2021/</guid>
+      <description>&lt;p&gt;tldr; when: 10 June 2021 @ 11-13 A.M. GMT:+1&lt;/p&gt;
+&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
+Despite the &lt;em&gt;prima facie&lt;/em&gt; differences  and purposes of many real-world networks,
+previous research shows several universal characteristics in networks properties
+such as the small-world phenomenon, fat-tail degree and feedback loops. This has
+lead to  the common but  often implicit assumption  that the connectedness  of a
+node in  the network is proportional  to its dynamic importance.  For example in
+epidemic  research, high  degree nodes  or &amp;ldquo;super-spreaders&amp;rdquo;  are associated  to
+dominant  epidemic  risk and  therefore  deserve  special attention.  Yet  prior
+research shows  that the shared  universality in network characteristics  is not
+shared in the dynamic or functional properties of many real-world systems.&lt;/p&gt;
+&lt;p&gt;In  this  talk I  will  explore  the  relation  between local  interactions  and
+macroscopic properties of  a system through the lens of  statistical physics and
+information theory. In particular, I will  show novel methods on determining the
+so-called driver node  in complex systems, and how tipping  point can be studied
+from an information theoretical perspective.&lt;/p&gt;
+</description>
     </item>
     
   </channel>
