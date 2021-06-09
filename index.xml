@@ -5,20 +5,12 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 09 Jun 2021 08:34:46 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 May 2021 12:14:53 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
-    
-    <item>
-      <title>F Strings</title>
-      <link>https://cvanelteren.github.io/post/f-strings/</link>
-      <pubDate>Wed, 09 Jun 2021 08:34:46 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/post/f-strings/</guid>
-      <description></description>
-    </item>
     
     <item>
       <title>Through the looking glass</title>
