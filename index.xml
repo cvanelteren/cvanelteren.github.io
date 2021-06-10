@@ -38,7 +38,7 @@ print(f&amp;quot;Some variable = {some_variable}&amp;quot;)
 &lt;p&gt;Merely by adding the formatting operator &amp;ldquo;f&amp;rdquo; in front of the string, the output becomes more readble. This has the advantage of literate programming; in plain langauge one can read this sentence and understand its output in normal plain language. Since the feature became available I quickly replaced the old formatting style with this newer better way: f-strings became the norm.&lt;/p&gt;
 &lt;p&gt;In my normal debugging routine, I am not used to using full-featured debuggers that can step in and out of functions allowing to see local scopes: very fancy! I usually resort to print statements, and lots of coffee and pacing around my room. F-strings allowed for quicker and clearer debugging. This prompts me to write this post now, what else can F-strings do?&lt;/p&gt;
 &lt;h1 id=&#34;capabilities-of-f-strings&#34;&gt;Capabilities of f-strings&lt;/h1&gt;
-&lt;p&gt;F-strings can do a great number of things. One of the major advantages for me wa making readable strings as was indicated above.&lt;/p&gt;
+&lt;p&gt;F-strings can do a great number of things. One of the major advantages for me is making readable strings as was indicated above.&lt;/p&gt;
 &lt;h2 id=&#34;formatting&#34;&gt;Formatting&lt;/h2&gt;
 &lt;p&gt;F-strings allow for formatting opertors to be passed in. Say you have a float with 10 decimes but you only want to plot the rounded number. One option would be to do:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a = 1.23123512351234
