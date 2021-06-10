@@ -30,7 +30,7 @@
   
     
   
-  <meta name="description" content="" />
+  <meta name="description" content="If you know python, you are probably aware of its value. The language is easy to develop in, which allows for quick proto-typing. It is used by many professional companies either as glue to bind compiled languages together, or as a full-stack for their apps." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/f-strings/" />
@@ -299,8 +299,8 @@
   
   <meta property="og:site_name" content="Casper van Elteren" />
   <meta property="og:url" content="https://cvanelteren.github.io/post/f-strings/" />
-  <meta property="og:title" content="F Strings | Casper van Elteren" />
-  <meta property="og:description" content="" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:title" content="F-strings are awesome! | Casper van Elteren" />
+  <meta property="og:description" content="If you know python, you are probably aware of its value. The language is easy to develop in, which allows for quick proto-typing. It is used by many professional companies either as glue to bind compiled languages together, or as a full-stack for their apps." /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -335,7 +335,7 @@
     "@type": "WebPage",
     "@id": "https://cvanelteren.github.io/post/f-strings/"
   },
-  "headline": "F Strings",
+  "headline": "F-strings are awesome!",
   
   "datePublished": "2021-06-09T08:34:46+02:00",
   "dateModified": "2021-06-09T08:34:46+02:00",
@@ -348,7 +348,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": ""
+  "description": "If you know python, you are probably aware of its value. The language is easy to develop in, which allows for quick proto-typing. It is used by many professional companies either as glue to bind compiled languages together, or as a full-stack for their apps."
 }
 </script>
 
@@ -364,7 +364,7 @@
 
 
 
-  <title>F Strings | Casper van Elteren</title>
+  <title>F-strings are awesome! | Casper van Elteren</title>
 </head>
 
 
@@ -734,8 +734,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>F Strings</h1>
+  <h1>F-strings are awesome!</h1>
 
+  
+  <p class="page-subtitle">Exploring some neat features I wasn&rsquo;t aware of</p>
   
 
   
@@ -762,7 +764,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    3 min read
   </span>
   
 
@@ -792,7 +794,59 @@
   <div class="article-container">
 
     <div class="article-style">
-      
+      <p>If you know python, you are probably aware of its value. The language is easy to
+develop in, which allows for quick proto-typing. It is used by many professional
+companies either as glue to bind compiled languages together, or as a full-stack
+for    their     apps.    With     the    advent     of    python     3.6    and
+[[pep498][https://www.python.org/dev/peps/pep-0498/]]  f-strings   arrived.  Its
+longer name  is formatted string  literals or f-strings  for short ;-).  This is
+probably  one of  my  favorite python  feature  next to  dicts  being sorted  by
+default.</p>
+<h1 id="what-are-f-strings">What are f-strings?</h1>
+<p>When you are either debugging or writing some logging library, strings (in my opinion) were always a hassle to deal with. In order to write the output of a variable one would either write</p>
+<pre><code class="language-python">some_variable = &quot;hello world!&quot;
+print(&quot;Some variable = &quot; + some_variable)
+print(&quot;Some variable = %s&quot;.format(some_variable))
+</code></pre>
+<p>The top choice is not that bad, but the bottom one gets complicated when formatting get more complex. With F-strings this procedure can be simplified by writing:</p>
+<pre><code class="language-python">some_variable = &quot;hello world!&quot;
+print(f&quot;Some variable = {some_variable}&quot;)
+</code></pre>
+<p>Merely by adding the formatting operator &ldquo;f&rdquo; in front of the string, the output becomes more readble. This has the advantage of literate programming; in plain langauge one can read this sentence and understand its output in normal plain language. Since the feature became available I quickly replaced the old formatting style with this newer better way: f-strings became the norm.</p>
+<p>In my normal debugging routine, I am not used to using full-featured debuggers that can step in and out of functions allowing to see local scopes: very fancy! I usually resort to print statements, and lots of coffee and pacing around my room. F-strings allowed for quicker and clearer debugging. This prompts me to write this post now, what else can F-strings do?</p>
+<h1 id="capabilities-of-f-strings">Capabilities of f-strings</h1>
+<p>F-strings can do a great number of things. One of the major advantages for me wa making readable strings as was indicated above.</p>
+<h2 id="formatting">Formatting</h2>
+<p>F-strings allow for formatting opertors to be passed in. Say you have a float with 10 decimes but you only want to plot the rounded number. One option would be to do:</p>
+<pre><code class="language-python">a = 1.23123512351234
+print(f&quot;{round(a, 2)}&quot;)
+
+</code></pre>
+<p>This however, quickly makes the f-string &ldquo;complicated&rdquo;. Luckliy f-strings allow for format operators to be used</p>
+<pre><code class="language-python">a = 1.23123512351234
+print(f&quot;{a:.2f}&quot;) # prints up to 2 precision
+</code></pre>
+<p>Next to rouding formats, one can also apply alignment of text</p>
+<pre><code class="language-python">text = &quot;hello world&quot;
+print(f&quot;{text: &gt;}&quot;) # right align
+print(f&quot;{text: &lt;}&quot;) # left align [default often]
+print(f&quot;{text: ^}&quot;) # center align 
+</code></pre>
+<p>There are many more possibilites, including aligning only if the text goes bigger than a certain predetermined number of digits or formatting numbers to hex, binary, leading space for positive numbers and so on. In fact there is a minilanguage that it uses that can be found on the python docs.</p>
+<h2 id="lambda-functions">Lambda functions</h2>
+<p>The colon is used for formatting indicator. This  prevents lambda functions from being used directly. However, by encapsupating the lambda function one is still able to insert lambda functions inside an f-string.</p>
+<pre><code class="language-python">print(f&quot;This is the output of two times 2 {(lambda x: x*2)(2)}&quot;)
+</code></pre>
+<h3 id="debugging">Debugging</h3>
+<p>In debugging I often revert to writing the output to check the state of some object. This results in boilerplate statements that I wish to prevent. Luckily, f-strings can to this with <code>=</code> formatting.</p>
+<pre><code class="language-python">some_variables = &quot;ERROR!&quot;
+print(f&quot;{some_variable=}&quot;)
+</code></pre>
+<p>will print out</p>
+<pre><code>some_variable = &quot;ERROR&quot;
+</code></pre>
+<p>Pretty neat! This reduces the need to write out the variable statement completely.</p>
+
     </div>
 
     
@@ -815,7 +869,7 @@
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/f-strings/&amp;text=F%20Strings" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/f-strings/&amp;text=F-strings%20are%20awesome!" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -828,7 +882,7 @@
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/f-strings/&amp;t=F%20Strings" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/f-strings/&amp;t=F-strings%20are%20awesome!" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -841,7 +895,7 @@
       
       
       <li>
-        <a href="mailto:?subject=F%20Strings&amp;body=https://cvanelteren.github.io/post/f-strings/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=F-strings%20are%20awesome!&amp;body=https://cvanelteren.github.io/post/f-strings/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -854,7 +908,7 @@
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/f-strings/&amp;title=F%20Strings" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/f-strings/&amp;title=F-strings%20are%20awesome!" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -867,7 +921,7 @@
       
       
       <li>
-        <a href="whatsapp://send?text=F%20Strings%20https://cvanelteren.github.io/post/f-strings/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=F-strings%20are%20awesome!%20https://cvanelteren.github.io/post/f-strings/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -880,7 +934,7 @@
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/f-strings/&amp;title=F%20Strings" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/f-strings/&amp;title=F-strings%20are%20awesome!" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
