@@ -5,9 +5,9 @@
     <link>https://cvanelteren.github.io/talk/</link>
       <atom:link href="https://cvanelteren.github.io/talk/index.xml" rel="self" type="application/rss+xml" />
     <description>Recent &amp; Upcoming Talks</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 30 May 2021 12:14:53 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 10 Jun 2021 11:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
+      <url>https://cvanelteren.github.io/media/network_big.png</url>
       <title>Recent &amp; Upcoming Talks</title>
       <link>https://cvanelteren.github.io/talk/</link>
     </image>
@@ -15,10 +15,9 @@
     <item>
       <title>Through the looking glass</title>
       <link>https://cvanelteren.github.io/talk/diep2021/</link>
-      <pubDate>Sun, 30 May 2021 12:14:53 +0200</pubDate>
+      <pubDate>Thu, 10 Jun 2021 11:00:00 +0000</pubDate>
       <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
-      <description>&lt;p&gt;tldr; when: 10 June 2021 @ 11-13 A.M. GMT:+1&lt;/p&gt;
-&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
+      <description>&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
 Despite the &lt;em&gt;prima facie&lt;/em&gt; differences  and purposes of many real-world networks,
 previous research shows several universal characteristics in networks properties
 such as the small-world phenomenon, fat-tail degree and feedback loops. This has
