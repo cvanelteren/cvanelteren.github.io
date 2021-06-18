@@ -7,16 +7,16 @@
     <description>Casper van Elteren</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 10 Jun 2021 11:00:00 +0000</lastBuildDate>
     <image>
-      <url>https://cvanelteren.github.io/images/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
     
     <item>
       <title>Through the looking glass</title>
-      <link>https://cvanelteren.github.io/talk/diep2021/</link>
+      <link>https://cvanelteren.github.io/talk/through-the-looking-glass/</link>
       <pubDate>Thu, 10 Jun 2021 11:00:00 +0000</pubDate>
-      <guid>https://cvanelteren.github.io/talk/diep2021/</guid>
+      <guid>https://cvanelteren.github.io/talk/through-the-looking-glass/</guid>
       <description>&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
 Despite the &lt;em&gt;prima facie&lt;/em&gt; differences  and purposes of many real-world networks,
 previous research shows several universal characteristics in networks properties
@@ -365,9 +365,9 @@ Unforutnately, the process is not perfect. It was fun making this regardless.
     
     <item>
       <title>Simulation based science lecture talks</title>
-      <link>https://cvanelteren.github.io/talk/sbs2021/</link>
+      <link>https://cvanelteren.github.io/talk/simulation-based-science-lecture-talks/</link>
       <pubDate>Fri, 12 Mar 2021 16:00:00 +0100</pubDate>
-      <guid>https://cvanelteren.github.io/talk/sbs2021/</guid>
+      <guid>https://cvanelteren.github.io/talk/simulation-based-science-lecture-talks/</guid>
       <description></description>
     </item>
     
@@ -1588,9 +1588,9 @@ HWRhdGEAAAABAAAAAExhdmY1OC4yOS4xMDA=
     
     <item>
       <title>What node is most important?</title>
-      <link>https://cvanelteren.github.io/talk/ias_tu_delft/</link>
+      <link>https://cvanelteren.github.io/talk/what-node-is-most-important/</link>
       <pubDate>Tue, 02 Apr 2019 16:45:00 +0000</pubDate>
-      <guid>https://cvanelteren.github.io/talk/ias_tu_delft/</guid>
+      <guid>https://cvanelteren.github.io/talk/what-node-is-most-important/</guid>
       <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
 Additionally, the same slides were shown at the simulation based science group at the institute
 for advanced studies (IAS) at the university of Amsterdam.
