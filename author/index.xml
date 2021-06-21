@@ -1206,7 +1206,7 @@ HWRhdGEAAAABAAAAAExhdmY1OC4yOS4xMDA=
 &#34;&gt;
   Your browser does not support the video tag.
 &lt;/video&gt;
-&lt;p&gt;&lt;img src=&#34;./matplotlib_colorbar_fix_1_1.png&#34; alt=&#34;png&#34;&gt;&lt;/p&gt;
+&lt;!-- ![png](./matplotlib_colorbar_fix_1_1.png) --&gt;
 </description>
     </item>
     
