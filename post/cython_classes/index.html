@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="A python daemon around tss-saver" />
+  <meta name="description" content="Creating the fastest chicken alive!" />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/project/tssclient/" />
+  <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/cython_classes/" />
 
   
 
@@ -274,7 +274,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_2.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_2.png" />
 
-  <link rel="canonical" href="https://cvanelteren.github.io/project/tssclient/" />
+  <link rel="canonical" href="https://cvanelteren.github.io/post/cython_classes/" />
 
   
   
@@ -291,18 +291,18 @@
   <meta property="twitter:card" content="summary" />
   
   <meta property="og:site_name" content="Casper van Elteren" />
-  <meta property="og:url" content="https://cvanelteren.github.io/project/tssclient/" />
-  <meta property="og:title" content="Apple tss-saver daemon | Casper van Elteren" />
-  <meta property="og:description" content="A python daemon around tss-saver" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:url" content="https://cvanelteren.github.io/post/cython_classes/" />
+  <meta property="og:title" content="Wrapping cpp in cython and python | Casper van Elteren" />
+  <meta property="og:description" content="Creating the fastest chicken alive!" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2018-03-10T00:00:00&#43;00:00"
+        content="2021-06-23T20:59:18&#43;02:00"
       />
     
-    <meta property="article:modified_time" content="2018-03-10T00:00:00&#43;00:00">
+    <meta property="article:modified_time" content="2021-06-23T20:59:18&#43;02:00">
   
 
   
@@ -314,6 +314,8 @@
 
 
 
+
+  
 
 
 
@@ -321,15 +323,15 @@
 <script type="application/ld+json">
 {
   "@context": "https://schema.org",
-  "@type": "Article",
+  "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://cvanelteren.github.io/project/tssclient/"
+    "@id": "https://cvanelteren.github.io/post/cython_classes/"
   },
-  "headline": "Apple tss-saver daemon",
+  "headline": "Wrapping cpp in cython and python",
   
-  "datePublished": "2018-03-10T00:00:00Z",
-  "dateModified": "2018-03-10T00:00:00Z",
+  "datePublished": "2021-06-23T20:59:18+02:00",
+  "dateModified": "2021-06-23T20:59:18+02:00",
   
   "publisher": {
     "@type": "Organization",
@@ -339,7 +341,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "A python daemon around tss-saver"
+  "description": "Creating the fastest chicken alive!"
 }
 </script>
 
@@ -355,11 +357,11 @@
 
 
 
-  <title>Apple tss-saver daemon | Casper van Elteren</title>
+  <title>Wrapping cpp in cython and python | Casper van Elteren</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="5a25776864d721c91b4e4909a8f1c05c" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="3090dbdddef851274dbf01003d0f4d86" >
 
   
   
@@ -704,7 +706,7 @@
   </div>
 
   <div class="page-body">
-    <article class="article article-project">
+    <article class="article">
 
   
 
@@ -725,8 +727,10 @@
   
   
 <div class="article-container pt-3">
-  <h1>Apple tss-saver daemon</h1>
+  <h1>Wrapping cpp in cython and python</h1>
 
+  
+  <p class="page-subtitle">Creating the fastest chicken alive!</p>
   
 
   
@@ -744,12 +748,17 @@
     
       
     
-    Mar 10, 2018
+    Jun 23, 2021
   </span>
   
 
   
 
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
   
 
   
@@ -778,8 +787,125 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>I built an automatic daemon around tss-saver by 1Conan. It automatically grabs
-the latest shsh2 blobs from apple servers.</p>
+      <p>Python is my preferred language due to its ease of use, general application, interactivity, and availibility of libraries. There is however one big downside: python can be painfully slow for numerical applications. One possible solution is to write extensions in lower-level languages and provide bindings that one can use from python. This is often referred to as the two-language-problem as it requires a programmer to know two languages. In this post I will explore <code>cython</code> which is &ldquo;half&rdquo; language that allows to write both native python and c/cpp in one file. In particular, I will focus on binding cpp classes to python to extend python libraries to python.</p>
+<h1 id="cython">Cython</h1>
+<p>In a nutshell, cython allows a programmer to write python-like code that is then compiled into c/cpp. This can be used to write high performant extensions. The goal of this post is not to provide a novice tutorial; for those interested cython&rsquo;s documentation provides some great material for that. This post will focus mainly on providing bindings of cpp to python.</p>
+<h2 id="cpp-class">CPP class</h2>
+<p>Imagine we want to write an extremely fast chicken, and we have decided python is not suitable for this. We turn to cpp and write something like</p>
+<pre><code class="language-c++">// file: chicken.hpp
+#ifndef chicken_hpp
+#define chicken_hpp
+#include &lt;iostream&gt;
+class Chicken {
+public:
+  Chicken();
+  Chicken(std::string name);
+  std::string name;
+  void peck();
+};
+#endif
+</code></pre>
+<p>We start implementing straight away and end up with something like:</p>
+<pre><code class="language-c++">// file: chicken.cpp
+#include &quot;chicken.hpp&quot;
+
+Chicken::Chicken() { this-&gt;name = &quot;HELP I HAVE NO NAME&quot;; }
+Chicken::Chicken(std::string name) { this-&gt;name = name; }
+void Chicken::peck() { std::cout &lt;&lt; &quot;Peck peck!&quot; &lt;&lt; std::endl; }
+</code></pre>
+<p>Our chicken is alive, but it is stuck in cpp world. We have to get it running in python. How do we start doing this? In order to order to create a python chicken class, we have to provide a wrapper. In cython, we achieve this in two steps. First, we need to tell cython what cpp object we are looking at. Second, we need to create a cython extenions that provides bindings for python.</p>
+<h2 id="cython-headers">Cython headers</h2>
+<p>Just like in cpp, cython has a header/implementation style system. The headers are kept in <code>pxd</code> files and the implementation are in <code>pyx</code> files. For our headers, we merely have to provide implementations on our cpp class methods. Cython offers three kinds; standard python <code>def</code> implementations, <code>cpdef</code>, and <code>cdef</code> methods. The last two are special kinds; <code>cpdef</code> methods allow for seamless interaction between &ldquo;python-world&rdquo; and &ldquo;cpp-world&rdquo;. In contrast, <code>cdef</code> methods only allow for interaction with cpp objects. For this current tutorial, this distinction is not necessary, and we can go straight ahead with implementing our chicken.</p>
+<p>We need to tell cython what our cpp class looks like. We create a header file <code>cychicken.pxd</code> with the following content</p>
+<pre><code class="language-python">#file cychicken.pxd
+from libcpp.string cimport string
+
+cdef extern from &quot;chicken.hpp&quot;:
+    cdef cppclass Chicken:
+        Chicken() except+
+        Chicken(string name) except+
+        string name
+        void peck()
+</code></pre>
+<p>The first line imports the cython implementation of string (which is merely a wrapper for <code>std::string</code>), <code>cdef extern</code> is similar to <code>extern</code> in c/cpp: it tells cython that there is an external header. We then &ldquo;color in&rdquo; the header and tell cython what objects life in this header. In our case, we have a chicken! And importantly, this chicken has a <code>name</code> and it can <code>peck</code> (be careful!).</p>
+<h2 id="cython-implementations">Cython implementations</h2>
+<p>We now have  implemented our class in cpp and defined headers for the class in cpp and cython. At this point, we could <code>cimport</code> the <code>Chicken</code> class and within <code>cdef</code> and <code>cpdef</code> classes can interact with this cpp class. However, we cannot yet import our chicken class into python directly. In order to do this, we have to provide an implementation (wrapper) for the python side to interact with.</p>
+<pre><code class="language-python">#file: cychicken.pyx
+from cychicken cimport Chicken, string
+cdef class PyChicken:
+    # defines class property
+    # can be put into pxd files
+    cdef Chicken *cpp_chicken
+
+    # normal class init
+    def __init__(self, name: str):
+        # need to convert string to binary
+        # for cpp strings
+        self.cpp_chicken = new Chicken(f&quot;{name}&quot;.encode('utf8'))
+
+    # ensures that point is deleted when object is
+    # destroyed
+    def __dealloc__(self):
+        del self.cpp_chicken
+
+    # wrap the peck function
+    def peck(self):
+        self.cpp_chicken.peck()
+
+    # wrap the name property
+    @property
+    def name(self):
+        return self.cpp_chicken.name.decode('utf8')
+
+</code></pre>
+<p>Our chicken can now freely be called  from python!</p>
+<h2 id="compiling">Compiling</h2>
+<p>Before we can test our chicken, we have to write some code to compile it into a shared object. Setting up a proper extension is some black magic in and of itself. I won&rsquo;t bore you with the details today and for now you can merely create a setup file as such</p>
+<pre><code class="language-python">#file: setup.py
+from setuptools import setup
+from Cython.Build import cythonize
+from setuptools.extension import Extension
+
+exts = [
+    Extension(
+        &quot;chicken&quot;,
+        sources=[&quot;cychicken.pyx&quot;, &quot;chicken.cpp&quot;],
+        include_dirs=[&quot;.&quot;],
+        language=&quot;c++&quot;,
+    )
+]
+
+setup(ext_modules=cythonize(exts))
+
+</code></pre>
+<p>Running <code>python setup.py build_ext --inplace</code> will compile and create a shared object file inplace with the name <code>chicken.cpython-39-x86_64-linux-gnu.so</code>. We can now finally test our chicken:</p>
+<pre><code class="language-python"># file: test_chicken.py
+from chicken import PyChicken
+
+chicken = PyChicken(&quot;Carl&quot;)
+# cdef Chicken chicken = Chicken(string(&quot;CARL&quot;))
+print(f&quot;My name is {chicken.name}&quot;)
+for i in range(10):
+    chicken.peck()
+
+
+</code></pre>
+<p>Which outputs:</p>
+<pre><code>My name is Carl
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+</code></pre>
+<p>Carl is now the fastest chicken that can be called from python.</p>
+<h2 id="outlook">Outlook</h2>
+<p>I hope you find this little tutorial helpful. I hope to continue some explorations in the future. Cython can produce highly performant code. However, providing the bindings requires a lot of boiler-plate code. In the future I will look at another great alternative to provide python wrappers. In particular, I will focus on <code>nimpy</code> and <code>pybind11</code>. See you in the next post!</p>
 
     </div>
 
@@ -789,12 +915,6 @@ the latest shsh2 blobs from apple servers.</p>
 
 
 
-
-<div class="article-tags">
-  
-  <a class="badge badge-light" href="/tag/tss/">tss</a>
-  
-</div>
 
 
 
@@ -809,7 +929,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/project/tssclient/&amp;text=Apple%20tss-saver%20daemon" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/cython_classes/&amp;text=Wrapping%20cpp%20in%20cython%20and%20python" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -822,7 +942,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/project/tssclient/&amp;t=Apple%20tss-saver%20daemon" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/cython_classes/&amp;t=Wrapping%20cpp%20in%20cython%20and%20python" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -835,7 +955,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="mailto:?subject=Apple%20tss-saver%20daemon&amp;body=https://cvanelteren.github.io/project/tssclient/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Wrapping%20cpp%20in%20cython%20and%20python&amp;body=https://cvanelteren.github.io/post/cython_classes/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -848,7 +968,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/project/tssclient/&amp;title=Apple%20tss-saver%20daemon" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/cython_classes/&amp;title=Wrapping%20cpp%20in%20cython%20and%20python" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -861,7 +981,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="whatsapp://send?text=Apple%20tss-saver%20daemon%20https://cvanelteren.github.io/project/tssclient/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Wrapping%20cpp%20in%20cython%20and%20python%20https://cvanelteren.github.io/post/cython_classes/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -874,7 +994,7 @@ the latest shsh2 blobs from apple servers.</p>
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/project/tssclient/&amp;title=Apple%20tss-saver%20daemon" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/cython_classes/&amp;title=Wrapping%20cpp%20in%20cython%20and%20python" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1037,15 +1157,8 @@ the latest shsh2 blobs from apple servers.</p>
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/project/information_impact/" rel="next">Information impact</a>
-  </div>
-  
-  
-  
-  <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/project/fishviewer/" rel="prev">FishViewer</a>
+    <a href="/post/f-strings/" rel="prev">F-strings are awesome!</a>
   </div>
   
 </div>
@@ -1063,22 +1176,6 @@ the latest shsh2 blobs from apple servers.</p>
 
 
 
-    <div class="project-related-pages content-widget-hr">
-      
-      
-
-      
-      
-      
-
-      
-      
-      
-
-      
-      
-      
-    </div>
   </div>
 </article>
   </div>
