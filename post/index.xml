@@ -44,7 +44,7 @@ Chicken::Chicken(std::string name) { this-&amp;gt;name = name; }
 void Chicken::peck() { std::cout &amp;lt;&amp;lt; &amp;quot;Peck peck!&amp;quot; &amp;lt;&amp;lt; std::endl; }
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Our chicken is alive, but it is stuck in cpp world. We have to get it running in python. How do we start doing this? In order to order to create a python chicken class, we have to provide a wrapper. In cython, we achieve this in two steps. First, we need to tell cython what cpp object we are looking at. Second, we need to create a cython extenions that provides bindings for python.&lt;/p&gt;
-&lt;h2 id=&#34;cython-headers&#34;&gt;Cython headers&lt;/h2&gt;
+&lt;h2 id=&#34;cython-header&#34;&gt;Cython header&lt;/h2&gt;
 &lt;p&gt;Just like in cpp, cython has a header/implementation style system. The headers are kept in &lt;code&gt;pxd&lt;/code&gt; files and the implementation are in &lt;code&gt;pyx&lt;/code&gt; files. For our headers, we merely have to provide implementations on our cpp class methods. Cython offers three kinds; standard python &lt;code&gt;def&lt;/code&gt; implementations, &lt;code&gt;cpdef&lt;/code&gt;, and &lt;code&gt;cdef&lt;/code&gt; methods. The last two are special kinds; &lt;code&gt;cpdef&lt;/code&gt; methods allow for seamless interaction between &amp;ldquo;python-world&amp;rdquo; and &amp;ldquo;cpp-world&amp;rdquo;. In contrast, &lt;code&gt;cdef&lt;/code&gt; methods only allow for interaction with cpp objects. For this current tutorial, this distinction is not necessary, and we can go straight ahead with implementing our chicken.&lt;/p&gt;
 &lt;p&gt;We need to tell cython what our cpp class looks like. We create a header file &lt;code&gt;cychicken.pxd&lt;/code&gt; with the following content&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file cychicken.pxd
@@ -58,7 +58,7 @@ cdef extern from &amp;quot;chicken.hpp&amp;quot;:
         void peck()
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;The first line imports the cython implementation of string (which is merely a wrapper for &lt;code&gt;std::string&lt;/code&gt;), &lt;code&gt;cdef extern&lt;/code&gt; is similar to &lt;code&gt;extern&lt;/code&gt; in c/cpp: it tells cython that there is an external header. We then &amp;ldquo;color in&amp;rdquo; the header and tell cython what objects life in this header. In our case, we have a chicken! And importantly, this chicken has a &lt;code&gt;name&lt;/code&gt; and it can &lt;code&gt;peck&lt;/code&gt; (be careful!).&lt;/p&gt;
-&lt;h2 id=&#34;cython-implementations&#34;&gt;Cython implementations&lt;/h2&gt;
+&lt;h2 id=&#34;cython-implementation&#34;&gt;Cython implementation&lt;/h2&gt;
 &lt;p&gt;We now have  implemented our class in cpp and defined headers for the class in cpp and cython. At this point, we could &lt;code&gt;cimport&lt;/code&gt; the &lt;code&gt;Chicken&lt;/code&gt; class and within &lt;code&gt;cdef&lt;/code&gt; and &lt;code&gt;cpdef&lt;/code&gt; classes can interact with this cpp class. However, we cannot yet import our chicken class into python directly. In order to do this, we have to provide an implementation (wrapper) for the python side to interact with.&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file: cychicken.pyx
 from cychicken cimport Chicken, string
