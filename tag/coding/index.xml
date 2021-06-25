@@ -95,6 +95,7 @@ Peck peck!
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.&lt;/p&gt;
 &lt;h1 id=&#34;the-nim-farm&#34;&gt;The nim-farm&lt;/h1&gt;
+&lt;p&gt;So far we have been able to bind the nim type to python. Carl and Betsy can life happily ever after there. Nim is, however, also compiled. So we can also inhabit our little farm purely on the cpp side. This will look as follows:&lt;/p&gt;
 &lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;type
   String* {.importcpp: &amp;quot;std::string&amp;quot;, header: &amp;quot;string&amp;quot;.} = object
 
@@ -117,9 +118,8 @@ echo cchick.name
 for i in 1..10:
     nchick.peck()
     cchick.peck()
-
-
 &lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Now Betsy and Carl are the fastest two chickens across languages. Note that it is also possible to output nim to c/cpp, making it possible for Betsy and Carl to life across three worlds, but this is where I end the post for now.&lt;/p&gt;
 &lt;pre&gt;&lt;code&gt;We have two chickens now, introducing:
 Betsy
 Carl
