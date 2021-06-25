@@ -4,8 +4,8 @@
 class Chicken {
 public:
   Chicken();
-  Chicken(std::string name);
-  std::string name;
+  Chicken(char *name);
+  char *name;
   void peck();
 };
 #endif

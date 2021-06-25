@@ -30,10 +30,10 @@
   
     
   
-  <meta name="description" content="Wrapping cpp in cython and python" />
+  <meta name="description" content="In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python." />
 
   
-  <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/cython_classes/" />
+  <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/nim_chicken/" />
 
   
 
@@ -274,7 +274,7 @@
   <link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_2.png" />
   <link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_2.png" />
 
-  <link rel="canonical" href="https://cvanelteren.github.io/post/cython_classes/" />
+  <link rel="canonical" href="https://cvanelteren.github.io/post/nim_chicken/" />
 
   
   
@@ -285,24 +285,23 @@
   
   
     
-    
   
   
-  <meta property="twitter:card" content="summary" />
+  <meta property="twitter:card" content="summary_large_image" />
   
   <meta property="og:site_name" content="Casper van Elteren" />
-  <meta property="og:url" content="https://cvanelteren.github.io/post/cython_classes/" />
-  <meta property="og:title" content="Creating the fastest chicken alive! | Casper van Elteren" />
-  <meta property="og:description" content="Wrapping cpp in cython and python" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
-    <meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
+  <meta property="og:url" content="https://cvanelteren.github.io/post/nim_chicken/" />
+  <meta property="og:title" content="Nim_chicken | Casper van Elteren" />
+  <meta property="og:description" content="In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python." /><meta property="og:image" content="https://cvanelteren.github.io/post/nim_chicken/featured.png" />
+    <meta property="twitter:image" content="https://cvanelteren.github.io/post/nim_chicken/featured.png" /><meta property="og:locale" content="en-us" />
   
     
       <meta
         property="article:published_time"
-        content="2021-06-23T20:59:18&#43;02:00"
+        content="2021-06-25T19:47:55&#43;02:00"
       />
     
-    <meta property="article:modified_time" content="2021-06-23T20:59:18&#43;02:00">
+    <meta property="article:modified_time" content="2021-06-25T19:47:55&#43;02:00">
   
 
   
@@ -326,12 +325,16 @@
   "@type": "BlogPosting",
   "mainEntityOfPage": {
     "@type": "WebPage",
-    "@id": "https://cvanelteren.github.io/post/cython_classes/"
+    "@id": "https://cvanelteren.github.io/post/nim_chicken/"
   },
-  "headline": "Creating the fastest chicken alive!",
+  "headline": "Nim_chicken",
   
-  "datePublished": "2021-06-23T20:59:18+02:00",
-  "dateModified": "2021-06-23T20:59:18+02:00",
+  "image": [
+    "https://cvanelteren.github.io/post/nim_chicken/featured.png"
+  ],
+  
+  "datePublished": "2021-06-25T19:47:55+02:00",
+  "dateModified": "2021-06-25T19:47:55+02:00",
   
   "publisher": {
     "@type": "Organization",
@@ -341,7 +344,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Wrapping cpp in cython and python"
+  "description": "In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python."
 }
 </script>
 
@@ -357,11 +360,11 @@
 
 
 
-  <title>Creating the fastest chicken alive! | Casper van Elteren</title>
+  <title>Nim_chicken | Casper van Elteren</title>
 </head>
 
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="3090dbdddef851274dbf01003d0f4d86" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c523e45c1d30f06d447c2daa81779222" >
 
   
   
@@ -721,20 +724,24 @@
 
 
 
-  
+
+
+
+
+
+
+
 
   
   
-  
+
+
 <div class="article-container pt-3">
-  <h1>Creating the fastest chicken alive!</h1>
+  <h1>Nim_chicken</h1>
 
   
-  <p class="page-subtitle">Wrapping cpp in cython and python</p>
-  
 
   
-    
 
 
 <div class="article-metadata">
@@ -748,7 +755,7 @@
     
       
     
-    Jun 23, 2021
+    Jun 25, 2021
   </span>
   
 
@@ -773,13 +780,20 @@
 
 </div>
 
-    
-
-
-
-
-
   
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 180px; max-height: 136px;">
+  <div style="position: relative">
+    <img src="/post/nim_chicken/featured.png" alt="" class="featured-image">
+    
+  </div>
 </div>
 
 
@@ -787,111 +801,71 @@
   <div class="article-container">
 
     <div class="article-style">
-      <p>Python is my preferred language due to its ease of use, general application, interactivity, and availibility of libraries. There is however one big downside: python can be painfully slow for numerical applications. One possible solution is to write extensions in lower-level languages and provide bindings that one can use from python. This is often referred to as the two-language-problem as it requires a programmer to know two languages. In this post I will explore <code>cython</code> which is &ldquo;half&rdquo; language that allows to write both native python and c/cpp in one file. In particular, I will focus on binding cpp classes to python to extend python libraries to python.</p>
-<h1 id="cython">Cython</h1>
-<p>In a nutshell, cython allows a programmer to write python-like code that is then compiled into c/cpp. This can be used to write high performant extensions. The goal of this post is not to provide a novice tutorial; for those interested cython&rsquo;s documentation provides some great material for that. This post will focus mainly on providing bindings of cpp to python.</p>
-<h2 id="cpp-class">CPP class</h2>
-<p>Imagine we want to write an extremely fast chicken, and we have decided python is not suitable for this. We turn to cpp and write something like</p>
-<pre><code class="language-c++">// file: chicken.hpp
-#ifndef chicken_hpp
-#define chicken_hpp
-#include &lt;iostream&gt;
-class Chicken {
-public:
-  Chicken();
-  Chicken(std::string name);
-  std::string name;
-  void peck();
-};
-#endif
+      <p>In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called <code>nim</code>; and I will show how nim can produce similarly fast chickens that can be called from python.</p>
+<h1 id="what-is-nim">What is Nim?</h1>
+<p>From their website:</p>
+<blockquote>
+<p>Nim is a statically typed compiled systems programming language. It combines succesful concepts from mature languages like Python, Ada and Modula</p>
+</blockquote>
+<p>I am not familiar with the latter two, but I am quite familiar with python and it  can be used to solve one of python&rsquo;s weaknesses: python can be terribly slow for numerical problems.</p>
+<p>Writing nim is similar to other modern languages like rust: it prefers inheritance over composition. However, it does not shy away from using &ldquo;more&rdquo; traditional methods. For example, in nim &ldquo;classes&rdquo; are called types and types can be composed (preferred) but can also inheret from oneanother. Which allows more ancient programmers like me to be able to use my toolset while also exploring composition more.</p>
+<p>Writing nim looks very similar to python. Variables defined with the <code>var</code> keyword, functions are <code>proc</code> (process), printing is performed with <code>echo</code>, classes / structs are <code>types</code> and so on.</p>
+<p>Variables are typed, however the compiler is often very good at inferring the type you are assigning. This effectively means that defining a variable as</p>
+<pre><code class="language-nim">var x = 1
+var x: int = 1
 </code></pre>
-<p>We start implementing straight away and end up with something like:</p>
-<pre><code class="language-c++">// file: chicken.cpp
-#include &quot;chicken.hpp&quot;
-
-Chicken::Chicken() { this-&gt;name = &quot;HELP I HAVE NO NAME&quot;; }
-Chicken::Chicken(std::string name) { this-&gt;name = name; }
-void Chicken::peck() { std::cout &lt;&lt; &quot;Peck peck!&quot; &lt;&lt; std::endl; }
+<p>is the same, and <code>var</code> can be seen as implicitly using the <code>auto</code> keyword from cpp. For more details on nim see  their excellent tutorial on the website; let&rsquo;s start making our chicken friend!</p>
+<h1 id="nim-chickens">Nim chickens</h1>
+<p>Classes are called <code>types</code>. As want to bind to python, we make use of the <code>nimpy</code> library from nim. Fellow pythonistas should feel right at home</p>
+<pre><code class="language-nim"># import a package as per usual of python
+import nimpy
+# types are &quot;classes&quot;
+# they are similar to structs
+type Chicken = ref object of PyNimObjectExperimental
+   name: string
 </code></pre>
-<p>Our chicken is alive, but it is stuck in cpp world. We have to get it running in python. How do we start doing this? In order to order to create a python chicken class, we have to provide a wrapper. In cython, we achieve this in two steps. First, we need to tell cython what cpp object we are looking at. Second, we need to create a cython extenions that provides bindings for python.</p>
-<h2 id="cython-header">Cython header</h2>
-<p>Just like in cpp, cython has a header/implementation style system. The headers are kept in <code>pxd</code> files and the implementation are in <code>pyx</code> files. For our headers, we merely have to provide implementations on our cpp class methods. Cython offers three kinds; standard python <code>def</code> implementations, <code>cpdef</code>, and <code>cdef</code> methods. The last two are special kinds; <code>cpdef</code> methods allow for seamless interaction between &ldquo;python-world&rdquo; and &ldquo;cpp-world&rdquo;. In contrast, <code>cdef</code> methods only allow for interaction with cpp objects. For this current tutorial, this distinction is not necessary, and we can go straight ahead with implementing our chicken.</p>
-<p>We need to tell cython what our cpp class looks like. We create a header file <code>cychicken.pxd</code> with the following content</p>
-<pre><code class="language-python">#file cychicken.pxd
-from libcpp.string cimport string
-
-cdef extern from &quot;chicken.hpp&quot;:
-    cdef cppclass Chicken:
-        Chicken() except+
-        Chicken(string name) except+
-        string name
-        void peck()
+<p>We have  defined our  chicken <code>type</code>,  the ref  object makes
+sure that  our types <em>inherents</em>  from the root  object that
+makes sure our  chicken can be imported from  python. As can
+be  seen  from  the  name, this  features  is  experimental.
+Functions are  readily exportable to python,  but types have
+only recently been added in. Not to worry, it will hopefully
+improve over time.</p>
+<h1 id="nim-implementation">Nim implementation</h1>
+<p>Similar, to our previous chicken Carl, we want our chicken to <em>do</em> something</p>
+<pre><code class="language-nim"># on the structs we can define methods
+proc set_name(self: Chicken, value : string) {.exportpy.}=
+  self.name = value
+proc get_name(self: Chicken): string  {.exportpy.}=
+    self.name
+proc peck(self: Chicken): void {.exportpy.} =
+    echo &quot;Peck peck!&quot;
 </code></pre>
-<p>The first line imports the cython implementation of string (which is merely a wrapper for <code>std::string</code>), <code>cdef extern</code> is similar to <code>extern</code> in c/cpp: it tells cython that there is an external header. We then &ldquo;color in&rdquo; the header and tell cython what objects life in this header. In our case, we have a chicken! And importantly, this chicken has a <code>name</code> and it can <code>peck</code> (be careful!).</p>
-<h2 id="cython-implementation">Cython implementation</h2>
-<p>We now have  implemented our class in cpp and defined headers for the class in cpp and cython. At this point, we could <code>cimport</code> the <code>Chicken</code> class and within <code>cdef</code> and <code>cpdef</code> classes can interact with this cpp class. However, we cannot yet import our chicken class into python directly. In order to do this, we have to provide an implementation (wrapper) for the python side to interact with.</p>
-<pre><code class="language-python">#file: cychicken.pyx
-from cychicken cimport Chicken, string
-cdef class PyChicken:
-    # defines class property
-    # can be put into pxd files
-    cdef Chicken *cpp_chicken
-
-    # normal class init
-    def __init__(self, name: str):
-        # need to convert string to binary
-        # for cpp strings
-        self.cpp_chicken = new Chicken(f&quot;{name}&quot;.encode('utf8'))
-
-    # ensures that point is deleted when object is
-    # destroyed
-    def __dealloc__(self):
-        del self.cpp_chicken
-
-    # wrap the peck function
-    def peck(self):
-        self.cpp_chicken.peck()
-
-    # wrap the name property
-    @property
-    def name(self):
-        return self.cpp_chicken.name.decode('utf8')
-
+<p>There is a lot going on in this piece, so let&rsquo;s step through it. The <code>proc</code> keyword is similar to <code>def</code> in python: it defines our function. Similar to type hinting our return type is given after the <code>:</code>. Nim, similar to other languages like matlab, implictly defines a <code>result</code> variable; return keywords are not necessary and last lines without assignment are automatically put into result. For example</p>
+<pre><code class="language-nim">proc some_test(x: float): float =
+    result = x
+proc some_test_other(x: float): float =
+    return x
+proc some_test_another(x: float): float =
+    x
 </code></pre>
-<p>Our chicken can now freely be called  from python!</p>
-<h2 id="compiling">Compiling</h2>
-<p>Before we can test our chicken, we have to write some code to compile it into a shared object. Setting up a proper extension is some black magic in and of itself. I won&rsquo;t bore you with the details today and for now you can merely create a setup file as such</p>
-<pre><code class="language-python">#file: setup.py
-from setuptools import setup
-from Cython.Build import cythonize
-from setuptools.extension import Extension
-
-exts = [
-    Extension(
-        &quot;chicken&quot;,
-        sources=[&quot;cychicken.pyx&quot;, &quot;chicken.cpp&quot;],
-        include_dirs=[&quot;.&quot;],
-        language=&quot;c++&quot;,
-    )
-]
-
-setup(ext_modules=cythonize(exts))
-
+<p>are equivalent. The curly brackets indicate compiler directives; <code>{.exportpy.}</code> tells the compiler to make these functions available in our shared object.</p>
+<h1 id="compilation">Compilation</h1>
+<p>All that is left to do is to compile our chicken into a shared object and import it.</p>
+<pre><code>nim cpp -d:release --threads:on --app:lib --out:chicken.so chicken.nim
 </code></pre>
-<p>Running <code>python setup.py build_ext --inplace</code> will compile and create a shared object file inplace with the name <code>chicken.cpython-39-x86_64-linux-gnu.so</code>. We can now finally test our chicken:</p>
-<pre><code class="language-python"># file: test_chicken.py
-from chicken import PyChicken
+<p>and, we are done! This is less boilerplate code than the cython approach. Compared to cython, nimpy is less mature. However, nim can readily interact with native c/cpp. It&rsquo;s mainly immature in the type export, but I hope that will improve in the future. It does form a nice alternative to more &ldquo;verbose&rdquo; cpp; it writes quite similar to python. Just to finish of the end, let&rsquo;s run our litle chicken</p>
+<pre><code class="language-python">#file: test_nim.py
+from chicken import Chicken
 
-chicken = PyChicken(&quot;Carl&quot;)
-# cdef Chicken chicken = Chicken(string(&quot;CARL&quot;))
-print(f&quot;My name is {chicken.name}&quot;)
+c = Chicken()
+c.set_name(&quot;Betsy&quot;)
+print(f&quot;My name is {c.get_name()}&quot;)
 for i in range(10):
-    chicken.peck()
-
-
+    c.peck()
 </code></pre>
-<p>Which outputs:</p>
-<pre><code>My name is Carl
+<p>generates</p>
+<pre><code>My name is Betsy
 Peck peck!
 Peck peck!
 Peck peck!
@@ -903,9 +877,60 @@ Peck peck!
 Peck peck!
 Peck peck!
 </code></pre>
-<p>Carl is now the fastest chicken that can be called from python.</p>
-<h2 id="outlook">Outlook</h2>
-<p>I hope you find this little tutorial helpful. I hope to continue some explorations in the future. Cython can produce highly performant code. However, providing the bindings requires a lot of boiler-plate code. In the future I will look at another great alternative to provide python wrappers. In particular, I will focus on <code>nimpy</code> and <code>pybind11</code>. See you in the next post!</p>
+<p>Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.</p>
+<h1 id="the-nim-farm">The nim-farm</h1>
+<pre><code class="language-nim">type
+  String* {.importcpp: &quot;std::string&quot;, header: &quot;string&quot;.} = object
+
+{.compile: &quot;../cython_classes/chicken.cpp&quot;.}
+
+type CChicken* {.header: &quot;../cython_classes/chicken.hpp&quot;, importcpp: &quot;Chicken&quot;.} = object
+    name: cstring
+
+# proc peck*(this: CChicken;): {.header: &quot;../cython_classes/chicken.hpp&quot;, importcpp: &quot;#.peck(@)&quot;.}
+proc peck*(this: CChicken) {.header: &quot;../cython_classes/chicken.hpp&quot;, importcpp: &quot;#.peck(@)&quot;.}
+
+# var chick = CChicken()
+var cchick = CChicken()
+var nchick = Chicken(name: &quot;Betsy&quot;)
+
+echo &quot;We have two chickens now, introducing:&quot;
+cchick.name = &quot;Carl&quot;
+echo nchick.name
+echo cchick.name
+for i in 1..10:
+    nchick.peck()
+    cchick.peck()
+
+
+</code></pre>
+<pre><code>We have two chickens now, introducing:
+Betsy
+Carl
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+</code></pre>
+<p>I hope Betsy and Carl get to know each other better! Soon we need to prepare for additional expansions. I&rsquo;m looking at you <code>pybindd11</code>.</p>
+<h1 id="outlook">Outlook</h1>
+<p>Nim offers readable syntax and fast performance. It is a rather strange language as it originally released in 2008 but hasn&rsquo;t gotten much attention compared to more recent languages like rust.  I hope in the future I can apply this language more, for now I&rsquo;m signing off. See you in the next post.</p>
 
     </div>
 
@@ -915,6 +940,14 @@ Peck peck!
 
 
 
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/chickens/">chickens</a>
+  
+  <a class="badge badge-light" href="/tag/coding/">Coding</a>
+  
+</div>
 
 
 
@@ -929,7 +962,7 @@ Peck peck!
       
       
       <li>
-        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/cython_classes/&amp;text=Creating%20the%20fastest%20chicken%20alive!" target="_blank" rel="noopener" class="share-btn-twitter">
+        <a href="https://twitter.com/intent/tweet?url=https://cvanelteren.github.io/post/nim_chicken/&amp;text=Nim_chicken" target="_blank" rel="noopener" class="share-btn-twitter">
           <i class="fab fa-twitter"></i>
         </a>
       </li>
@@ -942,7 +975,7 @@ Peck peck!
       
       
       <li>
-        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/cython_classes/&amp;t=Creating%20the%20fastest%20chicken%20alive!" target="_blank" rel="noopener" class="share-btn-facebook">
+        <a href="https://www.facebook.com/sharer.php?u=https://cvanelteren.github.io/post/nim_chicken/&amp;t=Nim_chicken" target="_blank" rel="noopener" class="share-btn-facebook">
           <i class="fab fa-facebook"></i>
         </a>
       </li>
@@ -955,7 +988,7 @@ Peck peck!
       
       
       <li>
-        <a href="mailto:?subject=Creating%20the%20fastest%20chicken%20alive!&amp;body=https://cvanelteren.github.io/post/cython_classes/" target="_blank" rel="noopener" class="share-btn-email">
+        <a href="mailto:?subject=Nim_chicken&amp;body=https://cvanelteren.github.io/post/nim_chicken/" target="_blank" rel="noopener" class="share-btn-email">
           <i class="fas fa-envelope"></i>
         </a>
       </li>
@@ -968,7 +1001,7 @@ Peck peck!
       
       
       <li>
-        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/cython_classes/&amp;title=Creating%20the%20fastest%20chicken%20alive!" target="_blank" rel="noopener" class="share-btn-linkedin">
+        <a href="https://www.linkedin.com/shareArticle?url=https://cvanelteren.github.io/post/nim_chicken/&amp;title=Nim_chicken" target="_blank" rel="noopener" class="share-btn-linkedin">
           <i class="fab fa-linkedin-in"></i>
         </a>
       </li>
@@ -981,7 +1014,7 @@ Peck peck!
       
       
       <li>
-        <a href="whatsapp://send?text=Creating%20the%20fastest%20chicken%20alive!%20https://cvanelteren.github.io/post/cython_classes/" target="_blank" rel="noopener" class="share-btn-whatsapp">
+        <a href="whatsapp://send?text=Nim_chicken%20https://cvanelteren.github.io/post/nim_chicken/" target="_blank" rel="noopener" class="share-btn-whatsapp">
           <i class="fab fa-whatsapp"></i>
         </a>
       </li>
@@ -994,7 +1027,7 @@ Peck peck!
       
       
       <li>
-        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/cython_classes/&amp;title=Creating%20the%20fastest%20chicken%20alive!" target="_blank" rel="noopener" class="share-btn-weibo">
+        <a href="https://service.weibo.com/share/share.php?url=https://cvanelteren.github.io/post/nim_chicken/&amp;title=Nim_chicken" target="_blank" rel="noopener" class="share-btn-weibo">
           <i class="fab fa-weibo"></i>
         </a>
       </li>
@@ -1157,15 +1190,8 @@ Peck peck!
   
   
   <div class="post-nav-item">
-    <div class="meta-nav">Next</div>
-    <a href="/post/nim_chicken/" rel="next">Nim_chicken</a>
-  </div>
-  
-  
-  
-  <div class="post-nav-item">
     <div class="meta-nav">Previous</div>
-    <a href="/post/f-strings/" rel="prev">F-strings are awesome!</a>
+    <a href="/post/cython_classes/" rel="prev">Creating the fastest chicken alive!</a>
   </div>
   
 </div>
@@ -1177,6 +1203,15 @@ Peck peck!
 
 
   
+  
+  <div class="article-widget content-widget-hr">
+    <h3>Related</h3>
+    <ul>
+      
+      <li><a href="/post/matplotlib_colorbar/matplotlib_colorbar_fix/">Fix your matplotlib colorbars</a></li>
+      
+    </ul>
+  </div>
   
 
 

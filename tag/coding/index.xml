@@ -5,12 +5,150 @@
     <link>https://cvanelteren.github.io/tag/coding/</link>
       <atom:link href="https://cvanelteren.github.io/tag/coding/index.xml" rel="self" type="application/rss+xml" />
     <description>Coding</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 13 Dec 2020 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 25 Jun 2021 19:47:55 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
       <title>Coding</title>
       <link>https://cvanelteren.github.io/tag/coding/</link>
     </image>
+    
+    <item>
+      <title>Nim_chicken</title>
+      <link>https://cvanelteren.github.io/post/nim_chicken/</link>
+      <pubDate>Fri, 25 Jun 2021 19:47:55 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/nim_chicken/</guid>
+      <description>&lt;p&gt;In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called &lt;code&gt;nim&lt;/code&gt;; and I will show how nim can produce similarly fast chickens that can be called from python.&lt;/p&gt;
+&lt;h1 id=&#34;what-is-nim&#34;&gt;What is Nim?&lt;/h1&gt;
+&lt;p&gt;From their website:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nim is a statically typed compiled systems programming language. It combines succesful concepts from mature languages like Python, Ada and Modula&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I am not familiar with the latter two, but I am quite familiar with python and it  can be used to solve one of python&amp;rsquo;s weaknesses: python can be terribly slow for numerical problems.&lt;/p&gt;
+&lt;p&gt;Writing nim is similar to other modern languages like rust: it prefers inheritance over composition. However, it does not shy away from using &amp;ldquo;more&amp;rdquo; traditional methods. For example, in nim &amp;ldquo;classes&amp;rdquo; are called types and types can be composed (preferred) but can also inheret from oneanother. Which allows more ancient programmers like me to be able to use my toolset while also exploring composition more.&lt;/p&gt;
+&lt;p&gt;Writing nim looks very similar to python. Variables defined with the &lt;code&gt;var&lt;/code&gt; keyword, functions are &lt;code&gt;proc&lt;/code&gt; (process), printing is performed with &lt;code&gt;echo&lt;/code&gt;, classes / structs are &lt;code&gt;types&lt;/code&gt; and so on.&lt;/p&gt;
+&lt;p&gt;Variables are typed, however the compiler is often very good at inferring the type you are assigning. This effectively means that defining a variable as&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;var x = 1
+var x: int = 1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;is the same, and &lt;code&gt;var&lt;/code&gt; can be seen as implicitly using the &lt;code&gt;auto&lt;/code&gt; keyword from cpp. For more details on nim see  their excellent tutorial on the website; let&amp;rsquo;s start making our chicken friend!&lt;/p&gt;
+&lt;h1 id=&#34;nim-chickens&#34;&gt;Nim chickens&lt;/h1&gt;
+&lt;p&gt;Classes are called &lt;code&gt;types&lt;/code&gt;. As want to bind to python, we make use of the &lt;code&gt;nimpy&lt;/code&gt; library from nim. Fellow pythonistas should feel right at home&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;# import a package as per usual of python
+import nimpy
+# types are &amp;quot;classes&amp;quot;
+# they are similar to structs
+type Chicken = ref object of PyNimObjectExperimental
+   name: string
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We have  defined our  chicken &lt;code&gt;type&lt;/code&gt;,  the ref  object makes
+sure that  our types &lt;em&gt;inherents&lt;/em&gt;  from the root  object that
+makes sure our  chicken can be imported from  python. As can
+be  seen  from  the  name, this  features  is  experimental.
+Functions are  readily exportable to python,  but types have
+only recently been added in. Not to worry, it will hopefully
+improve over time.&lt;/p&gt;
+&lt;h1 id=&#34;nim-implementation&#34;&gt;Nim implementation&lt;/h1&gt;
+&lt;p&gt;Similar, to our previous chicken Carl, we want our chicken to &lt;em&gt;do&lt;/em&gt; something&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;# on the structs we can define methods
+proc set_name(self: Chicken, value : string) {.exportpy.}=
+  self.name = value
+proc get_name(self: Chicken): string  {.exportpy.}=
+    self.name
+proc peck(self: Chicken): void {.exportpy.} =
+    echo &amp;quot;Peck peck!&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There is a lot going on in this piece, so let&amp;rsquo;s step through it. The &lt;code&gt;proc&lt;/code&gt; keyword is similar to &lt;code&gt;def&lt;/code&gt; in python: it defines our function. Similar to type hinting our return type is given after the &lt;code&gt;:&lt;/code&gt;. Nim, similar to other languages like matlab, implictly defines a &lt;code&gt;result&lt;/code&gt; variable; return keywords are not necessary and last lines without assignment are automatically put into result. For example&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;proc some_test(x: float): float =
+    result = x
+proc some_test_other(x: float): float =
+    return x
+proc some_test_another(x: float): float =
+    x
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;are equivalent. The curly brackets indicate compiler directives; &lt;code&gt;{.exportpy.}&lt;/code&gt; tells the compiler to make these functions available in our shared object.&lt;/p&gt;
+&lt;h1 id=&#34;compilation&#34;&gt;Compilation&lt;/h1&gt;
+&lt;p&gt;All that is left to do is to compile our chicken into a shared object and import it.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nim cpp -d:release --threads:on --app:lib --out:chicken.so chicken.nim
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and, we are done! This is less boilerplate code than the cython approach. Compared to cython, nimpy is less mature. However, nim can readily interact with native c/cpp. It&amp;rsquo;s mainly immature in the type export, but I hope that will improve in the future. It does form a nice alternative to more &amp;ldquo;verbose&amp;rdquo; cpp; it writes quite similar to python. Just to finish of the end, let&amp;rsquo;s run our litle chicken&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file: test_nim.py
+from chicken import Chicken
+
+c = Chicken()
+c.set_name(&amp;quot;Betsy&amp;quot;)
+print(f&amp;quot;My name is {c.get_name()}&amp;quot;)
+for i in range(10):
+    c.peck()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;generates&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;My name is Betsy
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.&lt;/p&gt;
+&lt;h1 id=&#34;the-nim-farm&#34;&gt;The nim-farm&lt;/h1&gt;
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;type
+  String* {.importcpp: &amp;quot;std::string&amp;quot;, header: &amp;quot;string&amp;quot;.} = object
+
+{.compile: &amp;quot;../cython_classes/chicken.cpp&amp;quot;.}
+
+type CChicken* {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;Chicken&amp;quot;.} = object
+    name: cstring
+
+# proc peck*(this: CChicken;): {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;#.peck(@)&amp;quot;.}
+proc peck*(this: CChicken) {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;#.peck(@)&amp;quot;.}
+
+# var chick = CChicken()
+var cchick = CChicken()
+var nchick = Chicken(name: &amp;quot;Betsy&amp;quot;)
+
+echo &amp;quot;We have two chickens now, introducing:&amp;quot;
+cchick.name = &amp;quot;Carl&amp;quot;
+echo nchick.name
+echo cchick.name
+for i in 1..10:
+    nchick.peck()
+    cchick.peck()
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;pre&gt;&lt;code&gt;We have two chickens now, introducing:
+Betsy
+Carl
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I hope Betsy and Carl get to know each other better! Soon we need to prepare for additional expansions. I&amp;rsquo;m looking at you &lt;code&gt;pybindd11&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;outlook&#34;&gt;Outlook&lt;/h1&gt;
+&lt;p&gt;Nim offers readable syntax and fast performance. It is a rather strange language as it originally released in 2008 but hasn&amp;rsquo;t gotten much attention compared to more recent languages like rust.  I hope in the future I can apply this language more, for now I&amp;rsquo;m signing off. See you in the next post.&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>Fix your matplotlib colorbars</title>
