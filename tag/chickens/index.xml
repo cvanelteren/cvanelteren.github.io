@@ -104,15 +104,13 @@ Peck peck!
 type CChicken* {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;Chicken&amp;quot;.} = object
     name: cstring
 
-# proc peck*(this: CChicken;): {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;#.peck(@)&amp;quot;.}
 proc peck*(this: CChicken) {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;#.peck(@)&amp;quot;.}
 
 # var chick = CChicken()
-var cchick = CChicken()
+var cchick = CChicken(name: &amp;quot;Carl&amp;quot;)
 var nchick = Chicken(name: &amp;quot;Betsy&amp;quot;)
 
 echo &amp;quot;We have two chickens now, introducing:&amp;quot;
-cchick.name = &amp;quot;Carl&amp;quot;
 echo nchick.name
 echo cchick.name
 for i in 1..10:
