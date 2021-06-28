@@ -96,10 +96,7 @@ Peck peck!
 &lt;p&gt;Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.&lt;/p&gt;
 &lt;h1 id=&#34;the-nim-farm&#34;&gt;The nim-farm&lt;/h1&gt;
 &lt;p&gt;So far we have been able to bind the nim type to python. Carl and Betsy can life happily ever after there. Nim is, however, also compiled. So we can also inhabit our little farm purely on the cpp side. This will look as follows:&lt;/p&gt;
-&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;type
-  String* {.importcpp: &amp;quot;std::string&amp;quot;, header: &amp;quot;string&amp;quot;.} = object
-
-{.compile: &amp;quot;../cython_classes/chicken.cpp&amp;quot;.}
+&lt;pre&gt;&lt;code class=&#34;language-nim&#34;&gt;{.compile: &amp;quot;../cython_classes/chicken.cpp&amp;quot;.}
 
 type CChicken* {.header: &amp;quot;../cython_classes/chicken.hpp&amp;quot;, importcpp: &amp;quot;Chicken&amp;quot;.} = object
     name: cstring
