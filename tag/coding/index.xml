@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Coding | Casper van Elteren</title>
+    <title>coding | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/tag/coding/</link>
       <atom:link href="https://cvanelteren.github.io/tag/coding/index.xml" rel="self" type="application/rss+xml" />
-    <description>Coding</description>
+    <description>coding</description>
     <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 25 Jun 2021 19:47:55 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png</url>
-      <title>Coding</title>
+      <title>coding</title>
       <link>https://cvanelteren.github.io/tag/coding/</link>
     </image>
     
@@ -142,6 +142,450 @@ Peck peck!
 &lt;p&gt;I hope Betsy and Carl get to know each other better! Soon we need to prepare for additional expansions. I&amp;rsquo;m looking at you &lt;code&gt;pybind11&lt;/code&gt;.&lt;/p&gt;
 &lt;h1 id=&#34;outlook&#34;&gt;Outlook&lt;/h1&gt;
 &lt;p&gt;Nim offers readable syntax and fast performance. It is a rather strange language as it originally released in 2008 but hasn&amp;rsquo;t gotten much attention compared to more recent languages like rust.  I hope in the future I can apply this language more, for now I&amp;rsquo;m signing off. See you in the next post.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Creating the fastest chicken alive!</title>
+      <link>https://cvanelteren.github.io/post/cython_classes/</link>
+      <pubDate>Wed, 23 Jun 2021 20:59:18 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/cython_classes/</guid>
+      <description>&lt;p&gt;Python is my preferred language due to its ease of use, general application, interactivity, and availibility of libraries. There is however one big downside: python can be painfully slow for numerical applications. One possible solution is to write extensions in lower-level languages and provide bindings that one can use from python. This is often referred to as the two-language-problem as it requires a programmer to know two languages. In this post I will explore &lt;code&gt;cython&lt;/code&gt; which is &amp;ldquo;half&amp;rdquo; language that allows to write both native python and c/cpp in one file. In particular, I will focus on binding cpp classes to python to extend python libraries to python.&lt;/p&gt;
+&lt;h1 id=&#34;cython&#34;&gt;Cython&lt;/h1&gt;
+&lt;p&gt;In a nutshell, cython allows a programmer to write python-like code that is then compiled into c/cpp. This can be used to write high performant extensions. The goal of this post is not to provide a novice tutorial; for those interested cython&amp;rsquo;s documentation provides some great material for that. This post will focus mainly on providing bindings of cpp to python.&lt;/p&gt;
+&lt;h2 id=&#34;cpp-class&#34;&gt;CPP class&lt;/h2&gt;
+&lt;p&gt;Imagine we want to write an extremely fast chicken, and we have decided python is not suitable for this. We turn to cpp and write something like&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;// file: chicken.hpp
+#ifndef chicken_hpp
+#define chicken_hpp
+#include &amp;lt;iostream&amp;gt;
+class Chicken {
+public:
+  Chicken();
+  Chicken(std::string name);
+  std::string name;
+  void peck();
+};
+#endif
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We start implementing straight away and end up with something like:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-c++&#34;&gt;// file: chicken.cpp
+#include &amp;quot;chicken.hpp&amp;quot;
+
+Chicken::Chicken() { this-&amp;gt;name = &amp;quot;HELP I HAVE NO NAME&amp;quot;; }
+Chicken::Chicken(std::string name) { this-&amp;gt;name = name; }
+void Chicken::peck() { std::cout &amp;lt;&amp;lt; &amp;quot;Peck peck!&amp;quot; &amp;lt;&amp;lt; std::endl; }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our chicken is alive, but it is stuck in cpp world. We have to get it running in python. How do we start doing this? In order to order to create a python chicken class, we have to provide a wrapper. In cython, we achieve this in two steps. First, we need to tell cython what cpp object we are looking at. Second, we need to create a cython extenions that provides bindings for python.&lt;/p&gt;
+&lt;h2 id=&#34;cython-header&#34;&gt;Cython header&lt;/h2&gt;
+&lt;p&gt;Just like in cpp, cython has a header/implementation style system. The headers are kept in &lt;code&gt;pxd&lt;/code&gt; files and the implementation are in &lt;code&gt;pyx&lt;/code&gt; files. For our headers, we merely have to provide implementations on our cpp class methods. Cython offers three kinds; standard python &lt;code&gt;def&lt;/code&gt; implementations, &lt;code&gt;cpdef&lt;/code&gt;, and &lt;code&gt;cdef&lt;/code&gt; methods. The last two are special kinds; &lt;code&gt;cpdef&lt;/code&gt; methods allow for seamless interaction between &amp;ldquo;python-world&amp;rdquo; and &amp;ldquo;cpp-world&amp;rdquo;. In contrast, &lt;code&gt;cdef&lt;/code&gt; methods only allow for interaction with cpp objects. For this current tutorial, this distinction is not necessary, and we can go straight ahead with implementing our chicken.&lt;/p&gt;
+&lt;p&gt;We need to tell cython what our cpp class looks like. We create a header file &lt;code&gt;cychicken.pxd&lt;/code&gt; with the following content&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file cychicken.pxd
+from libcpp.string cimport string
+
+cdef extern from &amp;quot;chicken.hpp&amp;quot;:
+    cdef cppclass Chicken:
+        Chicken() except+
+        Chicken(string name) except+
+        string name
+        void peck()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The first line imports the cython implementation of string (which is merely a wrapper for &lt;code&gt;std::string&lt;/code&gt;), &lt;code&gt;cdef extern&lt;/code&gt; is similar to &lt;code&gt;extern&lt;/code&gt; in c/cpp: it tells cython that there is an external header. We then &amp;ldquo;color in&amp;rdquo; the header and tell cython what objects life in this header. In our case, we have a chicken! And importantly, this chicken has a &lt;code&gt;name&lt;/code&gt; and it can &lt;code&gt;peck&lt;/code&gt; (be careful!).&lt;/p&gt;
+&lt;h2 id=&#34;cython-implementation&#34;&gt;Cython implementation&lt;/h2&gt;
+&lt;p&gt;We now have  implemented our class in cpp and defined headers for the class in cpp and cython. At this point, we could &lt;code&gt;cimport&lt;/code&gt; the &lt;code&gt;Chicken&lt;/code&gt; class and within &lt;code&gt;cdef&lt;/code&gt; and &lt;code&gt;cpdef&lt;/code&gt; classes can interact with this cpp class. However, we cannot yet import our chicken class into python directly. In order to do this, we have to provide an implementation (wrapper) for the python side to interact with.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file: cychicken.pyx
+from cychicken cimport Chicken, string
+cdef class PyChicken:
+    # defines class property
+    # can be put into pxd files
+    cdef Chicken *cpp_chicken
+
+    # normal class init
+    def __init__(self, name: str):
+        # need to convert string to binary
+        # for cpp strings
+        self.cpp_chicken = new Chicken(f&amp;quot;{name}&amp;quot;.encode(&#39;utf8&#39;))
+
+    # ensures that point is deleted when object is
+    # destroyed
+    def __dealloc__(self):
+        del self.cpp_chicken
+
+    # wrap the peck function
+    def peck(self):
+        self.cpp_chicken.peck()
+
+    # wrap the name property
+    @property
+    def name(self):
+        return self.cpp_chicken.name.decode(&#39;utf8&#39;)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Our chicken can now freely be called  from python!&lt;/p&gt;
+&lt;h2 id=&#34;compiling&#34;&gt;Compiling&lt;/h2&gt;
+&lt;p&gt;Before we can test our chicken, we have to write some code to compile it into a shared object. Setting up a proper extension is some black magic in and of itself. I won&amp;rsquo;t bore you with the details today and for now you can merely create a setup file as such&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;#file: setup.py
+from setuptools import setup
+from Cython.Build import cythonize
+from setuptools.extension import Extension
+
+exts = [
+    Extension(
+        &amp;quot;chicken&amp;quot;,
+        sources=[&amp;quot;cychicken.pyx&amp;quot;, &amp;quot;chicken.cpp&amp;quot;],
+        include_dirs=[&amp;quot;.&amp;quot;],
+        language=&amp;quot;c++&amp;quot;,
+    )
+]
+
+setup(ext_modules=cythonize(exts))
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Running &lt;code&gt;python setup.py build_ext --inplace&lt;/code&gt; will compile and create a shared object file inplace with the name &lt;code&gt;chicken.cpython-39-x86_64-linux-gnu.so&lt;/code&gt;. We can now finally test our chicken:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;# file: test_chicken.py
+from chicken import PyChicken
+
+chicken = PyChicken(&amp;quot;Carl&amp;quot;)
+# cdef Chicken chicken = Chicken(string(&amp;quot;CARL&amp;quot;))
+print(f&amp;quot;My name is {chicken.name}&amp;quot;)
+for i in range(10):
+    chicken.peck()
+
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Which outputs:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;My name is Carl
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+Peck peck!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Carl is now the fastest chicken that can be called from python.&lt;/p&gt;
+&lt;h2 id=&#34;outlook&#34;&gt;Outlook&lt;/h2&gt;
+&lt;p&gt;I hope you find this little tutorial helpful. I hope to continue some explorations in the future. Cython can produce highly performant code. However, providing the bindings requires a lot of boiler-plate code. In the future I will look at another great alternative to provide python wrappers. In particular, I will focus on &lt;code&gt;nimpy&lt;/code&gt; and &lt;code&gt;pybind11&lt;/code&gt;. See you in the next post!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>F-strings are awesome!</title>
+      <link>https://cvanelteren.github.io/post/f-strings/</link>
+      <pubDate>Wed, 09 Jun 2021 08:34:46 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/f-strings/</guid>
+      <description>&lt;p&gt;If you know python, you are probably aware of its value. The language is easy to
+develop in, which allows for quick proto-typing. It is used by many professional
+companies either as glue to bind compiled languages together, or as a full-stack
+for    their     apps.    With     the    advent     of    python     3.6    and
+[[pep498][https://www.python.org/dev/peps/pep-0498/]]  f-strings   arrived.  Its
+longer name  is formatted string  literals or f-strings  for short ;-).  This is
+probably  one of  my  favorite python  feature  next to  dicts  being sorted  by
+default.&lt;/p&gt;
+&lt;h1 id=&#34;what-are-f-strings&#34;&gt;What are f-strings?&lt;/h1&gt;
+&lt;p&gt;When you are either debugging or writing some logging library, strings (in my opinion) were always a hassle to deal with. In order to write the output of a variable one would either write&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;some_variable = &amp;quot;hello world!&amp;quot;
+print(&amp;quot;Some variable = &amp;quot; + some_variable)
+print(&amp;quot;Some variable = %s&amp;quot;.format(some_variable))
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The top choice is not that bad, but the bottom one gets complicated when formatting get more complex. With F-strings this procedure can be simplified by writing:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;some_variable = &amp;quot;hello world!&amp;quot;
+print(f&amp;quot;Some variable = {some_variable}&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Merely by adding the formatting operator &amp;ldquo;f&amp;rdquo; in front of the string, the output becomes more readble. This has the advantage of literate programming; in plain langauge one can read this sentence and understand its output in normal plain language. Since the feature became available I quickly replaced the old formatting style with this newer better way: f-strings became the norm.&lt;/p&gt;
+&lt;p&gt;In my normal debugging routine, I am not used to using full-featured debuggers that can step in and out of functions allowing to see local scopes: very fancy! I usually resort to print statements, and lots of coffee and pacing around my room. F-strings allowed for quicker and clearer debugging. This prompts me to write this post now, what else can F-strings do?&lt;/p&gt;
+&lt;h1 id=&#34;capabilities-of-f-strings&#34;&gt;Capabilities of f-strings&lt;/h1&gt;
+&lt;p&gt;F-strings can do a great number of things. One of the major advantages for me is making readable strings as was indicated above.&lt;/p&gt;
+&lt;h2 id=&#34;formatting&#34;&gt;Formatting&lt;/h2&gt;
+&lt;p&gt;F-strings allow for formatting opertors to be passed in. Say you have a float with 10 decimes but you only want to plot the rounded number. One option would be to do:&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a = 1.23123512351234
+print(f&amp;quot;{round(a, 2)}&amp;quot;)
+
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;This however, quickly makes the f-string &amp;ldquo;complicated&amp;rdquo;. Luckliy f-strings allow for format operators to be used&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;a = 1.23123512351234
+print(f&amp;quot;{a:.2f}&amp;quot;) # prints up to 2 precision
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next to rouding formats, one can also apply alignment of text&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;text = &amp;quot;hello world&amp;quot;
+print(f&amp;quot;{text: &amp;gt;}&amp;quot;) # right align
+print(f&amp;quot;{text: &amp;lt;}&amp;quot;) # left align [default often]
+print(f&amp;quot;{text: ^}&amp;quot;) # center align 
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;There are many more possibilites, including aligning only if the text goes bigger than a certain predetermined number of digits or formatting numbers to hex, binary, leading space for positive numbers and so on. In fact there is a minilanguage that it uses that can be found on the python docs.&lt;/p&gt;
+&lt;h2 id=&#34;lambda-functions&#34;&gt;Lambda functions&lt;/h2&gt;
+&lt;p&gt;The colon is used for formatting indicator. This  prevents lambda functions from being used directly. However, by encapsupating the lambda function one is still able to insert lambda functions inside an f-string.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;print(f&amp;quot;This is the output of two times 2 {(lambda x: x*2)(2)}&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;h3 id=&#34;debugging&#34;&gt;Debugging&lt;/h3&gt;
+&lt;p&gt;In debugging I often revert to writing the output to check the state of some object. This results in boilerplate statements that I wish to prevent. Luckily, f-strings can to this with &lt;code&gt;=&lt;/code&gt; formatting.&lt;/p&gt;
+&lt;pre&gt;&lt;code class=&#34;language-python&#34;&gt;some_variables = &amp;quot;ERROR!&amp;quot;
+print(f&amp;quot;{some_variable=}&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;will print out&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;some_variable = &amp;quot;ERROR&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Pretty neat! This reduces the need to write out the variable statement completely.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Growing pains</title>
+      <link>https://cvanelteren.github.io/post/mu4e/</link>
+      <pubDate>Fri, 23 Apr 2021 10:12:27 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/mu4e/</guid>
+      <description>&lt;p&gt;A few months ago, my work email switched from outlook to office365 and with it came &lt;code&gt;OAUTH2&lt;/code&gt;. The transition was coupled with a lack of initial support for receiving email with this security protocol yielding some email clients useless. The goal of this post is to provide future users with some insights on setting up &lt;code&gt;OAUTH2&lt;/code&gt; in &lt;code&gt;mu4e&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;what-is-oauth2&#34;&gt;What is &lt;code&gt;OAUTH2&lt;/code&gt;?&lt;/h1&gt;
+&lt;p&gt;In brief, &lt;code&gt;OAUTH2&lt;/code&gt; is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.&lt;/p&gt;
+&lt;h1 id=&#34;setting-up-oauth2-in-emacs&#34;&gt;Setting up &lt;code&gt;OAUTH2&lt;/code&gt; in &lt;code&gt;emacs&lt;/code&gt;&lt;/h1&gt;
+&lt;p&gt;We need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to set up some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.&lt;/p&gt;
+&lt;h2 id=&#34;acquiring-the-secret&#34;&gt;Acquiring the secret&lt;/h2&gt;
+&lt;p&gt;Acquiring the  secret may  differ depending  on the service  you are  using. For
+gmail                    for                     example                    look
+&lt;a href=&#34;https://support.google.com/googleapi/answer/6158849?hl=en&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;.   For  office
+365 however, it proved a bit more difficult as I did not have access directly to
+the api to setup  these keys through azure. In order to acquire  a secret I used
+&lt;a href=&#34;https://gitlab.com/muttmua/mutt/-/blob/master/contrib/mutt_oauth2.py.README&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mutt_oauth2.py&lt;/a&gt;, and I used the publically available application id for thunderbird which can be found &lt;a href=&#34;https://hg.mozilla.org/comm-central/file/tip/mailnews/base/src/OAuth2Providers.jsm&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;. At the time of writing these are&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;AppID = &amp;quot;08162f7c-0fd2-4200-a84a-f25a4db0b584&amp;quot;
+ClientSecret = &amp;quot;TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82&amp;quot;
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Acquire &lt;code&gt;mutt_oauth2.py&lt;/code&gt; and edit the code with this info. Running the file will then give you a token after logging in with the through your SSO of your company. Now this token is put in a public file, anyone who has acces to this token could theoretically scoop your email. It is therefore crucial to setup a password manager to protect this secret.&lt;/p&gt;
+&lt;h2 id=&#34;email-receiving&#34;&gt;Email receiving&lt;/h2&gt;
+&lt;p&gt;I use &lt;code&gt;mbsync&lt;/code&gt; for receiving emails and &lt;code&gt;mstmp&lt;/code&gt; for sending emails. I again defer to the respective tutorials for setting these up, but I will mention what is important for &lt;code&gt;XOAUTH2&lt;/code&gt;. A common setup for &lt;code&gt;mbsync&lt;/code&gt; could look something like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#file: ~/.mbsyncrc
+# mbsyncrc based on
+# http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+# ACCOUNT INFORMATION
+IMAPAccount office365
+# Address to connect to
+Host smtp.office365.com
+User &amp;lt;EMAIL_HERE&amp;gt;
+PassCmd &amp;quot;gpg2 -q --for-your-eyes-only --no-tty -d ~/.emacs.d/mu4e/.mbsyncpass-&amp;lt;EMAIL_HERE&amp;gt;.gpg&amp;quot;
+AuthMechs LOGIN
+SSLType IMAPS
+SSLVersions TLSv1.3
+CertificateFile /etc/ssl/certs/ca-certificates.crt
+
+
+IMAPStore office365
+Account office365
+
+MaildirStore office365-local
+SubFolders Verbatim
+# The trailing &amp;quot;/&amp;quot; is important
+Path ~/Mail/
+Inbox ~/Mail/office365/inbox
+
+Channel office365
+Far :office365-remote:
+Near :office365-local:
+# Exclude everything under the internal [Gmail] folder, except the interesting folders
+Patterns * ![office365]* &amp;quot;[office365]/Sent Mail&amp;quot; &amp;quot;[office365]/Starred&amp;quot; &amp;quot;[office365]/All Mail&amp;quot;
+# Or include everything
+#Patterns *
+# Automatically create missing mailboxes, both locally and on the server
+Create Both
+# Save the synchronization state files in the relevant directory
+SyncState *
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;code&gt;PassCmd&lt;/code&gt; is used to obtain your client secret setup above and &lt;code&gt;Authmechs&lt;/code&gt; needs to be set to &lt;code&gt;XOAUTH2&lt;/code&gt; for office365 but oddly to &lt;code&gt;LOGIN&lt;/code&gt; for gmail. One could also fill in a bare string password to prevent the hassle of setting up password managers, or use &lt;code&gt;python mutt_oauth2.py TOKENFILE&lt;/code&gt; to acquire the secret but this is not recommended. We can check whether it works by running &lt;code&gt;mbsync -a&lt;/code&gt; from your favorite shell.&lt;/p&gt;
+&lt;h1 id=&#34;email-sending&#34;&gt;Email sending&lt;/h1&gt;
+&lt;p&gt;Similar to the setup of &lt;code&gt;mbsync&lt;/code&gt;, &lt;code&gt;msmtp&lt;/code&gt; can be setup to use a password command
+to  insert the  token.  Note that  you  need  to have  a  version that  supports
+&lt;code&gt;xoauth2&lt;/code&gt;, on AUR you can use &lt;code&gt;mstmp-oauth2&lt;/code&gt;. A typical setup looks like this&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;#file : ~/.mstmprc 
+# Set default values for all following accounts.
+defaults
+auth           on
+tls            on
+tls_trust_file /etc/ssl/certs/ca-certificates.crt
+logfile        ~/.msmtp.log
+
+# Outlook
+account        outlook
+host           smtp.office365.com
+port           587
+auth           xoauth2
+from           username@outlook.com
+# not necessary
+# user           username
+# not recommended
+password       plain-text-password
+# recommended
+passwordeval   &amp;lt;Password retrieval command&amp;gt;
+...
+
+# Set a default account (optional)
+account default : outlook
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We can now receive and send email. As coup de grâce we have to setup mu4e to start using email from emacs.&lt;/p&gt;
+&lt;h1 id=&#34;mu4e&#34;&gt;Mu4e&lt;/h1&gt;
+&lt;p&gt;At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &amp;ldquo;Modern&amp;rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell &lt;code&gt;mu&lt;/code&gt; use &lt;code&gt;mbsync&lt;/code&gt; to retrieve emails and &lt;code&gt;msmtp&lt;/code&gt; to send emails.&lt;/p&gt;
+&lt;script src=&#34;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/elisp.min.js&#34;&gt;&lt;/script&gt;
+&lt;pre&gt;&lt;code class=&#34;language-lisp&#34;&gt;(after! mu4e
+ (setq
+   ;; set correct path
+   sendmail-program &amp;quot;/usr/sbin/msmtp&amp;quot;
+   mu4e-root-maildir &amp;quot;~/Mail&amp;quot;
+   mu4e-mu4e-mail-path &amp;quot;~/Mail&amp;quot;
+   send-mail-function  &#39;smtpmail-send-it
+   ;; remove adding username --&amp;gt; msmtp takes care of this
+   message-sendmail-f-is-evil t
+   ;; read who is sending the email 
+   message-sendmail-extra-arguments &#39;(&amp;quot;--read-envelope-from&amp;quot;)
+    (make-mu4e-context
+     :name  &amp;quot;office365&amp;quot;
+     :match-func (lambda (msg)
+                   (when msg
+                     (string-prefix-p &amp;quot;/office365&amp;quot; (mu4e-message-field msg :maildir)
+                                      )
+                     )
+                   )
+     :enter-func (lambda () (mu4e-message &amp;quot;Entering work contenxt&amp;quot;))
+     ;; relevant bits
+     :vars &#39;(
+             (mu4e-sent-folder . &amp;quot;/office365/Sent Items&amp;quot;)
+             (mu4e-drafts-folder . &amp;quot;/office365/Drafts&amp;quot;)
+             (mu4e-inbox-folder . &amp;quot;/office365/inbox&amp;quot;)
+             (smtpmail-local-domain . &amp;quot;office365&amp;quot;)
+             (smtpmail-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
+             (smtpmail-default-smtp-server . &amp;quot;smtp.office365.com&amp;quot;)
+             (user-mail-address . &amp;quot;&amp;lt;user email address&amp;quot;)
+             ;; name setup in mbsync
+             (mu4e-get-mail-command . &amp;quot;mbsync office365&amp;quot;)
+             )
+    )
+  )
+)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;As a final step, we need to setup &lt;code&gt;mu&lt;/code&gt; itself. From your favorite shell write:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mu init --maildir ~/Mail --my-address=&amp;lt;User address&amp;gt; &amp;amp;&amp;amp; mu index
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&amp;hellip;and we are done! You can now use mu4e to send and receive emails from emacs, happy hacking 😉!&lt;/p&gt;
+&lt;!-- # Setting up password manager --&gt;
+&lt;!-- https://avaldes.co/2020/01/28/secret-service-keepassxc.html --&gt;
+&lt;!-- # Using msmtp --&gt;
+&lt;!-- https://tushartyagi.com/blog/configure-mu4e-and-msmtp/ --&gt;
+&lt;!-- # Setting up different accounts  --&gt;
+&lt;!-- https://www.djcbsoftware.nl/code/mu/mu4e/Contexts.html --&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Covid dashboard</title>
+      <link>https://cvanelteren.github.io/post/covid/</link>
+      <pubDate>Thu, 15 Apr 2021 19:38:11 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/covid/</guid>
+      <description>&lt;video playsinline autoplay controls mute loop&gt;
+ &lt;source src = &#34;covid_anim.webm&#34; type = &#34;video/webm&#34;&gt;
+ &lt;source src = &#34;test.mp4&#34; type = &#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;Covid &amp;ldquo;dashboard&amp;rdquo; I made over the winter. Data is sourced from the &lt;a href=&#34;https://coronadashboard.rijksoverheid.nl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dutch national corona dashboard&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In order to reflect the spatio-temporal effects of corona, the data consists of three categories per municipality. Namely, it consists of total cases, number of people hospitalized, and the total number of deceased due to corona at per publication date. I designed a metric which I dubbed &amp;ldquo;relative severity&amp;rdquo; which had the goal to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reflect the relative contribution to the source vectors at each time point;&lt;/li&gt;
+&lt;li&gt;Include a memory effect of the contribution over time;&lt;/li&gt;
+&lt;li&gt;Take into account the number of people living in that municipality.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For municipality $j$ the  relative severity for source $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $t$  was computed as&lt;/p&gt;
+&lt;p&gt;$$ R_j(s_{ij}^t) = \frac{1}{Z_j \sum_k R_k(s_i^t)}\sum_{\tau =0}^t s_{ij}^{\tau},$$&lt;/p&gt;
+&lt;p&gt;were $Z_j$ is the number of people living in municipality $j$, and $s_{ij}$ is one of the sources (total cases, hospitalized, deceased) in municipality $j$.
+The percentile of $R_j(s_i^t)$ at each time $t$ is then computed and plotted above.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rock-paper-scissor dynamics to study biodiversity</title>
+      <link>https://cvanelteren.github.io/post/rps/</link>
+      <pubDate>Mon, 05 Apr 2021 14:57:08 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/rps/</guid>
+      <description>&lt;p&gt;Some  years ago  an  &lt;a href  url=&#34;https://www.nature.com/articles/nature06095&#34;&gt;
+article  &lt;/a&gt;  was published  using  rock-paper-scissor  dynamics to  study  the
+effects  on  biodiversity.  I  got  inspired by  the  excellent  website  of  &lt;a
+href=&#34;https://www.complexity-explorables.org/explorables/cycledelic/&#34;&gt;Dirck
+Brockmann  &lt;/a&gt;   and  decided   to  implement   it  myself   in  the   &lt;a  href
+url=&#34;https://github.com/cvanelteren/Plexsim&#34;&gt; the computational  toolbox I wrote
+&lt;/a&gt;. Below  I simulated  the rock-paper-scissor model  and created  a (possibly
+novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
+fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
+grid with Moore neighborhood.&lt;/p&gt;
+&lt;figure&gt;    &lt;video    width=&#34;auto&#34;    height=&#34;auto&#34;    controls loop autoplay&gt;    &lt;source
+src=&#34;rock_paper_scissor_dynamics.mp4&#34; type=&#34;video/mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
+rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
+starts with all  vertices having a random  value in $[0, 1]$. The  color of each
+vertex is proportional to the density of the species (red, green or blue). White
+would indicate low values of all  species whereas black indicates high values of
+all species.  Over time  larger patches  of similar  states appear  and interact
+according to rock-paper-scissor dynamics. &lt;/figure&gt;
+&lt;h1 id=&#34;the-model&#34;&gt;The model&lt;/h1&gt;
+&lt;p&gt;The model was designed to understand the co-existance of interacting species in a spatially extended ecosystem. Each vertex point represents the locus of three species.
+The color (red, green, blue) are proportional to the density
+of the three species at each pixel (vertex point).&lt;/p&gt;
+&lt;p&gt;The  model produces  a wide  range of  different patterns  based on  three input
+parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Diffusion ($D$): mobility of species.&lt;/li&gt;
+&lt;li&gt;Predation ($P$): competition between the tree different species.&lt;/li&gt;
+&lt;li&gt;Competition ($C$): Competition among different specifies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each vertex in the system $\sigma_i  \in \sigma :=${ $\sigma_0, \dots, \sigma_n$
+} contains a  vector with the density  of the three &amp;ldquo;species&amp;rdquo;,  i.e. rock ($r$),
+paper ($g$), or scissor ($b$). The concentration of each specie at vertex $i$ is
+updated according to&lt;/p&gt;
+&lt;p&gt;$$
+\frac{d \sigma_i}{dt} = \scriptstyle \begin{cases}
+\frac{dr_i}{dt}&amp;amp; = ((\underbrace{P  (g_i - b_i)  + r_i}_{\textrm{predation}} - \underbrace{C  (g_i + b_i) - r_i^2}_{\textrm{Competition}})r_i - \underbrace{D(\sum_{&amp;lt;i,j&amp;gt;} r_j r_i)}_{\textrm{mobility}}) \delta t \\\&lt;br&gt;
+\frac{dg_i}{dt}&amp;amp; = ((P  (b_i - r_i)  + g_i - C  (r_i + b_i) - g_i^2)g_i - D(\sum_{&amp;lt;i,j&amp;gt;} g_j g_i)) \delta t \\\&lt;br&gt;
+\frac{db_i}{dt}&amp;amp; = ((P  (r_i - g_i)  + b_i - C  (r_i + g_i) - b_i^2)b_i - D(\sum_{&amp;lt;i,j&amp;gt;} b_j b_i)) \delta t, \end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;where $&amp;lt;i,j&amp;gt;$ indicates the nearest neighbors of variable $i$.&lt;/p&gt;
+&lt;p&gt;In order to see  the effect of the three parameters,  I simulated $T=1000$ steps
+and visualized  the last system  state while varying predation,  competition and
+diffusion while keeping the rest constant.  It is fascinating to see
+how each parameter causes different spatially extended patterns. The simulations
+over time exhibit  fluid-like behavior, and the observed  patterns are distinct
+on the set of input parameters.  Most notably, the diffusion parameter can cause
+large extended  patches similar to  what can  be observed in  Ising/Potts model.
+Predation on  the other hand tends  to cause fragmentation of  species for lower
+values, but  for higher values  create similar larger patterns.  The interaction
+among the variables shows a non-linear  effect with each other. This can readily
+be seen in the competition parameters.  That is, the competition parameter shows
+larger patches  only for  a small range  (1.89 - 2.17)  while keeping  all other
+values constant.&lt;/p&gt;
+&lt;img src=&#34;diffusion.png&#34; alt =&#34;effect of mobility&#34;&gt;
+&lt;img src=&#34;predation.png&#34; alt =&#34;effect of predation&#34;&gt;
+&lt;img src=&#34;competition.png&#34; alt =&#34;effect of competition&#34;&gt;
+&lt;h1 id=&#34;agent-based-implementation&#34;&gt;Agent-based implementation&lt;/h1&gt;
+&lt;p&gt;In the original paper, the authors apply a so-called Gillspie algorithm to efficiently sample the reaction between the different density. I was interested whether one can get away with &amp;ldquo;tradtiional&amp;rdquo; Monte-Carlo methods and implemented and agent-based approach to the model above.&lt;/p&gt;
+&lt;p&gt;Each agent updates stochastically with parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mobility $M \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Reproduction $R \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Selection $S \in [0, 1]$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An agent can only reproduce if an adjacent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:&lt;/p&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;Dead state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Rock&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Paper&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Scissor&amp;rdquo; state&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each update step an agent interacts  with a random neighbor and randomly chooses
+an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).&lt;/p&gt;
+&lt;p&gt;We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:&lt;/p&gt;
+&lt;figure&gt;
+&lt;video  width=&#34;auto&#34; height=&#34;auto&#34; controls autoplay loop&gt;  &lt;source src=&#34;rock_paper_scissor_dynamics_abm.mp4&#34;&gt; &lt;/video&gt;
+&lt;figcaption&gt; Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
+&lt;/figure&gt;
+&lt;p&gt;This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.&lt;/p&gt;
+&lt;!-- &lt;video id=&#34;video&#34; controls autplay loop&gt; --&gt;
+&lt;!-- &lt;source src=&#34;test.webm&#34;&gt;  --&gt;
+&lt;!-- &lt;/video&gt; --&gt;
+&lt;!-- here --&gt;
 </description>
     </item>
     
