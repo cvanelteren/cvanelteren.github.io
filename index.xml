@@ -19,22 +19,22 @@
       <guid>https://cvanelteren.github.io/post/splitboard/</guid>
       <description>&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#org9c43196&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org80871bf&#34;&gt;Outline&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org6133bf6&#34;&gt;ESP32&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org11515d0&#34;&gt;Matrix scanning&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#orgaa1413b&#34;&gt;Introduction &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-06-21 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org79fc848&#34;&gt;Outline&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org280935e&#34;&gt;ESP32 &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-07-12 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;-&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org780a1bf&#34;&gt;Matrix scanning &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-07-12 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/a&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#orga2526db&#34;&gt;Ghosting&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgedbb31d&#34;&gt;Key debouncing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org7b9d744&#34;&gt;Ghosting&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orge44d685&#34;&gt;Key debouncing&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org98ce38d&#34;&gt;ESP-Now&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org40a4601&#34;&gt;Bluetooth&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgc568448&#34;&gt;OLED Display&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgb9119a6&#34;&gt;Battery control&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb367c43&#34;&gt;ESP-Now&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgef527f7&#34;&gt;Bluetooth&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org988c3f8&#34;&gt;OLED Display&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgf5ec2f6&#34;&gt;Battery control&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;a id=&#34;org9c43196&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;orgaa1413b&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;introduction-span-classtimestamp-wrapperspan-classtimestamplt2021-06-21-mongtspanspan&#34;&gt;Introduction &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-06-21 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/h1&gt;
 &lt;p&gt;Mechanical keyboards  are somewhat  of a dated  concept that
 has  gathered some  speed in  more recent  years. Back  when
 computers were  first coming  out for the  public, keyboards
@@ -93,7 +93,7 @@ The post will updated as I work on it.&lt;/p&gt;
 &lt;li&gt;OLED display&lt;/li&gt;
 &lt;li&gt;Rotary encoders&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a id=&#34;org80871bf&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org79fc848&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;outline&#34;&gt;Outline&lt;/h1&gt;
 &lt;p&gt;The keyboard is split; it has two halves. The right and left
 half will have  most of the same  “base” functionality. Most
@@ -128,8 +128,8 @@ with some heuristic (for example  deep sleep), the roles may
 switch to prolong batter life of both units.&lt;/p&gt;
 &lt;p&gt;To give a course overview consider the following picture:&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/overview.png&#34; alt=&#34;img&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org6133bf6&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;esp32&#34;&gt;ESP32&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;org280935e&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;esp32-span-classtimestamp-wrapperspan-classtimestamplt2021-07-12-mongtspanspan-&#34;&gt;ESP32 &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-07-12 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;-&lt;/h1&gt;
 &lt;p&gt;I  opted for  a micro-controller  as this  would allow  me to
 prototype without  worrying about my electronic  skills. The
 controller needed  to have  battery control,  bluetooth, and
@@ -151,8 +151,8 @@ low  energy simultanaously.  In  addition, through  ESP-NOW,
 different  eps32  modules can  form  a  mesh, which  I  will
 harness to do server-client communication.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/pinout.jpg&#34; alt=&#34;img&#34; title=&#34;Pin-out ESP32 LORA-V2&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org11515d0&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h1 id=&#34;matrix-scanning&#34;&gt;Matrix scanning&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;org780a1bf&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;matrix-scanning-span-classtimestamp-wrapperspan-classtimestamplt2021-07-12-mongtspanspan&#34;&gt;Matrix scanning &lt;span class=&#34;timestamp-wrapper&#34;&gt;&lt;span class=&#34;timestamp&#34;&gt;&amp;lt;2021-07-12 Mon&amp;gt;&lt;/span&gt;&lt;/span&gt;&lt;/h1&gt;
 &lt;p&gt;A keyboard  matrix scanning circuit  is used to  enhance the
 number  of keys,  while keeping  the number  of pins  low. A
 micro-controller  uses general  pin  input/output (GPIO)  to
@@ -171,7 +171,7 @@ column form  an open circuit.  That is,  if a key  switch is
 pressed down, current  can flow between the  row and column.
 The scanning occurs at a high scan rate, making it seemingly
 instantaneous.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orga2526db&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org7b9d744&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;ghosting&#34;&gt;Ghosting&lt;/h2&gt;
 &lt;p&gt;Matrix  scanning  forms  an excellent  idea  to  efficiently
 represent our electronic  switches. However, merely scanning
@@ -189,20 +189,20 @@ approach is to put a diode  right after the switch either on
 the columns or rows,  which prevents current from traversing
 and causing ghosting.&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/ghosting.png&#34; alt=&#34;img&#34; title=&#34;Ghosting example. Ghosting occurs when current can flow freely across columns and rows. (Left) one key is pressed down bottom left. (Middle) A key across from the first is activated which causes ghosting (right); current flows from the second row, first column to the second row, second column etc.&#34;&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orgedbb31d&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orge44d685&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;key-debouncing&#34;&gt;Key debouncing&lt;/h2&gt;
 &lt;p&gt;Key  debounce is  a mechanism  to filter  out erroneous  key
 activity.  When  two metal  plates  come  into contact,  the
 signal does not form a clean  square wave. In order to clean
 up  this  signal, key  debouncing  is  used to  reflect  the
 “press” of key switch.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org98ce38d&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgb367c43&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;esp-now&#34;&gt;ESP-Now&lt;/h1&gt;
-&lt;p&gt;&lt;a id=&#34;org40a4601&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgef527f7&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;bluetooth&#34;&gt;Bluetooth&lt;/h1&gt;
-&lt;p&gt;&lt;a id=&#34;orgc568448&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org988c3f8&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;oled-display&#34;&gt;OLED Display&lt;/h1&gt;
-&lt;p&gt;&lt;a id=&#34;orgb9119a6&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgf5ec2f6&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;battery-control&#34;&gt;Battery control&lt;/h1&gt;
 </description>
     </item>

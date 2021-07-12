@@ -30,8 +30,8 @@
   
     
   
-  <meta name="description" content="Table of Contents  Introduction Outline ESP32 Matrix scanning  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  
-Introduction Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years." />
+  <meta name="description" content="Table of Contents  Introduction &lt;2021-06-21 Mon&gt; Outline ESP32 &lt;2021-07-12 Mon&gt;- Matrix scanning &lt;2021-07-12 Mon&gt;  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  
+Introduction &lt;2021-06-21 Mon&gt; Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years." />
 
   
   <link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/splitboard/" />
@@ -294,8 +294,8 @@ Introduction Mechanical keyboards are somewhat of a dated concept that has gathe
   <meta property="og:site_name" content="Casper van Elteren" />
   <meta property="og:url" content="https://cvanelteren.github.io/post/splitboard/" />
   <meta property="og:title" content="Creating a splitkeyboard from hardware to firmware! | Casper van Elteren" />
-  <meta property="og:description" content="Table of Contents  Introduction Outline ESP32 Matrix scanning  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  
-Introduction Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years." /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
+  <meta property="og:description" content="Table of Contents  Introduction &lt;2021-06-21 Mon&gt; Outline ESP32 &lt;2021-07-12 Mon&gt;- Matrix scanning &lt;2021-07-12 Mon&gt;  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  
+Introduction &lt;2021-06-21 Mon&gt; Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years." /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" />
     <meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_2.png" /><meta property="og:locale" content="en-us" />
   
     
@@ -343,7 +343,7 @@ Introduction Mechanical keyboards are somewhat of a dated concept that has gathe
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_2.png"
     }
   },
-  "description": "Table of Contents  Introduction Outline ESP32 Matrix scanning  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  \nIntroduction Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years."
+  "description": "Table of Contents  Introduction \u0026lt;2021-06-21 Mon\u0026gt; Outline ESP32 \u0026lt;2021-07-12 Mon\u0026gt;- Matrix scanning \u0026lt;2021-07-12 Mon\u0026gt;  Ghosting Key debouncing   ESP-Now Bluetooth OLED Display Battery control  \nIntroduction \u0026lt;2021-06-21 Mon\u0026gt; Mechanical keyboards are somewhat of a dated concept that has gathered some speed in more recent years."
 }
 </script>
 
@@ -791,22 +791,22 @@ Introduction Mechanical keyboards are somewhat of a dated concept that has gathe
     <div class="article-style">
       <h1 id="table-of-contents">Table of Contents</h1>
 <ol>
-<li><a href="#org9c43196">Introduction</a></li>
-<li><a href="#org80871bf">Outline</a></li>
-<li><a href="#org6133bf6">ESP32</a></li>
-<li><a href="#org11515d0">Matrix scanning</a>
+<li><a href="#orgaa1413b">Introduction <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-21 Mon&gt;</span></span></a></li>
+<li><a href="#org79fc848">Outline</a></li>
+<li><a href="#org280935e">ESP32 <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt;</span></span>-</a></li>
+<li><a href="#org780a1bf">Matrix scanning <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt;</span></span></a>
 <ol>
-<li><a href="#orga2526db">Ghosting</a></li>
-<li><a href="#orgedbb31d">Key debouncing</a></li>
+<li><a href="#org7b9d744">Ghosting</a></li>
+<li><a href="#orge44d685">Key debouncing</a></li>
 </ol>
 </li>
-<li><a href="#org98ce38d">ESP-Now</a></li>
-<li><a href="#org40a4601">Bluetooth</a></li>
-<li><a href="#orgc568448">OLED Display</a></li>
-<li><a href="#orgb9119a6">Battery control</a></li>
+<li><a href="#orgb367c43">ESP-Now</a></li>
+<li><a href="#orgef527f7">Bluetooth</a></li>
+<li><a href="#org988c3f8">OLED Display</a></li>
+<li><a href="#orgf5ec2f6">Battery control</a></li>
 </ol>
-<p><a id="org9c43196"></a></p>
-<h1 id="introduction">Introduction</h1>
+<p><a id="orgaa1413b"></a></p>
+<h1 id="introduction-span-classtimestamp-wrapperspan-classtimestamplt2021-06-21-mongtspanspan">Introduction <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-21 Mon&gt;</span></span></h1>
 <p>Mechanical keyboards  are somewhat  of a dated  concept that
 has  gathered some  speed in  more recent  years. Back  when
 computers were  first coming  out for the  public, keyboards
@@ -865,7 +865,7 @@ The post will updated as I work on it.</p>
 <li>OLED display</li>
 <li>Rotary encoders</li>
 </ul>
-<p><a id="org80871bf"></a></p>
+<p><a id="org79fc848"></a></p>
 <h1 id="outline">Outline</h1>
 <p>The keyboard is split; it has two halves. The right and left
 half will have  most of the same  “base” functionality. Most
@@ -900,8 +900,8 @@ with some heuristic (for example  deep sleep), the roles may
 switch to prolong batter life of both units.</p>
 <p>To give a course overview consider the following picture:</p>
 <p><img src="./figures/overview.png" alt="img"></p>
-<p><a id="org6133bf6"></a></p>
-<h1 id="esp32">ESP32</h1>
+<p><a id="org280935e"></a></p>
+<h1 id="esp32-span-classtimestamp-wrapperspan-classtimestamplt2021-07-12-mongtspanspan-">ESP32 <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt;</span></span>-</h1>
 <p>I  opted for  a micro-controller  as this  would allow  me to
 prototype without  worrying about my electronic  skills. The
 controller needed  to have  battery control,  bluetooth, and
@@ -923,8 +923,8 @@ low  energy simultanaously.  In  addition, through  ESP-NOW,
 different  eps32  modules can  form  a  mesh, which  I  will
 harness to do server-client communication.</p>
 <p><img src="./figures/pinout.jpg" alt="img" title="Pin-out ESP32 LORA-V2"></p>
-<p><a id="org11515d0"></a></p>
-<h1 id="matrix-scanning">Matrix scanning</h1>
+<p><a id="org780a1bf"></a></p>
+<h1 id="matrix-scanning-span-classtimestamp-wrapperspan-classtimestamplt2021-07-12-mongtspanspan">Matrix scanning <span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt;</span></span></h1>
 <p>A keyboard  matrix scanning circuit  is used to  enhance the
 number  of keys,  while keeping  the number  of pins  low. A
 micro-controller  uses general  pin  input/output (GPIO)  to
@@ -943,7 +943,7 @@ column form  an open circuit.  That is,  if a key  switch is
 pressed down, current  can flow between the  row and column.
 The scanning occurs at a high scan rate, making it seemingly
 instantaneous.</p>
-<p><a id="orga2526db"></a></p>
+<p><a id="org7b9d744"></a></p>
 <h2 id="ghosting">Ghosting</h2>
 <p>Matrix  scanning  forms  an excellent  idea  to  efficiently
 represent our electronic  switches. However, merely scanning
@@ -961,20 +961,20 @@ approach is to put a diode  right after the switch either on
 the columns or rows,  which prevents current from traversing
 and causing ghosting.</p>
 <p><img src="./figures/ghosting.png" alt="img" title="Ghosting example. Ghosting occurs when current can flow freely across columns and rows. (Left) one key is pressed down bottom left. (Middle) A key across from the first is activated which causes ghosting (right); current flows from the second row, first column to the second row, second column etc."></p>
-<p><a id="orgedbb31d"></a></p>
+<p><a id="orge44d685"></a></p>
 <h2 id="key-debouncing">Key debouncing</h2>
 <p>Key  debounce is  a mechanism  to filter  out erroneous  key
 activity.  When  two metal  plates  come  into contact,  the
 signal does not form a clean  square wave. In order to clean
 up  this  signal, key  debouncing  is  used to  reflect  the
 “press” of key switch.</p>
-<p><a id="org98ce38d"></a></p>
+<p><a id="orgb367c43"></a></p>
 <h1 id="esp-now">ESP-Now</h1>
-<p><a id="org40a4601"></a></p>
+<p><a id="orgef527f7"></a></p>
 <h1 id="bluetooth">Bluetooth</h1>
-<p><a id="orgc568448"></a></p>
+<p><a id="org988c3f8"></a></p>
 <h1 id="oled-display">OLED Display</h1>
-<p><a id="orgb9119a6"></a></p>
+<p><a id="orgf5ec2f6"></a></p>
 <h1 id="battery-control">Battery control</h1>
 
     </div>
