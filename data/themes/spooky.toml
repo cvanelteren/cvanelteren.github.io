@@ -1,0 +1,48 @@
+# # Theme metadata
+name = "spooky"
+
+
+# Is theme light or dark?
+# 
+is_light = true
+
+# Primary
+
+
+# Menu
+#menu_primary = "#d24c18"
+#menu_primary = "#efebda"
+#
+[light]
+  primary = "#efebda"
+  menu_primary = "#1c1e26"
+  menu_text = "#6a98a5"
+  menu_text_active = "#defebda"
+  menu_title = "#6a98a5"
+
+  # Home sections
+  background = "#1c1e26"
+
+  home_section_odd = "#1c1e26"
+  home_section_even = "#1c1e26"
+  link = "#bbdefb"
+  link_hover = "#bbdefb"
+
+[dark]
+  menu_primary = "#1c1e26"
+  menu_text = "#6a98a5"
+  menu_text_active = "#defebda"
+  menu_title = "#6a98a5"
+
+  # Home sections
+  background = "#1c1e26"
+
+  home_section_odd = "#1c1e26"
+  home_section_even = "#1c1e26"
+  link = "#bbdefb"
+  link_hover = "#bbdefb"
+
+
+  
+[params]
+custom_scss = ["assets/scss/spooky.scss"]

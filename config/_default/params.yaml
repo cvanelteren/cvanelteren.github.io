@@ -6,8 +6,8 @@
 # Appearance
 
 appearance:
-  theme_day: minimal
-  theme_night: minimal
+  theme_day: spooky
+  # theme_night: spooky
   font: minimal
   font_size: L
 
@@ -35,7 +35,7 @@ header:
     align: l
     show_logo: true
     show_language: false
-    show_day_night: true
+    show_day_night: false
     show_search: true
     highlight_active_link: true
 

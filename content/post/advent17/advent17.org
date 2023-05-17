@@ -1,0 +1,300 @@
+#+title: Day 17
+
+* Introduction
+Over the years  I have grown quite fond  of solving riddles.
+There  is  something  thrilling about  reasoning  through  a
+problem and  finding non-trivial properties  about seemingly
+trivial   things.  To   me  programming   gives  a   similar
+experience;  by using  the tools  of a  programming language
+words are strung  together to provide sentences  that can be
+used to  solve a  real-world problem  like finding  the most
+efficient route between A or B,  find the minimum state of a
+system  moving over  an energy  landscape, sort  files in  a
+folder using a particular regex and so on.
+
+Without knowing  it, my interest  for riddles was  hidden in
+programming. Programming to me was  a tool to reason through
+complex   logical  problems.   Programming  allowed   me  to
+verbalize the complex logical problem. This verbalization is
+very important. A  few years ago, I attended  a book reading
+from an author  who expressed that speaking  a language also
+invokes  a form  of thinking,  and by  speaking a  different
+language  your thinking  would also  be bend  and used  in a
+different way.  After programming many years  in python, and
+matlab.  I have  gotten a  little  bored of  the way  python
+speaks. I wanted to think differently.
+
+Then last christmas,  I read a blog that used  the advent of
+code to learn a new programming language. The advent of code
+is an initiative that  poses different programming exercises
+of increasing  difficulty. The  idea sparked interest  in me
+and I set out some months ago  to satisfy my need to learn a
+new language and attempt to solve some difficult riddles.
+
+The advent  code is an  initiative that started in  2015. It
+starts  25  days before  christmas  with  a new  programming
+exercise every  day leading up to  christmas. The difficulty
+of the problem increases as the christmas approaches.
+
+In  this particular  post, I  will focus  on day  17 of  the
+advent of code 2021 as it beat my but and it need not have to!
+
+* The problem
+The  theme of  the advent  of code  2021 is  helping Santa's
+elves finding  a key that was  dropped in the ocean.  On day
+17, you are trying to shoot  a probe from you submarine such
+that it hits a particular area (see figure below). The probe
+is  shot with  a velocity  in the  x, and  y-direction. Each
+simulation step, the x, and  y-velocity decreased by 1 where
+the x-velocity has a minimum of 0 and y-velocity can grow to
+-infinity. The  aim is  to find a  trajectory that  hits the
+target and for which the y-position is maximized. Seems easy
+right?
+
+#+name: fig:int
+#+begin_src jupyter-python
+import proplot as plt, cmasher as cmr, pandas as pd,\
+    numpy as np, os, sys, networkx as nx, warnings
+from matplotlib.patches import Rectangle
+
+class Target:
+    def __init__(self, xmin, xmax, ymin, ymax):
+        self.xmin = xmin
+        self.xmax = xmax
+
+        self.ymin = ymin
+        self.ymax = ymax
+
+def gauss(n):
+    return (n * (n + 1)) // 2
+
+def distance(v, t):
+    out = [ [], [] ]
+    if t < v[0]:
+        out[0] = gauss(v[0]) - gauss(v[0] - t)
+    else:
+        out[0] = gauss(v[0])
+
+    out[1] = gauss(v[1]) - gauss(v[1] - t)
+    return tuple(out)
+
+def evaluate(v, target):
+    path = []
+    t = 0
+    s = (0, 0)
+    out = [s]
+    while s[0] <= target.xmax and s[1] > target.ymin:
+        s = distance(v, t)
+        out.append(s)
+        t += 1
+    return out
+
+target = Target(20, 30, -10, -5)
+velocities = [
+    (20, -10),
+    (6, 9),
+    (11, -1)
+]
+
+
+# show target and start
+x = np.arange(20, 31)
+y = np.arange(-10, -6)
+xy = np.stack(np.meshgrid(x, y)).reshape(2, -1)
+
+fig, ax = plt.subplots()
+ax.scatter(*(0,0), marker = 's', label = "Start")
+ax.scatter(*xy, label = "target", color = "tab:gray")
+
+colors = np.linspace(0, 1, len(velocities), 0)
+colors = cmr.pride(colors)
+for idx, (c, v) in enumerate(zip(colors, velocities)):
+    trj = np.array(evaluate(v, target))
+    ax.plot(*trj.T, label = f"{v=}", color = c,
+            zorder = len(velocities) - idx + 1)
+ax.format(xlabel = "x", ylabel = "y")
+ax.legend(loc = "ur", ncols = 1)
+fig.savefig("./trajectory.png", transparent = False)
+fig.show()
+#+end_src
+
+#+begin_export html
+ <figure>
+  <img src="./trajectory.png" alt="Trulli" style="width:100%">
+  <figcaption>Shooting a probe from the start to the target. Example trajectories are shown. In green the trajectory is maximizes the height, black minimizes the height, and orange maximizes the x-distance.</figcaption>
+</figure>
+#+end_export
+
+
+
+What ended up  being difficult is that it is  not trivial to
+determine the final  position of the probe  given an initial
+velocity. Let's  say that the probe  has velocity $V=(v_x^0,
+v_y^0)$. The position of the probe at time $t$ is determined as
+\begin{equation}
+ P(t) = \left[ \begin{aligned} x \\\\\\ y \end{aligned} \right] =  \left[\begin{aligned}
+    &\begin{cases}
+        \sum_{t=1}^{v_x^0} v_x^0 - t & \text{ if } t < v_x^0\\\\\\
+                    \sum_{t=1}^{v_x^0} t & \text{otherwise}
+    \end{cases}\\\\\\
+    & \sum_{t=1}^{t'} v_y^0 - t\\\\\\
+    \end{aligned}
+\right]
+\end{equation}
+
+In the continuous case, any trajectory which intersects with
+the  target will  be  a valid  trajectory.  However, in  the
+discrete scenario, the probe  may overshoot the target. That
+is, there may be a gap which for which between $t$ and $t+1$
+the probe misses the target. I decomposed the problem in two
+steps.  First,  we  need   to  figure  what  properties  the
+trajectories that hit  the target have. Second,  we focus on
+finding  the trajectory  that  maximizes the  height of  the
+trajectory.
+
+* Step 1: Reaching the target area.
+Initially I  had the intuition  of plotting the  dynamics of
+the of the velocity over  time. The distance traveled in the
+x-direction takes  the form of  a sum of  integers. Luckily,
+for  the sum  of integers  there is  a nice  expression: the
+Gauss sum which takes the form
+
+$$ \sum_{i = 1}^n i = \frac{1}{2} n (n + 1).$$
+
+To  see why  this  is,  write down  a  sequence of  positive
+integers, e.g. $1  + 2 + 3  + 4$. Next, take  pairs form the
+outside in and  notice how the sum of these  pairs are equal
+$n+1$. For example, the  sum of $(1,4) = n +  1$ is equal to
+the  sum of  $(2,3)  =  n -  1  +  2 =  n  +  1$ (by  moving
+"inwards").  Since we  have  $\frac{1}{2}n$  of these  pairs
+Gauss  deduced a  nice closed-formed  solution for  the sum.
+This property is  pretty nifty to use in  the computation of
+the  distance,  as  it  prevents a  possible  large  sum  in
+determining the  distant traveled. Our  distance computation
+therefore becomes
+
+\begin{equation}
+ P(t) = \left[\begin{aligned}
+    &\begin{cases}
+        \frac{1}{2} ((v_x^0) (v_x^0 +1)  -  (v_x^0 - t)(v_x^0 - t + 1))& \text{ if } t < v_x^0\\\\\\
+                    \frac{1}{2} v_x^0 (v_x^0 + 1) & \text{otherwise}
+    \end{cases}\\\\\\
+    & \frac{1}{2}((v_y^0)(v_y^0 + 1) - (v_y^0 - t)(v_y^0 -t  +1))\\\\\\
+    \end{aligned}
+\right].
+\end{equation}
+
+In order  to hit the target,  we need to compute  the bounds
+which are  allowed for  $v_x^0$ and $v_y^0$.  Let's consider
+the  $x$  direction  first  as  it  is  slightly  easier  to
+understand.  The  maximum  $v_x$  that  is  allowed  is  the
+velocity in which after $t=1$ step, the $x$ distance travels
+still hits the  target. This is true for  $v_x^0 = x_{\max}$
+where $x_{\max}$  of the target  is the right most  limit of
+the target.  The minimum  velocity for $x$  can be  found by
+considering that for  some $t$ the sum of  the velocity will
+need to  reach the  left limit of  the target.  The distance
+moved along  $x$ direction is  capped of when $v_x(t)  = 0$.
+This point is  reached when $v_x^0$ is decreased  to zero or
+distance traveled along the $x$ direction is
+
+$$ x_{\min} = \frac{1}{2} v_x^0(v_x^0 + 1).$$
+
+The $y$-direction  is a bit  more challenging to  compute as
+the  distance traveled  does not  have  a cap  like the  $x$
+distance has. Yet, we can  still deduce some bounds. Similar
+to the $x$  direction, the max velocity in $y$  is capped by
+the distance  traveled in $t=1$  step. That is,  the fastest
+you can reach the target, is by throwing the projectile with
+$v_y^0 =  y_{\min}$. For  the minimum $y$-velocity,  we note
+the following: after $t =  v_y^0$ time steps, the trajectory
+reaches its  apex, and after  $t' = 2 v_y^0$  the trajectory
+reaches  the line  $y=0$. The  minimum $y$  velocity has  to
+match the  maximum distance from  $y=0$ to the  target. That
+is, for $t'  + 1$ the velocity $v_y(t' +  1) = y_{\min}$. In
+other words, relative to the line $y=0$, the velocity has to
+match at most $v_y = |y_{\min}|$. This gives us the bounds
+
+\begin{equation}
+\begin{aligned}
+\frac{1}{2} v_x^0 (v_x^0 + 1) &\leq & v_x &\leq x_{\max} \\\\\\
+ y_{\min} &\leq  & v_y &\leq |y_{\min}|.
+\end{aligned}
+\end{equation}
+
+Side note: some other random  property I found was that when
+you have  some velocity $v_y$  and it  is shifted by  1, the
+following $y$  distance also shifts  by 1. That is,  $v_y' =
+v_y + 1 \to y' = y - 1$ for the same time-span $t$.
+
+* Step 2: Determining the max height
+For a given starting velocity $v_y^0$ the max height will be
+reached when $v_y(t)$ reaches zero. This is readily computed
+using the Gauss sum:
+
+\begin{equation}
+y_{\max} = \frac{1}{2} v_y^0 ( v_y^0  + 1 ).
+\end{equation}
+For example for  $v_y^0=0$ the max height will  be zero, and
+for $v_y^0 = 4$ the max height will be 6.
+
+* Finding the trajectory with the max height.
+Finding   the  highest   trajectory  now   merely  involves
+evaluating  the over  the  ranges indicated  in  step 1  and
+keeping  track of  the  starting velocities  that yield  the
+highest value  (step 2). A  "priority queue" can be  used to
+quickly find the  max value: by starting  from strongest $y$
+velocities first, the first trajectory that lands within the
+target  area,  will  also  be  the  starting  velocity  that
+maximizes the height.
+
+* Reflections and conclusions
+Initially,  I  approached this  problem  by  looking at  the
+various ranges that the velocities  in $x$ and $y$ can take.
+I spent quite some time thinking  of a clever way to somehow
+come up with a closed-form solution. Since I was writing the
+code up in  Nim I did not have access  to fancy optimization
+libraries found in for example  python (or at least I didn't
+look for one). This prompted  me to look further than merely
+over  complicated  the  problem   and  throwing  some  fancy
+abstract  analysis  on it.  After  a  couple of  hours,  the
+problem  seemed easier  when looking  at it  from the  right
+perspective.   Here,  the   trick  was   realize  that   the
+optimization had  to involve identifying the  correct ranges
+and setting  up a  priority queue. Overlooking  these ranges
+gives  no  guarantees  if the  solution  converges  although
+brute-force approaches will give you the proper solution.
+
+After nearly 17 exercises in  Nim, my experience with coding
+up examples  and structuring code improved  remarkable. When
+the time is ripe I will  post a full solution and reflection
+on my  adventure with advent and  Nim in a future  post. For
+now, I  would like to  remark that  taking up this  task was
+initially  not easy.  Implementing simple  ideas takes  more
+time, and  nearly everything  has to  be looked  up. Looking
+back, the ease at which I  write Nim code is faster and more
+fluent  than  the  initial   couple  of  exercises.  I  also
+appreciate  how free  Nim  is in  expressing your  thoughts;
+functions  operate on  data  and the  way  your write  these
+operations are rather free.
+
+The speed  of programming in  a novel language shows  both a
+maturating of  the knowledge I have  acquired of programming
+languages  I  can  fluently  write, but  also  a  manner  of
+thinking. Techniques and algorithms that are relatively easy
+in  language A  becomes  more challenging  or impossible  in
+language B; one has to  look for other approaches to harness
+the power  of that  particular language.  Nim is  a powerful
+language that writes really well.  It's too bad that is does
+not score higher among the programming popularity charts.
+
+As  the months  progress and  christmas seems  like a  vague
+memory, I  feel the pressure of  finishing these programming
+riddles. There is a  remarkable difference in difficulty for
+the  earlier  exercises  and   the  latter  ones.  For  some
+exercises, I  found multiple  solutions. I believe  this one
+also has a  nice mathematical solution that  seems to escape
+me and I may come back to  it later and update this post. To
+me,  these exercises  form a  nice  brain tease  and I  will
+slowly work  through them when I  find the time. See  you in
+the next post!

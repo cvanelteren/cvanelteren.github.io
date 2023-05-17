@@ -3,8 +3,8 @@
 # Hugo Documentation: https://gohugo.io/getting-started/configuration/#all-configuration-settings
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
-title: Academic # Website name
-baseURL: 'https://example.com/' # Website URL
+title: Casper van Elteren # Website name
+baseURL: 'cvanelteren.github.io' # Website URL
 
 ############################
 ## LANGUAGE
@@ -25,6 +25,8 @@ module:
     - path: github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy-plugin-netlify
     - path: github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy-plugin-reveal
     - path: github.com/wowchemy/wowchemy-hugo-themes/modules/wowchemy/v5
+    - path: github.com/cvanelteren/wowchemy-shortcode-include
+    - path: github.com/cvanelteren/wowchemy-block-starter
 
 ############################
 ## ADVANCED
@@ -38,6 +40,7 @@ enableRobotsTXT: true
 footnotereturnlinkcontents: <sup>^</sup>
 ignoreFiles: [\.ipynb$, .ipynb_checkpoints$, \.Rmd$, \.Rmarkdown$, _cache$]
 permalinks:
+  authors: '/authors/:slug/'
   event: '/talk/:slug/'
   tags: '/tag/:slug/'
   categories: '/category/:slug/'
@@ -52,10 +55,10 @@ imaging:
   anchor: smart
 timeout: 600000
 taxonomies:
+  author: authors
   tag: tags
   category: categories
   publication_type: publication_types
-  author: authors
 markup:
   _merge: deep
 related:

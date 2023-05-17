@@ -1,0 +1,308 @@
+#+title: What is synergy?
+#+author: Casper van Elteren
+
+The real-world is a complex place. Scientists aim to explain
+real-world phenomena by means of a simplified representation
+of reality. In  this process they tend to focus  on parts of
+reality that  are most correlated with  the observation from
+this phenomenon.
+
+Most of these models  contain multiple factors. For example,
+the  infection rate  of  covid can  be  related the  general
+health  of the  population,  age, mobility  rate, amount  of
+social gatherings  etc. Similarly,  ones voting  behavior is
+some  outcome  of  the   moral  compass  of  an  individual,
+socio-economic developments and other environmental factors.
+Modelers make choices what factors  to include (and which to
+ignore) but (generally) all models of the real-world consist
+of  at least 2 or more factors,  and more  importantly these
+factors  often  interact   (non-trivially).
+
+# There is  a commonly held assumption  that understanding the
+# so-called  higher-order dependencies  among variables  is at
+# the  core  of  understanding   /how/  the  to  be  explained
+# phenomena is  created. A higher order  interaction contrasts
+# itself  with  lower-order  interactions.  Generally,  higher
+# order interactions  refers to an interaction  between two or
+# more variables. The relative order  is an indicator that the
+# interaction is  less complex  compared to the  higher order.
+# For  example  in  a  statistical model  with  3  independent
+# factors $A,  B, C$ a  lower order  effect would be  the main
+# effects of  $A$,$B$ or  $C$ separately. In  contrast, higher
+# order  interactions reflect  to some  interaction among  the
+# factors, such  as a three  way interaction $A  \times B \times  C$. In
+# order to avoid  confusion of the implied order,  I prefer to
+# use the term multivariate interactions.
+
+# A problem of scale
+Multivariate  interactions  are   notoriously  difficult  to
+analyze  as  the combinations  that  can  occur between  the
+variables explode  non-linearly. This  point can  readily be
+understood by combinatorics. Consider a set of $N$ variables
+and all  the three  way interactions  that can  occur within
+this set. Ignoring the order  of the factors, we readily see
+that for  $N=3$ there  is only one  such grouping,  but this
+scales non-linearly with $N$:
+
+$$\binom{N}{3} = \frac{N(N-1)(N-2)}{3!}.$$
+There is a commonly held assumption that the dependencies in
+a system can  generally be compressed such  that in practice
+the non-linearly scaling does not occur in practice.
+
+
+* What is synergy?
+#+begin_src jupyter-python
+from dit.example_dists import Xor, Rdn
+import proplot as plt, numpy as np
+
+A = Rdn()
+B = Xor()
+
+rdn = dict(zip(A.outcomes, B.pmf))
+xor = dict(zip(B.outcomes, B.pmf))
+
+print(A)
+def mix(a, b, mixing = 0.5):
+    # mix two distributions and renormalize
+    seen = set()
+    out = {}
+    for key in a:
+        out[key] = mixing * a.get(key, 0) + (1 - mixing) * b.get(key, 0)
+        seen.add(key)
+    # check possible unseen keys
+    for key in b:
+        if key not in seen:
+            out[key] = mixing * a.get(key, 0) + (1 - mixing) * b.get(key, 0)
+            seen.add(key)
+    # normalize
+    z = sum(out.values())
+    out = {key: value/z for key, value in out.items()}
+    return out
+
+mixes = np.linspace(0, 1, 100)
+os = np.zeros(mixes.size)
+for idx, mixi in enumerate(mixes):
+    out = mix(xor, rdn, mixi)
+    D = dit.Distribution(out)
+    os[idx] = dit.multivariate.o_information(D)
+fig, ax = plt.subplots()
+ax.plot(mixes, os)
+ax.axhline(0, ls = '--', color = 'k')
+ax.format(xlabel = r"Mixing coefficient ($\alpha$)",
+          ylabel = "O-information $(\Omega(X^3))$")
+
+ax.annotate("3-bit copy", (0, -0.1),
+            xycoords = ax.transAxes,
+            va = "top",
+            ha = 'center',
+            rotation = 90)
+
+ax.annotate("3-bit XOR", (1, -0.1),
+            xycoords = ax.transAxes,
+            va = "top",
+            ha = 'center',
+            rotation = 90)
+fig.show()
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+#+begin_example
+Class:          Distribution
+Alphabet:       ('0', '1') for all rvs
+Base:           linear
+Outcome Class:  str
+Outcome Length: 3
+RV Names:       None
+
+x     p(x)
+000   0.5
+111   0.5
+/tmp/ipykernel_145908/1944106033.py:51: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+  fig.show()
+#+end_example
+#+attr_org: :width 333 :height 342
+[[file:./.ob-jupyter/fdb8966f6a3aaa03641697f95913f43c9c2a2fb2.png]]
+:END:
+#+begin_src jupyter-python
+from itertools import combinations
+import networkx as nx, proplot as plt, numpy as np
+from iFlow.exact import gen_states
+from itertools import product
+from tqdm import tqdm
+import dit
+
+def gen_H(n, gamma, beta):
+    N = np.arange(n, dtype = int)
+    A = np.random.randn(n, n)
+    # A = np.zeros((n, n))
+
+    external = np.random.randn(n)
+    sets = np.array(list(combinations(N, gamma)))
+
+    higher = np.random.randn(len(sets))
+
+    states, allowed = gen_states(n)
+    s = ["".join(str(i) for i in j) for j in states]
+    states = states * 2 - 1
+
+
+    H = np.zeros(len(s))
+    H -= np.einsum("ij, ij -> ij", states, states @ A).sum(-1) / 2
+    H -= states @ external
+    H -= np.prod(states[:, sets], axis = -1) @ higher
+    p = np.exp(-beta * H)
+    p /= np.sum(p)
+    return p, s
+
+n = 5
+beta = 0.1
+n_trials = 100
+gammas = np.arange(1, n + 1, dtype = int)
+outcomes = np.zeros((gammas.size, n_trials))
+for trial, gamma in tqdm(product(range(n_trials), gammas)):
+    p, s = gen_H(n, gamma, beta)
+    D = dit.Distribution(s, p)
+    jdx = np.where(gammas == gamma)[0]
+    outcomes[jdx, trial] = dit.multivariate.o_information(D)
+
+#+end_src
+
+#+RESULTS:
+: 500it [00:26, 18.82it/s]
+
+#+begin_src jupyter-python
+from scipy.stats import sem
+fig, ax = plt.subplots()
+e = np.std(outcomes, axis = -1) * 2
+# e = sem(outcomes, axis = -1) * 2
+ax.errorbar(gammas, outcomes.mean(1), e)
+ax.format(
+    xlabel = r"Interaction order ($\gamma$)",
+    ylabel = r"O-information ($\Omega(X^5)$)",
+    title = "$N = 100, \pm 2 stds$")
+fig.show()
+
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: /tmp/ipykernel_145908/1416257510.py:10: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+:   fig.show()
+#+attr_org: :width 334 :height 323
+[[file:./.ob-jupyter/0ae7f6d4aae18f9ec861f91b2f70e5bd917f4fd4.png]]
+:END:
+
+
+Consider a  discrete random variable  $X = {X_1,  X_2, X_3}$
+each  having discrete  alphabet $X_i  \in {0,  1, 2,  3}$. The
+random variable is  constructed by mapping the  outcome of 3
+random coin flips in pairs.  The outcome of two random coins
+is given as
+
+| C_1 | C_2 | Outcome |
+|-----+-----+---------|
+|   0 |   0 |       0 |
+|   1 |   0 |       1 |
+|   0 |   1 |       2 |
+|   1 |   1 |       3 |
+|-----+-----+---------|
+
+Which would yield the following construction of $X$:
+
+| C_1 | C_2 | C_3 |   X |
+|-----+-----+-----+-----|
+|   0 |   0 |   0 | 000 |
+|   1 |   0 |   0 | 100 |
+|   1 |   1 |   0 | 311 |
+|   1 |   1 |   1 | 333 |
+|   0 |   1 |   0 | 210 |
+|   0 |   0 |   1 | 022 |
+|   1 |   0 |   1 | 123 |
+|   0 |   1 |   1 | 232 |
+|-----+-----+-----+-----|
+
+#+begin_src jupyter-python
+dist = "000 101 311 333 210 022 123 232".split()
+dist = {d: 1/len(dist)  for d in dist}
+
+D = dit.Distribution(dist)
+print(D)
+
+print(dit.profiles.ShannonPartition(D))
+print(dit.multivariate.o_information(D))
+#+end_src
+
+#+RESULTS:
+#+begin_example
+Class:          Distribution
+Alphabet:       ('0', '1', '2', '3') for all rvs
+Base:           linear
+Outcome Class:  str
+Outcome Length: 3
+RV Names:       None
+
+x     p(x)
+000   0.125
+022   0.125
+101   0.125
+123   0.125
+210   0.125
+232   0.125
+311   0.125
+333   0.125
++---------------------+
+|  Shannon Partition  |
++-----------+---------+
+|  measure  |   bits  |
++-----------+---------+
+|  H[0|1,2] |   0.000 |
+|  H[1|0,2] |   0.000 |
+|  H[2|0,1] |   0.000 |
+|  I[0:1|2] |   1.000 |
+|  I[0:2|1] |   1.000 |
+|  I[1:2|0] |   1.000 |
+|  I[0:1:2] |   0.000 |
++-----------+---------+
+0.0
+#+end_example
+
+
+The other  variable is built  by pairing the outcome  of the
+three coins pairwise.  For example $X_1 = {C_1,  C_2}, X_2 =
+{C_2, C_3}$ and $X_3 = {C_1, C_3}$. The variables are mapped
+bassed on the XOR between each coin pair. That is, we obtain
+the following mapping for the XOR
+
+| C_1 | C_2 | label |
+|   0 |   0 |     0 |
+|   0 |   1 |     1 |
+|   1 |   0 |     2 |
+|   1 |   1 |     3 |
+
+Which then results in the following distribution
+
+| C_1 | C_2 | C_3 | X_1 | X_2 | X_3 |
+|-----+-----+-----+-----+-----+-----|
+|   0 |   0 |   0 |   0 |   0 |   0 |
+|   0 |   0 |   1 |   0 |   2 |   2 |
+|   0 |   1 |   0 |   2 |   1 |   0 |
+|   1 |   0 |   0 |   1 |   0 |   1 |
+|   1 |   1 |   0 |   3 |   1 |   1 |
+|   1 |   0 |   1 |   1 |   2 |   3 |
+|   0 |   1 |   1 |   2 |   3 |   2 |
+|   1 |   1 |   1 |   3 |   3 |   3 |
+|-----+-----+-----+-----+-----+-----|
+
+#+begin_src jupyter-python
+dist = "000 022 210 101 311 123 232 333".split()
+dist = {d: 1/len(dist)  for d in dist}
+
+D = dit.Distribution(dist)
+print(D)
+prof = dit.profiles.ComplexityProfile(D)
+print(dit.profiles.DependencyDecomposition(D))
+# print(dit.multivariate.o_information(D))
+
+#+end_src
+

@@ -1,0 +1,73 @@
+{{/* Notify JS that this is a widget page */}}
+<!-- TODO: use data attribute on <body> instead if this is still required -->
+<span class="js-widget-page d-none"></span>
+
+{{/* Load Wowchemy blocks */}}
+{{ range $index, $block := .Params.sections }}
+  {{ partial "functions/parse_block_v2" (dict "page" $ "block" $block) }}
+  {{ end }}
+
+
+{{ $ := .root }}
+{{ $page := .page }}
+
+{{ $author := "Admin" }}
+{{ if .author }}
+	{{ $author = .author }}
+{{ else }}
+	{{ $author = $page.Params.author }}
+{{end}}
+
+{{ $person_page_path := (printf "/authors/%s" $author) }}
+{{ $person_page := site.GetPage $person_page_path }}
+{{ if not $person_page }}
+      {{ errorf "Could not find an author page at `%s`. Please check the value of `author` in your About widget and create an associated author page if one does not already exist. See https://wowchemy.com/docs/page-builder/#about " $person_page_path }}
+{{end}}
+
+{{ $person := $person_page.Params }}
+{{ $avatar := ($person_page.Resources.ByType "image").GetMatch "*avatar*" }}
+{{ $avatar_shape := site.Params.avatar.shape | default "circle" }}
+
+{{ $avatar_image := $avatar.Fill "250x250 Center" }}
+
+
+
+<!-- About widget -->
+
+<div class="about-widget">
+	<div class="row">
+		  <div class="about-avatar col-12 col-lg-4">
+			      <br>
+			          <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="{{ $avatar_image.RelPermalink }}" alt="{{$person_page.Title}}">
+				    </div>
+				      <div class="col-12 col-lg-8 card-about-outer">
+					          <h1 class="about-name">Casper van Elteren</h1>
+						        <div class="card-about" style="padding:1rem;padding-bottom:0.25rem;">
+									      <p> Hi there, welcome to my website. I like to write and share about data visualisation,
+									      statistics, and using  C++, Python, Cython and  some Nim.
+									      My latest work can be found below.  <a href="/about">More about me <i class="fas fa-long-arrow-alt-right"></i></a></p>
+									              <br>
+										              <br>
+
+											              <ul class="network-icon" aria-hidden="true">
+													                <li>
+																              <p class="btn-articles"><a href="/about" class="btn-cv"><b>CV</b></a></p>
+																	                </li> &emsp;
+																			          <li>
+																					              <a href="mailto:caspervanelteren@gmail.com"><i class="fas fa-at md-icon"></i></a> &ensp;
+																						                </li>
+																								          <li>
+																										              <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/"><i class="fab fa-linkedin-in md-icon"></i></a> &ensp;
+																											                </li>
+																													          <li>
+																															              <a href="https://github.com/cvanelteren"><i class="fab fa-github md-icon"></i></a> &ensp;
+																																                </li>
+																																		        </ul>
+																																			      </div>
+
+																																			            <video playsinline  muted autoplay id="main_logo_video" src="/files/logo_t.webm">Browser not supported (damn it Safari!)</video>
+																																				      </div>
+	</div>
+</div>
+
+

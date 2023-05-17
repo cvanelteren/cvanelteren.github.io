@@ -1,0 +1,39 @@
+# # Theme metadata
+name = "custom_me"
+
+# Is theme light or dark?
+is_light = true
+
+# Optional Google font URL
+google_fonts = "family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700"
+
+# Primary
+#primary = "rgb(255, 0, 60)"
+primary = "#16161D"
+
+# Font families
+heading_font = "Montserrat"
+body_font = "Roboto"
+nav_font = "Roboto"
+mono_font = "Roboto Mono"
+
+# Menu
+#menu_primary = "#fff"
+menu_primary = "#16161D"
+menu_text = "#34495e"
+#menu_text = "#16161D"
+background = "#fff"
+menu_text_active = "#2962ff"
+menu_title = "#2b2b2b"
+
+# Home sections
+home_section_odd = "#1616D"
+home_section_even = "#1616D"
+
+[dark]
+  link = "#bbdefb"
+  link_hover = "#bbdefb"
+  text = "#fff"
+
+   background = "#000"
+

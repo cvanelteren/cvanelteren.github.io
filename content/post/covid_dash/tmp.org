@@ -1,0 +1,586 @@
+#+begin_src jupyter-python
+import matplotlib.pyplot as plt, cmasher as cmr, pandas as pd
+import numpy as np, os, sys, networkx as nx, warnings
+from plexsim import models
+from imi import infcy
+warnings.simplefilter("ignore"); plt.style.use("fivethirtyeight spooky".split())
+
+import geopandas as gpd
+
+import csv, requests, pandas as pd, numpy as np
+def load_data(fp):
+    headers = {'User-Agent':
+               'Mozilla/5.0 (Windows NT 6.1; WOW64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/56.0.2924.76 Safari/537.36'}
+    with requests.Session() as s:
+        dl = s.get(fp, headers = headers).content.decode('utf-8')
+    return dl
+fp   = "https://data.rivm.nl/covid-19/COVID-19_aantallen_gemeente_per_dag.csv"
+icfp = "https://lcps.nu/wp-content/uploads/covid-19.csv"
+
+dl   = load_data(fp)
+
+# load covid_cases data
+tmp = dl.splitlines()
+c   = tmp.pop(0)
+tmp = [i.split(';') for i in tmp]
+
+df = pd.DataFrame(tmp, columns = c.split(';'))
+conversion = dict(Total_reported = int,
+                  Hospital_admission = int,
+                  Deceased = int,
+                 Date_of_report = np.datetime64,
+                 Date_of_publication = np.datetime64)
+# df = df.astype(conversion);
+
+# load ic data
+icdl = load_data(icfp)
+tmp = icdl.splitlines()
+c   = tmp.pop(0)
+tmp = [i.split(',') for i in tmp]
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+ic = pd.DataFrame(tmp, columns = c.split(','))
+ic = ic.replace('', np.nan)
+conversion = {c: float if c != "Datum" else np.datetime64 for c in ic.columns[1:]}
+
+# ic = ic.astype(conversion)
+ic['Datum'] = pd.to_datetime(ic['Datum'], format = "%d-%m-%Y")
+ic = ic.reindex(index=ic.index[::-1])
+
+print(df.shape)
+#+end_src
+
+#+RESULTS:
+: (270052, 12)
+
+#+begin_src jupyter-python
+date = "Date_of_publication"
+df[date] = df[date].astype(np.datetime64)
+
+data = {}
+for date, tmpi in df.set_index(date).resample("3M"):
+    t = {}
+    for mun, tmpj in tmpi.groupby("Municipality_name"):
+        if mun != "":
+            tt = {k: str(tmpj[k].iloc[0]) if k not in "Total_reported Deceased".split () else tmpj[k].mean() for k in tmpi.columns}
+            t[mun] = tt
+    data[str(date)] = t
+#+end_src
+
+#+RESULTS:
+#+RESULTS:
+
+#+begin_src jupyter-python
+tmp = []
+for k, v in data.items():
+    for kk, vv in v.items():
+        vv = dict(date = k, **vv)
+        tmp.append(vv)
+rdf = pd.DataFrame(tmp)
+rdf.head()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+                  date Version       Date_of_report Municipality_code  \
+0  2020-02-29 00:00:00       4  2022-02-20 10:00:00            GM0518
+1  2020-02-29 00:00:00       4  2022-02-20 10:00:00            GM0796
+2  2020-02-29 00:00:00       4  2022-02-20 10:00:00            GM1680
+3  2020-02-29 00:00:00       4  2022-02-20 10:00:00            GM0358
+4  2020-02-29 00:00:00       4  2022-02-20 10:00:00            GM0197
+
+  Municipality_name       Province Security_region_code  \
+0     's-Gravenhage   Zuid-Holland                 VR15
+1  's-Hertogenbosch  Noord-Brabant                 VR21
+2       Aa en Hunze        Drenthe                 VR03
+3          Aalsmeer  Noord-Holland                 VR13
+4            Aalten     Gelderland                 VR06
+
+        Security_region_name       Municipal_health_service  \
+0                 Haaglanden                 GGD Haaglanden
+1              Brabant-Noord          GGD Hart voor Brabant
+2                    Drenthe                    GGD Drenthe
+3       Amsterdam-Amstelland                  GGD Amsterdam
+4  Noord- en Oost-Gelderland  GGD Noord- en Oost-Gelderland
+
+                         ROAZ_region  Total_reported  Deceased
+0            Netwerk Acute Zorg West             0.0       0.0
+1         Netwerk Acute Zorg Brabant             0.0       0.0
+2  Acute Zorgnetwerk Noord Nederland             0.0       0.0
+3       Netwerk Acute Zorg Noordwest             0.0       0.0
+4                 Acute Zorg Euregio             0.0       0.0
+#+end_example
+
+
+#+begin_src jupyter-python
+def get_rank(row):
+    tmp = rdf[rdf.date == row.date]
+    d = tmp[tmp.total_cumsum <= row.total_cumsum]
+    return np.count_nonzero(d) / tmp.size
+rdf["Total_reported"] = rdf["Total_reported"].astype(float)
+rdf["Deceased"] = rdf["Deceased"].astype(float)
+rdf["total_cumsum"] = rdf["Total_reported"].cumsum()
+rdf["total_ranked"] = rdf.apply(get_rank, axis = 1)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+0          's-Gravenhage
+1       's-Hertogenbosch
+2            Aa en Hunze
+3               Aalsmeer
+4                 Aalten
+              ...
+3100             Zundert
+3101             Zutphen
+3102     Zwartewaterland
+3103         Zwijndrecht
+3104              Zwolle
+Name: Municipality_name, Length: 3105, dtype: object
+#+end_example
+
+#+begin_src jupyter-python
+print(rdf.columns)
+names = rdf["Municipality_code"].unique()
+#+end_src
+
+#+begin_src jupyter-python
+a = pd.read_pickle("nl.pkl")
+print(a.columns)
+b = pd.merge(rdf, a, right_on = "statcode", left_on = "Municipality_code")
+#+end_src
+
+#+RESULTS:
+: Index(['id', 'statcode', 'statnaam', 'jrstatcode', 'rubriek', 'geometry'], dtype='object')
+#+begin_src jupyter-python
+print(b.shape, rdf.shape)
+#+end_src
+
+#+RESULTS:
+: (3069, 20) (3105, 14)
+
+
+
+
+#+begin_src jupyter-python
+def to_json(df):
+    out = {}
+    cols = list(df.columns)
+    cols = "Municipality_code total_ranked Deceased".split()
+    for date, data in df.groupby("date"):
+
+        out[date] = {d["Municipality_code"]: {i: d[i]
+                     for i in cols}
+                     for idx, d in data.iterrows()
+        }
+    with open("./test.json", "w") as f:
+        json.dump(out, f)
+to_json(rdf)
+
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+#+begin_example
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+File ~/miniconda3/lib/python3.9/site-packages/pandas/core/indexes/base.py:3621, in Index.get_loc(self, key, method, tolerance)
+   3620 try:
+-> 3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/_libs/index.pyx:136, in pandas._libs.index.IndexEngine.get_loc()
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/_libs/index.pyx:163, in pandas._libs.index.IndexEngine.get_loc()
+
+File pandas/_libs/hashtable_class_helper.pxi:5198, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+File pandas/_libs/hashtable_class_helper.pxi:5206, in pandas._libs.hashtable.PyObjectHashTable.get_item()
+
+KeyError: 'total_tanked'
+
+The above exception was the direct cause of the following exception:
+
+KeyError                                  Traceback (most recent call last)
+Input In [131], in <module>
+     11     with open("./test.json", "w") as f:
+     12         json.dump(out, f)
+---> 13 to_json(rdf)
+
+Input In [131], in to_json(df)
+      4 cols = "Municipality_code total_tanked Deceased".split()
+      5 for date, data in df.groupby("date"):
+----> 7     out[date] = {d["Municipality_code"]: {i: d[i]
+      8                  for i in cols}
+      9                  for idx, d in data.iterrows()
+     10     }
+     11 with open("./test.json", "w") as f:
+     12     json.dump(out, f)
+
+Input In [131], in <dictcomp>(.0)
+      4 cols = "Municipality_code total_tanked Deceased".split()
+      5 for date, data in df.groupby("date"):
+----> 7     out[date] = {d["Municipality_code"]: {i: d[i]
+      8                  for i in cols}
+      9                  for idx, d in data.iterrows()
+     10     }
+     11 with open("./test.json", "w") as f:
+     12     json.dump(out, f)
+
+Input In [131], in <dictcomp>(.0)
+      4 cols = "Municipality_code total_tanked Deceased".split()
+      5 for date, data in df.groupby("date"):
+----> 7     out[date] = {d["Municipality_code"]: {i: d[i]
+      8                  for i in cols}
+      9                  for idx, d in data.iterrows()
+     10     }
+     11 with open("./test.json", "w") as f:
+     12     json.dump(out, f)
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/core/series.py:959, in Series.__getitem__(self, key)
+    956     return self._values[key]
+    958 elif key_is_scalar:
+--> 959     return self._get_value(key)
+    961 if is_hashable(key):
+    962     # Otherwise index.get_value will raise InvalidIndexError
+    963     try:
+    964         # For labels that don't resolve as scalars like tuples and frozensets
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/core/series.py:1070, in Series._get_value(self, label, takeable)
+   1067     return self._values[label]
+   1069 # Similar to Index.get_value, but we do not fall back to positional
+-> 1070 loc = self.index.get_loc(label)
+   1071 return self.index._get_values_for_loc(self, loc, label)
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/core/indexes/base.py:3623, in Index.get_loc(self, key, method, tolerance)
+   3621     return self._engine.get_loc(casted_key)
+   3622 except KeyError as err:
+-> 3623     raise KeyError(key) from err
+   3624 except TypeError:
+   3625     # If we have a listlike key, _check_indexing_error will raise
+   3626     #  InvalidIndexError. Otherwise we fall through and re-raise
+   3627     #  the TypeError.
+   3628     self._check_indexing_error(key)
+
+KeyError: 'total_tanked'
+#+end_example
+:END:
+
+
+
+#+begin_src jupyter-python
+import json
+with open("data.json", "w") as f:
+    json.dump(data, f)
+#+end_src
+
+#+RESULTS:
+
+
+
+#+begin_src jupyter-python
+# display(ic)
+
+# load gemeentegrenzen
+import cbsodata
+import geopandas as gpd
+# Haal de kaart met gemeentegrenzen op van PDOK
+geodata_url = 'https://geodata.nationaalgeoregister.nl/cbsgebiedsindelingen/wfs?request=GetFeature&service=WFS&version=2.0.0&typeName=cbs_gemeente_2021_gegeneraliseerd&outputFormat=json'
+
+gj = requests.get(geodata_url).json()
+gemeentegrenzen = gpd.read_file(geodata_url)
+print(gemeentegrenzen.head())
+gemeentegrenzen["geometry"] = gemeentegrenzen.geometry.to_crs("EPSG:4326")
+import json
+gj = json.loads(gemeentegrenzen.to_json())
+gz = gpd.GeoDataFrame(gj)
+#+end_src
+
+#+RESULTS:
+#+begin_example
+                                    id statcode     statnaam  jrstatcode  \
+0  cbs_gemeente_2021_gegeneraliseerd.1   GM0014    Groningen  2021GM0014
+1  cbs_gemeente_2021_gegeneraliseerd.2   GM0034       Almere  2021GM0034
+2  cbs_gemeente_2021_gegeneraliseerd.3   GM0037  Stadskanaal  2021GM0037
+3  cbs_gemeente_2021_gegeneraliseerd.4   GM0047      Veendam  2021GM0047
+4  cbs_gemeente_2021_gegeneraliseerd.5   GM0050     Zeewolde  2021GM0050
+
+    rubriek                                           geometry
+0  gemeente  MULTIPOLYGON (((245194.691 592594.007, 245344....
+1  gemeente  MULTIPOLYGON (((146891.056 493291.709, 147422....
+2  gemeente  MULTIPOLYGON (((263763.866 566430.392, 263988....
+3  gemeente  MULTIPOLYGON (((256231.909 572319.213, 258595....
+4  gemeente  MULTIPOLYGON (((170596.293 486786.456, 170560....
+#+end_example
+
+#+begin_src jupyter-python
+gemeentegrenzen.geometry.head()
+#+end_src
+
+#+RESULTS:
+: 0    MULTIPOLYGON (((245194.69060 592594.00720, 245...
+: 1    MULTIPOLYGON (((146891.05600 493291.70900, 147...
+: 2    MULTIPOLYGON (((263763.86600 566430.39200, 263...
+: 3    MULTIPOLYGON (((256231.90870 572319.21340, 258...
+: 4    MULTIPOLYGON (((170596.29300 486786.45640, 170...
+: Name: geometry, dtype: geometry
+
+
+#+begin_src jupyter-python
+from shapely.geometry import Point
+# print(gz.head())
+# print(gemeentegrenzen.head())
+print(gj.keys())
+gemeentegrenzen.columns
+# for k in gj["features"]:
+    # print(k)
+    # break
+gf = gemeentegrenzen.to_crs(epsg = 4326).geometry
+#+end_src
+
+#+RESULTS:
+: dict_keys(['type', 'features'])
+
+
+
+
+#+begin_src jupyter-python
+df = pd.merge(df, gemeentegrenzen,
+                right_on = "statcode",
+                left_on = "Municipality_code")
+df = gpd.GeoDataFrame(df)
+
+print(df.columns)
+print(df.shape)
+# print(df.dtypes)
+
+labs = "id Date_of_publication Deceased Total_reported geometry statnaam Municipality_name".split()
+tmp = df.loc[:, labs]
+print(tmp.shape)
+#+end_src
+#+RESULTS:
+
+#+begin_src jupyter-python
+df = df.astype(conversion);
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+#+begin_example
+---------------------------------------------------------------------------
+KeyError                                  Traceback (most recent call last)
+Input In [6], in <module>
+----> 1 df = df.astype(conversion)
+
+File ~/miniconda3/lib/python3.9/site-packages/geopandas/geodataframe.py:1708, in GeoDataFrame.astype(self, dtype, copy, errors, **kwargs)
+   1695 def astype(self, dtype, copy=True, errors="raise", **kwargs):
+   1696     """
+   1697     Cast a pandas object to a specified dtype ``dtype``.
+   1698
+   (...)
+   1706     GeoDataFrame or DataFrame
+   1707     """
+-> 1708     df = super().astype(dtype, copy=copy, errors=errors, **kwargs)
+   1710     try:
+   1711         geoms = df[self._geometry_column_name]
+
+File ~/miniconda3/lib/python3.9/site-packages/pandas/core/generic.py:5887, in NDFrame.astype(self, dtype, copy, errors)
+   5885 for col_name in dtype.keys():
+   5886     if col_name not in self:
+-> 5887         raise KeyError(
+   5888             "Only a column name can be used for the "
+   5889             "key in a dtype mappings argument. "
+   5890             f"'{col_name}' not found in columns."
+   5891         )
+   5893 # GH#44417 cast to Series so we can use .iat below, which will be
+   5894 #  robust in case we
+   5895 from pandas import Series
+
+KeyError: "Only a column name can be used for the key in a dtype mappings argument. 'Hospital_admission' not found in columns."
+#+end_example
+:END:
+
+
+
+#+begin_src jupyter-python
+conversion = dict(Total_reported = int,
+                  Deceased = int,
+                 Date_of_publication = np.datetime64)
+tmp = tmp.astype(conversion)
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+date = "Date_of_publication"
+l = []
+
+def get_rank(row):
+    tmp = l[l.date == row.date]
+    d = tmp[tmp.total_cumsum <= row.total_cumsum]
+    return np.count_nonzero(d) / tmp.size
+
+for idx, i in tmp.set_index(date).resample("1Y"):
+    for statnaam, j in i.groupby("statnaam"):
+        assert j["Municipality_name"].unique().size == 1, j["Municipality_name"]
+        t = dict(id = j["id"].iloc[0],
+                 deceased = i["Deceased"].mean(),
+                total = j["Total_reported"].mean(),
+                statnaam = statnaam,
+                geometry = j["geometry"].iloc[0],
+                mun      = j["Municipality_name"].iloc[0],
+                date = str(idx),
+                )
+        l.append(t)
+
+l = gpd.GeoDataFrame(l)
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+l.geometry = l.geometry.set_crs(28992)
+l.geometry= l.geometry.to_crs("EPSG:4326")
+#+end_src
+
+#+RESULTS:
+
+
+#+begin_src jupyter-python
+print(l.columns)
+def get_rank(row):
+    tmp = l[l.date == row.date]
+    d = tmp[tmp.total_cumsum <= row.total_cumsum]
+    return np.count_nonzero(d) / tmp.size
+
+
+l["total_cumsum"] = l["total"].cumsum()
+
+l["total_ranked"] = l.apply(get_rank, axis = 1)
+print(l.total_ranked.max())
+#+end_src
+
+#+RESULTS:
+: Index(['id', 'deceased', 'total', 'statnaam', 'geometry', 'mun', 'date'], dtype='object')
+: 1.0
+
+#+begin_src jupyter-python
+fig, ax = plt.subplots()
+ax.plot(l.total_ranked)
+fig.show()
+#+end_src
+
+#+begin_src jupyter-python
+print(type(l))
+print(l.shape)
+print(l.columns)
+#+end_src
+
+#+RESULTS:
+: <class 'geopandas.geodataframe.GeoDataFrame'>
+: (3078, 9)
+: Index(['id', 'deceased', 'total', 'statnaam', 'geometry', 'mun', 'date',
+:        'total_cumsum', 'total_ranked'],
+:       dtype='object')
+
+
+#+begin_src jupyter-python
+data = {}
+for idx, tmpi in l.iterrows():
+    t = {}
+    date = tmpi.date
+    mun  = tmpi.mun
+    if mun != "":
+        tt = {k: str(tmpi[k]) if k not in "Total_reported Deceased".split () else tmpi[k].mean() for k in tmpi.index}
+        t[mun] = tt
+        tmp = data.get(date, {})
+        tmp[mun] = t
+        data[date] = tmp
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+print(tmpi.index)
+#+end_src
+
+#+RESULTS:
+: Index(['id', 'deceased', 'total', 'statnaam', 'geometry', 'mun', 'date',
+:        'total_cumsum', 'total_ranked'],
+:       dtype='object')
+
+
+#+begin_src jupyter-python
+with open("test.json", "w") as f:
+    json.dump(data, f)
+#+end_src
+
+#+RESULTS:
+
+#+begin_src jupyter-python
+for k, v in data.items():
+    for kk, vv in v.items():
+        print(k, kk, vv["total_ranked"])
+        break
+    break
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+: ---------------------------------------------------------------------------
+: KeyError                                  Traceback (most recent call last)
+: Input In [27], in <module>
+:       1 for k, v in data.items():
+:       2     for kk, vv in v.items():
+: ----> 3         print(k, kk, vv["total_ranked"])
+:       4         break
+:       5     break
+:
+: KeyError: 'total_ranked'
+:END:
+
+
+
+#+begin_src jupyter-python
+print(gemeentegrenzen.dtypes)
+# print(gemeentegrenzen.loc[0, "geometry"])
+print(type(gemeentegrenzen))
+#+end_src
+
+#+RESULTS:
+: id              object
+: statcode        object
+: statnaam        object
+: jrstatcode      object
+: rubriek         object
+: geometry      geometry
+: dtype: object
+: <class 'geopandas.geodataframe.GeoDataFrame'>
+
+
+#+begin_src jupyter-python
+gemeentegrenzen.head()
+#+end_src
+
+#+RESULTS:
+#+begin_example
+                                    id statcode     statnaam  jrstatcode  \
+0  cbs_gemeente_2021_gegeneraliseerd.1   GM0014    Groningen  2021GM0014
+1  cbs_gemeente_2021_gegeneraliseerd.2   GM0034       Almere  2021GM0034
+2  cbs_gemeente_2021_gegeneraliseerd.3   GM0037  Stadskanaal  2021GM0037
+3  cbs_gemeente_2021_gegeneraliseerd.4   GM0047      Veendam  2021GM0047
+4  cbs_gemeente_2021_gegeneraliseerd.5   GM0050     Zeewolde  2021GM0050
+
+    rubriek                                           geometry
+0  gemeente  MULTIPOLYGON (((245194.69060 592594.00720, 245...
+1  gemeente  MULTIPOLYGON (((146891.05600 493291.70900, 147...
+2  gemeente  MULTIPOLYGON (((263763.86600 566430.39200, 263...
+3  gemeente  MULTIPOLYGON (((256231.90870 572319.21340, 258...
+4  gemeente  MULTIPOLYGON (((170596.29300 486786.45640, 170...
+#+end_example

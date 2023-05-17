@@ -1,0 +1,1 @@
+document.querySelector("#banner_graph").getContext("2d").fillColor="red";

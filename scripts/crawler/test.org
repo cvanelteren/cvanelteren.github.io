@@ -1,0 +1,42 @@
+#+begin_src jupyter-python
+import proplot as plt, cmasher as cmr, pandas as pd,\
+    numpy as np, os, sys, networkx as nx, warnings
+from plexsim import models
+from imi import infcy
+
+import json
+with open("test.json", 'r') as f:
+    d = json.load(f)
+g = nx.node_link_graph(d)
+#+end_src
+
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+#+begin_example
+---------------------------------------------------------------------------
+AttributeError                            Traceback (most recent call last)
+Input In [2], in <cell line: 9>()
+      7 with open("test.json", 'r') as f:
+      8     d = json.load(f)
+----> 9 g = nx.node_link_graph(d)
+
+File ~/miniconda3/lib/python3.9/site-packages/networkx/readwrite/json_graph/node_link.py:167, in node_link_graph(data, directed, multigraph, attrs)
+    165 c = count()
+    166 for d in data["nodes"]:
+--> 167     node = to_tuple(d.get(name, next(c)))
+    168     nodedata = {str(k): v for k, v in d.items() if k != name}
+    169     graph.add_node(node, **nodedata)
+
+AttributeError: 'str' object has no attribute 'get'
+#+end_example
+:END:
+
+#+begin_src jupyter-python
+print(d.keys())
+d['nodes']
+#+end_src
+
+#+RESULTS:
+: dict_keys(['nodes', 'links', 'directed', 'multigraph'])

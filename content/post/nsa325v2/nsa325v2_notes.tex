@@ -1,0 +1,320 @@
+% Created 2022-02-27 Sun 08:04
+% Intended LaTeX compiler: xelatex
+\documentclass[11pt]{article}
+\usepackage{graphicx}
+\usepackage{longtable}
+\usepackage{wrapfig}
+\usepackage{rotating}
+\usepackage[normalem]{ulem}
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{capt-of}
+\usepackage{hyperref}
+\usepackage[english]{babel}
+\author{Casper van Elteren}
+\date{\today}
+\title{}
+\begin{document}
+
+\tableofcontents
+
+\section{Installing Debian 11 ``Bullseye'' on the NSA325}
+\label{sec:org4127854}
+My old zyxal NSA325 has served me well. I paid sub 150 euros
+for it and allowed me to store my data securely offsite. The
+NSA325v2 released  in 2014 and supports  a 2 bay NAS  with a
+1.2Ghz proccessor. I didn't know  it at the time of writing,
+but  it   turned  out  that  the   NSA325(v2)  offered  nice
+``hackable'' features  with the accessibility of  UART pins on
+the motherboard. I can't call  exactly when I bought the NAS
+but  it has  served me  for  many years.  When the  NSA325v2
+became end of life, I thought about upgrading it to arch arm
+but life happened and I  ended up spending my time somewhere
+else.
+
+The original firmware  allowed for ssh access,  and some app
+support  such as  dropbox, an  internal photo  app. However,
+support  for  other  apps  such  as  a  plex  media  server,
+self-hosted cloud such as owncloud or nextcloud was minor at
+best. The  opensource community, however, were  able to hack
+the device a  little through the fonz plug  which allowed to
+install third  party apps such as  owncloud, sickbeard, plex
+media server  and so on. This  pluging served me well  as my
+needs for the NAS was mainly for storage, and the bare-bones
+interface from Zyxal  was enough to setup  an apache server,
+with sickbeard  pulling my shows  from the web.  Support for
+the fonz plug diminished over  the years as the market share
+for the zyxal NAS became end of life.
+
+Luckily, in the opensource community people have developed a
+way  to   boot  into  another  file   system  all  together,
+completely replacing the original  firmware and file system.
+This would prevent my old NAS  to become ewaste and allow it
+to start a  second life. The process  involved replacing the
+original  bootloader such  that it  could boot  into another
+linux distribution. This  is not for the faint  of heart and
+requires some ``low-level'' access  to ensure the process goes
+correctly  in case  stuff  goes wrong  (and  it most  likely
+will). I looked into this process many years ago, and nearly
+ended up bricking my device. As the disk space slowed filled
+on my trusty NAS, I decided this year to upgrade my storage,
+and in the process upgrade the software to the modern age.
+
+The  process  involved  (1) replacing  the  bootloader,  (2)
+installing a new OS (Debian). Initially, I wanted to install
+arch arm.  But unfortunately, support for  the kirkwood cpus
+was dropped February 2022 due  to lack of NEO floating point
+operations on  these devices.  Luckily, Debian 11  was still
+supported. I  hope that this  support will cary  through for
+another few years  before eventually, I need  to upgrade the
+NAS completely. That point hasn't  reached yet, so let's get
+started. This post  is mostly for me to  organize my thought
+on the  process and  is not necessarily  a tutorial.  I will
+provide resources that I  used. Debugging took several hours
+in order for me to boot  into Debian and in the end required
+UART access to solve completely.
+
+\section{What is uboot?}
+\label{sec:orgc5766ea}
+Uboot  is  a  bootloader  popular  in  embedded  systems.  A
+bootloader is software  that sets up the device  on boot. On
+boot  the device  gets  information from  the  BIOS on  what
+hardware  is available.  The  bootloader is  then called  to
+start launching the  file system. Uboot operates  as a ferry
+man ensuring  that the correct drive  is read and the  os is
+loaded.
+
+NSA325v2 is  part of the  ARM5 family which is  getting more
+and more obsolete. Luckily, running contemporary software is
+made   possible   by   a   person  named   Bohdi   over   on
+\url{https://forum.doozan.com/index.php}   who    provides   uboot
+firmware and corresponding releases for debian.
+
+\section{Upgrading uboot}
+\label{sec:org1b6d336}
+The instructions are a little involved and for me went wrong
+initially. Having access to a  serial monitor (see below) is
+essential if one aims to follow in my footsteps. The install
+procedure  may require  replacing original  firmware on  the
+NAND flash,  which effectively  upgrades (and  removes) the
+original firmware. The process is well described but not for
+the faint of heart, the relevant links are:
+
+\begin{itemize}
+\item \href{https://forum.doozan.com/read.php?2,12096}{Linux kernel and debian rootfs}
+\item \href{https://forum.doozan.com/read.php?3,12381}{Uboot install
+instructions}
+\end{itemize}
+
+At  the time  of writing  the  latest version  of uboot  was
+released in 2017 which allows to boot from different devices
+including USB sticks.  For the NSA325(v2) the  front USB3 is
+disabled at boot, but the back  USB allows to store the file
+system on a pen drive, maximizing the storage on the drives.
+
+For  me the  procedure went  wrong, and  my NSA325  was left
+blinking  with a  yellow  indicator light.  This means  that
+uboot was  not able to  boot, and the  device was left  in a
+confused state. I had to obtain  UART access to see what was
+going on.
+
+\section{Obtaining UART access}
+\label{sec:org2ba666d}
+A  particular  welcoming  feature   on  the  NSA325  is  the
+availability of  UART pins  on the motherboard.  Opening the
+case  up was  a  bit tricky.  There are  two  screws on  the
+bottom, after which the shell ``slides'' to the front, showing
+access to  the metal casing  with 4 more  additional screws.
+After  this,  the motherboard  can  be  freed (and  the  fan
+replaced if needed).  I hooked up an FTDI  programmer on the
+pins (see figure). We find  two rows, where the ``longer'' row
+has access to  3.3V, TX, RX, (empty),  Ground. After hooking
+up the FTDI controller, it shows logs on the boot process.
+
+\begin{verbatim}
+           +----+----+
+           |    |    |
+ +----+----+----+----+----+
+ |3.3V| TX | RX |    | GND|
+ +----+----+----+    +----+
+\end{verbatim}
+
+I hooked up  TX and RX with a FTDI  programmer ensuring that
+the pins between 5V and ground were set on the programmer.
+
+\section{Debugging}
+\label{sec:orga127f21}
+After obtaining  UART access,  I was  able to  determine the
+cause of the error. My filesystem was corrupt, and the `dts`
+file was  not pointing  to the  correct file.  Flashing file
+systems on storage has always been a bit strange to me. Most
+of the time,  things go as planned.  However, sometimes, the
+storage device does not want  to cooperate and your drive is
+unreadable even  after reformatting it. Using  gparted I was
+able  to  create and  EXT3  partition  labeled rootfs  (per
+instruction), and uboot was able to boot in to debian 11.
+\section{Installing openmediavault}
+\label{sec:org0a5ea09}
+After  replacing   thet  stock  OS,  the   accompanying  web
+interface also had to be removed. The stock interface showed
+some  information about  the  device with  toggles for  File
+Transfer Protocol (FPT), Secure  Shell (SSH), IP address and
+so on.
+
+\href{./figures/nsa325old.jpg}{NSA admin image}
+
+There are  different linux based opensource  NAS tools, e.g.
+FreeNAS, openWRT, openmediavault (OMV), BSDN just to name a few. I
+opted to  install OMV which provides  disk images
+but more  importantly is  installable on  Debian. Installing
+OMV   was  not   straight   forward.  I   started
+installing  OMV  through  the  instructions  listed  on  the
+website. They provide some shell commands that would add OMV
+repo and keyrings to  the Debian package manager (aptitude),
+download the  necessary files  and setup OMV.  After running
+the commands I was unfortunately greeted with
+
+\begin{verbatim}
+armel is not supported
+\end{verbatim}
+
+The  kirkwood  CPUs  are  ancient.  The  NSA325v2  I  bought
+originates from around 2012 (or  abouts) which makes it nearly
+10 years old(!). The main problem was that some dependencies
+needed  to be  recompiled for  ARM5. From  what I  gathered,
+there  are some  PHP related  files  that are  not any  more
+supported for  the ARM5 architecture. Luckily,  there was an
+obscure reference  to a repository which  supposedly had the
+files  needed to  get PHP  up  and running.  The address  is
+\url{https://repozytorium.mati75.eu}. After adding the repo with
+
+\begin{minted}[frame=lines,linenos=true]{bash}
+echo "deb http://repozytorium.mati75.eu/debian (lsb -r) main contrib non-free" | tee /etc/aptitude/sources.list.d/mati75.list
+apt update
+
+cat <<EOF >> /etc/apt/sources.list.d/openmediavault.list
+deb http://packages.openmediavault.org/public shaitan main
+# deb http://downloads.sourceforge.net/project/openmediavault/packages shaitan main
+## Uncomment the following line to add software from the proposed repository.
+# deb http://packages.openmediavault.org/public shaitan-proposed main
+# deb http://downloads.sourceforge.net/project/openmediavault/packages shaitan-proposed main
+## This software is not part of OpenMediaVault, but is offered by third-party
+## developers as a service to OpenMediaVault users.
+# deb http://packages.openmediavault.org/public shaitan partner
+# deb http://downloads.sourceforge.net/project/openmediavault/packages shaitan partner
+EOF
+
+export LANG=C.UTF-8
+export DEBIAN_FRONTEND=noninteractive
+export APT_LISTCHANGES_FRONTEND=none
+apt-get install --yes gnupg
+wget -O "/etc/apt/trusted.gpg.d/openmediavault-archive-keyring.asc" https://packages.openmediavault.org/public/archive.key
+apt-key add "/etc/apt/trusted.gpg.d/openmediavault-archive-keyring.asc"
+apt-get update
+apt-get --yes --auto-remove --show-upgraded \
+    --allow-downgrades --allow-change-held-packages \
+    --no-install-recommends \
+    --option DPkg::Options::="--force-confdef" \
+    --option DPkg::Options::="--force-confold" \
+    install openmediavault-keyring openmediavault
+
+# Populate the database.
+omv-confdbadm populate
+
+# Display the login information.
+cat /etc/issue
+\end{minted}
+
+OMV  installed,  and  was   running.  This  is  great  news!
+Confirming  that   the  related  services  were   running  I
+installed `systemd` and checked
+
+\begin{minted}[frame=lines,linenos=true]{bash}
+root@debian:~# systemctl status openmediavault-engined
+*openmediavault-engined.service - The OpenMediaVault engine daemon that processes the RPC request
+     Loaded: loaded (/lib/systemd/system/openmediavault-engined.service; enabled; vendor preset: enabled)
+     Active: active (running) since Sun 2022-02-27 07:28:22 CET; 21min ago
+    Process: 593 ExecStart=/usr/sbin/omv-engined (code=exited, status=0/SUCCESS)
+   Main PID: 627 (omv-engined)
+        CPU: 3min 26.833s
+     CGroup: /system.slice/openmediavault-engined.service
+             `-627 omv-engined
+\end{minted}
+
+This meant that  OMV was running at  the ipaddress listening
+on port 80. Navigating to the  web page I was greeted with a
+404  error. More  fixing was  ahead.
+
+After browsing  autocomplete with  `omv[tab]` I  noticed omv
+provides a script called `omv-firstaid`. Hitting enter I was
+greeted   with  an   interface  allowing   me  to   fix  the
+web-interface, how convenient! Thinking  the end was in sight
+I quickly ran the command and confirmed the port was 80.
+
+\href{./figures/omv-firstaid.png}{omv-firstaid screen}
+
+The output greeted me with
+
+\begin{minted}[frame=lines,linenos=true]{shell}
+Updating web control panel settings. Please wait ...
+{'response': None, 'error': {'code': 0, 'message': "Failed to execute command 'export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin; export LANG=C.UTF-8; omv-salt deploy run --no-color monit 2>&1' with exit code '1': debian:\n    Data failed to compile:\n----------\n    Rendering SLS 'base:omv.deploy.monit.default' failed: Jinja variable 'salt.utils.templates.AliasedLoader object' has no attribute 'omv_conf.get'", 'trace': "OMV\\ExecException: Failed to execute command 'export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin; export LANG=C.UTF-8; omv-salt deploy run --no-color monit 2>&1' with exit code '1': debian:\n    Data failed to compile:\n----------\n    Rendering SLS 'base:omv.deploy.monit.default' failed: Jinja variable 'salt.utils.templates.AliasedLoader object' has no attribute 'omv_conf.get' in /usr/share/php/openmediavault/system/process.inc:196\nStack trace:\n#0 /usr/share/php/openmediavault/engine/module/serviceabstract.inc(62): OMV\\System\\Process->execute()\n#1 /usr/share/openmediavault/engined/rpc/config.inc(167): OMV\\Engine\\Module\\ServiceAbstract->deploy()\n#2 [internal function]: Engined\\Rpc\\Config->applyChanges(Array, Array)\n#3 /usr/share/php/openmediavault/rpc/serviceabstract.inc(123): call_user_func_array(Array, Array)\n#4 /usr/share/php/openmediavault/rpc/rpc.inc(86): OMV\\Rpc\\ServiceAbstract->callMethod('applyChanges', Array, Array)\n#5 /usr/sbin/omv-engined(537): OMV\\Rpc\\Rpc::call('Config', 'applyChanges', Array, Array, 1)\n#6 {main}", 'http_status_code': 500}}
+ERROR: Failed to execute command 'export PATH=/bin:/sbin:/usr/bin:/usr/sbin:/usr/local/bin:/usr/local/sbin; export LANG=C.UTF-8; omv-salt deploy run --no-color monit 2>&1' with exit code '1': debian:
+Data failed to compile:
+----------
+Rendering SLS 'base:omv.deploy.monit.default' failed: Jinja variable 'salt.utils.templates.AliasedLoader object' has no attribute 'omv_conf.get'
+\end{minted}
+
+Not knowing  exactly what  I was looking,  I decided  it was
+time to contact the good people  at omv forums. In the end I
+am not sure  exactly what fixed the omv  installation. I can
+only recount the coarse steps I took.
+
+\begin{itemize}
+\item Purged and removed apache2 [didn't work]. This was because
+at first I aimed to run nextCloud. However, this interface
+didn't offer me  what I wanted. Omv used `nginx`  as a web
+server so I believe it interfered with the package.
+\item Purged and reinstalled omv [didn't work]
+\item Manually  installed  `salt-common` and  `salt-api`.  After
+this point  the error went  away above. The  web interface
+was available (yay!), but it wouldn't allow me to sign in.
+That is,  after signing  in with  the default  password, I
+could  see  with `journalctl  -f`  that  the password  was
+correct, yet in the browser I was booted back to the login
+screen. The output read
+\begin{minted}[frame=lines,linenos=true]{bash}
+   Feb 26 20:45:18 debian openmediavault-webgui[8507]: Authorized login from 192.168.1.245 [username=admin, user-agent=Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/98.0.4758.102 Safari/537.36]
+    Feb 26 20:45:21 debian postfix/postdrop[637]: warning: mail_queue_enter: create file maildrop/146156.637: Permission denied
+\end{minted}
+\item As an  aside I would  also like to mention  that `postfix`
+had  similar permissions  errors. I  ended up  fixing this
+similar to the PHP  issue; setting the correct permissions
+o particular  folders for  the mail\textsubscript{queue}. After  a reboot
+these errors went away. But  I still couldn't login to the
+web-interface.
+\item I  think what  finally fixed  it was  the PHP  session not
+having    the    proper     write    permissions.    Under
+`/var/lib/php/sesssions` there  were files created  by the
+user openmediavault. Changing the ownership of that folder
+to  the   proper  settings   granted  me  access   to  the
+webinterface. SUCCESS!
+\end{itemize}
+
+After  this,  I was  greeted  with  a new  shiny  up-to-date
+interface for 2022.
+
+\href{./figures/omv-greeting.png}{Great success}
+
+
+
+
+
+\section{Summary}
+\label{sec:org13ad662}
+\begin{itemize}
+\item Read the instructions completely
+\item Be careful when flashing stuff to NAND
+\item Check  with  `e2label`  whether   the  drive  is  labeled
+correctly by `gparted`
+\end{itemize}
+\end{document}

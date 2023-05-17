@@ -1,0 +1,130 @@
+<style>
+* {
+  box-sizing: border-box;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  padding: 0 4px;
+  align-items: top;
+}
+
+.columns {
+  flex: 50%;
+  width: 20%;
+  padding 0 20px;
+  flex-flow: row wrap;
+  justify-content: flex-start;
+}
+
+.column img video {
+  margin-top: 12px;
+  vertical-align: middle;
+  border-radius: 2%;
+}
+
+.col-1 {width: 8.33%;}
+.col-2 {width: 16.66%;}
+.col-3 {width: 25%;}
+.col-4 {width: 33.33%;}
+.col-5 {width: 41.66%;}
+.col-6 {width: 50%;}
+.col-7 {width: 58.33%;}
+.col-8 {width: 66.66%;}
+.col-9 {width: 75%;}
+.col-10 {width: 83.33%;}
+.col-11 {width: 91.66%;}
+.col-12 {width: 100%;}
+
+
+.responsive {
+  max-width: 50%;
+  height: auto;
+  }
+</style>
+
+<script src="https://d3js.org/d3.v7.min.js"></script>
+<script type="module" src="./scripts/logo/bundle.js"></script>
+
+{{/* Wowchemy Blocks: About */}}
+{{/* Documentation: https://wowchemy.com/blocks/ */}}
+{{/* License: https://github.com/wowchemy/wowchemy-hugo-themes/blob/main/LICENSE.md */}}
+
+{{/* Initialise */}}
+{{ $page := .wcPage }}
+{{ $block := .wcBlock }}
+
+{{ $author := "" }}
+{{ if .author }}
+  {{ $author = .author }}
+{{ else }}
+  {{ $author = $block.Params.author }}
+{{end}}
+
+{{ $person_page_path := (printf "/authors/%s" $author) }}
+{{ $person_page := site.GetPage $person_page_path }}
+{{ if not $person_page }}
+  {{ errorf "Could not find an author page at `%s`. Please check the value of `author` in your About widget and create an associated author page if one does not already exist. See https://wowchemy.com/docs/page-builder/#about " $person_page_path }}
+{{end}}
+{{ $person := $person_page.Params }}
+{{ $avatar := ($person_page.Resources.ByType "image").GetMatch "*avatar*" }}
+{{ $avatar_shape := site.Params.features.avatar.shape | default "circle" }}
+
+<!-- About widget -->
+<div class = "about-widget">
+<div class="row">
+  <div class = "col-12 col-lg-4" id = "profile">
+      {{ if site.Params.features.avatar.gravatar }}
+      <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}" src="https://s.gravatar.com/avatar/{{ md5 $person.email }}?s=270')" alt="{{$person_page.Title}}">
+      {{ else if $avatar }}
+      {{ $avatar_image := $avatar.Fill "270x270 Center" }}
+      <img class="avatar {{if eq $avatar_shape "square"}}avatar-square{{else}}avatar-circle{{end}}"
+           width="{{ $avatar_image.Width }}" height="{{ $avatar_image.Height }}"
+           src="{{ $avatar_image.RelPermalink }}" alt="{{$person_page.Title}}">
+      {{ end }}
+      </div>
+
+      <div class="portrait-title col-lg-8 card-about-outer">
+       <h1 class = "about-name"> Casper van Elteren </h1>
+        <h2>
+          {{- if $person.name_pronunciation -}}
+            <ruby>
+              <!-- <rb>{{ $person_page.Title }}</rb> -->
+              <rt>{{ $person.name_pronunciation }}</rt>
+            </ruby>
+          {{- else -}}
+            <!-- {{- $person_page.Title -}} -->
+          {{- end -}}
+        </h2>
+
+        <div class = "card-about" style="padding:0.5rem;padding-bottom:0.25rem;">
+          <p> Hi there, welcome to my website. I like to write and share about data visualization, statistics, computational modelling, and programming. My latest work can be found below. <a href = "/about"> More about me <i class="fas fa-long-arrow-alt-right"></i> </a></p>
+      <ul class="network-icon" aria-hidden="true">
+        {{ range $person.social }}
+        {{ $pack := or .icon_pack "fas" }}
+        {{ $pack_prefix := $pack }}
+        {{ if in (slice "fab" "fas" "far" "fal") $pack }}
+          {{ $pack_prefix = "fa" }}
+        {{ end }}
+        {{ $link := .link }}
+        {{ $scheme := (urls.Parse $link).Scheme }}
+        {{ $target := "" }}
+        {{ if not $scheme }}
+          {{ $link = .link | relLangURL }}
+        {{ else if in (slice "http" "https") $scheme }}
+          {{ $target = "target=\"_blank\" rel=\"noopener\"" }}
+        {{ end }}
+        <li>
+          <a href="{{ $link | safeURL }}" {{ $target | safeHTMLAttr }} aria-label="{{ .icon }}">
+            <i class="{{ $pack }} {{ $pack_prefix }}-{{ .icon }} big-icon"></i>
+          </a>
+        </li>
+        {{ end }}
+      </ul>
+    </div>
+
+    <video playsinline="" muted="" autoplay="" id= "main_logo_video" src="/files/logo_t.webm">Browser not supported (damn it Safari!)</video>
+    </div>
+  </div>
+</div>
