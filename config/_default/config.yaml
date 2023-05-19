@@ -4,7 +4,7 @@
 # This file is formatted using YAML syntax - learn more at https://learnxinyminutes.com/docs/yaml/
 
 title: Casper van Elteren # Website name
-baseURL: 'cvanelteren.github.io' # Website URL
+baseURL: 'https://cvanelteren.github.io' # Website URL
 
 ############################
 ## LANGUAGE
