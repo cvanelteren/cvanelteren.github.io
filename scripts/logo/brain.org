@@ -1,0 +1,92 @@
+
+#+begin_src jupyter-python
+
+import numpy as np, matplotlib.pyplot as plt, os
+import networkx as nx
+
+from sklearn.neighbors import NearestNeighbors as NN
+from PIL import Image
+from skimage.color import rgb2gray
+from random import choice
+
+fp = os.path.expanduser("~/Phd/outline_brain.png")
+image = rgb2gray(np.asarray(Image.open(fp))[..., :3])
+image[image == 1] = 0
+x, y = np.where(image > 0)
+xy = np.array(np.stack((x, y)).T[::35], dtype = float)
+xy += np.random.randn(*xy.shape) * (xy.max() - xy.min()) * 1e-2
+n = len(xy)
+g = nx.erdos_renyi_graph(n, .2)
+
+knn = NN(n_neighbors = 8, algorithm = "ball_tree").fit(xy)
+distances, idx = knn.kneighbors(xy)
+
+el = ((int(i), int(ji)) for i, j in enumerate(idx) for ji in j)
+g = nx.from_edgelist(el)
+g.remove_edges_from(nx.selfloop_edges(g))
+pos = {node: p[::-1]  for node, p in enumerate(xy)}
+pos = nx.rescale_layout_dict(pos, 1)
+for node, p in pos.items():
+    # p[1] *= -1
+    pos[node] = list(p)
+
+import json
+nx.set_node_attributes(g, {node: pos[0] for node, pos in pos.items()}, "x")
+nx.set_node_attributes(g, {node: pos[1] for node, pos in pos.items()}, "y")
+
+nx.set_node_attributes(g, {node: pos[0] for node, pos in pos.items()}, "tx")
+nx.set_node_attributes(g, {node: pos[1] for node, pos in pos.items()}, "ty")
+
+nx.set_node_attributes(g, {node: 0 for node in pos}, "vx")
+nx.set_node_attributes(g, {node: 0 for node in pos}, "vy")
+
+
+node_link = nx.node_link_data(g)
+with open ("./src/brain_graph.json", "w") as f:
+    json.dump(node_link, f)
+
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+# [goto error]
+#+begin_example
+---------------------------------------------------------------------------
+FileNotFoundError                         Traceback (most recent call last)
+Cell In[45], line 42
+     38 nx.set_node_attributes(g, {node: 0 for node in pos}, "vy")
+     41 node_link = nx.node_link_data(g)
+---> 42 with open ("./src/brain_graph.json", "w") as f:
+     43     json.dump(node_link, f)
+
+File ~/mambaforge/lib/python3.10/site-packages/IPython/core/interactiveshell.py:284, in _modified_open(file, *args, **kwargs)
+    277 if file in {0, 1, 2}:
+    278     raise ValueError(
+    279         f"IPython won't let you open fd={file} by default "
+    280         "as it is likely to crash IPython. If you know what you are doing, "
+    281         "you can use builtins' open."
+    282     )
+--> 284 return io_open(file, *args, **kwargs)
+
+FileNotFoundError: [Errno 2] No such file or directory: './src/brain_graph.json'
+#+end_example
+:END:
+
+
+
+
+#+begin_src jupyter-python
+
+fig, ax = plt.subplots()
+nx.draw_networkx_nodes(g, pos = pos, node_size = 10)
+nx.draw_networkx_edges(g, pos, alpha = 0.2)
+fig.show()
+
+#+end_src
+
+#+RESULTS:
+:RESULTS:
+: /tmp/ipykernel_7324/3529888932.py:4: UserWarning: Matplotlib is currently using module://matplotlib_inline.backend_inline, which is a non-GUI backend, so cannot show the figure.
+:   fig.show()
+[[file:./.ob-jupyter/b91ba81869109433c8e9b87bdf50f6d0bf687ad3.png]]
+:END:

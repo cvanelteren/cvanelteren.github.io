@@ -1,4 +1,3 @@
-
 $text-main: #efebda ;
 $title-highlight: #e9c46a;
 $title-muted: #ADC3D1;
@@ -35,6 +34,12 @@ ul.ul-edu li .description p.institution {
 .featurette h3{
     color: $title-muted;
 }
+
+.featurette .section-subheading{
+    color: $title-muted !important;
+}
+
+
 
 ul {
     text-align: left;
@@ -117,9 +122,8 @@ a{
 // color: #e76f51 !important;
 }
 
-.experience .card-text p{
- // color: #efebda !important;
-color: #f1edee !important;
+.experience .card-text, .experience .card-text p {
+    color: $text-main !important;
 }
 
 // controls education text
@@ -146,6 +150,7 @@ pre, code {
 .page-subtitle {
     color: $title-muted !important;
 }
+
 
 
 table {
@@ -182,4 +187,30 @@ aside > p {
 
 p {
     font-family: 'Fira Sans', sans-serif;
+}
+
+button {
+    border-radius: 10px;
+    color: $text-main !important;
+    background-color: $muted-green;
+    border-color: transparent;
+    padding: 5px;
+    opacity: 0;
+    animation: fadeIn 1s;
+    animation-delay: 1s;
+    animation-fill-mode: forwards;
+    transition: fadeIn;
+}
+.fadeable {
+    opacity: 0;
+    transition: opacity 1s;
+}
+
+.fade {
+    opacity: 1 !important;
+}
+
+@keyframes fadeIn {
+    from {opacity: 0;}
+    to {opacity: 1;}
 }
