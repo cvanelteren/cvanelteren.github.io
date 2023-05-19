@@ -1,0 +1,124 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Wowchemy | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/category/wowchemy/</link>
+      <atom:link href="https://cvanelteren.github.io/category/wowchemy/index.xml" rel="self" type="application/rss+xml" />
+    <description>Wowchemy</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Fri, 19 May 2023 16:34:44 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>Wowchemy</title>
+      <link>https://cvanelteren.github.io/category/wowchemy/</link>
+    </image>
+    
+    <item>
+      <title>Customizing Wowchemy</title>
+      <link>https://cvanelteren.github.io/post/customizing-wowchemy/</link>
+      <pubDate>Fri, 19 May 2023 16:34:44 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/customizing-wowchemy/</guid>
+      <description>&lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org488dae5&#34;&gt;Site 2.0&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org822527b&#34;&gt;Goals&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org58bd05a&#34;&gt;Customizing a block&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orga0b7b60&#34;&gt;Concluding statements&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Having a web-pressence is excellent for you to create a portfolio, for people to
+get in contact with your, or share some randoms thoughts on your favorite topic.
+Years ago I was on the journey to create a webpage, but was quickly sucked into
+the endless possibilities of web design. Should I go for Vue.js, REACT, or maybe
+a different web programming language such as svelte or supersets of javascript
+such as typescipt. Possibilities are endless, but for those starting out it is a
+daunting undertaking.&lt;/p&gt;
+&lt;p&gt;Enter website generators that take away the initial pain of designing layouts
+for websites. These generators provide a batteries included approach to the web,
+offering you a landing page with some optional widgets that gets you started on
+creating a personalized corner of the web. I too started out in this manner.
+Years ago, I wanted a web page that would help reflect my academic endeavors.
+The portfolio would need to consist of talks, links to slides and or papers.
+Hugo academic  was the generator I used for web design. For
+years Hugo academic work perfectly well. However, as time passed my page began
+to feel stale and I wanted to display something more exciting on my page.
+Websites become more capable of running full fledged apps and more and more
+standalone software was pushed to have a web component. I felt like I was left
+behind. You see, using a generator kicks off the process of getting a website.
+However, it did not gave me insights in &lt;em&gt;how&lt;/em&gt; the website was generated. I still
+felt like I was stuck at square one. As such I slowly began to interface with
+the code that was generated. I started first with customization and later on
+created a site navigator with networks in javascript. I was starting to web
+design!&lt;/p&gt;
+&lt;p&gt;All things changed, however, when Hugo Academic was re-branded to Wowchemy. The
+change in name was reflected with a change in design. Every now and again when I
+wanted to write a new post, my website would be faced with upgrading issues.
+Especially since my code base originated from Hugo Academic. My need for
+customization grew and grew, but my frustration with the process of wowchemy did
+too. I am currently faced with a dilemma; I either decide to leave the framework
+behind, and create something from scratch &lt;em&gt;or&lt;/em&gt; I figure out how to effectively
+interface with wowchemy such that I can work with it more pleasently.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org488dae5&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;site-20&#34;&gt;Site 2.0&lt;/h1&gt;
+&lt;p&gt;Enter site 2.0; on the surface I does not look any different from my old website
+except some rounded corners here and there. Under the hood, however, I am able
+to more deeply change the feel of the webpages.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org822527b&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;p&gt;First, I wanted to change the look and feel of some widgets on the web page.
+Wowchemy calls these nowadays “blocks”. The process of changing these pages is a
+bit ill-documented so I am here to outline what my current understanding is of
+how wowchemy blocks can be modified to your hearts desire. I started out by just
+plain googling and found a post by A.J. Campell which was greatly helpful and I
+copied his landing design (&lt;a href=&#34;https://www.adam-campbell.com/post/wowchemy-customisations/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;). But let’s first decide
+on some goals.&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;I want to understand &lt;em&gt;how&lt;/em&gt; I can modify the look and feel of my website&lt;/li&gt;
+&lt;li&gt;I want to be able to control and extend the look and feel of my website&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Note 2 is implied by 1 but is not necessary a consequence of 1.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org58bd05a&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;customizing-a-block&#34;&gt;Customizing a block&lt;/h1&gt;
+&lt;p&gt;A web page consists of different elements that can be blocked by `divs`.
+Wowchemy organizes a webpage with widgets called blocks. The blocks are
+pre-defined views of content such as a portfolio, landing page, how posts are
+viewed (you get the drift). To customize a block we need to create a new
+directory from the root folder of our site as&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;mkdir -p layouts/partials/blocks/v1
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;I don’t know why they called it v1, but it implies that they are going to change
+this in the future again (and I will probably write a post about it again). Now
+the reasoning is as follows, when you build your site, wowchemy pulls default
+templates from repos and puts them in the public folder which constitutes your
+website. If a local path if present, the local edit will take precedence over
+the default template. You will override the template. In past iterations of
+wowchemy this process was under `./layouts/partials/widgets/`, and the structure
+of the go code inside these folders was also different. At the time over writing
+for version v5.7, the blocks structure is what should be aimed for. One can take
+the
+&lt;a href=&#34;https://github.com/wowchemy/wowchemy-hugo-themes/tree/main/modules/wowchemy/layouts/partials/blocks&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;default
+templates&lt;/a&gt;, and edit the html files to change the look and feel of the
+website, and one can also create new blocks to extend your website: mission accomplished.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orga0b7b60&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;concluding-statements&#34;&gt;Concluding statements&lt;/h1&gt;
+&lt;p&gt;This is a pretty short post with a seemingly simple statement. However, from the
+user perspective it was a little tricky figuring this out. My website was
+working before with edits using and older version of wowchemy. Every X updates
+it seems like the updates break things that need not have fixing. It would be
+nice if their documentation is edited to walk somebody through building as
+simple block from scratch. I am not too familiar with the go environment and
+therefore reading statements such as `{{ .page.Params.Author }}` intermixed with
+traditional HTML was a bit confusing in how these magic lines were interfacing
+with the website (a veteran in GO is probably laughing hysterically right now).
+This post is more written for future me;&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;In the future take your time to read your error statements&lt;/li&gt;
+&lt;li&gt;Take care of the low hanging fruit first, before tackling the more difficult problem&lt;/li&gt;
+&lt;li&gt;Always use simple test files to test hypotheses why something is not working.&lt;/li&gt;
+&lt;/ul&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

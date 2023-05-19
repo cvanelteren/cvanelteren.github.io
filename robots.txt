@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://cvanelteren.github.io/sitemap.xml

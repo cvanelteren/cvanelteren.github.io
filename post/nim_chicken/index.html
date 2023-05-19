@@ -1,0 +1,1459 @@
+<!DOCTYPE html>
+<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
+<!-- Last Published: May 19, 2023 --><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.c39391f95677ad80cbdeec5f85c81a73.css" />
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Casper van Elteren" />
+
+
+
+
+
+  
+
+<meta name="description" content="In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python." />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/nim_chicken/" />
+<link rel="canonical" href="https://cvanelteren.github.io/post/nim_chicken/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#efebda" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary_large_image" />
+
+  <meta property="twitter:site" content="@wowchemy" />
+  <meta property="twitter:creator" content="@wowchemy" />
+<meta property="twitter:image" content="https://cvanelteren.github.io/post/nim_chicken/featured.png" />
+<meta property="og:site_name" content="Casper van Elteren" />
+<meta property="og:url" content="https://cvanelteren.github.io/post/nim_chicken/" />
+<meta property="og:title" content="Expanding the farm | Casper van Elteren" />
+<meta property="og:description" content="In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python." /><meta property="og:image" content="https://cvanelteren.github.io/post/nim_chicken/featured.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-06-25T19:47:55&#43;02:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2021-06-25T19:47:55&#43;02:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cvanelteren.github.io/post/nim_chicken/"
+  },
+  "headline": "Expanding the farm",
+  
+  "image": [
+    "https://cvanelteren.github.io/post/nim_chicken/featured.png"
+  ],
+  
+  "datePublished": "2021-06-25T19:47:55+02:00",
+  "dateModified": "2021-06-25T19:47:55+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Casper van Elteren"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called nim; and I will show how nim can produce similarly fast chickens that can be called from python."
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Expanding the farm | Casper van Elteren</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="c523e45c1d30f06d447c2daa81779222" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<div class="article-container pt-3">
+  <h1>Expanding the farm</h1>
+
+  
+  <p class="page-subtitle">The creation of the nim chicken</p>
+  
+
+  
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jun 25, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+  
+
+
+
+
+
+</div>
+
+
+<div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 180px; max-height: 136px;">
+  <div style="position: relative">
+    <img src="/post/nim_chicken/featured_hu9c3f4f6a61d5e6255ed9aae63e1c0a04_5404_720x2500_fit_q75_h2_lanczos_3.webp" width="180" height="136" alt="" class="featured-image">
+    
+  </div>
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called <code>nim</code>; and I will show how nim can produce similarly fast chickens that can be called from python.</p>
+<h1 id="what-is-nim">What is Nim?</h1>
+<p>From their website:</p>
+<blockquote>
+<p>Nim is a statically typed compiled systems programming language. It combines succesful concepts from mature languages like Python, Ada and Modula</p>
+</blockquote>
+<p>I am not familiar with the latter two, but I am quite familiar with python and it  can be used to solve one of python&rsquo;s weaknesses: python can be terribly slow for numerical problems.</p>
+<p>Writing nim is similar to other modern languages like rust: it prefers inheritance over composition. However, it does not shy away from using &ldquo;more&rdquo; traditional methods. For example, in nim &ldquo;classes&rdquo; are called types and types can be composed (preferred) but can also inheret from oneanother. Which allows more ancient programmers like me to be able to use my toolset while also exploring composition more.</p>
+<p>Writing nim looks very similar to python. Variables defined with the <code>var</code> keyword, functions are <code>proc</code> (process), printing is performed with <code>echo</code>, classes / structs are <code>types</code> and so on.</p>
+<p>Variables are typed, however the compiler is often very good at inferring the type you are assigning. This effectively means that defining a variable as</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">x</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">x</span><span class="p">:</span> <span class="kt">int</span> <span class="o">=</span> <span class="mi">1</span>
+</span></span></code></pre></div><p>is the same, and <code>var</code> can be seen as implicitly using the <code>auto</code> keyword from cpp. For more details on nim see  their excellent tutorial on the website; let&rsquo;s start making our chicken friend!</p>
+<h1 id="nim-chickens">Nim chickens</h1>
+<p>Classes are called <code>types</code>. As want to bind to python, we make use of the <code>nimpy</code> library from nim. Fellow pythonistas should feel right at home</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c"># import a package as per usual of python</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">nimpy</span>
+</span></span><span class="line"><span class="cl"><span class="c"># types are &#34;classes&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="c"># they are similar to structs</span>
+</span></span><span class="line"><span class="cl"><span class="k">type</span> <span class="n">Chicken</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span> <span class="k">of</span> <span class="n">PyNimObjectExperimental</span>
+</span></span><span class="line"><span class="cl">   <span class="n">name</span><span class="p">:</span> <span class="kt">string</span>
+</span></span></code></pre></div><p>We have  defined our  chicken <code>type</code>,  the ref  object makes
+sure that  our types <em>inherents</em>  from the root  object that
+makes sure our  chicken can be imported from  python. As can
+be  seen  from  the  name, this  features  is  experimental.
+Functions are  readily exportable to python,  but types have
+only recently been added in. Not to worry, it will hopefully
+improve over time.</p>
+<h1 id="nim-implementation">Nim implementation</h1>
+<p>Similar, to our previous chicken Carl, we want our chicken to <em>do</em> something</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c"># on the structs we can define methods</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">set_name</span><span class="p">(</span><span class="n">self</span><span class="p">:</span> <span class="n">Chicken</span><span class="p">,</span> <span class="n">value</span> <span class="p">:</span> <span class="kt">string</span><span class="p">)</span> <span class="p">{.</span><span class="n">exportpy</span><span class="p">.}</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="n">self</span><span class="p">.</span><span class="n">name</span> <span class="o">=</span> <span class="n">value</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">get_name</span><span class="p">(</span><span class="n">self</span><span class="p">:</span> <span class="n">Chicken</span><span class="p">):</span> <span class="kt">string</span>  <span class="p">{.</span><span class="n">exportpy</span><span class="p">.}</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">self</span><span class="p">.</span><span class="n">name</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">peck</span><span class="p">(</span><span class="n">self</span><span class="p">:</span> <span class="n">Chicken</span><span class="p">):</span> <span class="n">void</span> <span class="p">{.</span><span class="n">exportpy</span><span class="p">.}</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">echo</span> <span class="s">&#34;Peck peck!&#34;</span>
+</span></span></code></pre></div><p>There is a lot going on in this piece, so let&rsquo;s step through it. The <code>proc</code> keyword is similar to <code>def</code> in python: it defines our function. Similar to type hinting our return type is given after the <code>:</code>. Nim, similar to other languages like matlab, implictly defines a <code>result</code> variable; return keywords are not necessary and last lines without assignment are automatically put into result. For example</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">some_test</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">float</span><span class="p">):</span> <span class="kt">float</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">result</span> <span class="o">=</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">some_test_other</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">float</span><span class="p">):</span> <span class="kt">float</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="n">x</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">some_test_another</span><span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="kt">float</span><span class="p">):</span> <span class="kt">float</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">    <span class="n">x</span>
+</span></span></code></pre></div><p>are equivalent. The curly brackets indicate compiler directives; <code>{.exportpy.}</code> tells the compiler to make these functions available in our shared object.</p>
+<h1 id="compilation">Compilation</h1>
+<p>All that is left to do is to compile our chicken into a shared object and import it.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">nim cpp -d:release --threads:on --app:lib --out:chicken.so chicken.nim
+</span></span></code></pre></div><p>and, we are done! This is less boilerplate code than the cython approach. Compared to cython, nimpy is less mature. However, nim can readily interact with native c/cpp. It&rsquo;s mainly immature in the type export, but I hope that will improve in the future. It does form a nice alternative to more &ldquo;verbose&rdquo; cpp; it writes quite similar to python. Just to finish of the end, let&rsquo;s run our litle chicken</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="c1">#file: test_nim.py</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="nn">chicken</span> <span class="kn">import</span> <span class="n">Chicken</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">c</span> <span class="o">=</span> <span class="n">Chicken</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl"><span class="n">c</span><span class="o">.</span><span class="n">set_name</span><span class="p">(</span><span class="s2">&#34;Betsy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&#34;My name is </span><span class="si">{</span><span class="n">c</span><span class="o">.</span><span class="n">get_name</span><span class="p">()</span><span class="si">}</span><span class="s2">&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">10</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">c</span><span class="o">.</span><span class="n">peck</span><span class="p">()</span>
+</span></span></code></pre></div><p>generates</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">My name is Betsy
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span></code></pre></div><p>Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.</p>
+<h1 id="the-nim-farm">The nim-farm</h1>
+<p>So far we have been able to bind the nim type to python. Carl and Betsy can life happily ever after there. Nim is, however, also compiled. So we can also inhabit our little farm purely on the cpp side. This will look as follows:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="p">{.</span><span class="n">compile</span><span class="p">:</span> <span class="s">&#34;../cython_classes/chicken.cpp&#34;</span><span class="p">.}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">type</span> <span class="n">CChicken</span><span class="o">*</span> <span class="p">{.</span><span class="n">header</span><span class="p">:</span> <span class="s">&#34;../cython_classes/chicken.hpp&#34;</span><span class="p">,</span> <span class="n">importcpp</span><span class="p">:</span> <span class="s">&#34;Chicken&#34;</span><span class="p">.}</span> <span class="o">=</span> <span class="k">object</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="p">:</span> <span class="n">cstring</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">peck</span><span class="o">*</span><span class="p">(</span><span class="n">this</span><span class="p">:</span> <span class="n">CChicken</span><span class="p">)</span> <span class="p">{.</span><span class="n">header</span><span class="p">:</span> <span class="s">&#34;../cython_classes/chicken.hpp&#34;</span><span class="p">,</span> <span class="n">importcpp</span><span class="p">:</span> <span class="s">&#34;#.peck(@)&#34;</span><span class="p">.}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># var chick = CChicken()</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">cchick</span> <span class="o">=</span> <span class="n">CChicken</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;Carl&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">nchick</span> <span class="o">=</span> <span class="n">Chicken</span><span class="p">(</span><span class="n">name</span><span class="p">:</span> <span class="s">&#34;Betsy&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="s">&#34;We have two chickens now, introducing:&#34;</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="n">nchick</span><span class="p">.</span><span class="n">name</span>
+</span></span><span class="line"><span class="cl"><span class="n">echo</span> <span class="n">cchick</span><span class="p">.</span><span class="n">name</span>
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="mf">1</span><span class="p">..</span><span class="mi">10</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">nchick</span><span class="p">.</span><span class="n">peck</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="n">cchick</span><span class="p">.</span><span class="n">peck</span><span class="p">()</span>
+</span></span></code></pre></div><p>Now Betsy and Carl are the fastest two chickens across languages. Note that it is also possible to output nim to c/cpp, making it possible for Betsy and Carl to life across three worlds, but this is where I end the post for now.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">We have two chickens now, introducing:
+</span></span><span class="line"><span class="cl">Betsy
+</span></span><span class="line"><span class="cl">Carl
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span><span class="line"><span class="cl">Peck peck!
+</span></span></code></pre></div><p>I hope Betsy and Carl get to know each other better! Soon we need to prepare for additional expansions. I&rsquo;m looking at you <code>pybind11</code>.</p>
+<h1 id="outlook">Outlook</h1>
+<p>Nim offers readable syntax and fast performance. It is a rather strange language as it originally released in 2008 but hasn&rsquo;t gotten much attention compared to more recent languages like rust.  I hope in the future I can apply this language more, for now I&rsquo;m signing off. See you in the next post.</p>
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/chickens/">chickens</a>
+  
+  <a class="badge badge-light" href="/tag/coding/">coding</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Expanding%20the%20farm&amp;body=https%3A%2F%2Fcvanelteren.github.io%2Fpost%2Fnim_chicken%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fcvanelteren.github.io%2Fpost%2Fnim_chicken%2F&amp;title=Expanding&#43;the&#43;farm" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://cvanelteren.github.io"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q75_lanczos_center.jpg" alt="Casper van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://cvanelteren.github.io">Casper van Elteren</a></h5>
+      <h6 class="card-subtitle">Computational scientist | Data scientist | Tinkerer</h6>
+      <p class="card-text">I am a computational scientist interested in data analysis, visualization and software engineering.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/cv" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2023 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.1d4346c6f7d46c340dc0a9058dd85c13.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.c84202fca2a6efbbecbaf0e8358c1d51.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

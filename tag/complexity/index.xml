@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>complexity | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/tag/complexity/</link>
+      <atom:link href="https://cvanelteren.github.io/tag/complexity/index.xml" rel="self" type="application/rss+xml" />
+    <description>complexity</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 05 Apr 2021 14:57:08 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>complexity</title>
+      <link>https://cvanelteren.github.io/tag/complexity/</link>
+    </image>
+    
+    <item>
+      <title>Rock-paper-scissor dynamics to study biodiversity</title>
+      <link>https://cvanelteren.github.io/post/rps/</link>
+      <pubDate>Mon, 05 Apr 2021 14:57:08 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/rps/</guid>
+      <description>&lt;p&gt;Some  years ago  an  &lt;a href  url=&#34;https://www.nature.com/articles/nature06095&#34;&gt;
+article  &lt;/a&gt;  was published  using  rock-paper-scissor  dynamics to  study  the
+effects  on  biodiversity.  I  got  inspired by  the  excellent  website  of  &lt;a
+href=&#34;https://www.complexity-explorables.org/explorables/cycledelic/&#34;&gt;Dirck
+Brockmann  &lt;/a&gt;   and  decided   to  implement   it  myself   in  the   &lt;a  href
+url=&#34;https://github.com/cvanelteren/Plexsim&#34;&gt; the computational  toolbox I wrote
+&lt;/a&gt;. Below  I simulated  the rock-paper-scissor model  and created  a (possibly
+novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
+fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
+grid with Moore neighborhood.&lt;/p&gt;
+&lt;figure&gt;    &lt;video    width=&#34;auto&#34;    height=&#34;auto&#34;    controls loop autoplay&gt;    &lt;source
+src=&#34;rock_paper_scissor_dynamics.mp4&#34; type=&#34;video/mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
+rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
+starts with all  vertices having a random  value in $[0, 1]$. The  color of each
+vertex is proportional to the density of the species (red, green or blue). White
+would indicate low values of all  species whereas black indicates high values of
+all species.  Over time  larger patches  of similar  states appear  and interact
+according to rock-paper-scissor dynamics. &lt;/figure&gt;
+&lt;h1 id=&#34;the-model&#34;&gt;The model&lt;/h1&gt;
+&lt;p&gt;The model was designed to understand the co-existance of interacting species in a spatially extended ecosystem. Each vertex point represents the locus of three species.
+The color (red, green, blue) are proportional to the density
+of the three species at each pixel (vertex point).&lt;/p&gt;
+&lt;p&gt;The  model produces  a wide  range of  different patterns  based on  three input
+parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Diffusion ($D$): mobility of species.&lt;/li&gt;
+&lt;li&gt;Predation ($P$): competition between the tree different species.&lt;/li&gt;
+&lt;li&gt;Competition ($C$): Competition among different specifies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each vertex in the system $\sigma_i  \in \sigma :=${ $\sigma_0, \dots, \sigma_n$
+} contains a  vector with the density  of the three &amp;ldquo;species&amp;rdquo;,  i.e. rock ($r$),
+paper ($g$), or scissor ($b$). The concentration of each specie at vertex $i$ is
+updated according to&lt;/p&gt;
+&lt;p&gt;$$
+\frac{d \sigma_i}{dt} = \scriptstyle \begin{cases}
+\frac{dr_i}{dt}&amp;amp; = ((\underbrace{P  (g_i - b_i)  + r_i}_{\textrm{predation}} - \underbrace{C  (g_i + b_i) - r_i^2}_{\textrm{Competition}})r_i - \underbrace{D(\sum_{&amp;lt;i,j&amp;gt;} r_j r_i)}_{\textrm{mobility}}) \delta t \\\
+\frac{dg_i}{dt}&amp;amp; = ((P  (b_i - r_i)  + g_i - C  (r_i + b_i) - g_i^2)g_i - D(\sum_{&amp;lt;i,j&amp;gt;} g_j g_i)) \delta t \\\
+\frac{db_i}{dt}&amp;amp; = ((P  (r_i - g_i)  + b_i - C  (r_i + g_i) - b_i^2)b_i - D(\sum_{&amp;lt;i,j&amp;gt;} b_j b_i)) \delta t, \end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;where $&amp;lt;i,j&amp;gt;$ indicates the nearest neighbors of variable $i$.&lt;/p&gt;
+&lt;p&gt;In order to see  the effect of the three parameters,  I simulated $T=1000$ steps
+and visualized  the last system  state while varying predation,  competition and
+diffusion while keeping the rest constant.  It is fascinating to see
+how each parameter causes different spatially extended patterns. The simulations
+over time exhibit  fluid-like behavior, and the observed  patterns are distinct
+on the set of input parameters.  Most notably, the diffusion parameter can cause
+large extended  patches similar to  what can  be observed in  Ising/Potts model.
+Predation on  the other hand tends  to cause fragmentation of  species for lower
+values, but  for higher values  create similar larger patterns.  The interaction
+among the variables shows a non-linear  effect with each other. This can readily
+be seen in the competition parameters.  That is, the competition parameter shows
+larger patches  only for  a small range  (1.89 - 2.17)  while keeping  all other
+values constant.&lt;/p&gt;
+&lt;img src=&#34;diffusion.png&#34; alt =&#34;effect of mobility&#34;&gt;
+&lt;img src=&#34;predation.png&#34; alt =&#34;effect of predation&#34;&gt;
+&lt;img src=&#34;competition.png&#34; alt =&#34;effect of competition&#34;&gt;
+&lt;h1 id=&#34;agent-based-implementation&#34;&gt;Agent-based implementation&lt;/h1&gt;
+&lt;p&gt;In the original paper, the authors apply a so-called Gillspie algorithm to efficiently sample the reaction between the different density. I was interested whether one can get away with &amp;ldquo;tradtiional&amp;rdquo; Monte-Carlo methods and implemented and agent-based approach to the model above.&lt;/p&gt;
+&lt;p&gt;Each agent updates stochastically with parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mobility $M \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Reproduction $R \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Selection $S \in [0, 1]$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An agent can only reproduce if an adjacent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:&lt;/p&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;Dead state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Rock&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Paper&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Scissor&amp;rdquo; state&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each update step an agent interacts  with a random neighbor and randomly chooses
+an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).&lt;/p&gt;
+&lt;p&gt;We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:&lt;/p&gt;
+&lt;figure&gt;
+&lt;video  width=&#34;auto&#34; height=&#34;auto&#34; controls autoplay loop&gt;  &lt;source src=&#34;rock_paper_scissor_dynamics_abm.mp4&#34;&gt; &lt;/video&gt;
+&lt;figcaption&gt; Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
+&lt;/figure&gt;
+&lt;p&gt;This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.&lt;/p&gt;
+&lt;!-- &lt;video id=&#34;video&#34; controls autplay loop&gt; --&gt;
+&lt;!-- &lt;source src=&#34;test.webm&#34;&gt;  --&gt;
+&lt;!-- &lt;/video&gt; --&gt;
+&lt;!-- here --&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Rock-paper-scissor dynamics to study biodiversity</title>
+      <link>https://cvanelteren.github.io/project/roshambo/</link>
+      <pubDate>Mon, 05 Apr 2021 14:57:08 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/project/roshambo/</guid>
+      <description>&lt;p&gt;Some  years ago  an  &lt;a href  url=&#34;https://www.nature.com/articles/nature06095&#34;&gt;
+article  &lt;/a&gt;  was published  using  rock-paper-scissor  dynamics to  study  the
+effects  on  biodiversity.  I  got  inspired by  the  excellent  website  of  &lt;a
+href=&#34;https://www.complexity-explorables.org/explorables/cycledelic/&#34;&gt;Dirck
+Brockmann  &lt;/a&gt;   and  decided   to  implement   it  myself   in  the   &lt;a  href
+url=&#34;https://github.com/cvanelteren/Plexsim&#34;&gt; the computational  toolbox I wrote
+&lt;/a&gt;. Below  I simulated  the rock-paper-scissor model  and created  a (possibly
+novel)  agent-based  inspired  version  of  it.  The  model  produces  beautiful
+fluid-like patterns  as can be  seen in the video  below simulated on  a 100x100
+grid with Moore neighborhood.&lt;/p&gt;
+&lt;figure&gt;    &lt;video    width=&#34;auto&#34;    height=&#34;auto&#34;    controls loop autoplay&gt;    &lt;source
+src=&#34;rock_paper_scissor_dynamics.mp4&#34; type=&#34;video/mp4&#34;&gt;   &lt;/video&gt;  &lt;figcaption&gt;   Simulation  of
+rock-paper-scissor dynamics on a 100x100 grid with Moore neighborhood. The model
+starts with all  vertices having a random  value in $[0, 1]$. The  color of each
+vertex is proportional to the density of the species (red, green or blue). White
+would indicate low values of all  species whereas black indicates high values of
+all species.  Over time  larger patches  of similar  states appear  and interact
+according to rock-paper-scissor dynamics. &lt;/figure&gt;
+&lt;h1 id=&#34;the-model&#34;&gt;The model&lt;/h1&gt;
+&lt;p&gt;The model was designed to understand the co-existance of interacting species in a spatially extended ecosystem. Each vertex point represents the locus of three species.
+The color (red, green, blue) are proportional to the density
+of the three species at each pixel (vertex point).&lt;/p&gt;
+&lt;p&gt;The  model produces  a wide  range of  different patterns  based on  three input
+parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Diffusion ($D$): mobility of species.&lt;/li&gt;
+&lt;li&gt;Predation ($P$): competition between the tree different species.&lt;/li&gt;
+&lt;li&gt;Competition ($C$): Competition among different specifies.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;Each vertex in the system $\sigma_i  \in \sigma :=${ $\sigma_0, \dots, \sigma_n$
+} contains a  vector with the density  of the three &amp;ldquo;species&amp;rdquo;,  i.e. rock ($r$),
+paper ($g$), or scissor ($b$). The concentration of each specie at vertex $i$ is
+updated according to&lt;/p&gt;
+&lt;p&gt;$$
+\frac{d \sigma_i}{dt} = \scriptstyle \begin{cases}
+\frac{dr_i}{dt}&amp;amp; = ((\underbrace{P  (g_i - b_i)  + r_i}_{\textrm{predation}} - \underbrace{C  (g_i + b_i) - r_i^2}_{\textrm{Competition}})r_i - \underbrace{D(\sum_{&amp;lt;i,j&amp;gt;} r_j r_i)}_{\textrm{mobility}}) \delta t \\\
+\frac{dg_i}{dt}&amp;amp; = ((P  (b_i - r_i)  + g_i - C  (r_i + b_i) - g_i^2)g_i - D(\sum_{&amp;lt;i,j&amp;gt;} g_j g_i)) \delta t \\\
+\frac{db_i}{dt}&amp;amp; = ((P  (r_i - g_i)  + b_i - C  (r_i + g_i) - b_i^2)b_i - D(\sum_{&amp;lt;i,j&amp;gt;} b_j b_i)) \delta t, \end{cases}
+$$&lt;/p&gt;
+&lt;p&gt;where $&amp;lt;i,j&amp;gt;$ indicates the nearest neighbors of variable $i$.&lt;/p&gt;
+&lt;p&gt;In order to see  the effect of the three parameters,  I simulated $T=1000$ steps
+and visualized  the last system  state while varying predation,  competition and
+diffusion while keeping the rest constant.  It is fascinating to see
+how each parameter causes different spatially extended patterns. The simulations
+over time exhibit  fluid-like behavior, and the observed  patterns are distinct
+on the set of input parameters.  Most notably, the diffusion parameter can cause
+large extended  patches similar to  what can  be observed in  Ising/Potts model.
+Predation on  the other hand tends  to cause fragmentation of  species for lower
+values, but  for higher values  create similar larger patterns.  The interaction
+among the variables shows a non-linear  effect with each other. This can readily
+be seen in the competition parameters.  That is, the competition parameter shows
+larger patches  only for  a small range  (1.89 - 2.17)  while keeping  all other
+values constant.&lt;/p&gt;
+&lt;img src=&#34;diffusion.png&#34; alt =&#34;effect of mobility&#34;&gt;
+&lt;img src=&#34;predation.png&#34; alt =&#34;effect of predation&#34;&gt;
+&lt;img src=&#34;competition.png&#34; alt =&#34;effect of competition&#34;&gt;
+&lt;h1 id=&#34;agent-based-implementation&#34;&gt;Agent-based implementation&lt;/h1&gt;
+&lt;p&gt;In the original paper, the authors apply a so-called Gillspie algorithm to efficiently sample the reaction between the different density. I was interested whether one can get away with &amp;ldquo;tradtiional&amp;rdquo; Monte-Carlo methods and implemented and agent-based approach to the model above.&lt;/p&gt;
+&lt;p&gt;Each agent updates stochastically with parameters&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;Mobility $M \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Reproduction $R \in [0, 1]$&lt;/li&gt;
+&lt;li&gt;Selection $S \in [0, 1]$&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;An agent can only reproduce if an adjacent vertex is dead. The other moves are updated sequentially with the probabilities indicated above. In short, each agent can assume one of 4 states:&lt;/p&gt;
+&lt;ol start=&#34;0&#34;&gt;
+&lt;li&gt;Dead state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Rock&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Paper&amp;rdquo; state&lt;/li&gt;
+&lt;li&gt;&amp;ldquo;Scissor&amp;rdquo; state&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;Each update step an agent interacts  with a random neighbor and randomly chooses
+an interaction strategy random. That is, if the adjacent neighbor is empty, it could reproduce with probability $R$, otherwise it may attempt kill the neighbor with probability $S$. Lastly, it could inhabit the neighboring site with probability $M$. Note that the total set is a pair of (mobility, selection or reproduction).&lt;/p&gt;
+&lt;p&gt;We then yield the following for $(M, R, S) \rightarrow 2.5:1.5:.05 = 1.3:1:0.03 \rightarrow (.5, .66, 0.016)$:&lt;/p&gt;
+&lt;figure&gt;
+&lt;video  width=&#34;auto&#34; height=&#34;auto&#34; controls autoplay loop&gt;  &lt;source src=&#34;rock_paper_scissor_dynamics_abm.mp4&#34;&gt; &lt;/video&gt;
+&lt;figcaption&gt; Agent-based implementation of the model above. Black indicates dead or uninhabited vertices, red, yellow, green represent rock, paper, scissor state respectively. The dynamics are simulated on a 100x100 lattice with Moore neighborhood.
+&lt;/figure&gt;
+&lt;p&gt;This maintains the circular behavior found in the original paper, however this does not employ the Gillspie algorithm. This will be the topic of some future post.&lt;/p&gt;
+&lt;!-- &lt;video id=&#34;video&#34; controls autplay loop&gt; --&gt;
+&lt;!-- &lt;source src=&#34;test.webm&#34;&gt;  --&gt;
+&lt;!-- &lt;/video&gt; --&gt;
+&lt;!-- here --&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Are bubbles power law distributed?</title>
+      <link>https://cvanelteren.github.io/post/coffee/</link>
+      <pubDate>Mon, 22 Mar 2021 23:19:35 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/post/coffee/</guid>
+      <description>&lt;p&gt;Power laws are everywhere, even in your coffee! One lazy sunday morning I wondered whether the bubbles in the milk of my coffee was power law distributed; a little bit of coding and a few moments later we had an answer!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://cvanelteren.github.io/post/coffee/coffee.png&#34; alt=&#34;logo&#34;&gt;&lt;/p&gt;
+Unforutnately, the process is not perfect. It was fun making this regardless.
+</description>
+    </item>
+    
+    <item>
+      <title>Are bubbles power law distributed?</title>
+      <link>https://cvanelteren.github.io/project/coffee/</link>
+      <pubDate>Mon, 22 Mar 2021 23:19:35 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/project/coffee/</guid>
+      <description>&lt;p&gt;Power laws are everywhere, even in your coffee! One lazy sunday morning I wondered whether the bubbles in the milk of my coffee was power law distributed; a little bit of coding and a few moments later we had an answer!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://cvanelteren.github.io/post/coffee/coffee.png&#34; alt=&#34;logo&#34;&gt;&lt;/p&gt;
+Unforutnately, the process is not perfect. It was fun making this regardless.
+</description>
+    </item>
+    
+    <item>
+      <title>Are bubbles power law distributed?</title>
+      <link>https://cvanelteren.github.io/projects/</link>
+      <pubDate>Mon, 22 Mar 2021 23:19:35 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/projects/</guid>
+      <description>&lt;p&gt;Power laws are everywhere, even in your coffee! One lazy sunday morning I wondered whether the bubbles in the milk of my coffee was power law distributed; a little bit of coding and a few moments later we had an answer!&lt;/p&gt;
+&lt;p align=&#34;center&#34;&gt;&lt;img src=&#34;https://cvanelteren.github.io/post/coffee/coffee.png&#34; alt=&#34;logo&#34;&gt;&lt;/p&gt;
+Unforutnately, the process is not perfect. It was fun making this regardless.
+</description>
+    </item>
+    
+  </channel>
+</rss>

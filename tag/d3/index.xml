@@ -1,0 +1,478 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>D3 | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/tag/d3/</link>
+      <atom:link href="https://cvanelteren.github.io/tag/d3/index.xml" rel="self" type="application/rss+xml" />
+    <description>D3</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 08 Feb 2022 18:09:35 +0100</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>D3</title>
+      <link>https://cvanelteren.github.io/tag/d3/</link>
+    </image>
+    
+    <item>
+      <title>From matplotlib to D3</title>
+      <link>https://cvanelteren.github.io/post/d3/</link>
+      <pubDate>Tue, 08 Feb 2022 18:09:35 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/post/d3/</guid>
+      <description>&lt;!-- &lt;script src=&#34;./test.js&#34;&gt;&lt;/script&gt; --&gt;
+&lt;!-- &lt;div id=&#34;d3-example&#34;&gt;&lt;/div&gt; --&gt;
+&lt;!-- &lt;div id=&#34;output&#34;&gt;&lt;/div&gt; --&gt;
+&lt;!-- &lt;script src=&#34;https://cdn.jsdelivr.net/npm/d3@7&#34;&gt;&lt;/script&gt; --&gt;
+&lt;!-- &lt;script src=&#34;./test.js&#34;&gt;&lt;/script&gt; --&gt;
+&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org8d7891c&#34;&gt;Introduction&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org02e061d&#34;&gt;TLDR&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org9763250&#34;&gt;Starting the D3 Journey&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org22859dd&#34;&gt;Goals&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org81e6722&#34;&gt;Setting up an environment&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org26d41fa&#34;&gt;Understanding D3s design&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orge855feb&#34;&gt;Making the first plot&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org650d065&#34;&gt;Adding interactivity&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#orgbcede09&#34;&gt;Designing mouseOver&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgbc55fb9&#34;&gt;Designing mouseLeave&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb1c1c86&#34;&gt;Designing mouseMove&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgd6b55cd&#34;&gt;Bonus: adding a trend line&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgacb8da5&#34;&gt;Putting the pieces together&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org80c6323&#34;&gt;Summary&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#orgfdeda20&#34;&gt;Honorable mentions&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;style&gt;
+&lt;p&gt;.links line {
+stroke: #999;
+stroke-opacity: 0.6;
+}&lt;/p&gt;
+&lt;p&gt;.nodes circle {
+stroke: #fff;
+stroke-width: 1.5px;
+}
+&lt;/style&gt;&lt;/p&gt;
+&lt;script src=&#34;https://code.jquery.com/jquery-3.2.1.min.js&#34;&gt;&lt;/script&gt;
+&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
+&lt;div id=&#34;banner&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;./test2.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;&lt;a id=&#34;org8d7891c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Data visualization is  a crucial tool to  gain insights into
+data. For  data aficionados it  is a difficult task  to find
+the  balance  between  visual prowess  and  meaningful  data
+visualization.  My visualization  journey started  in matlab
+many years ago. Matlab’s visualization tool are powerful and
+are  apart of  many scientist’s  and engineers  toolkit. For
+static plots,  matlab’s toolkit is excellent.  However, over
+the years  I got a  deeper desire for interactive  tools and
+animations. Although this is  very much possible, the nature
+of matplotlib’s ecosystem  made it a bit  awkward in dealing
+with  complicated  animations.  As years  passed,  I  slowly
+transitioned to  the python scientific stack  which prompted
+me to  switch to  matlab’s equivalent matplotlib.  As python
+gained providence among the scientific community, so did the
+need  for interactive  visualizations. The  notebook culture
+grew,  and  so did  the  ports  to  allow matplotlib  to  be
+visualized in interactive contexts. Matplotlib has served me
+well for many  years; having its roots  in matlab’s plotting
+ecosystem,  it  moved more  and  more  to object  orientated
+design familiar  to many  pythonistas. However, I  was still
+rather unhappy  with sharing matplotlib code.  Preferable, I
+would like to  host the visualizations on a  website where a
+user can interact and explore  with the data. For the python
+ecosystem, this always requires a python interpreter running
+on a server somewhere. I was aware of D3 for many years, and
+was rather impressed by the visuals that it generates. After
+doing several tutorial online over  the years, I felt rather
+empty and left  with a lack of  understanding. Many tutorial
+allow  you  to copy  paste,  but  not understand  &lt;em&gt;how&lt;/em&gt;  the
+visualization work  under the hood.  In the year 2022  it is
+finally time to pick-up on  my previous attempts to learn D3
+(and  javascript). The  focus will  be for  matplotlib users
+that are interested in learning D3. I assume that the reader
+is familiar  with base  programming. I  am not  too familiar
+with  javascript,  and  as  such learning  that  will  be  a
+secondary goal  for me. In  the end, I  aim to make  a graph
+visualization tool with the use of  D3. In this post, I will
+guide the reader in my process  and share my thoughts on how
+the  code  works  internally. For  background  knowledge,  I
+assume the reader is  familiar with matplotlib and generally
+programming.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org02e061d&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;tldr&#34;&gt;TLDR&lt;/h2&gt;
+&lt;p&gt;I wrote down some thoughts on making plots in D3 by using my
+knowledge  from  matplotlib.  The   code  can  be  found  at
+&lt;a href=&#34;http://cvanelteren.github.io/post/d3/first_plot.js&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://cvanelteren.github.io/post/d3/first_plot.js&lt;/a&gt; The final
+plot is given below in &lt;a href=&#34;#orgacb8da5&#34;&gt;2.6&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org9763250&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;starting-the-d3-journey&#34;&gt;Starting the D3 Journey&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;org22859dd&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;goals&#34;&gt;Goals&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Familiarize with D3 ecosystem
+&lt;ul&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Make simple line plot&lt;/li&gt;
+&lt;li&gt;&lt;input disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Make simple scatter plot&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a id=&#34;org81e6722&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;setting-up-an-environment&#34;&gt;Setting up an environment&lt;/h2&gt;
+&lt;p&gt;In  order to  work with  d3, it  is possible  to install  it
+locally  with `npm`  (e.g. `npm  install -g  d3`) or  use it
+directly  from  the  Contend Delivery  Network  (CDN).  This
+latter option effectively acts as an import statement that a
+device connected to  the internet could use. I  will use the
+latter  option  as  the  target  is  running  visualizations
+online. For more information one could follow &lt;a href=&#34;https://www.tutorialsteacher.com/d3js/setup-d3js-development-environment&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;this tutorial&lt;/a&gt;.
+for setting it up locally. A typical modern website consists
+of  three components:  the webpage  content, the  looks, and
+possible external scripts. The workhorse for modern websites
+is  Hyper  Markum Language  (HTML);  it  defines the  basics
+structure of a  webpage. We will be writing  minimal HTML in
+this post. All that is necessary to know is that HTML is the
+“core” of how website determines where what goes. Javascript
+can be used  to dynamically serve content  by interacting or
+writing  HTML.  How  a  website  looks  is  controlled  with
+Cascading Style Sheets or CSS.  The files are used to change
+things like color, size of an  image and so on. Again CSS is
+not the  focus here, it is  merely important to be  aware of
+the base components  as D3 will interact  with them. Lastly,
+javascript is in  essence the programming for the  web. I am
+not an  expert in  any web-based development  and as  such I
+would recommend elsewhere  for learning the ins  and outs of
+javascript. My goal here is to  make pretty plots and use my
+extensive  programming experience  to  just  figure out  the
+syntax.&lt;/p&gt;
+&lt;p&gt;A minimal HTML file for D3 would look like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- file: hello_d3.html --&amp;gt;
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;!-- get module from cdn --&amp;gt;
+  &amp;lt;script src=&amp;quot;https://d3js.org/d3.v6.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;!-- or load it locally --&amp;gt;
+  &amp;lt;!-- &amp;lt;script src=&amp;quot;../d3.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&lt;p&gt;&amp;lt;script&amp;gt;
+&amp;lt;!&amp;ndash; write your d3 code here.. &amp;ndash;&amp;gt;
+&amp;lt;script src=&amp;quot;./first_plot.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;You can  view this file  by opening  this file in  a browser
+(e.g. `firefox hello&lt;sub&gt;d3.html&lt;/sub&gt;` or  equivalent for the browser
+you  are  using). The  file  should  be empty.  Let’s  start
+filling it up with D3 goodiness!&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org26d41fa&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;understanding-d3s-design&#34;&gt;Understanding D3s design&lt;/h2&gt;
+&lt;p&gt;Traditional  matplotlib  had   concept  of  functions,  i.e.
+`plt.figure()` would open a figure and `plt.plot` would plot
+a line  plot in  the most  recent figure.  Modern matplotlib
+uses an object oriented approach. A figure would opened like&lt;/p&gt;
+&lt;p&gt;There  is a  concept of  the “figure”  that hosts  different
+subplots which each  hold different axes. These  axes can be
+of   different  types   such  as   geographic,  polar,   the
+traditional Euclidean  plane, and  so on.  There is  a clear
+hierarchy on  what holds  what. In  matplotlib the  axes are
+essentially which  interacts with the data.  In contrast, D3
+assigns data attributes directly  to images. That is, inside
+a “canvas” (plt.figure) scalable  vector graphics (svgs) are
+created   which  gets   as   attributes  data   coordinates.
+Effectively, D3  allows you to make  a cake but you  have to
+provide  all  the  ingredients:  axes  are  not  created  by
+default.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orge855feb&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;making-the-first-plot&#34;&gt;Making the first plot&lt;/h2&gt;
+&lt;p&gt;Let’s  start  with  making  a scatter  plots.  We  start  by
+creating a figure. I will write  the code for the first plot
+in a  file names `first\&lt;sub&gt;plot.js&lt;/sub&gt;`  and will call it  from the
+html we just created above, yielding:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;&amp;lt;!-- file: hello_d3.html --&amp;gt;
+&amp;lt;!doctype html&amp;gt;
+&amp;lt;html lang=&amp;quot;en&amp;quot;&amp;gt;
+&amp;lt;head&amp;gt;
+  &amp;lt;!-- get module from cdn --&amp;gt;
+  &amp;lt;script src=&amp;quot;https://d3js.org/d3.v7.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+  &amp;lt;!-- or load it locally --&amp;gt;
+  &amp;lt;!-- &amp;lt;script src=&amp;quot;../d3.min.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt; --&amp;gt;
+  &amp;lt;script src=&amp;quot;./first_plot.js&amp;quot;&amp;gt;&amp;lt;/script&amp;gt;
+&amp;lt;/head&amp;gt;
+&amp;lt;body&amp;gt;
+&lt;p&gt;&amp;lt;script&amp;gt;
+&amp;lt;!&amp;ndash; write your d3 code here.. &amp;ndash;&amp;gt;
+&amp;lt;/script&amp;gt;
+&amp;lt;/body&amp;gt;
+&amp;lt;/html&amp;gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Next, we  create our  figure by selecting  the `#first_ plot`
+div and  and adding a  graphic (svg) to  it. The svg  is now
+empty, but we will soon fill it with some data.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// define margins
+ const margin = {top: 10,
+                right: 30,
+                bottom: 30,
+                left: 60};
+const width = 400 - margin.left - margin.right;
+const height = 400 - margin.top - margin.bottom;
+&lt;p&gt;// create canvas and select the graphics
+var svg = d3.select(&amp;quot;#first_plot&amp;quot;)
+.append(&amp;quot;svg&amp;quot;)
+.attr(&amp;quot;width&amp;quot;, width + margin.left + margin.right)
+.attr(&amp;quot;height&amp;quot;, height + margin.top + margin.bottom)
+.append(&amp;quot;g&amp;quot;)
+.attr(&amp;quot;transform&amp;quot;, &lt;code&gt;translate(${margin.left}, ${margin.top})&lt;/code&gt;)
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;In this snippet we select a div in the html in which we want
+to plot our  graph. We specify its width and  height and add
+an svg  graphic to it.  In addition,  we append a  new group
+(indicated by `g`) that is transformed (placed) a little bit
+from the left and top. Playing around with the parameters is
+highly  encourage to  see how  it affects  the plots.&lt;/p&gt;
+&lt;p&gt;Next, let’s add some data. Data  can be loaded from a csv or
+json  files,  I  opted  here to  learn  something  how  list
+comprehensions can  be emulated  in javascript. I  create an
+`Array` type  and specify  its length.  Then I  populate the
+array with a function. One can read this procedure similarly
+to a  list comprehension. That  is, &lt;code&gt;[some_func(x) for  x in range(100)]&lt;/code&gt;.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// make scatter
+var data = Array.from({length: 1000}, (_, idx) =&amp;gt; {
+    return {x: idx * 0.1/ ( 2 * 3.141592 ),
+            y:  (Math.sin(idx * 0.1/ ( 2 * 3.141592 )) +  1 * Math.random())}
+    });
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;In order  to complete the  figure, we  need to tell  D3 what
+axes to map the data on. In  order to do this, we create two
+axes (x, y) to form a Euclidean plane.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// construct axes
+const x = d3.scaleLinear()
+      .domain([0, 100])
+      .range([ 0, width ]);
+&lt;p&gt;const y = d3.scaleLinear()
+.domain([ 0, 100])
+.range([ height, 0 ]);
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Note that the coordinate system  starts from a imaginary box
+on the top  left. Hence, the y-axis needs to  be moved (with
+the `.range` property) down  by `height` which was specified
+in the canvas  specs. Similarly, the x-axis  spans the width
+of our canvas.&lt;/p&gt;
+&lt;p&gt;The axes  need to  be added  to our  svg. For  a traditional
+plot, the  x-axis has to be  moved `height` down to  yield a
+traditional xy plane.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// add axes
+svg.append(&amp;quot;g&amp;quot;)
+   .attr(&amp;quot;transform&amp;quot;, `translate(0, ${height})`)
+   .call(d3.axisBottom(x));
+&lt;p&gt;svg.append(&amp;quot;g&amp;quot;)
+.call(d3.axisLeft(y));
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Finally, we  add  the images  to  the svg  by
+specifying another  grounp `g` and popuplating  it using the
+`data` function.  The centers of the  circles are specificed
+by  maps  again. The  funny  `d`  syntax specifies  a  lamba
+function. This is the same  as `lambda x: [some expression]`
+in python. Finally, attributes such  as the color and radius
+(`r`) are set.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var scatter = svg.append(&amp;quot;g&amp;quot;)
+    .selectAll(&amp;quot;dot&amp;quot;)
+    .data(data)
+    .join(&amp;quot;circle&amp;quot;)
+    .attr(&amp;quot;cx&amp;quot;, d =&amp;gt; x(d.x))
+    .attr(&amp;quot;cy&amp;quot;, d =&amp;gt; y(d.y))
+    .attr(&amp;quot;r&amp;quot;, 2)
+    .style(&amp;quot;fill&amp;quot;, &amp;quot;#729B79&amp;quot;);
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;We are now  ready to plot! Running the final  HTML code in a
+browser should  yield a fancy  sine plot with  some noise.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org650d065&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;adding-interactivity&#34;&gt;Adding interactivity&lt;/h2&gt;
+&lt;p&gt;The plot above is a bit boring. Where D3 really shines is in
+its interactivity. What if we  want to know exactly what the
+xy  coordinates are  in  the  plot? Let’s  find  out how  to
+achieve this.&lt;/p&gt;
+&lt;p&gt;We add  a hover tool to  display the x,y coordinates  of the
+generated data. This  involves adding another div  to put in
+some HTML. We  start by setting the opacity to  0, hiding it
+from view and “popping” it back  into view when a data point
+is selected.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// create a tooltip
+var Tooltip = d3.select(&amp;quot;#first_plot&amp;quot;)
+  .append(&amp;quot;div&amp;quot;)
+  .style(&amp;quot;opacity&amp;quot;, 0)
+  .attr(&amp;quot;class&amp;quot;, &amp;quot;tooltip&amp;quot;)
+  .style(&amp;quot;background-color&amp;quot;, &amp;quot;gray&amp;quot;)
+  .style(&amp;quot;border&amp;quot;, &amp;quot;solid&amp;quot;)
+  .style(&amp;quot;border-width&amp;quot;, &amp;quot;2px&amp;quot;)
+  .style(&amp;quot;border-radius&amp;quot;, &amp;quot;5px&amp;quot;)
+  .style(&amp;quot;padding&amp;quot;, &amp;quot;5px&amp;quot;)
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Next, we  have to  define the behavior  what happens  to the
+toolbar (and the  dots) when the mouse hovers  over it. This
+means we have to create 3 functions&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;mouseOver: when the mouse moves over the point&lt;/li&gt;
+&lt;li&gt;mouseLeave: when the mouse leaves the point&lt;/li&gt;
+&lt;li&gt;mouseMove: when the mouse moves&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a id=&#34;orgbcede09&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;designing-mouseover&#34;&gt;Designing mouseOver&lt;/h3&gt;
+&lt;p&gt;In  order to  let  the  datapoint shine,  we  turn down  the
+opacity  and  highlight  the selected  point.  Finally,  the
+tooltip has to popup, reflecting the data coordinates.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let mouseOver = function(d) {
+  // turn down opacity of all other circles
+  d3.selectAll(&amp;quot;circle&amp;quot;)
+    .transition()
+    .duration(200)
+    .style(&amp;quot;opacity&amp;quot;, .5)
+&lt;p&gt;// make selection yellow
+d3.select(this)
+.transition()
+.duration(200)
+.style(&amp;quot;opacity&amp;quot;, 1)
+.style(&amp;quot;fill&amp;quot;, &amp;quot;yellow&amp;quot;)&lt;/p&gt;
+&lt;p&gt;// update tooltip
+Tooltip
+.style(&amp;quot;opacity&amp;quot;, 1)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgbc55fb9&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;designing-mouseleave&#34;&gt;Designing mouseLeave&lt;/h3&gt;
+&lt;p&gt;This  does the  effective  opposite of  the function  above;
+turning down up the opacity of all other dots.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let mouseLeave = function(d) {
+  d3.selectAll(&amp;quot;circle&amp;quot;)
+    .transition()
+    .duration(200)
+    .style(&amp;quot;opacity&amp;quot;, .8)
+&lt;p&gt;d3.select(this)
+.transition()
+.duration(200)
+// .style(&amp;quot;fill&amp;quot;, &amp;quot;transparent&amp;quot;)
+.style(&amp;quot;fill&amp;quot;, &amp;quot;#729B79&amp;quot;)&lt;/p&gt;
+&lt;p&gt;// update tooltip
+Tooltip
+.style(&amp;quot;opacity&amp;quot;, 0)
+}
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgb1c1c86&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;designing-mousemove&#34;&gt;Designing mouseMove&lt;/h3&gt;
+&lt;p&gt;This function removes  the toolbox when the  mouse is moved.
+This makes sure the toolbox does not confuse the enduser.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;let mouseMove = function(event, d) {
+  Tooltip
+      .html(`x: ${d.x} &amp;lt;br&amp;gt; y: ${d.y}`) // print inside the tooltip
+      .style(&amp;quot;left&amp;quot;, event.pageX + &amp;quot;px&amp;quot;) // move the toolbox to the correct position
+      .style(&amp;quot;top&amp;quot;, event.pageY + &amp;quot;px&amp;quot;)
+  }
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a id=&#34;orgd6b55cd&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;bonus-adding-a-trend-line&#34;&gt;Bonus: adding a trend line&lt;/h3&gt;
+&lt;p&gt;As a  bonus we add  a trend line to  show how well  our data
+fits a trend.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;// trend curving
+let c = d3.curveNatural;
+svg
+  .append(&amp;quot;path&amp;quot;)
+  .datum(data)
+  .attr(&amp;quot;stroke&amp;quot;, &amp;quot;#475B63&amp;quot;)
+  .attr(&amp;quot;fill&amp;quot;, &amp;quot;transparent&amp;quot;)
+  .attr(&amp;quot;stoke-width&amp;quot;, 1.5)
+  .attr(&amp;quot;d&amp;quot;, d3.line()
+        .x(d =&amp;gt; x(d.x))
+        .y(d =&amp;gt; y(d.y))
+        .curve(c)
+       )
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a id=&#34;orgacb8da5&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;putting-the-pieces-together&#34;&gt;Putting the pieces together&lt;/h2&gt;
+&lt;p&gt;Next, we  need to tell D3  to add this functionality  to the
+dots only. We add the  functions to the scatter dots defined
+above, yielding:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;var scatter = svg.append(&amp;quot;g&amp;quot;)
+  .selectAll(&amp;quot;dot&amp;quot;)
+  .data(data)
+  .join(&amp;quot;circle&amp;quot;)
+  .attr(&amp;quot;cx&amp;quot;, d =&amp;gt; x(d.x))
+  .attr(&amp;quot;cy&amp;quot;, d =&amp;gt; y(d.y))
+  .attr(&amp;quot;r&amp;quot;, 5)
+  .style(&amp;quot;fill&amp;quot;, &amp;quot;blue&amp;quot;)
+  .on(&amp;quot;mouseover&amp;quot;, mouseOver) // new
+  .on(&amp;quot;mouseleave&amp;quot;, mouseLeave) // new
+  .on(&amp;quot;mousemove&amp;quot;, mouseMove) // new
+&lt;/code&gt;&lt;/pre&gt;
+&lt;div id=&#34;first_plot&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;./first_plot.js&#34;&gt;&lt;/script&gt;
+&lt;p&gt;We have  now created an  interactive scatter plot!  The TLDR
+code          can           be          found          under
+&lt;a href=&#34;http://cvanelteren.github.io/post/d3/first_plot.js&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://cvanelteren.github.io/post/d3/first_plot.js&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org80c6323&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;summary&#34;&gt;Summary&lt;/h1&gt;
+&lt;p&gt;We have seen how to create  a simple plot in D3. Compared to
+matplotlib  D3  is  more   verbose;  everything  has  to  be
+specified. Some packages do exist that build on top of D3 to
+prevent this verboseness (e.g.  Chart.js), however, for full
+control  one  needs to  dive  in  deep  with D3.  The  major
+advantage for D3 is its portable  (it can exist in the web),
+and interactivity.  Building a shiny dashboard  to visualize
+your  major findings  for data  analysts and  scientists are
+hard to  beat. For  producing quality publication  graphs, I
+would still stick to matplotlib however. In summary we have:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;D3 allows for high quality data-driven documents;
+&lt;ul&gt;
+&lt;li&gt;May form the basis for dashboard;&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Learning curve is relatively high and requires more amount
+of coding than matplotlib;
+&lt;ul&gt;
+&lt;li&gt;D3 allow  for full  control which comes  at the  cost of
+verbose coding practices;&lt;/li&gt;
+&lt;li&gt;It is flexible, and can produce beautiful graphs (see &lt;a href=&#34;https://www.d3-graph-gallery.com/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;);&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/li&gt;
+&lt;li&gt;Interactivity  is  a  real  benefit  for  D3  compared  to
+matplotlib.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;In future  posts I will  explore the data  visualizations on
+networks a bit more. See you in the next one!&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgfdeda20&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;honorable-mentions&#34;&gt;Honorable mentions&lt;/h2&gt;
+&lt;p&gt;These packages  exist for making  pretty plots in  python or
+can convert to content that can be hosted on the web.&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;a href=&#34;http://mpld3.github.io/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;mpld3&lt;/a&gt; converts matplotlib figures to D3.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://plotly.com/dash/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;plotly  (and  dash)&lt;/a&gt;  use   plotly  to  make  nice  looking
+dashboard.&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://docs.bokeh.org/en/latest/index.html&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Bokeh&lt;/a&gt;: D3 for python&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://proplot.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Proplot&lt;/a&gt;: matplotlib but with sensible defaults&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;https://seaborn.pydata.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Seaborn&lt;/a&gt;: additional functionality on top of matplotlib&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

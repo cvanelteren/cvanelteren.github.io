@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>3 | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/publication-type/3/</link>
+      <atom:link href="https://cvanelteren.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
+    <description>3</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>3</title>
+      <link>https://cvanelteren.github.io/publication-type/3/</link>
+    </image>
+    
+    <item>
+      <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
+      <link>https://cvanelteren.github.io/publication/dynamic_importance2019/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://cvanelteren.github.io/publication/dynamic_importance2019/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

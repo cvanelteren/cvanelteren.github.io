@@ -1,0 +1,1456 @@
+<!DOCTYPE html>
+<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
+<!-- Last Published: May 19, 2023 --><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.c39391f95677ad80cbdeec5f85c81a73.css" />
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Casper van Elteren" />
+
+
+
+
+
+  
+
+<meta name="description" content="Setting up mu4e for office 365 with OAUTH2" />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://cvanelteren.github.io/post/mu4e/" />
+<link rel="canonical" href="https://cvanelteren.github.io/post/mu4e/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#efebda" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@wowchemy" />
+  <meta property="twitter:creator" content="@wowchemy" />
+<meta property="twitter:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" />
+<meta property="og:site_name" content="Casper van Elteren" />
+<meta property="og:url" content="https://cvanelteren.github.io/post/mu4e/" />
+<meta property="og:title" content="Growing pains | Casper van Elteren" />
+<meta property="og:description" content="Setting up mu4e for office 365 with OAUTH2" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-04-23T10:12:27&#43;02:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2021-04-23T10:12:27&#43;02:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://cvanelteren.github.io/post/mu4e/"
+  },
+  "headline": "Growing pains",
+  
+  "datePublished": "2021-04-23T10:12:27+02:00",
+  "dateModified": "2021-04-23T10:12:27+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Casper van Elteren"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Setting up mu4e for office 365 with OAUTH2"
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Growing pains | Casper van Elteren</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="b5db59d63cb81e98eea1243377d6c6fc" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Growing pains</h1>
+
+  
+  <p class="page-subtitle">Setting up mu4e for office 365</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Apr 23, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <p>A few months ago, my work email switched from outlook to office365 and with it came <code>OAUTH2</code>. The transition was coupled with a lack of initial support for receiving email with this security protocol yielding some email clients useless. The goal of this post is to provide future users with some insights on setting up <code>OAUTH2</code> in <code>mu4e</code>.</p>
+<h1 id="what-is-oauth2">What is <code>OAUTH2</code>?</h1>
+<p>In brief, <code>OAUTH2</code> is an authorization framework that enables applications to obtain limited access to user accounts through an HTTP service; applications can request access to user accounts by setting up a host-client secret. In my mind it works similar to ssh, but then for email.</p>
+<h1 id="setting-up-oauth2-in-emacs">Setting up <code>OAUTH2</code> in <code>emacs</code></h1>
+<p>We need to achieve 3 functions; we need to acquire a secret, use this secret to receive the emails, use this secret to send the emails. As an important aside, it is highly recommended to set up some form of password management such that your passwords are not visible of left strangling in clipboard; setting this up is outside the scope of this post.</p>
+<h2 id="acquiring-the-secret">Acquiring the secret</h2>
+<p>Acquiring the  secret may  differ depending  on the service  you are  using. For
+gmail                    for                     example                    look
+<a href="https://support.google.com/googleapi/answer/6158849?hl=en" target="_blank" rel="noopener">here</a>.   For  office
+365 however, it proved a bit more difficult as I did not have access directly to
+the api to setup  these keys through azure. In order to acquire  a secret I used
+<a href="https://gitlab.com/muttmua/mutt/-/blob/master/contrib/mutt_oauth2.py.README" target="_blank" rel="noopener">mutt_oauth2.py</a>, and I used the publically available application id for thunderbird which can be found <a href="https://hg.mozilla.org/comm-central/file/tip/mailnews/base/src/OAuth2Providers.jsm" target="_blank" rel="noopener">here</a>. At the time of writing these are</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">AppID = &#34;08162f7c-0fd2-4200-a84a-f25a4db0b584&#34;
+</span></span><span class="line"><span class="cl">ClientSecret = &#34;TxRBilcHdC6WGBee]fs?QR:SJ8nI[g82&#34;
+</span></span></code></pre></div><p>Acquire <code>mutt_oauth2.py</code> and edit the code with this info. Running the file will then give you a token after logging in with the through your SSO of your company. Now this token is put in a public file, anyone who has acces to this token could theoretically scoop your email. It is therefore crucial to setup a password manager to protect this secret.</p>
+<h2 id="email-receiving">Email receiving</h2>
+<p>I use <code>mbsync</code> for receiving emails and <code>mstmp</code> for sending emails. I again defer to the respective tutorials for setting these up, but I will mention what is important for <code>XOAUTH2</code>. A common setup for <code>mbsync</code> could look something like this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#file: ~/.mbsyncrc
+</span></span><span class="line"><span class="cl"># mbsyncrc based on
+</span></span><span class="line"><span class="cl"># http://www.ict4g.net/adolfo/notes/2014/12/27/EmacsIMAP.html
+</span></span><span class="line"><span class="cl"># ACCOUNT INFORMATION
+</span></span><span class="line"><span class="cl">IMAPAccount office365
+</span></span><span class="line"><span class="cl"># Address to connect to
+</span></span><span class="line"><span class="cl">Host smtp.office365.com
+</span></span><span class="line"><span class="cl">User &lt;EMAIL_HERE&gt;
+</span></span><span class="line"><span class="cl">PassCmd &#34;gpg2 -q --for-your-eyes-only --no-tty -d ~/.emacs.d/mu4e/.mbsyncpass-&lt;EMAIL_HERE&gt;.gpg&#34;
+</span></span><span class="line"><span class="cl">AuthMechs LOGIN
+</span></span><span class="line"><span class="cl">SSLType IMAPS
+</span></span><span class="line"><span class="cl">SSLVersions TLSv1.3
+</span></span><span class="line"><span class="cl">CertificateFile /etc/ssl/certs/ca-certificates.crt
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">IMAPStore office365
+</span></span><span class="line"><span class="cl">Account office365
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">MaildirStore office365-local
+</span></span><span class="line"><span class="cl">SubFolders Verbatim
+</span></span><span class="line"><span class="cl"># The trailing &#34;/&#34; is important
+</span></span><span class="line"><span class="cl">Path ~/Mail/
+</span></span><span class="line"><span class="cl">Inbox ~/Mail/office365/inbox
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">Channel office365
+</span></span><span class="line"><span class="cl">Far :office365-remote:
+</span></span><span class="line"><span class="cl">Near :office365-local:
+</span></span><span class="line"><span class="cl"># Exclude everything under the internal [Gmail] folder, except the interesting folders
+</span></span><span class="line"><span class="cl">Patterns * ![office365]* &#34;[office365]/Sent Mail&#34; &#34;[office365]/Starred&#34; &#34;[office365]/All Mail&#34;
+</span></span><span class="line"><span class="cl"># Or include everything
+</span></span><span class="line"><span class="cl">#Patterns *
+</span></span><span class="line"><span class="cl"># Automatically create missing mailboxes, both locally and on the server
+</span></span><span class="line"><span class="cl">Create Both
+</span></span><span class="line"><span class="cl"># Save the synchronization state files in the relevant directory
+</span></span><span class="line"><span class="cl">SyncState *
+</span></span></code></pre></div><p><code>PassCmd</code> is used to obtain your client secret setup above and <code>Authmechs</code> needs to be set to <code>XOAUTH2</code> for office365 but oddly to <code>LOGIN</code> for gmail. One could also fill in a bare string password to prevent the hassle of setting up password managers, or use <code>python mutt_oauth2.py TOKENFILE</code> to acquire the secret but this is not recommended. We can check whether it works by running <code>mbsync -a</code> from your favorite shell.</p>
+<h1 id="email-sending">Email sending</h1>
+<p>Similar to the setup of <code>mbsync</code>, <code>msmtp</code> can be setup to use a password command
+to  insert the  token.  Note that  you  need  to have  a  version that  supports
+<code>xoauth2</code>, on AUR you can use <code>mstmp-oauth2</code>. A typical setup looks like this</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">#file : ~/.mstmprc 
+</span></span><span class="line"><span class="cl"># Set default values for all following accounts.
+</span></span><span class="line"><span class="cl">defaults
+</span></span><span class="line"><span class="cl">auth           on
+</span></span><span class="line"><span class="cl">tls            on
+</span></span><span class="line"><span class="cl">tls_trust_file /etc/ssl/certs/ca-certificates.crt
+</span></span><span class="line"><span class="cl">logfile        ~/.msmtp.log
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Outlook
+</span></span><span class="line"><span class="cl">account        outlook
+</span></span><span class="line"><span class="cl">host           smtp.office365.com
+</span></span><span class="line"><span class="cl">port           587
+</span></span><span class="line"><span class="cl">auth           xoauth2
+</span></span><span class="line"><span class="cl">from           username@outlook.com
+</span></span><span class="line"><span class="cl"># not necessary
+</span></span><span class="line"><span class="cl"># user           username
+</span></span><span class="line"><span class="cl"># not recommended
+</span></span><span class="line"><span class="cl">password       plain-text-password
+</span></span><span class="line"><span class="cl"># recommended
+</span></span><span class="line"><span class="cl">passwordeval   &lt;Password retrieval command&gt;
+</span></span><span class="line"><span class="cl">...
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"># Set a default account (optional)
+</span></span><span class="line"><span class="cl">account default : outlook
+</span></span></code></pre></div><p>We can now receive and send email. As coup de grâce we have to setup mu4e to start using email from emacs.</p>
+<h1 id="mu4e">Mu4e</h1>
+<p>At the time of writing I am using doom emacs which has some wrappers for common long commands; substitute for default emacs accordingly. &ldquo;Modern&rdquo; mu4e uses contexts to setup various emails addresses. I will highlight the relevant parts for mu4e setup to make our setup work. In short, we need to tell <code>mu</code> use <code>mbsync</code> to retrieve emails and <code>msmtp</code> to send emails.</p>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/highlight.min.js"></script>
+<script src="//cdnjs.cloudflare.com/ajax/libs/highlight.js/8.4/languages/elisp.min.js"></script>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-lisp" data-lang="lisp"><span class="line"><span class="cl"><span class="p">(</span><span class="nv">after!</span> <span class="nv">mu4e</span>
+</span></span><span class="line"><span class="cl"> <span class="p">(</span><span class="k">setq</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">;; set correct path</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">sendmail-program</span> <span class="s">&#34;/usr/sbin/msmtp&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">mu4e-root-maildir</span> <span class="s">&#34;~/Mail&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">mu4e-mu4e-mail-path</span> <span class="s">&#34;~/Mail&#34;</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">send-mail-function</span>  <span class="ss">&#39;smtpmail-send-it</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">;; remove adding username --&gt; msmtp takes care of this</span>
+</span></span><span class="line"><span class="cl">   <span class="nv">message-sendmail-f-is-evil</span> <span class="no">t</span>
+</span></span><span class="line"><span class="cl">   <span class="c1">;; read who is sending the email </span>
+</span></span><span class="line"><span class="cl">   <span class="nv">message-sendmail-extra-arguments</span> <span class="o">&#39;</span><span class="p">(</span><span class="s">&#34;--read-envelope-from&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">(</span><span class="nv">make-mu4e-context</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">:name</span>  <span class="s">&#34;office365&#34;</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">:match-func</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">(</span><span class="nv">msg</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">(</span><span class="nb">when</span> <span class="nv">msg</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">(</span><span class="nv">string-prefix-p</span> <span class="s">&#34;/office365&#34;</span> <span class="p">(</span><span class="nv">mu4e-message-field</span> <span class="nv">msg</span> <span class="ss">:maildir</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">                                      <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                     <span class="p">)</span>
+</span></span><span class="line"><span class="cl">                   <span class="p">)</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">:enter-func</span> <span class="p">(</span><span class="nb">lambda</span> <span class="p">()</span> <span class="p">(</span><span class="nv">mu4e-message</span> <span class="s">&#34;Entering work contenxt&#34;</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">     <span class="c1">;; relevant bits</span>
+</span></span><span class="line"><span class="cl">     <span class="ss">:vars</span> <span class="o">&#39;</span><span class="p">(</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">mu4e-sent-folder</span> <span class="o">.</span> <span class="s">&#34;/office365/Sent Items&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">mu4e-drafts-folder</span> <span class="o">.</span> <span class="s">&#34;/office365/Drafts&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">mu4e-inbox-folder</span> <span class="o">.</span> <span class="s">&#34;/office365/inbox&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">smtpmail-local-domain</span> <span class="o">.</span> <span class="s">&#34;office365&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">smtpmail-smtp-server</span> <span class="o">.</span> <span class="s">&#34;smtp.office365.com&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">smtpmail-default-smtp-server</span> <span class="o">.</span> <span class="s">&#34;smtp.office365.com&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">user-mail-address</span> <span class="o">.</span> <span class="s">&#34;&lt;user email address&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="c1">;; name setup in mbsync</span>
+</span></span><span class="line"><span class="cl">             <span class="p">(</span><span class="nv">mu4e-get-mail-command</span> <span class="o">.</span> <span class="s">&#34;mbsync office365&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">             <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">)</span>
+</span></span></code></pre></div><p>As a final step, we need to setup <code>mu</code> itself. From your favorite shell write:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-fallback" data-lang="fallback"><span class="line"><span class="cl">mu init --maildir ~/Mail --my-address=&lt;User address&gt; &amp;&amp; mu index
+</span></span></code></pre></div><p>&hellip;and we are done! You can now use mu4e to send and receive emails from emacs, happy hacking 😉!</p>
+<!-- # Setting up password manager -->
+<!-- https://avaldes.co/2020/01/28/secret-service-keepassxc.html -->
+<!-- # Using msmtp -->
+<!-- https://tushartyagi.com/blog/configure-mu4e-and-msmtp/ -->
+<!-- # Setting up different accounts  -->
+<!-- https://www.djcbsoftware.nl/code/mu/mu4e/Contexts.html -->
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/emacs/">emacs</a>
+  
+  <a class="badge badge-light" href="/tag/coding/">coding</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Growing%20pains&amp;body=https%3A%2F%2Fcvanelteren.github.io%2Fpost%2Fmu4e%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fcvanelteren.github.io%2Fpost%2Fmu4e%2F&amp;title=Growing&#43;pains" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://cvanelteren.github.io"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q75_lanczos_center.jpg" alt="Casper van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://cvanelteren.github.io">Casper van Elteren</a></h5>
+      <h6 class="card-subtitle">Computational scientist | Data scientist | Tinkerer</h6>
+      <p class="card-text">I am a computational scientist interested in data analysis, visualization and software engineering.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/cv" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2023 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.1d4346c6f7d46c340dc0a9058dd85c13.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.c84202fca2a6efbbecbaf0e8358c1d51.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
