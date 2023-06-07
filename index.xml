@@ -6266,7 +6266,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-276983541&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-218934756&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -6276,7 +6276,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-276983541&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-218934756&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
