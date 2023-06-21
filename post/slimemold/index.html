@@ -281,7 +281,8 @@
 
   
 
-<meta name="description" content="&lt;!DOCTYPE html&gt; Table of Contents TLDR Introduction The Plan Why Nim? Modeling a slime mold Code layout Modeling an agent Agent movement Agent sensing Modeling the world Connecting Nim to Javascript What is webpack?" />
+<meta name="description" content="&lt;!DOCTYPE html&gt; author: Casper van Elteren bibliography:
+~/library.bib title: Simulating slime molds from scratch TLDR Slime molds are amazing creatures that can solve complex problems without a central cognitive unit I build a simulation from scratch in Nim and visualize it with d3 The simulation runs and can be controlled directly from the browser Introduction Human are fascinating creatures." />
 
 
 
@@ -323,7 +324,8 @@
 <meta property="og:site_name" content="Casper van Elteren" />
 <meta property="og:url" content="https://cvanelteren.github.io/post/slimemold/" />
 <meta property="og:title" content="Slimemold | Casper van Elteren" />
-<meta property="og:description" content="&lt;!DOCTYPE html&gt; Table of Contents TLDR Introduction The Plan Why Nim? Modeling a slime mold Code layout Modeling an agent Agent movement Agent sensing Modeling the world Connecting Nim to Javascript What is webpack?" /><meta property="og:image" content="https://cvanelteren.github.io/post/slimemold/featured.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:description" content="&lt;!DOCTYPE html&gt; author: Casper van Elteren bibliography:
+~/library.bib title: Simulating slime molds from scratch TLDR Slime molds are amazing creatures that can solve complex problems without a central cognitive unit I build a simulation from scratch in Nim and visualize it with d3 The simulation runs and can be controlled directly from the browser Introduction Human are fascinating creatures." /><meta property="og:image" content="https://cvanelteren.github.io/post/slimemold/featured.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
@@ -382,7 +384,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "\u003c!DOCTYPE html\u003e Table of Contents TLDR Introduction The Plan Why Nim? Modeling a slime mold Code layout Modeling an agent Agent movement Agent sensing Modeling the world Connecting Nim to Javascript What is webpack?"
+  "description": "\u003c!DOCTYPE html\u003e author: Casper van Elteren bibliography:\n~/library.bib title: Simulating slime molds from scratch TLDR Slime molds are amazing creatures that can solve complex problems without a central cognitive unit I build a simulation from scratch in Nim and visualize it with d3 The simulation runs and can be controlled directly from the browser Introduction Human are fascinating creatures."
 }
 </script>
 
@@ -881,7 +883,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    12 min read
+    17 min read
   </span>
   
 
@@ -915,483 +917,803 @@
   <title></title>
 </head>
 <body>
-   <h1 id="table-of-contents">Table of Contents</h1>
-<ol>
-<li><a href="#org321926f">TLDR</a></li>
-<li><a href="#orgb14fe87">Introduction</a></li>
-<li><a href="#org422886a">The Plan</a></li>
-<li><a href="#org01246cc">Why Nim?</a></li>
-<li><a href="#org26937da">Modeling a slime mold</a>
-<ol>
-<li><a href="#orga51136c">Code layout</a></li>
-<li><a href="#org0b04d28">Modeling an agent</a>
-<ol>
-<li><a href="#orge56a2cb">Agent movement</a></li>
-<li><a href="#org45acdb5">Agent sensing</a></li>
-</ol>
-</li>
-</ol>
-</li>
-<li><a href="#org29e8b8d">Modeling the world</a></li>
-<li><a href="#orgea2eb32">Connecting Nim to Javascript</a>
-<ol>
-<li><a href="#orgb02354a">What is webpack?</a></li>
-</ol>
-</li>
-<li><a href="#org6473a16">Building the applet</a></li>
-<li><a href="#orgd273740">Discussion</a></li>
-<li><a href="#orge87ff44">Conclusions</a></li>
-</ol>
-<p><a id="org321926f"></a></p>
+   <hr>
+<p>author: Casper van Elteren
+bibliography:</p>
+<ul>
+<li>~/library.bib
+title: Simulating slime molds from scratch</li>
+</ul>
+<hr>
 <h1 id="tldr">TLDR</h1>
 <ul>
-<li>Slime molds  are amazing creatures that  can solve complex
-problems without a central cognitive unit</li>
-<li>I build a simulation from  scratch in Nim and visualize it
-with d3</li>
-<li>The simulation  runs and  can be controlled  directly from
-the browser</li>
+<li>Slime molds are amazing creatures that can solve complex problems
+without a central cognitive unit</li>
+<li>I build a simulation from scratch in Nim and visualize it with d3</li>
+<li>The simulation runs and can be controlled directly from the browser</li>
 </ul>
 <div id ="slimeMold"></div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script type="module" src = "../../scripts/nim_loader/bundle.js"> </script>
-<p><a id="orgb14fe87"></a></p>
 <h1 id="introduction">Introduction</h1>
-<p>Human  are  fascinating  creatures.  We  like  to  think  of
-ourselves as having an identity, a sense of “self” or <em>ego</em>.
-We like to think of ourselves having a career or skills and
-hardly express (at least in common speech) about interaction
-with our environment. But what if you can be both?</p>
+<p>Human are fascinating creatures. We like to think of ourselves as having
+an identity, a sense of &ldquo;self&rdquo; or <em>ego</em>. We like to think of ourselves
+having a career or skills and hardly express (at least in common speech)
+about interaction with our environment. But what if you can be both?</p>
 <p>
-<figure  id="figure-slime-molds-form-spores-to-explore-the-environment-in-the-hunt-for-food">
+<figure  id="figure-slimemoldspores">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemold.jpg" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimemold.jpg" alt="Slime molds form spores to explore the environment in the hunt for
+food." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      Slime molds form spores to explore the environment in the hunt for food.
+      slimeMoldSpores
     </figcaption></figure>
 </p>
-<p>In nature, we  often do not consider other forms  of live as
-having an  ego. A  bird is considered  a bird  that interact
-purely with its environment because it cannot control to the
-same extent as we do. Some organism, however, exhibit a life
-that  could be  expressed as  living on  a spectrum  between
-operating as an  individual and as a  singular organism. The
-slime mold is one such creature.  The slime mold is a single
-celled  eukaryotic (=  having a  nucleus) organism  that can
-form spores. These spores  are often produces when different
-slime molds group together to form a multi-cellular organism
-(<a href="#org0d3a780">5</a>)</p>
+<p>In nature, we often do not consider other forms of live as having an
+ego. A bird is considered a bird that interact purely with its
+environment because it cannot control to the same extent as we do. Some
+organism, however, exhibit a life that could be expressed as living on a
+spectrum between operating as an individual and as a singular organism.
+The slime mold is one such creature. The slime mold is a single celled
+eukaryotic (= having a nucleus) organism that can form spores. These
+spores are often produces when different slime molds group together to
+form a multi-cellular organism (<a href="#fig:slimeMoldSpores">1</a>)</p>
 <p>
-<figure  id="figure-the-slime-mold-can-solve-a-maze-by-forming-spores-when-a-food-source-is-found-the-branches-that-did-not-find-food-are-trimmed-this-results-in-a-network-structure-with-highly-efficient-path-distances">
+<figure  id="figure-maze">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemold_maze.webp" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimemold_maze.webp" alt="The slime mold can solve a maze by forming spores. When a food source
+is found the branches that did not find food are trimmed. This results
+in a network structure with highly efficient path
+distances." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      The slime mold can solve a maze by forming spores. When a food source is found the branches that did not find food are trimmed. This results in a network structure with highly efficient path distances.
+      maze
     </figcaption></figure>
 </p>
-<p>Slime molds  are particularly interesting as  scientists have
-studied  them extensively  for their  computational ability.
-When slime  molds search for  food, they extend in  space by
-producing spores.  Initially, the search is  randomly around
-them, but as soon as these  spores find food, the slime mold
-increases  the “traffic”  to these  spores. Scientists  have
-studied this behavior and found  that the slime mold is able
-to solve mazes (<a href="#org53ae32d">7</a>), <a href="https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network" target="_blank" rel="noopener">reproduce the tokyo metro network</a></p>
+<p>Slime molds are particularly interesting as scientists have studied them
+extensively for their computational ability. When slime molds search for
+food, they extend in space by producing spores. Initially, the search is
+randomly around them, but as soon as these spores find food, the slime
+mold increases the &ldquo;traffic&rdquo; to these spores. Scientists have studied
+this behavior and found that the slime mold is able to solve mazes
+(<a href="#fig:maze">2</a>), <a href="https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network" target="_blank" rel="noopener">reproduce the tokyo metro
+network</a></p>
 <p>
 <figure  >
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimeMoldTokyo.png" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimeMoldTokyo.png" alt="" loading="lazy" data-zoomable /></div>
   </div></figure>
 </p>
-<p>What is amazing about this organism is that it can do all of
-this without “knowing” the  general surrounding. There is no
-generalized  intelligence,  or   forward  planning.  Through
-interactions with its environment  the organism can organize
-and solve complex problems.</p>
-<p>In  this post,  I want  to  explore the  properties of  this
-organism by building a  agent-based simulation from scratch.
-In addition,  I want  to explore visualizing  the simulation
-on a web page directly without the use of videos.</p>
-<p><a id="org422886a"></a></p>
+<p>What is amazing about this organism is that it can do all of this
+without &ldquo;knowing&rdquo; the general surrounding. There is no generalized
+intelligence, or forward planning. Through interactions with its
+environment the organism can organize and solve complex problems.</p>
+<p>In this post, I want to explore the properties of this organism by
+building a agent-based simulation from scratch. In addition, I want to
+explore visualizing the simulation on a web page directly without the
+use of videos.</p>
 <h1 id="the-plan">The Plan</h1>
-<p>The goal is  to create a simulator that can  be run directly
-from the browser (<a href="#org2ed984f">13</a>). I will use Nim (<a href="#orgdeb1bfa">14</a> to
-make   the  computational   model,  and   create  a   visual
-application  by   using  javascript   and  D3.   The  visual
-components will have a control  box that can control various
-aspects  of the  simulation such  as starting  and stopping,
-controlling  the number  of agents,  the decay  rate of  the
-resources and so on.</p>
+<p>The goal is to create a simulator that can be run directly from the
+browser (<a href="#fig:outline">3</a>). I will use Nim (<a href="#nimmer">4</a> to make the
+computational model, and create a visual application by using javascript
+and D3. The visual components will have a control box that can control
+various aspects of the simulation such as starting and stopping,
+controlling the number of agents, the decay rate of the resources and so
+on.</p>
 <p>
-<figure  id="figure-coarse-outline-of-the-different-components">
+<figure  id="figure-outline">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimeMoldSimulationOverview.drawio.png" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimeMoldSimulationOverview.drawio.png" alt="Coarse outline of the different
+components." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      Coarse outline of the different components.
+      outline
     </figcaption></figure>
 </p>
-<p><a id="org01246cc"></a></p>
 <h1 id="why-nim">Why Nim?</h1>
-<p>Nim  is a  pretty  nifty language  that  writes (and  feels)
-similar to  python, except  that it  is strongly  typed. The
-strength of Nim is that it compiles to javascript, or c/cpp.
-It was created  in 2005 and released to the  public in 2008.
-Compared ot  cpp or c  it has  more features that  you would
-expect from  a modern languages. For  example, checking that
-am member is  contained with in a list (or  sequence in Nim)
-can be  readily done with the  `in` command or added  with a
-`contains` function (called `proc`(ess) in Nim). In the past
-I have written some posts about Nim and its cool features of
-bridging         between         different         languages
-<a href="http://cvanelteren.github.io/tags/nim" target="_blank" rel="noopener">http://cvanelteren.github.io/tags/nim</a>),  an decided  to
-solve the  advent of code  challenges in Nim to  explore the
-language and its capabilities.</p>
-<p><a id="org26937da"></a></p>
+<p>Nim is a pretty nifty language that writes (and feels) similar to
+python, except that it is strongly typed. The strength of Nim is that it
+compiles to javascript, or c/cpp. It was created in 2005 and released to
+the public in 2008. Compared ot cpp or c it has more features that you
+would expect from a modern languages. For example, checking that am
+member is contained with in a list (or sequence in Nim) can be readily
+done with the `in` command or added with a `contains` function
+(called `proc`(ess) in Nim). In the past I have written some posts
+about Nim and its cool features of bridging between different languages
+<a href="http://cvanelteren.github.io/tags/nim" target="_blank" rel="noopener">http://cvanelteren.github.io/tags/nim</a>), an decided to solve the advent
+of code challenges in Nim to explore the language and its capabilities.</p>
 <h1 id="modeling-a-slime-mold">Modeling a slime mold</h1>
 <ul>
 <li>Describe the stages of the slime mold</li>
 <li>Describe the movement vector</li>
 </ul>
-<p>The  computational properties  of the  slime mold  have been
-studied extensively  both from  a biological  perspective as
-well                    as                   computationally
-&lt;@Jones2010,@Ito2003,Kessler1993&gt;.  Arguebly, one  of the
-simplest approach is done  by &lt;@Jones2010&gt;. He applies an
-agent-based  approach to  study the  pattern formation  that
-emerges through the interaction of slime mold agents.</p>
+<p>The computational properties of the slime mold have been studied
+extensively both from a biological perspective as well as
+computationally cite:@Jones2010,@Ito2003,Kessler1993. Arguebly, one of
+the simplest approach is done by cite:@Jones2010. He applies an
+agent-based approach to study the pattern formation that emerges through
+the interaction of slime mold agents.</p>
 <p>
-<figure  id="figure-representation-of-slimemold-agent-from-jones2010-the-agent-drops-resources-in-space-at-its-location-with-a-certain-activity-a_i-each-agent-possess-3-sensors-at--18-pi-0-18-pi-each-of-these-sensors-have-a-reach-and-a-width-at-which-they-can-sense-resources-dropped">
+<figure  id="figure-agent">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/fig:agent.png" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/fig:agent.png" alt="Representation of slimemold agent (from cite:@Jones2010). The agent
+drops resources in space at its location with a certain activity $A_i$
+Each agent possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors
+have a reach and a width at which they can sense resources
+dropped." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      Representation of slimemold agent (from &lt;@Jones2010&gt;). The agent drops resources in space at its location with a certain activity $A_i$ Each agent possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors have a reach and a width at which they can sense resources dropped.
+      agent
     </figcaption></figure>
 </p>
-<p>Each slimemold is modeled as an agent in 2D space possessing
-different  sensors   (<a href="#org261ff05">18</a>).  Each  agent   drops  food
-resources in the environment  with activity $A_i$ that other
-agents can sense. The agents have $n$ sensors that can sense
-location at  distance $R_i$ from  the agent of  width $W_i$.
-When  a food  source is  sensed  by the  sensors, the  agent
-orientates  and moves  towards the  sensor with  the largest
-concentration.  If the  propposed  location  is occupied  by
-another object, the angle will  pick a random angle. When an
-agent  does not  move, he  does  not drop  resources in  the
-environment. Over time, the dropped food source will decay
-from the environment with rate $\delta$.</p>
-<p>From  these   simple  dynamics,   agents  can   form  chains
-(<a href="#orgfcb7448">21</a>)  and  with  enough agents  will  form  networks
-(<a href="#orgd0dad84">22</a>).  The emergence  of networks,  occurs through
-the fact that each agent</p>
+<p>Each slimemold is modeled as an agent in 2D space possessing different
+sensors (<a href="#fig:agent">4</a>). Each agent drops food resources in the
+environment with activity $A_i$ that other agents can sense. The agents
+have $n$ sensors that can sense location at distance $R_i$ from the
+agent of width $W_i$. When a food source is sensed by the sensors, the
+agent orientates and moves towards the sensor with the largest
+concentration. If the propposed location is occupied by another object,
+the angle will pick a random angle. When an agent does not move, he does
+not drop resources in the environment. Over time, the dropped food
+source will decay from the environment with rate $\delta$.</p>
+<p>From these simple dynamics, agents can form chains (<a href="#fig:chains">5</a>)
+and with enough agents will form networks (<a href="#fig:networks">6</a>). The
+emergence of networks, occurs through the fact that each agent</p>
 <p>
-<figure  id="figure-slimemold-agents-can-form-chains-and-networks-through-the-simple-dynamics-described-in-18org261ff05-from-">
+<figure  id="figure-chains">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemoldchains.png" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimemoldchains.png" alt="Slimemold agents can form chains and networks through the simple
+dynamics described in &lt;a href=&#34;fig:agent&#34;&gt;fig:agent&lt;/a&gt; (from
+cite:Jones@2010)." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      Slimemold agents can form chains and networks through the simple dynamics described in <a href="#org261ff05">18</a> (from <a href="mailto:Jones@2010">Jones@2010</a>).
-    </figcaption></figure>
-</p>
-<p>
-<figure  id="figure-slime-molds-can-form-networks-over-time-from-top-left-to-right-bottom-the-time-increases-in-the-top-left-image-the-agents-are-spawn-at-a-random-location-as-the-simulation-develops-the-agents-will-form-networks-from-">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemoldnetworks.png" alt="img" loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      Slime molds can form networks over time. From top left to right bottom the time increases. In the top left image, the agents are spawn at a random location. As the simulation develops, the agents will form networks (from <Jones2010>).
+      chains
     </figcaption></figure>
 </p>
 <p>
-<figure  id="figure-when-food-sources-are-placed-in-the-environment-black-dots-the-agents-will-form-a-efficient-path-between-the-resources-from-jones2010">
+<figure  id="figure-networks">
   <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/minimum_resources.png" alt="img" loading="lazy" data-zoomable /></div>
+    <div class="w-100" ><img src="./figures/slimemold/slimemoldnetworks.png" alt="Slime molds can form networks over time. From top left to right bottom
+the time increases. In the top left image, the agents are spawn at a
+random location. As the simulation develops, the agents will form
+networks (from
+cite:Jones2010)." loading="lazy" data-zoomable /></div>
   </div><figcaption>
-      When food sources are placed in the environment (black dots), the agents will form a efficient path between the resources (from &lt;@Jones2010&gt;).
+      networks
     </figcaption></figure>
 </p>
-<p>The  dropped  resources  emulate  how  a  slime  mold  would
-communicate to  other slime  molds that  there is  some food
-source  nearby.  Jones  ran computational  simulations  that
-emulated food  sources in  the environment.  Remarkable, the
-agents  will produce  a minimum  spanning tree  (or network)
-between the food resources (<a href="#org6131f31">23</a>).</p>
-<p><a id="orga51136c"></a></p>
+<p>
+<figure  id="figure-minimum_resources">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/slimemold/minimum_resources.png" alt="When food sources are placed in the environment (black dots), the
+agents will form a efficient path between the resources (from
+cite:@Jones2010)." loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      minimum_resources
+    </figcaption></figure>
+</p>
+<p>The dropped resources emulate how a slime mold would communicate to
+other slime molds that there is some food source nearby. Jones ran
+computational simulations that emulated food sources in the environment.
+Remarkable, the agents will produce a minimum spanning tree (or network)
+between the food resources (<a href="#fig:minimum_resources">7</a>).</p>
 <h2 id="code-layout">Code layout</h2>
-<p><Jones2010> provides an elegant  description of a minimal
-agent-based  model for  the slime  mold. To  the best  of my
-knowledge no  implementation of  this model is  available on
-the  internet, so  I decided  to implement  it in  Nim. What
-follows is a bird’s eye  description of the relevant methods
-implemented in Nim. For the source code please see the listed
-source below.</p>
-<p>The simulation would  need a way to represent  the world the
-agents can  move in, and  a description of <em>how</em>  the agents
-can interact  with this world.  To structure my  approach, I
-propose the following code layout:</p>
-<pre><code>src
-├── agents.nim
-├── index.js
-├── main.nim
-├── types.nim
-├── utils.nim
-└── world.nim
-</code></pre>
-<p>The file names are ordered where the file name reflects what
-can be found  in it. For example,  `agents.nim` will contain
-methods   that  describe   how  agents   behave.  Similarly,
-`types.nim` will describe the  various <em>objects</em> such as the
-world and the agent and so  on. The main endpoint for nim is
-contained in  `main.nim`. Inside this file,  the methods are
-described   that  are   exported   to  javascript.   Lastly,
-`index.js` will  contain the applet with  the visualizations
-of the simulation.</p>
-<p><a id="org0b04d28"></a></p>
+<p>cite:Jones2010 provides an elegant description of a minimal agent-based
+model for the slime mold. To the best of my knowledge no implementation
+of this model is available on the internet, so I decided to implement it
+in Nim. What follows is a bird&rsquo;s eye description of the relevant methods
+implemented in Nim. For the source code please see the listed source
+below.</p>
+<p>The simulation would need a way to represent the world the agents can
+move in, and a description of <em>how</em> the agents can interact with this
+world. To structure my approach, I propose the following code layout:</p>
+<div class="captioned-content">
+<div class="caption">
+<p>Layout of the various components used to generate the simulation</p>
+</div>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl"><span class="n">src</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">agents</span><span class="o">.</span><span class="n">nim</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">index</span><span class="o">.</span><span class="n">js</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">main</span><span class="o">.</span><span class="n">nim</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">types</span><span class="o">.</span><span class="n">nim</span>
+</span></span><span class="line"><span class="cl"><span class="err">├──</span> <span class="n">utils</span><span class="o">.</span><span class="n">nim</span>
+</span></span><span class="line"><span class="cl"><span class="err">└──</span> <span class="n">world</span><span class="o">.</span><span class="n">nim</span>
+</span></span></code></pre></div></div>
+<p>The file names are ordered where the file name reflects what can be
+found in it. For example, `agents.nim` will contain methods that
+describe how agents behave. Similarly, `types.nim` will describe the
+various <em>objects</em> such as the world and the agent and so on. The main
+endpoint for nim is contained in `main.nim`. Inside this file, the
+methods are described that are exported to javascript. Lastly,
+`index.js` will contain the applet with the visualizations of the
+simulation.</p>
 <h2 id="modeling-an-agent">Modeling an agent</h2>
-<p>Each agent is  represented as a struct  containing data such
-as its position, speed, activity and so on.</p>
-<pre><code># file: types.nim
-type
-  Agent* = ref object
-    name*: int
-    pos*: Point
-    angle*, speed*, sensitivity*, activity*: float
-    sensor_reach*, sensor_width*: int
-    sensors*: seq[float]
-    noise*: float # controls noise added to a movement [ignore for now]
-</code></pre>
-<p>Th  e most important factors the  snippet above are the sensor
-related data (sensors, reach and width), the activity (which
-controls how much resource an agent drops after moving). The
-noise  parameter control  how much  noise is  added to  each
-movement of the agent. For the simulations presented here it
-can be ignored.</p>
+<p>Each agent is represented as a struct containing data such as its
+position, speed, activity and so on.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c"># file: types.nim</span>
+</span></span><span class="line"><span class="cl"><span class="k">type</span>
+</span></span><span class="line"><span class="cl">  <span class="n">Agent</span><span class="o">*</span> <span class="o">=</span> <span class="k">ref</span> <span class="k">object</span>
+</span></span><span class="line"><span class="cl">    <span class="n">name</span><span class="o">*</span><span class="p">:</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pos</span><span class="o">*</span><span class="p">:</span> <span class="n">Point</span>
+</span></span><span class="line"><span class="cl">    <span class="n">angle</span><span class="o">*</span><span class="p">,</span> <span class="n">speed</span><span class="o">*</span><span class="p">,</span> <span class="n">sensitivity</span><span class="o">*</span><span class="p">,</span> <span class="n">activity</span><span class="o">*</span><span class="p">:</span> <span class="kt">float</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sensor_reach</span><span class="o">*</span><span class="p">,</span> <span class="n">sensor_width</span><span class="o">*</span><span class="p">:</span> <span class="kt">int</span>
+</span></span><span class="line"><span class="cl">    <span class="n">sensors</span><span class="o">*</span><span class="p">:</span> <span class="kt">seq</span><span class="o">[</span><span class="kt">float</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">noise</span><span class="o">*</span><span class="p">:</span> <span class="kt">float</span> <span class="c"># controls noise added to a movement [ignore for now]</span>
+</span></span></code></pre></div><p>Th e most important factors the snippet above are the sensor related
+data (sensors, reach and width), the activity (which controls how much
+resource an agent drops after moving). The noise parameter control how
+much noise is added to each movement of the agent. For the simulations
+presented here it can be ignored.</p>
 <p>In each simulation step, each agent will</p>
 <ul>
 <li>attempt to move into the direction it is currently facing</li>
-<li>sense nearby  resources and  orientate itself  towards the
-sensor with the maximum sensed resource</li>
+<li>sense nearby resources and orientate itself towards the sensor with
+the maximum sensed resource</li>
 </ul>
-<p><a id="orge56a2cb"></a></p>
 <h3 id="agent-movement">Agent movement</h3>
-<p>We  have to  therefore  right two  functions that  represent
-these abilities. For move we</p>
-<pre><code># file: agent.nim
-proc move*(a: var Agent, world: var World) =
-  # update agent position
-  # move in current direction on grid cell
-  var proposal = a.pos + (a.speed * cos(a.angle),  a.speed * sin(a.angle))
-  if a.noise &gt; 0:
-    if rand(1.0) &lt; a.noise:
-      proposal.x += (rand(1.0) * 2 - 1) * a.speed
-      proposal.y += (rand(1.0) * 2 - 1) * a.speed
-  proposal.check_boundary(world)
-  # check if there is another agent at new location
-  if not is_occupied(proposal, world):
-    a.pos = proposal
-    a.deposit(world)
-  # assume random directiom
-  else:
-    # default model behavior
-    a.angle = rand_angle()
-</code></pre>
-<p>The agent will  attempt to move to  the `proposal` location.
-If  the  move  can  be  made  (no  object  present  at  that
-location), the agent will   put resources  at the  agents
-location in into  the world object (see  <a href="#org29e8b8d">6</a>)
-and move towards the proposal  location. When no move can be
-made,  the agent  will  not perform  a  deposit action,  but
+<p>We have to therefore right two functions that represent these abilities.
+For move we</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c"># file: agent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">move</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="kd">var</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="kd">var</span> <span class="n">World</span><span class="p">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># update agent position</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># move in current direction on grid cell</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span> <span class="n">proposal</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">pos</span> <span class="o">+</span> <span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">angle</span><span class="p">),</span>  <span class="n">a</span><span class="p">.</span><span class="n">speed</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">angle</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="n">a</span><span class="p">.</span><span class="n">noise</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="n">rand</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">&lt;</span> <span class="n">a</span><span class="p">.</span><span class="n">noise</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">      <span class="n">proposal</span><span class="p">.</span><span class="n">x</span> <span class="o">+=</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">.</span><span class="n">speed</span>
+</span></span><span class="line"><span class="cl">      <span class="n">proposal</span><span class="p">.</span><span class="n">y</span> <span class="o">+=</span> <span class="p">(</span><span class="n">rand</span><span class="p">(</span><span class="mf">1.0</span><span class="p">)</span> <span class="o">*</span> <span class="mi">2</span> <span class="o">-</span> <span class="mi">1</span><span class="p">)</span> <span class="o">*</span> <span class="n">a</span><span class="p">.</span><span class="n">speed</span>
+</span></span><span class="line"><span class="cl">  <span class="n">proposal</span><span class="p">.</span><span class="n">check_boundary</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># check if there is another agent at new location</span>
+</span></span><span class="line"><span class="cl">  <span class="k">if</span> <span class="ow">not</span> <span class="n">is_occupied</span><span class="p">(</span><span class="n">proposal</span><span class="p">,</span> <span class="n">world</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">.</span><span class="n">pos</span> <span class="o">=</span> <span class="n">proposal</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">.</span><span class="n">deposit</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># assume random directiom</span>
+</span></span><span class="line"><span class="cl">  <span class="k">else</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># default model behavior</span>
+</span></span><span class="line"><span class="cl">    <span class="n">a</span><span class="p">.</span><span class="n">angle</span> <span class="o">=</span> <span class="n">rand_angle</span><span class="p">()</span>
+</span></span></code></pre></div><p>The agent will attempt to move to the `proposal` location. If the move
+can be made (no object present at that location), the agent will put
+resources at the agents location in into the world object (see
+[6](#Modeling the world)) and move towards the proposal location. When
+no move can be made, the agent will not perform a deposit action, but
 merely choose a random new angle.</p>
-<p><a id="org45acdb5"></a></p>
 <h3 id="agent-sensing">Agent sensing</h3>
-<p>Each simulation  step, the agent  will probe the  sensors it
-has  for resources,  and  orientate  themselves towards  the
-sensor that has the most  resources. If all sensors have the
-same concentration of resources, the agent will continue straight.</p>
-<pre><code># file: agent.nim
-proc sense*(a: var Agent, world: World): float =
-  # get chemical  from sensors
-  #
-  # The  trail  data  structure  is subjected  to  a  simple
-  # diffusion  operator after  every system  step (a  system
-  # step is defined as a sensory sampling of the environment
-  # and attempted  forward movement for every  member of the
-  # population). The diffusion operator  takes the form of a
-  # pseudoparallel simple mean filter in a 3 × 3 kernel that
-  # is  subject  to  an  adjustable decay  value  to  affect
-  # chemoattractant persistence.
-<h1 id="var-concentrations-tablepoint-float">var concentrations: Table[Point, float]</h1>
-<p>var
-concentrations = newSeqWith(a.sensors.len, 0.0)
-prop: Point
-resource: float
-angle: float</p>
-<p>for idx, direction in a.sensors:
-angle = a.angle + direction
-for width in 1..(a.sensor_width):
-let tmp: Point = (x: a.sensor_reach.float * cos(angle),
-y: a.sensor_reach.float * sin(angle))
-prop.x = tmp.x + a.pos.x
-prop.y = tmp.y + a.pos.y</p>
-<pre><code>  prop.check_boundary(world)
-  resource = world.data[prop.x.floor.int][prop.y.floor.int]
-  # threshold activity
-  if resource &amp;gt;= a.sensitivity:
-    concentrations[idx] += resource
-</code></pre>
-<p>result = a.follow_gradient(concentrations)
-</code></pre></p>
-<p><a id="org29e8b8d"></a></p>
-<h1 id="modeling-the-world">Modeling the world</h1>
-<p>The agents are  not interacting in a vacuum,  there is world
-to be created! The world object will hold the agents, and a 2D plane on which
-the agents  can deposit resources. The  resources over time
-will decay  to produce  a trail map.  The update  will occur
-synchronously for all agents. That is, each agent is updated
-in random order with a  current (frozen) state of the world.
-The new data will form the next step in the simulation.</p>
-<pre><code>proc difuse*(world: var World)  =
-  # update synchronously the world trail
-  var
-    new_data = newSeqWith(world.data.len,
-                            newSeqWith(world.data.len, 0.0))
-    n = world.xmax * world.ymax
-    z = 1/(float moore.len)
-    pos: Point
-    val, y: float
-<p>for idx in 0..&lt;n:
-pos = un(idx, world.xmax, world.ymax)
-val = difuse_on_point(pos.x.int, pos.y.int, world)
-y = world.data[pos.x.int][pos.y.int]
-new_data[pos.x.int][pos.y.int] =  y + world.decay * (val * z - 2 * y)
-world.data = new_data
-</code></pre></p>
-<p><a id="orgea2eb32"></a></p>
-<h1 id="connecting-nim-to-javascript">Connecting Nim to Javascript</h1>
-<p>In the  end, we want to  view the output of  our hard labor.
-Although Nim  is a nice language  to write in, it  lacks the
-eco  system that  other languages  such as  python has.  For
-plotting,  great  toolboxes  already  exists,  e.g.  plotly,
-matplotlib, vispy, ggplot,  and so on. D3 is  one such great
-projects which particularly  excels at sharing (interactive)
-graphs on the  web. Luckily, Nim can  interface readily with
-other languages, and in particular has a close connection to
-javascript.</p>
-<p><a id="orgb02354a"></a></p>
+<p>Each simulation step, the agent will probe the sensors it has for
+resources, and orientate themselves towards the sensor that has the most
+resources. If all sensors have the same concentration of resources, the
+agent will continue straight.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c"># file: agent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">sense</span><span class="o">*</span><span class="p">(</span><span class="n">a</span><span class="p">:</span> <span class="kd">var</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">world</span><span class="p">:</span> <span class="n">World</span><span class="p">):</span> <span class="kt">float</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># get chemical  from sensors</span>
+</span></span><span class="line"><span class="cl">  <span class="c">#</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># The  trail  data  structure  is subjected  to  a  simple</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># diffusion  operator after  every system  step (a  system</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># step is defined as a sensory sampling of the environment</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># and attempted  forward movement for every  member of the</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># population). The diffusion operator  takes the form of a</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># pseudoparallel simple mean filter in a 3 × 3 kernel that</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># is  subject  to  an  adjustable decay  value  to  affect</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># chemoattractant persistence.</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="c"># var concentrations: Table[Point, float]</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span>
+</span></span><span class="line"><span class="cl">    <span class="n">concentrations</span> <span class="o">=</span> <span class="n">newSeqWith</span><span class="p">(</span><span class="n">a</span><span class="p">.</span><span class="n">sensors</span><span class="p">.</span><span class="n">len</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">prop</span><span class="p">:</span> <span class="n">Point</span>
+</span></span><span class="line"><span class="cl">    <span class="n">resource</span><span class="p">:</span> <span class="kt">float</span>
+</span></span><span class="line"><span class="cl">    <span class="n">angle</span><span class="p">:</span> <span class="kt">float</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="n">direction</span> <span class="ow">in</span> <span class="n">a</span><span class="p">.</span><span class="n">sensors</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">angle</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">angle</span> <span class="o">+</span> <span class="n">direction</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="n">width</span> <span class="ow">in</span> <span class="mf">1</span><span class="p">..(</span><span class="n">a</span><span class="p">.</span><span class="n">sensor_width</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">      <span class="k">let</span> <span class="n">tmp</span><span class="p">:</span> <span class="n">Point</span> <span class="o">=</span> <span class="p">(</span><span class="n">x</span><span class="p">:</span> <span class="n">a</span><span class="p">.</span><span class="n">sensor_reach</span><span class="p">.</span><span class="kt">float</span> <span class="o">*</span> <span class="n">cos</span><span class="p">(</span><span class="n">angle</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">                <span class="n">y</span><span class="p">:</span> <span class="n">a</span><span class="p">.</span><span class="n">sensor_reach</span><span class="p">.</span><span class="kt">float</span> <span class="o">*</span> <span class="n">sin</span><span class="p">(</span><span class="n">angle</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">      <span class="n">prop</span><span class="p">.</span><span class="n">x</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">x</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span>
+</span></span><span class="line"><span class="cl">      <span class="n">prop</span><span class="p">.</span><span class="n">y</span> <span class="o">=</span> <span class="n">tmp</span><span class="p">.</span><span class="n">y</span> <span class="o">+</span> <span class="n">a</span><span class="p">.</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">      <span class="n">prop</span><span class="p">.</span><span class="n">check_boundary</span><span class="p">(</span><span class="n">world</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">      <span class="n">resource</span> <span class="o">=</span> <span class="n">world</span><span class="p">.</span><span class="n">data</span><span class="o">[</span><span class="n">prop</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="n">floor</span><span class="p">.</span><span class="kt">int</span><span class="o">][</span><span class="n">prop</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="n">floor</span><span class="p">.</span><span class="kt">int</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">      <span class="c"># threshold activity</span>
+</span></span><span class="line"><span class="cl">      <span class="k">if</span> <span class="n">resource</span> <span class="o">&gt;=</span> <span class="n">a</span><span class="p">.</span><span class="n">sensitivity</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">concentrations</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span> <span class="o">+=</span> <span class="n">resource</span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="n">a</span><span class="p">.</span><span class="n">follow_gradient</span><span class="p">(</span><span class="n">concentrations</span><span class="p">)</span>
+</span></span></code></pre></div><h1 id="modeling-the-world">Modeling the world</h1>
+<p>The agents are not interacting in a vacuum, there is world to be
+created! The world object will hold the agents, and a 2D plane on which
+the agents can deposit resources. The resources over time will decay to
+produce a trail map. The update will occur synchronously for all agents.
+That is, each agent is updated in random order with a current (frozen)
+state of the world. The new data will form the next step in the
+simulation.</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">difuse</span><span class="o">*</span><span class="p">(</span><span class="n">world</span><span class="p">:</span> <span class="kd">var</span> <span class="n">World</span><span class="p">)</span>  <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># update synchronously the world trail</span>
+</span></span><span class="line"><span class="cl">  <span class="kd">var</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new_data</span> <span class="o">=</span> <span class="n">newSeqWith</span><span class="p">(</span><span class="n">world</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">len</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                            <span class="n">newSeqWith</span><span class="p">(</span><span class="n">world</span><span class="p">.</span><span class="n">data</span><span class="p">.</span><span class="n">len</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    <span class="n">n</span> <span class="o">=</span> <span class="n">world</span><span class="p">.</span><span class="n">xmax</span> <span class="o">*</span> <span class="n">world</span><span class="p">.</span><span class="n">ymax</span>
+</span></span><span class="line"><span class="cl">    <span class="n">z</span> <span class="o">=</span> <span class="mi">1</span><span class="o">/</span><span class="p">(</span><span class="kt">float</span> <span class="n">moore</span><span class="p">.</span><span class="n">len</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pos</span><span class="p">:</span> <span class="n">Point</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span><span class="p">,</span> <span class="n">y</span><span class="p">:</span> <span class="kt">float</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">n</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="n">pos</span> <span class="o">=</span> <span class="n">un</span><span class="p">(</span><span class="n">idx</span><span class="p">,</span> <span class="n">world</span><span class="p">.</span><span class="n">xmax</span><span class="p">,</span> <span class="n">world</span><span class="p">.</span><span class="n">ymax</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">val</span> <span class="o">=</span> <span class="n">difuse_on_point</span><span class="p">(</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="kt">int</span><span class="p">,</span> <span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="kt">int</span><span class="p">,</span> <span class="n">world</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">y</span> <span class="o">=</span> <span class="n">world</span><span class="p">.</span><span class="n">data</span><span class="o">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="kt">int</span><span class="o">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="kt">int</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl">    <span class="n">new_data</span><span class="o">[</span><span class="n">pos</span><span class="p">.</span><span class="n">x</span><span class="p">.</span><span class="kt">int</span><span class="o">][</span><span class="n">pos</span><span class="p">.</span><span class="n">y</span><span class="p">.</span><span class="kt">int</span><span class="o">]</span> <span class="o">=</span>  <span class="n">y</span> <span class="o">+</span> <span class="n">world</span><span class="p">.</span><span class="n">decay</span> <span class="o">*</span> <span class="p">(</span><span class="n">val</span> <span class="o">*</span> <span class="n">z</span> <span class="o">-</span> <span class="mi">2</span> <span class="o">*</span> <span class="n">y</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="n">world</span><span class="p">.</span><span class="n">data</span> <span class="o">=</span> <span class="n">new_data</span>
+</span></span></code></pre></div><h1 id="connecting-nim-to-javascript">Connecting Nim to Javascript</h1>
+<p>In the end, we want to view the output of our hard labor. Although Nim
+is a nice language to write in, it lacks the eco system that other
+languages such as python has. For plotting, great toolboxes already
+exists, e.g. plotly, matplotlib, vispy, ggplot, and so on. D3 is one
+such great projects which particularly excels at sharing (interactive)
+graphs on the web. Luckily, Nim can interface readily with other
+languages, and in particular has a close connection to javascript.</p>
 <h2 id="what-is-webpack">What is webpack?</h2>
-<p>Webpack  bundles  javascript  modules  (both  installed  and
-written by  you, see  <a href="https://webpack.js.org/concepts/why-webpack/" target="_blank" rel="noopener">here</a>) into a  singular target  that is
-compact and fast to use. Edits  in your files are updated as
-you write  code. It exists as  a sort of bridge  between the
-old way  of writing javascript modules  (with CommonJS), and
-the modern way of writing modules modules (using the <a href="https://en.wikipedia.org/wiki/ECMAScript" target="_blank" rel="noopener">ES
+<p>Webpack bundles javascript modules (both installed and written by you,
+see <a href="https://webpack.js.org/concepts/why-webpack/" target="_blank" rel="noopener">here</a>) into a
+singular target that is compact and fast to use. Edits in your files are
+updated as you write code. It exists as a sort of bridge between the old
+way of writing javascript modules (with CommonJS), and the modern way of
+writing modules modules (using the <a href="https://en.wikipedia.org/wiki/ECMAScript" target="_blank" rel="noopener">ES
 format</a>).</p>
-<p>To interface  with javascript, I  will use a  package called
-<a href="https://github.com/Double-oxygeN/nim-loader" target="_blank" rel="noopener">nim loader</a> which can be used by webpack to allow the written
-nim module to behave like a javacript module.</p>
-<p>To use nim  as as a javascript module, we  first install nim
-loader using nimble (nim’s package manager)</p>
+<p>To interface with javascript, I will use a package called <a href="https://github.com/Double-oxygeN/nim-loader" target="_blank" rel="noopener">nim
+loader</a> which can be used
+by webpack to allow the written nim module to behave like a javacript
+module.</p>
+<p>To use nim as as a javascript module, we first install nim loader using
+nimble (nim&rsquo;s package manager)</p>
 <pre><code>nimble install nim_loader
 </code></pre>
-<p>Then, we  start defining our  webpack config. The  end point
-for our webpack will be a bundled file that contains our nim
-module.  Per tradition  we call  this endpoint  `bundle.js`.
-Then we add a rule to  the webpack config to include our nim
-loader package  that will  take care of  our nim  files. The
-config in webpack looks something like</p>
-<pre><code>const config = {
-  entry: &quot;./src/index.js&quot;,
-  output: {
-    path: path.resolve(&quot;../../content/scripts/nim_loader&quot;),
-    filename: &quot;bundle.js&quot;
-  },
-<p>module: {
-rules: [
-{
-test: /.(js|jsx)$/i,
-loader: &quot;babel-loader&quot;,
-},
-{
-test: /.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
-type: &quot;asset&quot;,
-},
-{ test: /.nim$/,
-use:
-[{
-loader: &quot;nim-loader&quot;,
-options: {
-flags: [&quot;&ndash;threads:on&quot;] // does not work in javascript :(
-}
-}
-]
-},
-// Add your rules for custom modules here
-// Learn more about loaders from https://webpack.js.org/loaders/
-],
-},
-};
-</code></pre></p>
-<p>Now that  we have our webpack  setup, we need to  define our
-export  function that  will be  accessible from  javascript.
-I will write our export inside `main.nim` as such</p>
-<pre><code>import jsffi # javascript foreign function interface
-from types import World, Agent, rand_pos
-from agents import move, sense, move, consume
-from world as worlds import difuse
-import std/[random, sequtils]
-random.randomize() # setup rng
-proc newWorld*(n, xmax, ymax: int,
-               decay: float = 0.2,
-               agent_config: JsonNode,
-              ): World  =
-  echo &quot;Creating world&quot;
-  world = World(xmax: xmax,
-                 ymax: ymax,
-                 data: newSeqWith(xmax, newSeqWith(ymax, 0.0)),
-                 decay: decay,
-                 agents: @[])
-  # var agent: Agent
-  echo &quot;Creating agents&quot;
-  for id in 0..&lt;n:
-    var agent = newAgent(id, world, agent_config)
-    world.agents.add(agent)
-  return world
-<p>proc step*() {.exportc.}=
-world.move_agents()
-world.sense_agents()
-world.difuse()</p>
-<h1 id="define-our-export-for-the-nim-module">define our export for the nim module</h1>
-<p>var module {.importc.}: JsObject
-module.exports.newWorld = newWorld
-module.exports.step = step
-</code></pre></p>
-<p>Now  we  can  import  the  `newWorld`  and  `step`  function
-directly from javascript:</p>
-<pre><code>//file: index.js
-import module from &quot;main.nim&quot; //importing a nim module!!
-</code></pre>
-<p>The  module object  will  expose the  `newWorld` and  `step`
-function. Since `newWorld` returns  a `World` object you may
-wonder   what  happens   when   you   call  this   function.
-Interestingly, the `World` object  is directly accessible in
-javascript (given that the properties are exposed in Nim).</p>
-<p>We have  now reached  a point where  we could  start writing
-modules in  Nim and  then exposing them  through javascript.
-Nim can also be used to directly interact with the dom. Some
-modules (such  as D3)  have (incomplete) bindings  such that
-nim  can even  be used  to ditch  javascript all together  if
-needed. This is a nifty tool in your toolbelt if you want to
-harness the power of nim on  the web. It makes your nim code
-more  portable   if  you  want  to   write  applications  or
-simulations and share them on a shiny dashboard.</p>
-<p><a id="org6473a16"></a></p>
+<p>Then, we start defining our webpack config. The end point for our
+webpack will be a bundled file that contains our nim module. Per
+tradition we call this endpoint `bundle.js`. Then we add a rule to the
+webpack config to include our nim loader package that will take care of
+our nim files. The config in webpack looks something like</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">const</span> <span class="nx">config</span> <span class="o">=</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">entry</span><span class="o">:</span> <span class="s2">&#34;./src/index.js&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">  <span class="nx">output</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">path</span><span class="o">:</span> <span class="nx">path</span><span class="p">.</span><span class="nx">resolve</span><span class="p">(</span><span class="s2">&#34;../../content/scripts/nim_loader&#34;</span><span class="p">),</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">filename</span><span class="o">:</span> <span class="s2">&#34;bundle.js&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">  <span class="nx">module</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">rules</span><span class="o">:</span> <span class="p">[</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(js|jsx)$/i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;babel-loader&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">type</span><span class="o">:</span> <span class="s2">&#34;asset&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="p">{</span> <span class="nx">test</span><span class="o">:</span> <span class="sr">/\.nim$/</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">use</span><span class="o">:</span>
+</span></span><span class="line"><span class="cl">        <span class="p">[{</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">loader</span><span class="o">:</span> <span class="s2">&#34;nim-loader&#34;</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                <span class="nx">options</span><span class="o">:</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">                  <span class="nx">flags</span><span class="o">:</span> <span class="p">[</span><span class="s2">&#34;--threads:on&#34;</span><span class="p">]</span> <span class="c1">// does not work in javascript :(
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>          <span class="p">}</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">              <span class="p">]</span>
+</span></span><span class="line"><span class="cl">      <span class="p">},</span>
+</span></span><span class="line"><span class="cl">      <span class="c1">// Add your rules for custom modules here
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>      <span class="c1">// Learn more about loaders from https://webpack.js.org/loaders/
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="p">],</span>
+</span></span><span class="line"><span class="cl">  <span class="p">},</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span></code></pre></div><p>Now that we have our webpack setup, we need to define our export
+function that will be accessible from javascript. I will write our
+export inside `main.nim` as such</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">jsffi</span> <span class="c"># javascript foreign function interface</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="n">types</span> <span class="kn">import</span> <span class="n">World</span><span class="p">,</span> <span class="n">Agent</span><span class="p">,</span> <span class="n">rand_pos</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="n">agents</span> <span class="kn">import</span> <span class="n">move</span><span class="p">,</span> <span class="n">sense</span><span class="p">,</span> <span class="n">move</span><span class="p">,</span> <span class="n">consume</span>
+</span></span><span class="line"><span class="cl"><span class="kn">from</span> <span class="n">world</span> <span class="k">as</span> <span class="n">worlds</span> <span class="kn">import</span> <span class="n">difuse</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">std</span><span class="o">/[</span><span class="n">random</span><span class="p">,</span> <span class="n">sequtils</span><span class="o">]</span>
+</span></span><span class="line"><span class="cl"><span class="n">random</span><span class="p">.</span><span class="n">randomize</span><span class="p">()</span> <span class="c"># setup rng</span>
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">newWorld</span><span class="o">*</span><span class="p">(</span><span class="n">n</span><span class="p">,</span> <span class="n">xmax</span><span class="p">,</span> <span class="n">ymax</span><span class="p">:</span> <span class="kt">int</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="n">decay</span><span class="p">:</span> <span class="kt">float</span> <span class="o">=</span> <span class="mf">0.2</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">               <span class="n">agent_config</span><span class="p">:</span> <span class="n">JsonNode</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">              <span class="p">):</span> <span class="n">World</span>  <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="n">echo</span> <span class="s">&#34;Creating world&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="n">world</span> <span class="o">=</span> <span class="n">World</span><span class="p">(</span><span class="n">xmax</span><span class="p">:</span> <span class="n">xmax</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">ymax</span><span class="p">:</span> <span class="n">ymax</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">data</span><span class="p">:</span> <span class="n">newSeqWith</span><span class="p">(</span><span class="n">xmax</span><span class="p">,</span> <span class="n">newSeqWith</span><span class="p">(</span><span class="n">ymax</span><span class="p">,</span> <span class="mf">0.0</span><span class="p">)),</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">decay</span><span class="p">:</span> <span class="n">decay</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                 <span class="n">agents</span><span class="p">:</span> <span class="o">@[]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># var agent: Agent</span>
+</span></span><span class="line"><span class="cl">  <span class="n">echo</span> <span class="s">&#34;Creating agents&#34;</span>
+</span></span><span class="line"><span class="cl">  <span class="k">for</span> <span class="n">id</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">n</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">agent</span> <span class="o">=</span> <span class="n">newAgent</span><span class="p">(</span><span class="n">id</span><span class="p">,</span> <span class="n">world</span><span class="p">,</span> <span class="n">agent_config</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">world</span><span class="p">.</span><span class="n">agents</span><span class="p">.</span><span class="n">add</span><span class="p">(</span><span class="n">agent</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">  <span class="k">return</span> <span class="n">world</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">step</span><span class="o">*</span><span class="p">()</span> <span class="p">{.</span><span class="n">exportc</span><span class="p">.}</span><span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="n">world</span><span class="p">.</span><span class="n">move_agents</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">world</span><span class="p">.</span><span class="n">sense_agents</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">  <span class="n">world</span><span class="p">.</span><span class="n">difuse</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c"># define our export for the nim module</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="n">module</span> <span class="p">{.</span><span class="n">importc</span><span class="p">.}:</span> <span class="n">JsObject</span>
+</span></span><span class="line"><span class="cl"><span class="n">module</span><span class="p">.</span><span class="n">exports</span><span class="p">.</span><span class="n">newWorld</span> <span class="o">=</span> <span class="n">newWorld</span>
+</span></span><span class="line"><span class="cl"><span class="n">module</span><span class="p">.</span><span class="n">exports</span><span class="p">.</span><span class="n">step</span> <span class="o">=</span> <span class="n">step</span>
+</span></span></code></pre></div><p>Now we can import the `newWorld` and `step` function directly from
+javascript:</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="c1">//file: index.js
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kr">import</span> <span class="nx">module</span> <span class="nx">from</span> <span class="s2">&#34;main.nim&#34;</span> <span class="c1">//importing a nim module!!
+</span></span></span></code></pre></div><p>The module object will expose the `newWorld` and `step` function.
+Since `newWorld` returns a `World` object you may wonder what
+happens when you call this function. Interestingly, the `World~ object
+is directly accessible in javascript (given that the properties are
+exposed in Nim).</p>
+<p>We have now reached a point where we could start writing modules in Nim
+and then exposing them through javascript. Nim can also be used to
+directly interact with the dom. Some modules (such as D3) have
+(incomplete) bindings such that nim can even be used to ditch javascript
+all together if needed. This is a nifty tool in your toolbelt if you
+want to harness the power of nim on the web. It makes your nim code more
+portable if you want to write applications or simulations and share them
+on a shiny dashboard.</p>
 <h1 id="building-the-applet">Building the applet</h1>
-<p><a id="orgd273740"></a></p>
+<p>Initially, I wanted to build a simple control panels with toggles that
+could be used to change control parameters to the model. There are lots
+of control parameters that can be changed. In the end I opted to
+implement a more elaborate control box that emulates the view of
+<a href="#fig:agent">4</a>. This idea proved to be more problematic than I
+initially thought.</p>
+<p>Providing lots of toggles will be overwhelming, and I tend to prefer a
+more visual approach to complex information; using colors and graphics
+often eases understanding of a complex situation more readily than lots
+of text or other forms of media.</p>
+<p>In the end, the applet was a combination of some uggly programming in
+d3, future me will clean this up. The part that took lots of efford was
+figuring out why a nested <code>svg</code> does not visualize a <code>foreignObject</code>. I
+am not sure why it does not allow for this but I expect it has something
+to do with the name space that is loaded.</p>
+<p>For the interested individual I have included the code below, but be
+warned traveler, the journey was rough!</p>
+<details> <summary> D3 code </summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-javascript" data-lang="javascript"><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">module</span> <span class="nx">from</span> <span class="s2">&#34;./main.nim&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kr">import</span> <span class="nx">config</span> <span class="nx">from</span> <span class="s2">&#34;./config.json&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">minView</span> <span class="o">=</span> <span class="mi">4</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">maxView</span> <span class="o">=</span> <span class="mi">12</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">minR</span> <span class="o">=</span> <span class="mf">0.5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">maxR</span> <span class="o">=</span> <span class="mf">1.5</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="p">[</span><span class="nx">world</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newWorld</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">showAgents</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">startSimulation</span> <span class="o">=</span> <span class="kc">false</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">timer</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">newWorld</span><span class="p">(</span><span class="nx">config</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// wrap nim function as passing objects between javascript and
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// nim produces memory errors
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl">    <span class="nx">world</span> <span class="o">=</span> <span class="nx">module</span><span class="p">.</span><span class="nx">newWorld</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">data</span> <span class="o">=</span> <span class="p">[]</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">x</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">x</span> <span class="o">&lt;</span> <span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">x</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">y</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">y</span> <span class="o">&lt;</span> <span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="mi">0</span><span class="p">].</span><span class="nx">length</span><span class="p">;</span> <span class="nx">y</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">data</span><span class="p">.</span><span class="nx">push</span><span class="p">({</span><span class="nx">x</span><span class="o">:</span> <span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">z</span><span class="o">:</span> <span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">x</span><span class="p">][</span><span class="nx">y</span><span class="p">]});</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">return</span> <span class="p">[</span> <span class="nx">world</span><span class="p">,</span> <span class="nx">data</span> <span class="p">];</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// setup app
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">row</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="s2">&#34;#slimeMold&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;class&#34;</span><span class="p">,</span> <span class="s2">&#34;row&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;display&#34;</span><span class="p">,</span> <span class="s2">&#34;flex&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;justify-content&#34;</span><span class="p">,</span> <span class="s2">&#34;center&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;500&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;500&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="c1">// init control variables
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">agent</span> <span class="o">=</span> <span class="nx">row</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;margin-left&#34;</span><span class="p">,</span> <span class="s2">&#34;50px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;margin-right&#34;</span><span class="p">,</span> <span class="s2">&#34;10px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;display&#34;</span><span class="p">,</span> <span class="s2">&#34;flex&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;flex-direction&#34;</span><span class="p">,</span> <span class="s2">&#34;column&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;55px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">canvas</span> <span class="o">=</span> <span class="nx">row</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;canvas&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;300&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;300&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;margin-right&#34;</span><span class="p">,</span> <span class="s2">&#34;0px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// .attr(&#34;display&#34;, &#34;flex&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="c1">// plotting utils
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">context</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">getContext</span><span class="p">(</span><span class="s2">&#34;2d&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">width</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">clientWidth</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">height</span> <span class="o">=</span> <span class="nx">canvas</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">clientHeight</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">factor</span> <span class="o">=</span> <span class="mf">0.0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">square_width</span> <span class="o">=</span> <span class="p">(</span><span class="nx">width</span> <span class="o">/</span> <span class="nx">world</span><span class="p">.</span><span class="nx">xmax</span><span class="p">)</span> <span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">square_height</span> <span class="o">=</span> <span class="p">(</span><span class="nx">height</span> <span class="o">/</span> <span class="nx">world</span><span class="p">.</span><span class="nx">ymax</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">xScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">world</span><span class="p">.</span><span class="nx">xmax</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="nx">factor</span> <span class="o">*</span> <span class="nx">width</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nx">factor</span><span class="p">)</span> <span class="o">*</span> <span class="nx">width</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">yScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="nx">world</span><span class="p">.</span><span class="nx">ymax</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="nx">factor</span> <span class="o">*</span> <span class="nx">height</span><span class="p">,</span> <span class="p">(</span><span class="mi">1</span> <span class="o">-</span> <span class="nx">factor</span><span class="p">)</span> <span class="o">*</span> <span class="nx">height</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">oScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">10</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="mi">0</span><span class="p">,</span> <span class="mi">1</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">viewScale</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">scaleLinear</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">domain</span><span class="p">([</span><span class="nx">minR</span><span class="p">,</span> <span class="nx">maxR</span><span class="p">])</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">range</span><span class="p">([</span><span class="nx">minView</span><span class="p">,</span> <span class="nx">maxView</span><span class="p">]);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">cmap</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">interpolateViridis</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">bind</span><span class="p">(</span><span class="nx">data</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// this lives in memory
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&#34;data&#34;</span><span class="p">).</span><span class="nx">enter</span><span class="p">().</span><span class="nx">remove</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">squares</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&#34;data&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">data</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="nx">enter</span> <span class="o">=</span> <span class="nx">squares</span><span class="p">.</span><span class="nx">enter</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;custom&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;class&#34;</span><span class="p">,</span> <span class="s2">&#34;rect&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">xScale</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">x</span><span class="p">);})</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;y&#34;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">yScale</span><span class="p">(</span><span class="nx">e</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span> <span class="p">})</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="nx">square_width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">            <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;fillStyle&#34;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">cmap</span><span class="p">(</span><span class="nx">oScale</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">x</span><span class="p">][</span><span class="nx">e</span><span class="p">.</span><span class="nx">y</span><span class="p">]))});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">squares</span><span class="p">.</span><span class="nx">merge</span><span class="p">(</span><span class="nx">enter</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">transition</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="nx">square_width</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="nx">square_height</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;fillStyle&#34;</span><span class="p">,</span> <span class="nx">e</span> <span class="p">=&gt;</span> <span class="p">{</span><span class="k">return</span> <span class="nx">cmap</span><span class="p">(</span><span class="nx">oScale</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">e</span><span class="p">.</span><span class="nx">x</span><span class="p">][</span><span class="nx">e</span><span class="p">.</span><span class="nx">y</span><span class="p">]))});</span>
+</span></span><span class="line"><span class="cl"><span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">drawAgents</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">showAgents</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">agent</span> <span class="k">in</span> <span class="nx">world</span><span class="p">.</span><span class="nx">agents</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">xScale</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">agents</span><span class="p">[</span><span class="nx">agent</span><span class="p">].</span><span class="nx">pos</span><span class="p">.</span><span class="nx">Field0</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">yScale</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">agents</span><span class="p">[</span><span class="nx">agent</span><span class="p">].</span><span class="nx">pos</span><span class="p">.</span><span class="nx">Field1</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">beginPath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">moveTo</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="s2">&#34;gray&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">arc</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="mi">3</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="mi">2</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">fill</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">context</span><span class="p">.</span><span class="nx">closePath</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">draw</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">context</span><span class="p">.</span><span class="nx">clearRect</span><span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="nx">context</span><span class="p">.</span><span class="nx">clientWidth</span><span class="p">,</span> <span class="nx">context</span><span class="p">.</span><span class="nx">clientHeight</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">d3</span><span class="p">.</span><span class="nx">selectAll</span><span class="p">(</span><span class="s2">&#34;custom.rect&#34;</span><span class="p">).</span><span class="nx">each</span><span class="p">(</span> <span class="p">(</span><span class="nx">node</span><span class="p">,</span> <span class="nx">idx</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">x</span> <span class="o">=</span> <span class="nx">xScale</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">x</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">y</span> <span class="o">=</span> <span class="nx">yScale</span><span class="p">(</span><span class="nx">node</span><span class="p">.</span><span class="nx">y</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">let</span> <span class="nx">color</span> <span class="o">=</span> <span class="nx">cmap</span><span class="p">(</span><span class="nx">oScale</span><span class="p">(</span><span class="nx">world</span><span class="p">.</span><span class="nx">data</span><span class="p">[</span><span class="nx">node</span><span class="p">.</span><span class="nx">x</span><span class="p">][</span><span class="nx">node</span><span class="p">.</span><span class="nx">y</span><span class="p">]));</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">context</span><span class="p">.</span><span class="nx">fillRect</span><span class="p">(</span><span class="nx">x</span><span class="p">,</span> <span class="nx">y</span><span class="p">,</span> <span class="nx">square_width</span><span class="p">,</span> <span class="nx">square_height</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">context</span><span class="p">.</span><span class="nx">fillStyle</span> <span class="o">=</span> <span class="nx">color</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">drawAgents</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">simulate</span><span class="p">(){</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">function</span> <span class="nx">step</span><span class="p">(</span><span class="nx">t</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">module</span><span class="p">.</span><span class="nx">step</span><span class="p">(</span><span class="nx">world</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">draw</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">timer</span> <span class="o">==</span> <span class="kc">null</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">timer</span> <span class="o">=</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">timer</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">step</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">timer</span><span class="p">.</span><span class="nx">restart</span><span class="p">((</span><span class="nx">t</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">            <span class="nx">step</span><span class="p">(</span><span class="nx">t</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="p">});</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">controlGroup</span> <span class="o">=</span> <span class="nx">row</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;div&#34;</span><span class="p">).</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;margin-left&#34;</span><span class="p">,</span> <span class="s2">&#34;0px&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">point</span> <span class="o">=</span> <span class="p">{</span><span class="nx">x</span><span class="o">:</span> <span class="mi">100</span><span class="p">,</span> <span class="nx">y</span><span class="o">:</span> <span class="mi">100</span><span class="p">};</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">radius</span> <span class="o">=</span> <span class="mi">40</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">scale</span> <span class="o">=</span> <span class="mf">0.1</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">var</span> <span class="nx">r</span> <span class="o">=</span> <span class="mi">1</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="kd">function</span> <span class="nx">controlVisual</span><span class="p">(</span><span class="nx">event</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">event</span><span class="p">.</span><span class="nx">dy</span> <span class="o">&lt;=</span> <span class="mi">0</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">+=</span> <span class="nx">scale</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">min</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">maxR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">-=</span> <span class="nx">scale</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">r</span> <span class="o">=</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">max</span><span class="p">(</span><span class="nx">r</span><span class="p">,</span> <span class="nx">minR</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// bug.attr(&#34;transform&#34;, `scale(${r})`);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="kd">let</span> <span class="nx">transform</span> <span class="o">=</span> <span class="sb">`translate(</span><span class="si">${</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">, </span><span class="si">${</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">) scale(</span><span class="si">${</span><span class="nx">r</span><span class="si">}</span><span class="sb">)`</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">d3</span><span class="p">.</span><span class="nx">select</span><span class="p">(</span><span class="k">this</span><span class="p">).</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;transform&#34;</span><span class="p">,</span> <span class="nx">transform</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="nx">config</span><span class="p">.</span><span class="nx">agent</span><span class="p">.</span><span class="nx">sensor_reach</span> <span class="o">=</span> <span class="nx">viewScale</span><span class="p">(</span><span class="nx">r</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">for</span> <span class="p">(</span><span class="kd">var</span> <span class="nx">idx</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span> <span class="nx">idx</span> <span class="o">&lt;</span> <span class="nx">world</span><span class="p">.</span><span class="nx">agents</span><span class="p">.</span><span class="nx">length</span><span class="p">;</span> <span class="nx">idx</span><span class="o">++</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">world</span><span class="p">.</span><span class="nx">agents</span><span class="p">[</span><span class="nx">idx</span><span class="p">].</span><span class="nx">sensor_reach</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">agent</span><span class="p">.</span><span class="nx">sensor_reach</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl"><span class="p">};</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">bugCanvas</span> <span class="o">=</span> <span class="nx">controlGroup</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;svg&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;150px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;left-margin&#34;</span><span class="p">,</span> <span class="s2">&#34;0px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">tlt</span> <span class="o">=</span> <span class="nx">controlGroup</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;xhtml:div&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;class&#34;</span><span class="p">,</span> <span class="s2">&#34;xhtml:tooltip&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;opacity&#34;</span><span class="p">,</span> <span class="s2">&#34;0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;background-color&#34;</span><span class="p">,</span> <span class="s2">&#34;#FBFAF5&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;color&#34;</span><span class="p">,</span> <span class="s2">&#34;transparent&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;border&#34;</span><span class="p">,</span> <span class="s2">&#34;solid&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;padding&#34;</span><span class="p">,</span> <span class="s2">&#34;10px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;300px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;70px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;border-radius&#34;</span><span class="p">,</span> <span class="s2">&#34;20px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;padding&#34;</span><span class="p">,</span> <span class="s2">&#34;5px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">bug</span> <span class="o">=</span> <span class="nx">bugCanvas</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;g&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;path&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;id&#34;</span><span class="p">,</span> <span class="s2">&#34;bug_field&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;transform&#34;</span><span class="p">,</span> <span class="sb">`translate(</span><span class="si">${</span><span class="nx">point</span><span class="p">.</span><span class="nx">x</span><span class="si">}</span><span class="sb">, </span><span class="si">${</span><span class="nx">point</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">)`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;color&#34;</span><span class="p">,</span> <span class="s2">&#34;steelblue&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;d&#34;</span><span class="p">,</span> <span class="nx">d</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">innerRadius</span> <span class="o">=</span> <span class="mi">0</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="nx">outerRadius</span> <span class="o">=</span> <span class="nx">radius</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="nx">d3</span><span class="p">.</span><span class="nx">arc</span><span class="p">()({</span><span class="nx">innerRadius</span><span class="o">:</span> <span class="mi">0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                         <span class="nx">outerRadius</span><span class="o">:</span> <span class="nx">outerRadius</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">startAngle</span><span class="o">:</span> <span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                    <span class="nx">endAngle</span><span class="o">:</span> <span class="mi">1</span><span class="o">/</span><span class="mi">4</span> <span class="o">*</span> <span class="nb">Math</span><span class="p">.</span><span class="nx">PI</span><span class="p">}</span>
+</span></span><span class="line"><span class="cl">                             <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">bug</span><span class="p">.</span><span class="nx">call</span><span class="p">(</span><span class="nx">d3</span><span class="p">.</span><span class="nx">drag</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">          <span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;drag&#34;</span><span class="p">,</span> <span class="nx">controlVisual</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">         <span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">fo</span> <span class="o">=</span> <span class="nx">bugCanvas</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;foreignObject&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;50px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;50px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;x&#34;</span><span class="p">,</span> <span class="mi">80</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;y&#34;</span><span class="p">,</span> <span class="mi">90</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">agentInput</span> <span class="o">=</span> <span class="nx">fo</span><span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;xhtml:input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;xhtml:type&#34;</span><span class="p">,</span> <span class="s2">&#34;number&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;2.5rem&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;border-radius&#34;</span><span class="p">,</span> <span class="s2">&#34;50%&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;aspect-ratio&#34;</span><span class="p">,</span> <span class="s2">&#34;1/1&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;text-align&#34;</span><span class="p">,</span> <span class="s2">&#34;center&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;background-color&#34;</span><span class="p">,</span> <span class="s2">&#34;#cc5500&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;border&#34;</span><span class="p">,</span> <span class="s2">&#34;0&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;outline&#34;</span><span class="p">,</span> <span class="s2">&#34;none&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="nx">config</span><span class="p">.</span><span class="nx">agent</span><span class="p">.</span><span class="nx">nAgents</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">bugCanvas</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;mouseover&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// tlt.attr(&#34;x&#34;, event.x)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// tlt.attr(&#34;y&#34;, event.y)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// tlt.style(&#34;visibility&#34;, &#34;visible&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">tlt</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;opacity&#34;</span><span class="p">,</span> <span class="mi">1</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="sb">`
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;p style=&#39;font-size: 10px; color: black&#39;&gt;
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;b&gt;Drag &lt;/b&gt; the cone to change the agent&#39;s field of view.
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;br&gt; &lt;b&gt;Change&lt;/b&gt; the number to increase or decrease the number of agents.
+</span></span></span><span class="line"><span class="cl"><span class="sb">        &lt;/p&gt;`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;left&#34;</span><span class="p">,</span> <span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">x</span> <span class="o">+</span> <span class="mi">70</span><span class="si">}</span><span class="sb">px`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;top&#34;</span><span class="p">,</span> <span class="sb">`</span><span class="si">${</span><span class="nx">event</span><span class="p">.</span><span class="nx">y</span><span class="si">}</span><span class="sb">px`</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">bugCanvas</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;mouseout&#34;</span><span class="p">,</span> <span class="p">(</span><span class="nx">event</span><span class="p">)</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// tlt.style(&#34;visibility&#34;, &#34;hidden&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="nx">tlt</span><span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;opacity&#34;</span><span class="p">,</span><span class="mi">0</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">resetButton</span> <span class="o">=</span> <span class="nx">agent</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;type&#34;</span><span class="p">,</span> <span class="s2">&#34;button&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="s2">&#34;Reset&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;100px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;100px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;name&#34;</span><span class="p">,</span> <span class="s2">&#34;test&#34;</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// .style(&#34;width, 100px&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>    <span class="c1">// .style(&#34;height&#34;, &#34;100px&#34;);
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span>
+</span></span><span class="line"><span class="cl"><span class="kd">let</span> <span class="nx">startButton</span> <span class="o">=</span> <span class="nx">agent</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;type&#34;</span><span class="p">,</span> <span class="s2">&#34;button&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="s2">&#34;Start&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c1">// .style(&#34;width, 100px&#34;)
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="kd">let</span> <span class="nx">decayRate</span> <span class="o">=</span> <span class="nx">agent</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;label&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;display&#34;</span><span class="p">,</span> <span class="s2">&#34;flex&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;flex-direction&#34;</span><span class="p">,</span> <span class="s2">&#34;row&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;for&#34;</span><span class="p">,</span> <span class="s2">&#34;#decayRate&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;auto&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;height&#34;</span><span class="p">,</span> <span class="s2">&#34;1px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">html</span><span class="p">(</span><span class="s2">&#34;&lt;p style=&#39;font-size: 9px; margin-bottom:0px; margin-top: 10px&#39;&gt; Decay rate &lt;/p&gt;&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;margin-bottom&#34;</span><span class="p">,</span> <span class="s2">&#34;0px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">append</span><span class="p">(</span><span class="s2">&#34;input&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;type&#34;</span><span class="p">,</span> <span class="s2">&#34;text&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;id&#34;</span><span class="p">,</span> <span class="s2">&#34;decayRate&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;width&#34;</span><span class="p">,</span> <span class="s2">&#34;50px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">style</span><span class="p">(</span><span class="s2">&#34;margin-top&#34;</span><span class="p">,</span> <span class="s2">&#34;0px&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="p">.</span><span class="nx">attr</span><span class="p">(</span><span class="s2">&#34;value&#34;</span><span class="p">,</span> <span class="nx">config</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">decay</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">decayRate</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;change&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">config</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">decay</span> <span class="o">=</span> <span class="nx">decayRate</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">world</span><span class="p">.</span><span class="nx">decay</span> <span class="o">=</span> <span class="nx">config</span><span class="p">.</span><span class="nx">world</span><span class="p">.</span><span class="nx">decay</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">startButton</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">startSimulation</span> <span class="o">=</span> <span class="nx">startSimulation</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">startButton</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">value</span> <span class="o">=</span> <span class="nx">startSimulation</span> <span class="o">?</span> <span class="s2">&#34;Stop&#34;</span> <span class="o">:</span> <span class="s2">&#34;Start&#34;</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="k">if</span> <span class="p">(</span><span class="nx">startSimulation</span><span class="p">){</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">simulate</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">    <span class="k">else</span><span class="p">{</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">console</span><span class="p">.</span><span class="nx">log</span><span class="p">(</span><span class="s2">&#34;timer stopping&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">timer</span><span class="p">.</span><span class="nx">stop</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">agentInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;change&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">config</span><span class="p">.</span><span class="nx">agent</span><span class="p">.</span><span class="nx">nAgents</span> <span class="o">=</span> <span class="nx">agentInput</span><span class="p">.</span><span class="nx">node</span><span class="p">().</span><span class="nx">value</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nx">world</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newWorld</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">bind</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">    <span class="p">});</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">agentInput</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;dblclick&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="nx">showAgents</span> <span class="o">=</span> <span class="nx">showAgents</span> <span class="o">?</span> <span class="kc">false</span> <span class="o">:</span> <span class="kc">true</span><span class="p">;</span>
+</span></span><span class="line"><span class="cl">    <span class="c1">// showAgentsInput.node().value = showAgents;
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="p">})</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="nx">resetButton</span><span class="p">.</span><span class="nx">on</span><span class="p">(</span><span class="s2">&#34;click&#34;</span><span class="p">,</span> <span class="p">()</span> <span class="p">=&gt;</span> <span class="p">{</span>
+</span></span><span class="line"><span class="cl">    <span class="p">[</span><span class="nx">world</span><span class="p">,</span> <span class="nx">data</span><span class="p">]</span> <span class="o">=</span> <span class="nx">newWorld</span><span class="p">(</span><span class="nx">config</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">bind</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl">        <span class="nx">draw</span><span class="p">();</span>
+</span></span><span class="line"><span class="cl">    <span class="p">})</span>
+</span></span><span class="line"><span class="cl"><span class="c1">// when loading the page, we show the data and draw
+</span></span></span><span class="line"><span class="cl"><span class="c1"></span><span class="nx">bind</span><span class="p">(</span><span class="nx">data</span><span class="p">);</span>
+</span></span><span class="line"><span class="cl"><span class="nx">draw</span><span class="p">();</span>
+</span></span></code></pre></div></details>
 <h1 id="discussion">Discussion</h1>
-<p><a id="orge87ff44"></a></p>
+<p>This project was fun to put together and as always took way longer than
+I wanted to. I am interested to explore further the interaction of web
+visualization and programming languages. I really enjoy seeing my
+simulations come to live and being able to quickly share a link with a
+fellow friend, or show the efforts of my labor off to a co-worker. Nim
+is a joy to write in, and I wish the eco system was bigger for
+computational goals. Perhaps in the future I will write some network
+analysis toolbox for it.</p>
 <h1 id="conclusions">Conclusions</h1>
 <ul>
-<li>Writing nim offers a familiar and powerful syntax that can
-be exported to multiple backends including javascript.</li>
-<li>Integration and visualization  of scientific models could
-be readily exported to javascript and D3.</li>
+<li>I love writing in Nim, it writes like python but with highly
+performant code in the native language.</li>
+<li>Binding Nim to javascript is easily achieved which opens up lots of
+opportunity to combine it with interactive libraries such as D3.</li>
 </ul>
 </body>
 </html>
