@@ -1,0 +1,627 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>nim | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/tag/nim/</link>
+      <atom:link href="https://cvanelteren.github.io/tag/nim/index.xml" rel="self" type="application/rss+xml" />
+    <description>nim</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Jun 2023 17:40:10 +0200</lastBuildDate>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>nim</title>
+      <link>https://cvanelteren.github.io/tag/nim/</link>
+    </image>
+    
+    <item>
+      <title>Slimemold</title>
+      <link>https://cvanelteren.github.io/post/slimemold/</link>
+      <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/slimemold/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+&lt;head&gt;
+  &lt;title&gt;&lt;/title&gt;
+&lt;/head&gt;
+&lt;body&gt;
+   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org2fdecc4&#34;&gt;TLDR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org1e7f3d2&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb337831&#34;&gt;The Plan&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org22199b2&#34;&gt;Why Nim?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgca977cb&#34;&gt;Modeling a slime mold&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#orgaafa562&#34;&gt;Code layout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org348d55a&#34;&gt;Modeling an agent&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb3083ed&#34;&gt;Agent movement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org03b80c1&#34;&gt;Agent sensing&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org344dbd6&#34;&gt;Modeling the world&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgbebf9a9&#34;&gt;Connecting Nim to Javascript&lt;/a&gt;
+&lt;ol&gt;
+&lt;li&gt;&lt;a href=&#34;#org5c17d02&#34;&gt;What is webpack?&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org49fc472&#34;&gt;Discussion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org28f1e23&#34;&gt;Conclusions&lt;/a&gt;&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;&lt;a id=&#34;org2fdecc4&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Slime molds  are amazing creatures that  can solve complex
+problems without a central cognitive unit&lt;/li&gt;
+&lt;li&gt;I build a simulation from  scratch in Nim and visualize it
+with d3&lt;/li&gt;
+&lt;li&gt;The simulation  runs and  can be controlled  directly from
+the browser&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
+&lt;svg  width = &#34;100px&#34; height = &#34;100px&#34; xmlns = &#34;http://www.w3.org/2000/svg&#34;&gt;
+  &lt;rect x = &#34;10&#34; y = &#34;10&#34; width = &#34;100&#34; height = &#34;100&#34; style = &#34;fill: transparent;&#34;&gt;
+  &lt;/rect&gt;
+    &lt;foreignObject width = &#34;100px&#34; height = &#34;100px&#34; x = &#34;0&#34; y = &#34;0&#34;&gt;
+        &lt;form&gt;
+        &lt;input type = &#34;number&#34; value = &#34;3&#34;&gt;&lt;/input&gt;
+        &lt;input type = &#34;text&#34; value = &#34;hello there&#34;&gt; &lt;/input&gt;
+        &lt;/form&gt;
+    &lt;/foreignObject&gt;
+&lt;/svg&gt; 
+&lt;p&gt;&lt;a id=&#34;org1e7f3d2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Human  are  fascinating  creatures.  We  like  to  think  of
+ourselves as having an identity, a sense of “self” or &lt;em&gt;ego&lt;/em&gt;.
+We like to think of ourselves having a career or skills and
+hardly express (at least in common speech) about interaction
+with our environment. But what if you can be both?&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-slime-molds-form-spores-to-explore-the-environment-in-the-hunt-for-food&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold.jpg&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Slime molds form spores to explore the environment in the hunt for food.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;In nature, we  often do not consider other forms  of live as
+having an  ego. A  bird is considered  a bird  that interact
+purely with its environment because it cannot control to the
+same extent as we do. Some organism, however, exhibit a life
+that  could be  expressed as  living on  a spectrum  between
+operating as an  individual and as a  singular organism. The
+slime mold is one such creature.  The slime mold is a single
+celled  eukaryotic (=  having a  nucleus) organism  that can
+form spores. These spores  are often produces when different
+slime molds group together to form a multi-cellular organism
+(&lt;a href=&#34;#org7e21ff9&#34;&gt;5&lt;/a&gt;)&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-the-slime-mold-can-solve-a-maze-by-forming-spores-when-a-food-source-is-found-the-branches-that-did-not-find-food-are-trimmed-this-results-in-a-network-structure-with-highly-efficient-path-distances&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold_maze.webp&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      The slime mold can solve a maze by forming spores. When a food source is found the branches that did not find food are trimmed. This results in a network structure with highly efficient path distances.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Slime molds  are particularly interesting as  scientists have
+studied  them extensively  for their  computational ability.
+When slime  molds search for  food, they extend in  space by
+producing spores.  Initially, the search is  randomly around
+them, but as soon as these  spores find food, the slime mold
+increases  the “traffic”  to these  spores. Scientists  have
+studied this behavior and found  that the slime mold is able
+to solve mazes (&lt;a href=&#34;#orgcbf0e50&#34;&gt;7&lt;/a&gt;), &lt;a href=&#34;https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;reproduce the tokyo metro network&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  &gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimeMoldTokyo.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;What is amazing about this organism is that it can do all of
+this without “knowing” the  general surrounding. There is no
+generalized  intelligence,  or   forward  planning.  Through
+interactions with its environment  the organism can organize
+and solve complex problems.&lt;/p&gt;
+&lt;p&gt;In  this post,  I want  to  explore the  properties of  this
+organism by building a  agent-based simulation from scratch.
+In addition,  I want  to explore visualizing  the simulation
+on a web page directly without the use of videos.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgb337831&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;the-plan&#34;&gt;The Plan&lt;/h1&gt;
+&lt;p&gt;The goal is  to create a simulator that can  be run directly
+from the browser (&lt;a href=&#34;#orge722bc1&#34;&gt;13&lt;/a&gt;). I will use Nim (&lt;a href=&#34;#org2c85b32&#34;&gt;14&lt;/a&gt; to
+make   the  computational   model,  and   create  a   visual
+application  by   using  javascript   and  D3.   The  visual
+components will have a control  box that can control various
+aspects  of the  simulation such  as starting  and stopping,
+controlling  the number  of agents,  the decay  rate of  the
+resources and so on.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-coarse-outline-of-the-different-components&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimeMoldSimulationOverview.drawio.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Coarse outline of the different components.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org22199b2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;why-nim&#34;&gt;Why Nim?&lt;/h1&gt;
+&lt;p&gt;Nim  is a  pretty  nifty language  that  writes (and  feels)
+similar to  python, except  that it  is strongly  typed. The
+strength of Nim is that it compiles to javascript, or c/cpp.
+It was created  in 2005 and released to the  public in 2008.
+Compared ot  cpp or c  it has  more features that  you would
+expect from  a modern languages. For  example, checking that
+am member is  contained with in a list (or  sequence in Nim)
+can be  readily done with the  `in` command or added  with a
+`contains` function (called `proc`(ess) in Nim). In the past
+I have written some posts about Nim and its cool features of
+bridging         between         different         languages
+&lt;a href=&#34;http://cvanelteren.github.io/tags/nim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://cvanelteren.github.io/tags/nim&lt;/a&gt;),  an decided  to
+solve the  advent of code  challenges in Nim to  explore the
+language and its capabilities.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgca977cb&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;modeling-a-slime-mold&#34;&gt;Modeling a slime mold&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Describe the stages of the slime mold&lt;/li&gt;
+&lt;li&gt;Describe the movement vector&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;The  computational properties  of the  slime mold  have been
+studied extensively  both from  a biological  perspective as
+well                    as                   computationally
+&amp;lt;@Jones2010,@Ito2003,Kessler1993&amp;gt;.  Arguebly, one  of the
+simplest approach is done  by &amp;lt;@Jones2010&amp;gt;. He applies an
+agent-based  approach to  study the  pattern formation  that
+emerges through the interaction of slime mold agents.&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-representation-of-slimemold-agent-from-jones2010-the-agent-drops-resources-in-space-at-its-location-with-a-certain-activity-a_i-each-agent-possess-3-sensors-at--18-pi-0-18-pi-each-of-these-sensors-have-a-reach-and-a-width-at-which-they-can-sense-resources-dropped&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/fig:agent.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Representation of slimemold agent (from &amp;lt;@Jones2010&amp;gt;). The agent drops resources in space at its location with a certain activity $A_i$ Each agent possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors have a reach and a width at which they can sense resources dropped.
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;Each slimemold is modeled as an agent in 2D space possessing
+different  sensors   (&lt;a href=&#34;#org3052e2e&#34;&gt;18&lt;/a&gt;).  Each  agent   drops  food
+resources in the environment  with activity $A_i$ that other
+agents can sense. The agents have $n$ sensors that can sense
+location at  distance $R_i$ from  the agent of  width $W_i$.
+When  a food  source is  sensed  by the  sensors, the  agent
+orientates  and moves  towards the  sensor with  the largest
+concentration.  If the  propposed  location  is occupied  by
+another object, the angle will  pick a random angle. When an
+agent  does not  move, he  does  not drop  resources in  the
+environment. Over time, the dropped food source will decay
+from the environment with rate $\delta$.&lt;/p&gt;
+&lt;p&gt;From  these   simple  dynamics,   agents  can   form  chains
+(&lt;a href=&#34;#org71891dc&#34;&gt;21&lt;/a&gt;)  and  with  enough agents  will  form  networks
+(&lt;a href=&#34;#org17b50ed&#34;&gt;22&lt;/a&gt;).  The emergence  of networks,  occurs through
+the fact that each agent&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-slimemold-agents-can-form-chains-and-networks-through-the-simple-dynamics-described-in-18org3052e2e-from-&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemoldchains.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Slimemold agents can form chains and networks through the simple dynamics described in &lt;a href=&#34;#org3052e2e&#34;&gt;18&lt;/a&gt; (from &lt;a href=&#34;mailto:Jones@2010&#34;&gt;Jones@2010&lt;/a&gt;).
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-slime-molds-can-form-networks-over-time-from-top-left-to-right-bottom-the-time-increases-in-the-top-left-image-the-agents-are-spawn-at-a-random-location-as-the-simulation-develops-the-agents-will-form-networks-from-&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemoldnetworks.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      Slime molds can form networks over time. From top left to right bottom the time increases. In the top left image, the agents are spawn at a random location. As the simulation develops, the agents will form networks (from &lt;Jones2010&gt;).
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;
+&lt;figure  id=&#34;figure-when-food-sources-are-placed-in-the-environment-black-dots-the-agents-will-form-a-efficient-path-between-the-resources-from-jones2010&#34;&gt;
+  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/minimum_resources.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+  &lt;/div&gt;&lt;figcaption&gt;
+      When food sources are placed in the environment (black dots), the agents will form a efficient path between the resources (from &amp;lt;@Jones2010&amp;gt;).
+    &lt;/figcaption&gt;&lt;/figure&gt;
+&lt;/p&gt;
+&lt;p&gt;The  dropped  resources  emulate  how  a  slime  mold  would
+communicate to  other slime  molds that  there is  some food
+source  nearby.  Jones  ran computational  simulations  that
+emulated food  sources in  the environment.  Remarkable, the
+agents  will produce  a minimum  spanning tree  (or network)
+between the food resources (&lt;a href=&#34;#orgcf09aee&#34;&gt;23&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgaafa562&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;code-layout&#34;&gt;Code layout&lt;/h2&gt;
+&lt;p&gt;&lt;Jones2010&gt; provides an elegant  description of a minimal
+agent-based  model for  the slime  mold. To  the best  of my
+knowledge no  implementation of  this model is  available on
+the  internet, so  I decided  to implement  it in  Nim. What
+follows is a bird’s eye  description of the relevant methods
+implemented in Nim. For the source code please see the listed
+source below.&lt;/p&gt;
+&lt;p&gt;The simulation would  need a way to represent  the world the
+agents can  move in, and  a description of &lt;em&gt;how&lt;/em&gt;  the agents
+can interact  with this world.  To structure my  approach, I
+propose the following code layout:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;src
+├── agents.nim
+├── index.js
+├── main.nim
+├── types.nim
+├── utils.nim
+└── world.nim
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The file names are ordered where the file name reflects what
+can be found  in it. For example,  `agents.nim` will contain
+methods   that  describe   how  agents   behave.  Similarly,
+`types.nim` will describe the  various &lt;em&gt;objects&lt;/em&gt; such as the
+world and the agent and so  on. The main endpoint for nim is
+contained in  `main.nim`. Inside this file,  the methods are
+described   that  are   exported   to  javascript.   Lastly,
+`index.js` will  contain the applet with  the visualizations
+of the simulation.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org348d55a&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;modeling-an-agent&#34;&gt;Modeling an agent&lt;/h2&gt;
+&lt;p&gt;Each agent is  represented as a struct  containing data such
+as its position, speed, activity and so on.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# file: types.nim
+type
+  Agent* = ref object
+    name*: int
+    pos*: Point
+    angle*, speed*, sensitivity*, activity*: float
+    sensor_reach*, sensor_width*: int
+    sensors*: seq[float]
+    noise*: float # controls noise added to a movement [ignore for now]
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Th  e most important factors the  snippet above are the sensor
+related data (sensors, reach and width), the activity (which
+controls how much resource an agent drops after moving). The
+noise  parameter control  how much  noise is  added to  each
+movement of the agent. For the simulations presented here it
+can be ignored.&lt;/p&gt;
+&lt;p&gt;In each simulation step, each agent will&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;attempt to move into the direction it is currently facing&lt;/li&gt;
+&lt;li&gt;sense nearby  resources and  orientate itself  towards the
+sensor with the maximum sensed resource&lt;/li&gt;
+&lt;/ul&gt;
+&lt;p&gt;&lt;a id=&#34;orgb3083ed&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;agent-movement&#34;&gt;Agent movement&lt;/h3&gt;
+&lt;p&gt;We  have to  therefore  right two  functions that  represent
+these abilities. For move we&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# file: agent.nim
+proc move*(a: var Agent, world: var World) =
+  # update agent position
+  # move in current direction on grid cell
+  var proposal = a.pos + (a.speed * cos(a.angle),  a.speed * sin(a.angle))
+  if a.noise &amp;gt; 0:
+    if rand(1.0) &amp;lt; a.noise:
+      proposal.x += (rand(1.0) * 2 - 1) * a.speed
+      proposal.y += (rand(1.0) * 2 - 1) * a.speed
+  proposal.check_boundary(world)
+  # check if there is another agent at new location
+  if not is_occupied(proposal, world):
+    a.pos = proposal
+    a.deposit(world)
+  # assume random directiom
+  else:
+    # default model behavior
+    a.angle = rand_angle()
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The agent will  attempt to move to  the `proposal` location.
+If  the  move  can  be  made  (no  object  present  at  that
+location), the agent will   put resources  at the  agents
+location in into  the world object (see  &lt;a href=&#34;#org344dbd6&#34;&gt;6&lt;/a&gt;)
+and move towards the proposal  location. When no move can be
+made,  the agent  will  not perform  a  deposit action,  but
+merely choose a random new angle.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org03b80c1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h3 id=&#34;agent-sensing&#34;&gt;Agent sensing&lt;/h3&gt;
+&lt;p&gt;Each simulation  step, the agent  will probe the  sensors it
+has  for resources,  and  orientate  themselves towards  the
+sensor that has the most  resources. If all sensors have the
+same concentration of resources, the agent will continue straight.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;# file: agent.nim
+proc sense*(a: var Agent, world: World): float =
+  # get chemical  from sensors
+  #
+  # The  trail  data  structure  is subjected  to  a  simple
+  # diffusion  operator after  every system  step (a  system
+  # step is defined as a sensory sampling of the environment
+  # and attempted  forward movement for every  member of the
+  # population). The diffusion operator  takes the form of a
+  # pseudoparallel simple mean filter in a 3 × 3 kernel that
+  # is  subject  to  an  adjustable decay  value  to  affect
+  # chemoattractant persistence.
+&lt;h1 id=&#34;var-concentrations-tablepoint-float&#34;&gt;var concentrations: Table[Point, float]&lt;/h1&gt;
+&lt;p&gt;var
+concentrations = newSeqWith(a.sensors.len, 0.0)
+prop: Point
+resource: float
+angle: float&lt;/p&gt;
+&lt;p&gt;for idx, direction in a.sensors:
+angle = a.angle + direction
+for width in 1..(a.sensor_width):
+let tmp: Point = (x: a.sensor_reach.float * cos(angle),
+y: a.sensor_reach.float * sin(angle))
+prop.x = tmp.x + a.pos.x
+prop.y = tmp.y + a.pos.y&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;  prop.check_boundary(world)
+  resource = world.data[prop.x.floor.int][prop.y.floor.int]
+  # threshold activity
+  if resource &amp;amp;gt;= a.sensitivity:
+    concentrations[idx] += resource
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;result = a.follow_gradient(concentrations)
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org344dbd6&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;modeling-the-world&#34;&gt;Modeling the world&lt;/h1&gt;
+&lt;p&gt;The agents are  not interacting in a vacuum,  there is world
+to be created! The world object will hold the agents, and a 2D plane on which
+the agents  can deposit resources. The  resources over time
+will decay  to produce  a trail map.  The update  will occur
+synchronously for all agents. That is, each agent is updated
+in random order with a  current (frozen) state of the world.
+The new data will form the next step in the simulation.&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;proc difuse*(world: var World)  =
+  # update synchronously the world trail
+  var
+    new_data = newSeqWith(world.data.len,
+                            newSeqWith(world.data.len, 0.0))
+    n = world.xmax * world.ymax
+    z = 1/(float moore.len)
+    pos: Point
+    val, y: float
+&lt;p&gt;for idx in 0..&amp;lt;n:
+pos = un(idx, world.xmax, world.ymax)
+val = difuse_on_point(pos.x.int, pos.y.int, world)
+y = world.data[pos.x.int][pos.y.int]
+new_data[pos.x.int][pos.y.int] =  y + world.decay * (val * z - 2 * y)
+world.data = new_data
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgbebf9a9&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;connecting-nim-to-javascript&#34;&gt;Connecting Nim to Javascript&lt;/h1&gt;
+&lt;p&gt;In the  end, we want to  view the output of  our hard labor.
+Although Nim  is a nice language  to write in, it  lacks the
+eco  system that  other languages  such as  python has.  For
+plotting,  great  toolboxes  already  exists,  e.g.  plotly,
+matplotlib, vispy, ggplot,  and so on. D3 is  one such great
+projects which particularly  excels at sharing (interactive)
+graphs on the  web. Luckily, Nim can  interface readily with
+other languages, and in particular has a close connection to
+javascript.&lt;/p&gt;
+&lt;p&gt;To interface  with javascript, I  will use a  package called
+&lt;a href=&#34;https://github.com/Double-oxygeN/nim-loader&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nim loader&lt;/a&gt; which can be used by webpack to allow the written
+nim module to behave like a javacript module.&lt;/p&gt;
+&lt;p&gt;To use nim  as as a javascript module, we  first install nim
+loader using nimble (nim’s package manager)&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nimble install nim_loader
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;Then, we  start defining our  webpack config. The  end point
+for our webpack will be a bundled file that contains our nim
+module.  Per tradition  we call  this endpoint  `bundle.js`.
+Then we add a rule to  the webpack config to include our nim
+loader package  that will  take care of  our nim  files. The
+config in webpack looks something like&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;const config = {
+  entry: &amp;quot;./src/index.js&amp;quot;,
+  output: {
+    path: path.resolve(&amp;quot;../../content/scripts/nim_loader&amp;quot;),
+    filename: &amp;quot;bundle.js&amp;quot;
+  },
+&lt;p&gt;module: {
+rules: [
+{
+test: /.(js|jsx)$/i,
+loader: &amp;quot;babel-loader&amp;quot;,
+},
+{
+test: /.(eot|svg|ttf|woff|woff2|png|jpg|gif)$/i,
+type: &amp;quot;asset&amp;quot;,
+},
+{ test: /.nim$/,
+use:
+[{
+loader: &amp;quot;nim-loader&amp;quot;,
+options: {
+flags: [&amp;quot;&amp;ndash;threads:on&amp;quot;] // does not work in javascript :(
+}
+}
+]
+},
+// Add your rules for custom modules here
+// Learn more about loaders from https://webpack.js.org/loaders/
+],
+},
+};
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Now that  we have our webpack  setup, we need to  define our
+export  function that  will be  accessible from  javascript.
+I will write our export inside `main.nim` as such&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;import jsffi # javascript foreign function interface
+from types import World, Agent, rand_pos
+from agents import move, sense, move, consume
+from world as worlds import difuse
+import std/[random, sequtils]
+random.randomize() # setup rng
+proc newWorld*(n, xmax, ymax: int,
+               decay: float = 0.2,
+               agent_config: JsonNode,
+              ): World  =
+  echo &amp;quot;Creating world&amp;quot;
+  world = World(xmax: xmax,
+                 ymax: ymax,
+                 data: newSeqWith(xmax, newSeqWith(ymax, 0.0)),
+                 decay: decay,
+                 agents: @[])
+  # var agent: Agent
+  echo &amp;quot;Creating agents&amp;quot;
+  for id in 0..&amp;lt;n:
+    var agent = newAgent(id, world, agent_config)
+    world.agents.add(agent)
+  return world
+&lt;p&gt;proc step*() {.exportc.}=
+world.move_agents()
+world.sense_agents()
+world.difuse()&lt;/p&gt;
+&lt;h1 id=&#34;define-our-export-for-the-nim-module&#34;&gt;define our export for the nim module&lt;/h1&gt;
+&lt;p&gt;var module {.importc.}: JsObject
+module.exports.newWorld = newWorld
+module.exports.step = step
+&lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
+&lt;p&gt;Now  we  can  import  the  `newWorld`  and  `step`  function
+directly from javascript:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;//filie: index.js
+import module from &amp;quot;main.nim&amp;quot; //importing a nim module!!
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;&lt;a id=&#34;org5c17d02&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-is-webpack&#34;&gt;What is webpack?&lt;/h2&gt;
+&lt;p&gt;Webpack  bundles  javascript  modules  (both  installed  and
+written by  you, see  &lt;a href=&#34;https://webpack.js.org/concepts/why-webpack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;) into a  singular target  that is
+compact and fast to use. Edits  in your files are updated as
+you write  code. It exists as  a sort of bridge  between the
+old way  of writing javascript modules  (with CommonJS), and
+the modern way of writing modules modules (using the &lt;a href=&#34;https://en.wikipedia.org/wiki/ECMAScript&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ES
+format&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org49fc472&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;discussion&#34;&gt;Discussion&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;org28f1e23&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;Writing nim offers a familiar and powerful syntax that can
+be exported to multiple backends including javascript.&lt;/li&gt;
+&lt;li&gt;Integration and visualization  of scientific models could
+be readily exported to javascript and D3.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;/body&gt;
+&lt;/html&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Expanding the farm</title>
+      <link>https://cvanelteren.github.io/post/nim_chicken/</link>
+      <pubDate>Fri, 25 Jun 2021 19:47:55 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/nim_chicken/</guid>
+      <description>&lt;p&gt;In a previous post, I created the fastest chicken alive! I implemented a chicken in cpp and provided bindings in cython and python. However, our chicken Carl needs some friends. Today, I will implement a friend for Carl, in another morer niche language called &lt;code&gt;nim&lt;/code&gt;; and I will show how nim can produce similarly fast chickens that can be called from python.&lt;/p&gt;
+&lt;h1 id=&#34;what-is-nim&#34;&gt;What is Nim?&lt;/h1&gt;
+&lt;p&gt;From their website:&lt;/p&gt;
+&lt;blockquote&gt;
+&lt;p&gt;Nim is a statically typed compiled systems programming language. It combines succesful concepts from mature languages like Python, Ada and Modula&lt;/p&gt;
+&lt;/blockquote&gt;
+&lt;p&gt;I am not familiar with the latter two, but I am quite familiar with python and it  can be used to solve one of python&amp;rsquo;s weaknesses: python can be terribly slow for numerical problems.&lt;/p&gt;
+&lt;p&gt;Writing nim is similar to other modern languages like rust: it prefers inheritance over composition. However, it does not shy away from using &amp;ldquo;more&amp;rdquo; traditional methods. For example, in nim &amp;ldquo;classes&amp;rdquo; are called types and types can be composed (preferred) but can also inheret from oneanother. Which allows more ancient programmers like me to be able to use my toolset while also exploring composition more.&lt;/p&gt;
+&lt;p&gt;Writing nim looks very similar to python. Variables defined with the &lt;code&gt;var&lt;/code&gt; keyword, functions are &lt;code&gt;proc&lt;/code&gt; (process), printing is performed with &lt;code&gt;echo&lt;/code&gt;, classes / structs are &lt;code&gt;types&lt;/code&gt; and so on.&lt;/p&gt;
+&lt;p&gt;Variables are typed, however the compiler is often very good at inferring the type you are assigning. This effectively means that defining a variable as&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;1&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;is the same, and &lt;code&gt;var&lt;/code&gt; can be seen as implicitly using the &lt;code&gt;auto&lt;/code&gt; keyword from cpp. For more details on nim see  their excellent tutorial on the website; let&amp;rsquo;s start making our chicken friend!&lt;/p&gt;
+&lt;h1 id=&#34;nim-chickens&#34;&gt;Nim chickens&lt;/h1&gt;
+&lt;p&gt;Classes are called &lt;code&gt;types&lt;/code&gt;. As want to bind to python, we make use of the &lt;code&gt;nimpy&lt;/code&gt; library from nim. Fellow pythonistas should feel right at home&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# import a package as per usual of python&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nimpy&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# types are &amp;#34;classes&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# they are similar to structs&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;ref&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;object&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;of&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;PyNimObjectExperimental&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;   &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;We have  defined our  chicken &lt;code&gt;type&lt;/code&gt;,  the ref  object makes
+sure that  our types &lt;em&gt;inherents&lt;/em&gt;  from the root  object that
+makes sure our  chicken can be imported from  python. As can
+be  seen  from  the  name, this  features  is  experimental.
+Functions are  readily exportable to python,  but types have
+only recently been added in. Not to worry, it will hopefully
+improve over time.&lt;/p&gt;
+&lt;h1 id=&#34;nim-implementation&#34;&gt;Nim implementation&lt;/h1&gt;
+&lt;p&gt;Similar, to our previous chicken Carl, we want our chicken to &lt;em&gt;do&lt;/em&gt; something&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# on the structs we can define methods&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;set_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exportpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;value&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;get_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;  &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exportpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;peck&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;self&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;void&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;exportpy&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Peck peck!&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;There is a lot going on in this piece, so let&amp;rsquo;s step through it. The &lt;code&gt;proc&lt;/code&gt; keyword is similar to &lt;code&gt;def&lt;/code&gt; in python: it defines our function. Similar to type hinting our return type is given after the &lt;code&gt;:&lt;/code&gt;. Nim, similar to other languages like matlab, implictly defines a &lt;code&gt;result&lt;/code&gt; variable; return keywords are not necessary and last lines without assignment are automatically put into result. For example&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;some_test&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;some_test_other&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;some_test_another&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;float&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;are equivalent. The curly brackets indicate compiler directives; &lt;code&gt;{.exportpy.}&lt;/code&gt; tells the compiler to make these functions available in our shared object.&lt;/p&gt;
+&lt;h1 id=&#34;compilation&#34;&gt;Compilation&lt;/h1&gt;
+&lt;p&gt;All that is left to do is to compile our chicken into a shared object and import it.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;nim cpp -d:release --threads:on --app:lib --out:chicken.so chicken.nim
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;and, we are done! This is less boilerplate code than the cython approach. Compared to cython, nimpy is less mature. However, nim can readily interact with native c/cpp. It&amp;rsquo;s mainly immature in the type export, but I hope that will improve in the future. It does form a nice alternative to more &amp;ldquo;verbose&amp;rdquo; cpp; it writes quite similar to python. Just to finish of the end, let&amp;rsquo;s run our litle chicken&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c1&#34;&gt;#file: test_nim.py&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;from&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;chicken&lt;/span&gt; &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;set_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;Betsy&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;nb&#34;&gt;print&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;sa&#34;&gt;f&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;My name is &lt;/span&gt;&lt;span class=&#34;si&#34;&gt;{&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;get_name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;&lt;span class=&#34;si&#34;&gt;}&lt;/span&gt;&lt;span class=&#34;s2&#34;&gt;&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;nb&#34;&gt;range&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;c&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;peck&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;generates&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;My name is Betsy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Betsy and Carl can now life together in python world, but they can also interact together in nim or cpp world.&lt;/p&gt;
+&lt;h1 id=&#34;the-nim-farm&#34;&gt;The nim-farm&lt;/h1&gt;
+&lt;p&gt;So far we have been able to bind the nim type to python. Carl and Betsy can life happily ever after there. Nim is, however, also compiled. So we can also inhabit our little farm purely on the cpp side. This will look as follows:&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;compile&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;../cython_classes/chicken.cpp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;type&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CChicken&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;../cython_classes/chicken.hpp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;importcpp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Chicken&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;object&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cstring&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;peck&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;*&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;this&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CChicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;header&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;../cython_classes/chicken.hpp&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;importcpp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;#.peck(@)&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;# var chick = CChicken()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cchick&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;CChicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Carl&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nchick&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;Chicken&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;Betsy&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;We have two chickens now, introducing:&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;nchick&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;echo&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;cchick&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;name&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;i&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;1&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;mi&#34;&gt;10&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;nchick&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;peck&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;cchick&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;peck&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;Now Betsy and Carl are the fastest two chickens across languages. Note that it is also possible to output nim to c/cpp, making it possible for Betsy and Carl to life across three worlds, but this is where I end the post for now.&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;We have two chickens now, introducing:
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Betsy
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Carl
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;Peck peck!
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;I hope Betsy and Carl get to know each other better! Soon we need to prepare for additional expansions. I&amp;rsquo;m looking at you &lt;code&gt;pybind11&lt;/code&gt;.&lt;/p&gt;
+&lt;h1 id=&#34;outlook&#34;&gt;Outlook&lt;/h1&gt;
+&lt;p&gt;Nim offers readable syntax and fast performance. It is a rather strange language as it originally released in 2008 but hasn&amp;rsquo;t gotten much attention compared to more recent languages like rust.  I hope in the future I can apply this language more, for now I&amp;rsquo;m signing off. See you in the next post.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

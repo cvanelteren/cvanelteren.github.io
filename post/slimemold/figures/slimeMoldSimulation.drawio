@@ -1,0 +1,44 @@
+<mxfile host="Electron" modified="2023-06-16T05:10:27.115Z" agent="Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) draw.io/21.2.8 Chrome/112.0.5615.165 Electron/24.2.0 Safari/537.36" etag="9ZucFc8FwiwA67WAeJl_" version="21.2.8" type="device">
+  <diagram name="Page-1" id="gVrZgntwV-zbKVhXGJgT">
+    <mxGraphModel dx="2049" dy="2396" grid="1" gridSize="10" guides="1" tooltips="1" connect="1" arrows="1" fold="1" page="1" pageScale="1" pageWidth="850" pageHeight="1100" math="0" shadow="0">
+      <root>
+        <mxCell id="0" />
+        <mxCell id="1" parent="0" />
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-1" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;World&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="140" y="50" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-8" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0;exitY=0.5;exitDx=0;exitDy=0;entryX=1;entryY=0.5;entryDx=0;entryDy=0;endArrow=classic;endFill=1;startArrow=classic;startFill=1;strokeWidth=5;" edge="1" parent="1" source="uAHjcurpiI7lvtUmNGEU-2" target="uAHjcurpiI7lvtUmNGEU-1">
+          <mxGeometry relative="1" as="geometry" />
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-2" value="&lt;font style=&quot;font-size: 30px;&quot;&gt;Agents&lt;/font&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="460" y="50" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-6" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;entryX=0.5;entryY=1;entryDx=0;entryDy=0;curved=1;strokeWidth=5;" edge="1" parent="1" source="uAHjcurpiI7lvtUmNGEU-3" target="uAHjcurpiI7lvtUmNGEU-1">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="220" />
+              <mxPoint x="220" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-7" style="edgeStyle=orthogonalEdgeStyle;rounded=0;orthogonalLoop=1;jettySize=auto;html=1;exitX=0.5;exitY=0;exitDx=0;exitDy=0;curved=1;strokeWidth=5;" edge="1" parent="1" source="uAHjcurpiI7lvtUmNGEU-3" target="uAHjcurpiI7lvtUmNGEU-2">
+          <mxGeometry relative="1" as="geometry">
+            <Array as="points">
+              <mxPoint x="380" y="220" />
+              <mxPoint x="540" y="220" />
+            </Array>
+          </mxGeometry>
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-3" value="&lt;span style=&quot;font-size: 30px;&quot;&gt;Simulator&lt;/span&gt;" style="rounded=1;whiteSpace=wrap;html=1;" vertex="1" parent="1">
+          <mxGeometry x="300" y="240" width="160" height="120" as="geometry" />
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-9" value="" style="rounded=1;whiteSpace=wrap;html=1;fillColor=none;dashed=1;dashPattern=1 4;strokeWidth=4;" vertex="1" parent="1">
+          <mxGeometry x="100" y="10" width="560" height="370" as="geometry" />
+        </mxCell>
+        <mxCell id="uAHjcurpiI7lvtUmNGEU-10" value="Computational model" style="text;html=1;strokeColor=none;fillColor=none;align=center;verticalAlign=middle;whiteSpace=wrap;rounded=0;fontSize=40;" vertex="1" parent="1">
+          <mxGeometry x="100" y="-100" width="560" height="110" as="geometry" />
+        </mxCell>
+      </root>
+    </mxGraphModel>
+  </diagram>
+</mxfile>
