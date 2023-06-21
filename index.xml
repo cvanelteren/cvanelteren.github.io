@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Slimemold</title>
+      <title>How can slimemolds compute shortest paths?</title>
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
@@ -23,15 +23,7 @@
   &lt;title&gt;&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-   &lt;hr&gt;
-&lt;p&gt;author: Casper van Elteren
-bibliography:&lt;/p&gt;
-&lt;ul&gt;
-&lt;li&gt;~/library.bib
-title: Simulating slime molds from scratch&lt;/li&gt;
-&lt;/ul&gt;
-&lt;hr&gt;
-&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -7080,7 +7072,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-815943276&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-762593148&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7090,7 +7082,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-815943276&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-762593148&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

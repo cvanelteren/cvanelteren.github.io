@@ -14,6 +14,14 @@
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
+    <loc>https://cvanelteren.github.io/tag/d3/</loc>
+    <lastmod>2023-06-15T17:40:10+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/slimemold/</loc>
+    <lastmod>2023-06-15T17:40:10+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://cvanelteren.github.io/tag/nim/</loc>
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
@@ -22,7 +30,7 @@
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>https://cvanelteren.github.io/post/slimemold/</loc>
+    <loc>https://cvanelteren.github.io/tag/scientific-visualization/</loc>
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
@@ -108,10 +116,6 @@
   </url><url>
     <loc>https://cvanelteren.github.io/talk/information-flows-in-complex-systems/</loc>
     <lastmod>2022-02-11T15:30:00+01:00</lastmod>
-    <changefreq>weekly</changefreq>
-  </url><url>
-    <loc>https://cvanelteren.github.io/tag/d3/</loc>
-    <lastmod>2022-02-08T18:09:35+01:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://cvanelteren.github.io/post/d3/</loc>
