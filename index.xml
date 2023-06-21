@@ -25,31 +25,32 @@
 &lt;body&gt;
    &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#org2fdecc4&#34;&gt;TLDR&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org1e7f3d2&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgb337831&#34;&gt;The Plan&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org22199b2&#34;&gt;Why Nim?&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgca977cb&#34;&gt;Modeling a slime mold&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#org321926f&#34;&gt;TLDR&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb14fe87&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org422886a&#34;&gt;The Plan&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org01246cc&#34;&gt;Why Nim?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org26937da&#34;&gt;Modeling a slime mold&lt;/a&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#orgaafa562&#34;&gt;Code layout&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org348d55a&#34;&gt;Modeling an agent&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#orga51136c&#34;&gt;Code layout&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org0b04d28&#34;&gt;Modeling an agent&lt;/a&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#orgb3083ed&#34;&gt;Agent movement&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org03b80c1&#34;&gt;Agent sensing&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orge56a2cb&#34;&gt;Agent movement&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org45acdb5&#34;&gt;Agent sensing&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org344dbd6&#34;&gt;Modeling the world&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#orgbebf9a9&#34;&gt;Connecting Nim to Javascript&lt;/a&gt;
+&lt;li&gt;&lt;a href=&#34;#org29e8b8d&#34;&gt;Modeling the world&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgea2eb32&#34;&gt;Connecting Nim to Javascript&lt;/a&gt;
 &lt;ol&gt;
-&lt;li&gt;&lt;a href=&#34;#org5c17d02&#34;&gt;What is webpack?&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgb02354a&#34;&gt;What is webpack?&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
 &lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org49fc472&#34;&gt;Discussion&lt;/a&gt;&lt;/li&gt;
-&lt;li&gt;&lt;a href=&#34;#org28f1e23&#34;&gt;Conclusions&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#org6473a16&#34;&gt;Building the applet&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orgd273740&#34;&gt;Discussion&lt;/a&gt;&lt;/li&gt;
+&lt;li&gt;&lt;a href=&#34;#orge87ff44&#34;&gt;Conclusions&lt;/a&gt;&lt;/li&gt;
 &lt;/ol&gt;
-&lt;p&gt;&lt;a id=&#34;org2fdecc4&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org321926f&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds  are amazing creatures that  can solve complex
@@ -62,17 +63,7 @@ the browser&lt;/li&gt;
 &lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
 &lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
-&lt;svg  width = &#34;100px&#34; height = &#34;100px&#34; xmlns = &#34;http://www.w3.org/2000/svg&#34;&gt;
-  &lt;rect x = &#34;10&#34; y = &#34;10&#34; width = &#34;100&#34; height = &#34;100&#34; style = &#34;fill: transparent;&#34;&gt;
-  &lt;/rect&gt;
-    &lt;foreignObject width = &#34;100px&#34; height = &#34;100px&#34; x = &#34;0&#34; y = &#34;0&#34;&gt;
-        &lt;form&gt;
-        &lt;input type = &#34;number&#34; value = &#34;3&#34;&gt;&lt;/input&gt;
-        &lt;input type = &#34;text&#34; value = &#34;hello there&#34;&gt; &lt;/input&gt;
-        &lt;/form&gt;
-    &lt;/foreignObject&gt;
-&lt;/svg&gt; 
-&lt;p&gt;&lt;a id=&#34;org1e7f3d2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgb14fe87&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Human  are  fascinating  creatures.  We  like  to  think  of
 ourselves as having an identity, a sense of “self” or &lt;em&gt;ego&lt;/em&gt;.
@@ -82,7 +73,7 @@ with our environment. But what if you can be both?&lt;/p&gt;
 &lt;p&gt;
 &lt;figure  id=&#34;figure-slime-molds-form-spores-to-explore-the-environment-in-the-hunt-for-food&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold.jpg&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemold.jpg&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       Slime molds form spores to explore the environment in the hunt for food.
     &lt;/figcaption&gt;&lt;/figure&gt;
@@ -97,11 +88,11 @@ slime mold is one such creature.  The slime mold is a single
 celled  eukaryotic (=  having a  nucleus) organism  that can
 form spores. These spores  are often produces when different
 slime molds group together to form a multi-cellular organism
-(&lt;a href=&#34;#org7e21ff9&#34;&gt;5&lt;/a&gt;)&lt;/p&gt;
+(&lt;a href=&#34;#org0d3a780&#34;&gt;5&lt;/a&gt;)&lt;/p&gt;
 &lt;p&gt;
 &lt;figure  id=&#34;figure-the-slime-mold-can-solve-a-maze-by-forming-spores-when-a-food-source-is-found-the-branches-that-did-not-find-food-are-trimmed-this-results-in-a-network-structure-with-highly-efficient-path-distances&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold_maze.webp&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemold_maze.webp&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       The slime mold can solve a maze by forming spores. When a food source is found the branches that did not find food are trimmed. This results in a network structure with highly efficient path distances.
     &lt;/figcaption&gt;&lt;/figure&gt;
@@ -113,11 +104,11 @@ producing spores.  Initially, the search is  randomly around
 them, but as soon as these  spores find food, the slime mold
 increases  the “traffic”  to these  spores. Scientists  have
 studied this behavior and found  that the slime mold is able
-to solve mazes (&lt;a href=&#34;#orgcbf0e50&#34;&gt;7&lt;/a&gt;), &lt;a href=&#34;https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;reproduce the tokyo metro network&lt;/a&gt;&lt;/p&gt;
+to solve mazes (&lt;a href=&#34;#org53ae32d&#34;&gt;7&lt;/a&gt;), &lt;a href=&#34;https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;reproduce the tokyo metro network&lt;/a&gt;&lt;/p&gt;
 &lt;p&gt;
 &lt;figure  &gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimeMoldTokyo.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimeMoldTokyo.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;/figure&gt;
 &lt;/p&gt;
 &lt;p&gt;What is amazing about this organism is that it can do all of
@@ -129,10 +120,10 @@ and solve complex problems.&lt;/p&gt;
 organism by building a  agent-based simulation from scratch.
 In addition,  I want  to explore visualizing  the simulation
 on a web page directly without the use of videos.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orgb337831&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org422886a&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;the-plan&#34;&gt;The Plan&lt;/h1&gt;
 &lt;p&gt;The goal is  to create a simulator that can  be run directly
-from the browser (&lt;a href=&#34;#orge722bc1&#34;&gt;13&lt;/a&gt;). I will use Nim (&lt;a href=&#34;#org2c85b32&#34;&gt;14&lt;/a&gt; to
+from the browser (&lt;a href=&#34;#org2ed984f&#34;&gt;13&lt;/a&gt;). I will use Nim (&lt;a href=&#34;#orgdeb1bfa&#34;&gt;14&lt;/a&gt; to
 make   the  computational   model,  and   create  a   visual
 application  by   using  javascript   and  D3.   The  visual
 components will have a control  box that can control various
@@ -142,12 +133,12 @@ resources and so on.&lt;/p&gt;
 &lt;p&gt;
 &lt;figure  id=&#34;figure-coarse-outline-of-the-different-components&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimeMoldSimulationOverview.drawio.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
+    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimeMoldSimulationOverview.drawio.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
       Coarse outline of the different components.
     &lt;/figcaption&gt;&lt;/figure&gt;
 &lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org22199b2&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org01246cc&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;why-nim&#34;&gt;Why Nim?&lt;/h1&gt;
 &lt;p&gt;Nim  is a  pretty  nifty language  that  writes (and  feels)
 similar to  python, except  that it  is strongly  typed. The
@@ -163,7 +154,7 @@ bridging         between         different         languages
 &lt;a href=&#34;http://cvanelteren.github.io/tags/nim&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;http://cvanelteren.github.io/tags/nim&lt;/a&gt;),  an decided  to
 solve the  advent of code  challenges in Nim to  explore the
 language and its capabilities.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orgca977cb&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org26937da&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;modeling-a-slime-mold&#34;&gt;Modeling a slime mold&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Describe the stages of the slime mold&lt;/li&gt;
@@ -185,7 +176,7 @@ emerges through the interaction of slime mold agents.&lt;/p&gt;
     &lt;/figcaption&gt;&lt;/figure&gt;
 &lt;/p&gt;
 &lt;p&gt;Each slimemold is modeled as an agent in 2D space possessing
-different  sensors   (&lt;a href=&#34;#org3052e2e&#34;&gt;18&lt;/a&gt;).  Each  agent   drops  food
+different  sensors   (&lt;a href=&#34;#org261ff05&#34;&gt;18&lt;/a&gt;).  Each  agent   drops  food
 resources in the environment  with activity $A_i$ that other
 agents can sense. The agents have $n$ sensors that can sense
 location at  distance $R_i$ from  the agent of  width $W_i$.
@@ -197,15 +188,15 @@ agent  does not  move, he  does  not drop  resources in  the
 environment. Over time, the dropped food source will decay
 from the environment with rate $\delta$.&lt;/p&gt;
 &lt;p&gt;From  these   simple  dynamics,   agents  can   form  chains
-(&lt;a href=&#34;#org71891dc&#34;&gt;21&lt;/a&gt;)  and  with  enough agents  will  form  networks
-(&lt;a href=&#34;#org17b50ed&#34;&gt;22&lt;/a&gt;).  The emergence  of networks,  occurs through
+(&lt;a href=&#34;#orgfcb7448&#34;&gt;21&lt;/a&gt;)  and  with  enough agents  will  form  networks
+(&lt;a href=&#34;#orgd0dad84&#34;&gt;22&lt;/a&gt;).  The emergence  of networks,  occurs through
 the fact that each agent&lt;/p&gt;
 &lt;p&gt;
-&lt;figure  id=&#34;figure-slimemold-agents-can-form-chains-and-networks-through-the-simple-dynamics-described-in-18org3052e2e-from-&#34;&gt;
+&lt;figure  id=&#34;figure-slimemold-agents-can-form-chains-and-networks-through-the-simple-dynamics-described-in-18org261ff05-from-&#34;&gt;
   &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
     &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemoldchains.png&#34; alt=&#34;img&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
   &lt;/div&gt;&lt;figcaption&gt;
-      Slimemold agents can form chains and networks through the simple dynamics described in &lt;a href=&#34;#org3052e2e&#34;&gt;18&lt;/a&gt; (from &lt;a href=&#34;mailto:Jones@2010&#34;&gt;Jones@2010&lt;/a&gt;).
+      Slimemold agents can form chains and networks through the simple dynamics described in &lt;a href=&#34;#org261ff05&#34;&gt;18&lt;/a&gt; (from &lt;a href=&#34;mailto:Jones@2010&#34;&gt;Jones@2010&lt;/a&gt;).
     &lt;/figcaption&gt;&lt;/figure&gt;
 &lt;/p&gt;
 &lt;p&gt;
@@ -229,8 +220,8 @@ communicate to  other slime  molds that  there is  some food
 source  nearby.  Jones  ran computational  simulations  that
 emulated food  sources in  the environment.  Remarkable, the
 agents  will produce  a minimum  spanning tree  (or network)
-between the food resources (&lt;a href=&#34;#orgcf09aee&#34;&gt;23&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orgaafa562&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+between the food resources (&lt;a href=&#34;#org6131f31&#34;&gt;23&lt;/a&gt;).&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orga51136c&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;code-layout&#34;&gt;Code layout&lt;/h2&gt;
 &lt;p&gt;&lt;Jones2010&gt; provides an elegant  description of a minimal
 agent-based  model for  the slime  mold. To  the best  of my
@@ -260,7 +251,7 @@ contained in  `main.nim`. Inside this file,  the methods are
 described   that  are   exported   to  javascript.   Lastly,
 `index.js` will  contain the applet with  the visualizations
 of the simulation.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org348d55a&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org0b04d28&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h2 id=&#34;modeling-an-agent&#34;&gt;Modeling an agent&lt;/h2&gt;
 &lt;p&gt;Each agent is  represented as a struct  containing data such
 as its position, speed, activity and so on.&lt;/p&gt;
@@ -286,7 +277,7 @@ can be ignored.&lt;/p&gt;
 &lt;li&gt;sense nearby  resources and  orientate itself  towards the
 sensor with the maximum sensed resource&lt;/li&gt;
 &lt;/ul&gt;
-&lt;p&gt;&lt;a id=&#34;orgb3083ed&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orge56a2cb&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;agent-movement&#34;&gt;Agent movement&lt;/h3&gt;
 &lt;p&gt;We  have to  therefore  right two  functions that  represent
 these abilities. For move we&lt;/p&gt;
@@ -312,11 +303,11 @@ proc move*(a: var Agent, world: var World) =
 &lt;p&gt;The agent will  attempt to move to  the `proposal` location.
 If  the  move  can  be  made  (no  object  present  at  that
 location), the agent will   put resources  at the  agents
-location in into  the world object (see  &lt;a href=&#34;#org344dbd6&#34;&gt;6&lt;/a&gt;)
+location in into  the world object (see  &lt;a href=&#34;#org29e8b8d&#34;&gt;6&lt;/a&gt;)
 and move towards the proposal  location. When no move can be
 made,  the agent  will  not perform  a  deposit action,  but
 merely choose a random new angle.&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org03b80c1&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org45acdb5&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h3 id=&#34;agent-sensing&#34;&gt;Agent sensing&lt;/h3&gt;
 &lt;p&gt;Each simulation  step, the agent  will probe the  sensors it
 has  for resources,  and  orientate  themselves towards  the
@@ -355,7 +346,7 @@ prop.y = tmp.y + a.pos.y&lt;/p&gt;
 &lt;/code&gt;&lt;/pre&gt;
 &lt;p&gt;result = a.follow_gradient(concentrations)
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org344dbd6&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org29e8b8d&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;modeling-the-world&#34;&gt;Modeling the world&lt;/h1&gt;
 &lt;p&gt;The agents are  not interacting in a vacuum,  there is world
 to be created! The world object will hold the agents, and a 2D plane on which
@@ -380,7 +371,7 @@ y = world.data[pos.x.int][pos.y.int]
 new_data[pos.x.int][pos.y.int] =  y + world.decay * (val * z - 2 * y)
 world.data = new_data
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;orgbebf9a9&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgea2eb32&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;connecting-nim-to-javascript&#34;&gt;Connecting Nim to Javascript&lt;/h1&gt;
 &lt;p&gt;In the  end, we want to  view the output of  our hard labor.
 Although Nim  is a nice language  to write in, it  lacks the
@@ -391,6 +382,15 @@ projects which particularly  excels at sharing (interactive)
 graphs on the  web. Luckily, Nim can  interface readily with
 other languages, and in particular has a close connection to
 javascript.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orgb02354a&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h2 id=&#34;what-is-webpack&#34;&gt;What is webpack?&lt;/h2&gt;
+&lt;p&gt;Webpack  bundles  javascript  modules  (both  installed  and
+written by  you, see  &lt;a href=&#34;https://webpack.js.org/concepts/why-webpack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;) into a  singular target  that is
+compact and fast to use. Edits  in your files are updated as
+you write  code. It exists as  a sort of bridge  between the
+old way  of writing javascript modules  (with CommonJS), and
+the modern way of writing modules modules (using the &lt;a href=&#34;https://en.wikipedia.org/wiki/ECMAScript&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ES
+format&lt;/a&gt;).&lt;/p&gt;
 &lt;p&gt;To interface  with javascript, I  will use a  package called
 &lt;a href=&#34;https://github.com/Double-oxygeN/nim-loader&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;nim loader&lt;/a&gt; which can be used by webpack to allow the written
 nim module to behave like a javacript module.&lt;/p&gt;
@@ -472,21 +472,28 @@ module.exports.step = step
 &lt;/code&gt;&lt;/pre&gt;&lt;/p&gt;
 &lt;p&gt;Now  we  can  import  the  `newWorld`  and  `step`  function
 directly from javascript:&lt;/p&gt;
-&lt;pre&gt;&lt;code&gt;//filie: index.js
+&lt;pre&gt;&lt;code&gt;//file: index.js
 import module from &amp;quot;main.nim&amp;quot; //importing a nim module!!
 &lt;/code&gt;&lt;/pre&gt;
-&lt;p&gt;&lt;a id=&#34;org5c17d02&#34;&gt;&lt;/a&gt;&lt;/p&gt;
-&lt;h2 id=&#34;what-is-webpack&#34;&gt;What is webpack?&lt;/h2&gt;
-&lt;p&gt;Webpack  bundles  javascript  modules  (both  installed  and
-written by  you, see  &lt;a href=&#34;https://webpack.js.org/concepts/why-webpack/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;here&lt;/a&gt;) into a  singular target  that is
-compact and fast to use. Edits  in your files are updated as
-you write  code. It exists as  a sort of bridge  between the
-old way  of writing javascript modules  (with CommonJS), and
-the modern way of writing modules modules (using the &lt;a href=&#34;https://en.wikipedia.org/wiki/ECMAScript&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;ES
-format&lt;/a&gt;).&lt;/p&gt;
-&lt;p&gt;&lt;a id=&#34;org49fc472&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;The  module object  will  expose the  `newWorld` and  `step`
+function. Since `newWorld` returns  a `World` object you may
+wonder   what  happens   when   you   call  this   function.
+Interestingly, the `World` object  is directly accessible in
+javascript (given that the properties are exposed in Nim).&lt;/p&gt;
+&lt;p&gt;We have  now reached  a point where  we could  start writing
+modules in  Nim and  then exposing them  through javascript.
+Nim can also be used to directly interact with the dom. Some
+modules (such  as D3)  have (incomplete) bindings  such that
+nim  can even  be used  to ditch  javascript all together  if
+needed. This is a nifty tool in your toolbelt if you want to
+harness the power of nim on  the web. It makes your nim code
+more  portable   if  you  want  to   write  applications  or
+simulations and share them on a shiny dashboard.&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;org6473a16&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;h1 id=&#34;building-the-applet&#34;&gt;Building the applet&lt;/h1&gt;
+&lt;p&gt;&lt;a id=&#34;orgd273740&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;discussion&#34;&gt;Discussion&lt;/h1&gt;
-&lt;p&gt;&lt;a id=&#34;org28f1e23&#34;&gt;&lt;/a&gt;&lt;/p&gt;
+&lt;p&gt;&lt;a id=&#34;orge87ff44&#34;&gt;&lt;/a&gt;&lt;/p&gt;
 &lt;h1 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Writing nim offers a familiar and powerful syntax that can
@@ -6753,7 +6760,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-542713698&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-289376145&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -6763,7 +6770,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-542713698&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-289376145&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
