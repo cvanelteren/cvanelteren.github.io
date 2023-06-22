@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>How can slimemolds compute shortest paths?</title>
+      <title>How can slime molds compute shortest paths?</title>
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
@@ -118,7 +118,7 @@ agent-based approach to study the pattern formation that emerges through
 the interaction of slime mold agents.&lt;/p&gt;
 &lt;figure id=&#34;fig:agent&#34;&gt;
 &lt;img src=&#34;./figures/slimemold/fig:agent.png&#34; /&gt;
-&lt;figcaption&gt;Representation of slimemold agent (from cite:@Jones2010).
+&lt;figcaption&gt;Representation of slime mold agent (from cite:@Jones2010).
 The agent drops resources in space at its location with a certain
 activity &lt;span
 class=&#34;math inline&#34;&gt;&lt;em&gt;A&lt;/em&gt;&lt;sub&gt;&lt;em&gt;i&lt;/em&gt;&lt;/sub&gt;&lt;/span&gt; Each agent
@@ -126,7 +126,7 @@ possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors have a
 reach and a width at which they can sense resources
 dropped.&lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;Each slimemold is modeled as an agent in 2D space possessing different
+&lt;p&gt;Each slime mold is modeled as an agent in 2D space possessing different
 sensors (&lt;a href=&#34;#fig:agent&#34;&gt;4&lt;/a&gt;). Each agent drops food resources in the
 environment with activity $A_i$ that other agents can sense. The agents
 have $n$ sensors that can sense location at distance $R_i$ from the
@@ -141,7 +141,7 @@ and with enough agents will form networks (&lt;a href=&#34;#fig:networks&#34;&gt
 emergence of networks, occurs through the fact that each agent&lt;/p&gt;
 &lt;figure id=&#34;fig:chains&#34;&gt;
 &lt;img src=&#34;./figures/slimemold/slimemoldchains.png&#34; /&gt;
-&lt;figcaption&gt;Slimemold agents can form chains and networks through the
+&lt;figcaption&gt;Slime mold agents can form chains and networks through the
 simple dynamics described in &lt;a href=&#34;fig:agent&#34;&gt;fig:agent&lt;/a&gt; (from
 &lt;span class=&#34;citation&#34;
 data-cites=&#34;Jones&#34;&gt;cite:Jones&lt;/span&gt;@2010).&lt;/figcaption&gt;
@@ -7046,7 +7046,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-386294571&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-625387149&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7056,7 +7056,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-386294571&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-625387149&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
