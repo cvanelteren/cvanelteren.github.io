@@ -183,7 +183,6 @@ below.&lt;/p&gt;
 &lt;p&gt;The simulation would need a way to represent the world the agents can
 move in, and a description of &lt;em&gt;how&lt;/em&gt; the agents can interact with this
 world. To structure my approach, I propose the following code layout:&lt;/p&gt;
-&lt;figcaption&gt; Glauber versus Kawasaki dynamics for a Ising model on regular 2D lattice of 64x64 spins.  &lt;/figcaption&gt;
 &lt;div class=&#34;captioned-content&#34;&gt;
 &lt;div class=&#34;caption&#34;&gt;
 &lt;p&gt;Layout of the various components used to generate the simulation&lt;/p&gt;
