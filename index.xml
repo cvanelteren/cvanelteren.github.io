@@ -23,7 +23,15 @@
   &lt;title&gt;&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+   &lt;hr&gt;
+&lt;p&gt;author: Casper van Elteren
+bibliography:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;~/library.bib
+title: Simulating slime molds from scratch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -75,12 +83,13 @@ mold increases the &amp;ldquo;traffic&amp;rdquo; to these spores. Scientists hav
 this behavior and found that the slime mold is able to solve mazes
 (&lt;a href=&#34;#fig:maze&#34;&gt;2&lt;/a&gt;), &lt;a href=&#34;https://www.nationalgeographic.com/science/article/slime-mould-attacks-simulates-tokyo-rail-network&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;reproduce the tokyo metro
 network&lt;/a&gt;&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  &gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimeMoldTokyo.png&#34; alt=&#34;&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:tokyo&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimeMoldTokyo.png&#34; /&gt;
+&lt;figcaption&gt;Slime mold can reproduce networks that represent real-world
+networks. Here an example is shown that the slime mold can reproduce a
+network similar to the Tokyo metro network. Light was used to simulate
+the presence of mountains.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;What is amazing about this organism is that it can do all of this
 without &amp;ldquo;knowing&amp;rdquo; the general surrounding. There is no generalized
 intelligence, or forward planning. Through interactions with its
@@ -7054,7 +7063,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-759162483&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-143287965&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7064,7 +7073,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-759162483&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-143287965&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
