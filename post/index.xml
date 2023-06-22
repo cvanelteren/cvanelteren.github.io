@@ -33,6 +33,14 @@ without a central cognitive unit&lt;/li&gt;
 &lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
 &lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
+&lt;h2 id=&#34;things-to-try&#34;&gt;Things to try&lt;/h2&gt;
+&lt;ul&gt;
+&lt;li&gt;Adjust the FOV slider (blue arc) to see the effects on the emergent
+structures&lt;/li&gt;
+&lt;li&gt;Change the number of agents by changing the number in the orange agent&lt;/li&gt;
+&lt;li&gt;Place food sources with the left mouse button to guide agents to other
+branches of the network.&lt;/li&gt;
+&lt;/ul&gt;
 &lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
 &lt;p&gt;Human are fascinating creatures. We like to think of ourselves as having
 an identity, a sense of &amp;ldquo;self&amp;rdquo; or &lt;em&gt;ego&lt;/em&gt;. We like to think of ourselves
@@ -5527,7 +5535,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-625387149&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-146753892&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -5537,7 +5545,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-625387149&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-146753892&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
