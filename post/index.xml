@@ -23,7 +23,15 @@
   &lt;title&gt;&lt;/title&gt;
 &lt;/head&gt;
 &lt;body&gt;
-   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+   &lt;hr&gt;
+&lt;p&gt;author: Casper van Elteren
+bibliography:&lt;/p&gt;
+&lt;ul&gt;
+&lt;li&gt;~/library.bib
+title: Simulating slime molds from scratch&lt;/li&gt;
+&lt;/ul&gt;
+&lt;hr&gt;
+&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -38,15 +46,11 @@ without a central cognitive unit&lt;/li&gt;
 an identity, a sense of &amp;ldquo;self&amp;rdquo; or &lt;em&gt;ego&lt;/em&gt;. We like to think of ourselves
 having a career or skills and hardly express (at least in common speech)
 about interaction with our environment. But what if you can be both?&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-slimemoldspores&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemold.jpg&#34; alt=&#34;Slime molds form spores to explore the environment in the hunt for
-food.&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      slimeMoldSpores
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:slimeMoldSpores&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimemold.jpg&#34; /&gt;
+&lt;figcaption&gt;Slime molds form spores to explore the environment in the
+hunt for food.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;In nature, we often do not consider other forms of live as having an
 ego. A bird is considered a bird that interact purely with its
 environment because it cannot control to the same extent as we do. Some
@@ -56,17 +60,13 @@ The slime mold is one such creature. The slime mold is a single celled
 eukaryotic (= having a nucleus) organism that can form spores. These
 spores are often produces when different slime molds group together to
 form a multi-cellular organism (&lt;a href=&#34;#fig:slimeMoldSpores&#34;&gt;1&lt;/a&gt;)&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-maze&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemold_maze.webp&#34; alt=&#34;The slime mold can solve a maze by forming spores. When a food source
-is found the branches that did not find food are trimmed. This results
-in a network structure with highly efficient path
-distances.&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      maze
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:maze&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimemold_maze.webp&#34; /&gt;
+&lt;figcaption&gt;The slime mold can solve a maze by forming spores. When a
+food source is found the branches that did not find food are trimmed.
+This results in a network structure with highly efficient path
+distances.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;Slime molds are particularly interesting as scientists have studied them
 extensively for their computational ability. When slime molds search for
 food, they extend in space by producing spores. Initially, the search is
@@ -97,15 +97,10 @@ and D3. The visual components will have a control box that can control
 various aspects of the simulation such as starting and stopping,
 controlling the number of agents, the decay rate of the resources and so
 on.&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-outline&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimeMoldSimulationOverview.drawio.png&#34; alt=&#34;Coarse outline of the different
-components.&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      outline
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:outline&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimeMoldSimulationOverview.drawio.png&#34; /&gt;
+&lt;figcaption&gt;Coarse outline of the different components.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;h1 id=&#34;why-nim&#34;&gt;Why Nim?&lt;/h1&gt;
 &lt;p&gt;Nim is a pretty nifty language that writes (and feels) similar to
 python, except that it is strongly typed. The strength of Nim is that it
@@ -129,18 +124,16 @@ computationally cite:@Jones2010,@Ito2003,Kessler1993. Arguebly, one of
 the simplest approach is done by cite:@Jones2010. He applies an
 agent-based approach to study the pattern formation that emerges through
 the interaction of slime mold agents.&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-agent&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/fig:agent.png&#34; alt=&#34;Representation of slimemold agent (from cite:@Jones2010). The agent
-drops resources in space at its location with a certain activity $A_i$
-Each agent possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors
-have a reach and a width at which they can sense resources
-dropped.&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      agent
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:agent&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/fig:agent.png&#34; /&gt;
+&lt;figcaption&gt;Representation of slimemold agent (from cite:@Jones2010).
+The agent drops resources in space at its location with a certain
+activity &lt;span
+class=&#34;math inline&#34;&gt;&lt;em&gt;A&lt;/em&gt;&lt;sub&gt;&lt;em&gt;i&lt;/em&gt;&lt;/sub&gt;&lt;/span&gt; Each agent
+possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors have a
+reach and a width at which they can sense resources
+dropped.&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;Each slimemold is modeled as an agent in 2D space possessing different
 sensors (&lt;a href=&#34;#fig:agent&#34;&gt;4&lt;/a&gt;). Each agent drops food resources in the
 environment with activity $A_i$ that other agents can sense. The agents
@@ -154,38 +147,27 @@ source will decay from the environment with rate $\delta$.&lt;/p&gt;
 &lt;p&gt;From these simple dynamics, agents can form chains (&lt;a href=&#34;#fig:chains&#34;&gt;5&lt;/a&gt;)
 and with enough agents will form networks (&lt;a href=&#34;#fig:networks&#34;&gt;6&lt;/a&gt;). The
 emergence of networks, occurs through the fact that each agent&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-chains&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemoldchains.png&#34; alt=&#34;Slimemold agents can form chains and networks through the simple
-dynamics described in &amp;lt;a href=&amp;#34;fig:agent&amp;#34;&amp;gt;fig:agent&amp;lt;/a&amp;gt; (from
-cite:Jones@2010).&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      chains
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-networks&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/slimemoldnetworks.png&#34; alt=&#34;Slime molds can form networks over time. From top left to right bottom
-the time increases. In the top left image, the agents are spawn at a
-random location. As the simulation develops, the agents will form
-networks (from
-cite:Jones2010).&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      networks
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
-&lt;p&gt;
-&lt;figure  id=&#34;figure-minimum_resources&#34;&gt;
-  &lt;div class=&#34;d-flex justify-content-center&#34;&gt;
-    &lt;div class=&#34;w-100&#34; &gt;&lt;img src=&#34;./figures/slimemold/minimum_resources.png&#34; alt=&#34;When food sources are placed in the environment (black dots), the
-agents will form a efficient path between the resources (from
-cite:@Jones2010).&#34; loading=&#34;lazy&#34; data-zoomable /&gt;&lt;/div&gt;
-  &lt;/div&gt;&lt;figcaption&gt;
-      minimum_resources
-    &lt;/figcaption&gt;&lt;/figure&gt;
-&lt;/p&gt;
+&lt;figure id=&#34;fig:chains&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimemoldchains.png&#34; /&gt;
+&lt;figcaption&gt;Slimemold agents can form chains and networks through the
+simple dynamics described in &lt;a href=&#34;fig:agent&#34;&gt;fig:agent&lt;/a&gt; (from
+&lt;span class=&#34;citation&#34;
+data-cites=&#34;Jones&#34;&gt;cite:Jones&lt;/span&gt;@2010).&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure id=&#34;fig:networks&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/slimemoldnetworks.png&#34; /&gt;
+&lt;figcaption&gt;Slime molds can form networks over time. From top left to
+right bottom the time increases. In the top left image, the agents are
+spawn at a random location. As the simulation develops, the agents will
+form networks (from &lt;span class=&#34;citation&#34;
+data-cites=&#34;Jones2010&#34;&gt;cite:Jones2010&lt;/span&gt;).&lt;/figcaption&gt;
+&lt;/figure&gt;
+&lt;figure id=&#34;fig:minimum_resources&#34;&gt;
+&lt;img src=&#34;./figures/slimemold/minimum_resources.png&#34; /&gt;
+&lt;figcaption&gt;When food sources are placed in the environment (black
+dots), the agents will form a efficient path between the resources (from
+cite:@Jones2010).&lt;/figcaption&gt;
+&lt;/figure&gt;
 &lt;p&gt;The dropped resources emulate how a slime mold would communicate to
 other slime molds that there is some food source nearby. Jones ran
 computational simulations that emulated food sources in the environment.
@@ -201,6 +183,7 @@ below.&lt;/p&gt;
 &lt;p&gt;The simulation would need a way to represent the world the agents can
 move in, and a description of &lt;em&gt;how&lt;/em&gt; the agents can interact with this
 world. To structure my approach, I propose the following code layout:&lt;/p&gt;
+&lt;figcaption&gt; Glauber versus Kawasaki dynamics for a Ising model on regular 2D lattice of 64x64 spins.  &lt;/figcaption&gt;
 &lt;div class=&#34;captioned-content&#34;&gt;
 &lt;div class=&#34;caption&#34;&gt;
 &lt;p&gt;Layout of the various components used to generate the simulation&lt;/p&gt;
@@ -5553,7 +5536,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-964721853&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-298415376&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -5563,7 +5546,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-964721853&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-298415376&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

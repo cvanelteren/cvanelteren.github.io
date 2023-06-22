@@ -917,7 +917,15 @@
   <title></title>
 </head>
 <body>
-   <h1 id="tldr">TLDR</h1>
+   <hr>
+<p>author: Casper van Elteren
+bibliography:</p>
+<ul>
+<li>~/library.bib
+title: Simulating slime molds from scratch</li>
+</ul>
+<hr>
+<h1 id="tldr">TLDR</h1>
 <ul>
 <li>Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit</li>
@@ -932,15 +940,11 @@ without a central cognitive unit</li>
 an identity, a sense of &ldquo;self&rdquo; or <em>ego</em>. We like to think of ourselves
 having a career or skills and hardly express (at least in common speech)
 about interaction with our environment. But what if you can be both?</p>
-<p>
-<figure  id="figure-slimemoldspores">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemold.jpg" alt="Slime molds form spores to explore the environment in the hunt for
-food." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      slimeMoldSpores
-    </figcaption></figure>
-</p>
+<figure id="fig:slimeMoldSpores">
+<img src="./figures/slimemold/slimemold.jpg" />
+<figcaption>Slime molds form spores to explore the environment in the
+hunt for food.</figcaption>
+</figure>
 <p>In nature, we often do not consider other forms of live as having an
 ego. A bird is considered a bird that interact purely with its
 environment because it cannot control to the same extent as we do. Some
@@ -950,17 +954,13 @@ The slime mold is one such creature. The slime mold is a single celled
 eukaryotic (= having a nucleus) organism that can form spores. These
 spores are often produces when different slime molds group together to
 form a multi-cellular organism (<a href="#fig:slimeMoldSpores">1</a>)</p>
-<p>
-<figure  id="figure-maze">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemold_maze.webp" alt="The slime mold can solve a maze by forming spores. When a food source
-is found the branches that did not find food are trimmed. This results
-in a network structure with highly efficient path
-distances." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      maze
-    </figcaption></figure>
-</p>
+<figure id="fig:maze">
+<img src="./figures/slimemold/slimemold_maze.webp" />
+<figcaption>The slime mold can solve a maze by forming spores. When a
+food source is found the branches that did not find food are trimmed.
+This results in a network structure with highly efficient path
+distances.</figcaption>
+</figure>
 <p>Slime molds are particularly interesting as scientists have studied them
 extensively for their computational ability. When slime molds search for
 food, they extend in space by producing spores. Initially, the search is
@@ -991,15 +991,10 @@ and D3. The visual components will have a control box that can control
 various aspects of the simulation such as starting and stopping,
 controlling the number of agents, the decay rate of the resources and so
 on.</p>
-<p>
-<figure  id="figure-outline">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimeMoldSimulationOverview.drawio.png" alt="Coarse outline of the different
-components." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      outline
-    </figcaption></figure>
-</p>
+<figure id="fig:outline">
+<img src="./figures/slimemold/slimeMoldSimulationOverview.drawio.png" />
+<figcaption>Coarse outline of the different components.</figcaption>
+</figure>
 <h1 id="why-nim">Why Nim?</h1>
 <p>Nim is a pretty nifty language that writes (and feels) similar to
 python, except that it is strongly typed. The strength of Nim is that it
@@ -1023,18 +1018,16 @@ computationally cite:@Jones2010,@Ito2003,Kessler1993. Arguebly, one of
 the simplest approach is done by cite:@Jones2010. He applies an
 agent-based approach to study the pattern formation that emerges through
 the interaction of slime mold agents.</p>
-<p>
-<figure  id="figure-agent">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/fig:agent.png" alt="Representation of slimemold agent (from cite:@Jones2010). The agent
-drops resources in space at its location with a certain activity $A_i$
-Each agent possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors
-have a reach and a width at which they can sense resources
-dropped." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      agent
-    </figcaption></figure>
-</p>
+<figure id="fig:agent">
+<img src="./figures/slimemold/fig:agent.png" />
+<figcaption>Representation of slimemold agent (from cite:@Jones2010).
+The agent drops resources in space at its location with a certain
+activity <span
+class="math inline"><em>A</em><sub><em>i</em></sub></span> Each agent
+possess 3 sensors at -1/8 π, 0, 1/8 π. Each of these sensors have a
+reach and a width at which they can sense resources
+dropped.</figcaption>
+</figure>
 <p>Each slimemold is modeled as an agent in 2D space possessing different
 sensors (<a href="#fig:agent">4</a>). Each agent drops food resources in the
 environment with activity $A_i$ that other agents can sense. The agents
@@ -1048,38 +1041,27 @@ source will decay from the environment with rate $\delta$.</p>
 <p>From these simple dynamics, agents can form chains (<a href="#fig:chains">5</a>)
 and with enough agents will form networks (<a href="#fig:networks">6</a>). The
 emergence of networks, occurs through the fact that each agent</p>
-<p>
-<figure  id="figure-chains">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemoldchains.png" alt="Slimemold agents can form chains and networks through the simple
-dynamics described in &lt;a href=&#34;fig:agent&#34;&gt;fig:agent&lt;/a&gt; (from
-cite:Jones@2010)." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      chains
-    </figcaption></figure>
-</p>
-<p>
-<figure  id="figure-networks">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/slimemoldnetworks.png" alt="Slime molds can form networks over time. From top left to right bottom
-the time increases. In the top left image, the agents are spawn at a
-random location. As the simulation develops, the agents will form
-networks (from
-cite:Jones2010)." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      networks
-    </figcaption></figure>
-</p>
-<p>
-<figure  id="figure-minimum_resources">
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./figures/slimemold/minimum_resources.png" alt="When food sources are placed in the environment (black dots), the
-agents will form a efficient path between the resources (from
-cite:@Jones2010)." loading="lazy" data-zoomable /></div>
-  </div><figcaption>
-      minimum_resources
-    </figcaption></figure>
-</p>
+<figure id="fig:chains">
+<img src="./figures/slimemold/slimemoldchains.png" />
+<figcaption>Slimemold agents can form chains and networks through the
+simple dynamics described in <a href="fig:agent">fig:agent</a> (from
+<span class="citation"
+data-cites="Jones">cite:Jones</span>@2010).</figcaption>
+</figure>
+<figure id="fig:networks">
+<img src="./figures/slimemold/slimemoldnetworks.png" />
+<figcaption>Slime molds can form networks over time. From top left to
+right bottom the time increases. In the top left image, the agents are
+spawn at a random location. As the simulation develops, the agents will
+form networks (from <span class="citation"
+data-cites="Jones2010">cite:Jones2010</span>).</figcaption>
+</figure>
+<figure id="fig:minimum_resources">
+<img src="./figures/slimemold/minimum_resources.png" />
+<figcaption>When food sources are placed in the environment (black
+dots), the agents will form a efficient path between the resources (from
+cite:@Jones2010).</figcaption>
+</figure>
 <p>The dropped resources emulate how a slime mold would communicate to
 other slime molds that there is some food source nearby. Jones ran
 computational simulations that emulated food sources in the environment.
@@ -1095,6 +1077,7 @@ below.</p>
 <p>The simulation would need a way to represent the world the agents can
 move in, and a description of <em>how</em> the agents can interact with this
 world. To structure my approach, I propose the following code layout:</p>
+<figcaption> Glauber versus Kawasaki dynamics for a Ising model on regular 2D lattice of 64x64 spins.  </figcaption>
 <div class="captioned-content">
 <div class="caption">
 <p>Layout of the various components used to generate the simulation</p>
