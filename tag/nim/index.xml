@@ -17,13 +17,7 @@
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -796,8 +790,6 @@ performant code in the native language.&lt;/li&gt;
 &lt;li&gt;Binding Nim to javascript is easily achieved which opens up lots of
 opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     

@@ -17,13 +17,7 @@
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -796,8 +790,6 @@ performant code in the native language.&lt;/li&gt;
 &lt;li&gt;Binding Nim to javascript is easily achieved which opens up lots of
 opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -811,13 +803,7 @@ opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 &lt;!-- &lt;div id=&#34;output&#34;&gt;&lt;/div&gt; --&gt;
 &lt;!-- &lt;script src=&#34;https://cdn.jsdelivr.net/npm/d3@7&#34;&gt;&lt;/script&gt; --&gt;
 &lt;!-- &lt;script src=&#34;./test.js&#34;&gt;&lt;/script&gt; --&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+ &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org8d7891c&#34;&gt;Introduction&lt;/a&gt;
 &lt;ol&gt;
@@ -1258,8 +1244,6 @@ dashboard.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://proplot.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Proplot&lt;/a&gt;: matplotlib but with sensible defaults&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://seaborn.pydata.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Seaborn&lt;/a&gt;: additional functionality on top of matplotlib&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     

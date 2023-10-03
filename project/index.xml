@@ -27,13 +27,7 @@
       <link>https://cvanelteren.github.io/project/splitboard/</link>
       <pubDate>Sun, 04 Jul 2021 21:23:54 +0200</pubDate>
       <guid>https://cvanelteren.github.io/project/splitboard/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
+      <description> &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
 This post outlines the process.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/logo.svg&#34; width = &#34;100%&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
@@ -1298,8 +1292,6 @@ only once.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Replaced esp-now with ble mesh&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     

@@ -17,13 +17,7 @@
       <link>https://cvanelteren.github.io/post/cython_pure/</link>
       <pubDate>Tue, 15 Mar 2022 15:27:46 +0100</pubDate>
       <guid>https://cvanelteren.github.io/post/cython_pure/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org47f4632&#34;&gt;What are header files?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#orgb06f8c3&#34;&gt;Cython pure mode&lt;/a&gt;&lt;/li&gt;
@@ -203,8 +197,6 @@ preferred way  is to  use cython pyx  files with  pxd header
 files. An alternative is to use cython pure mode to speed up
 existing  python   code.  Pure  mode  allows   for  smoother
 collaboration with numerical experts and python developers.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     

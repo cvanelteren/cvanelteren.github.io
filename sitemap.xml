@@ -3,7 +3,39 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cvanelteren.github.io/</loc>
-    <lastmod>2023-06-15T17:40:10+02:00</lastmod>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/categories/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/category/coding/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/tag/concurrent-programming/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/concurrent_nim/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/tags/</loc>
+    <lastmod>2023-10-03T17:31:24+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/post/</loc>
+    <lastmod>2023-10-03T17:31:02+02:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/testing/</loc>
+    <lastmod>2023-10-03T17:30:40+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://cvanelteren.github.io/tag/coding/</loc>
@@ -26,24 +58,12 @@
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
-    <loc>https://cvanelteren.github.io/post/</loc>
-    <lastmod>2023-06-15T17:40:10+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-  </url><url>
     <loc>https://cvanelteren.github.io/tag/scientific-visualization/</loc>
-    <lastmod>2023-06-15T17:40:10+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-  </url><url>
-    <loc>https://cvanelteren.github.io/tags/</loc>
     <lastmod>2023-06-15T17:40:10+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://cvanelteren.github.io/post/air-quality-monitor/</loc>
     <lastmod>2023-06-06T10:13:28+02:00</lastmod>
-    <changefreq>weekly</changefreq>
-  </url><url>
-    <loc>https://cvanelteren.github.io/categories/</loc>
-    <lastmod>2023-05-19T16:34:44+02:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://cvanelteren.github.io/post/customizing-wowchemy/</loc>

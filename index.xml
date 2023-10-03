@@ -5,7 +5,7 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Jun 2023 17:40:10 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 03 Oct 2023 17:31:24 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
       <title>Casper van Elteren</title>
@@ -13,17 +13,197 @@
     </image>
     
     <item>
+      <title>Intro to concurrent computing (in Nim)</title>
+      <link>https://cvanelteren.github.io/post/concurrent_nim/</link>
+      <pubDate>Tue, 03 Oct 2023 17:31:24 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/concurrent_nim/</guid>
+      <description> &lt;p&gt;Modern computing usually concerns multiple compute units. These compute
+units can be in the form of implementing shaders on a graphics card, or
+programming for multiple cores on the &lt;em&gt;central processing unit&lt;/em&gt; (CPU).
+Taking advantage of the multiple cores can under optimal circumstances
+yield a $n$ times (= number of cores) increase runtime of your
+computation.&lt;/p&gt;
+&lt;p&gt;Implementing a multiple core program, however, is not a trivial task.
+Some programming languages (such as Matlab, python, julia) offer a high
+level abstract interface that would work well for so-called
+&lt;a href=&#34;https://en.wikipedia.org/wiki/Embarrassingly_parallel&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;embarrasingly parallel
+jobs&lt;/a&gt;. Work
+performed in these kinds of jobs offer little effort to implement on
+multiple cores as the computation can happen on each core independently
+of the other cores. Little to no communication occurs between the cores,
+and shared memory is read-only.&lt;/p&gt;
+&lt;h1 id=&#34;concurrent-computing-in-a-nutshell&#34;&gt;Concurrent computing in a nutshell&lt;/h1&gt;
+&lt;p&gt;In concurrent computer the programmer harnesses the power of compute
+units accessible to their program. These compute units can be compute
+cores on a single computer, or multiple computers communicating over the
+web or inside a server.&lt;/p&gt;
+&lt;p&gt;A concurrent program consists of dividing the task into sub-tasks that
+can independently run on threads (independent tiny programs).&lt;/p&gt;
+&lt;p&gt;Concurrent programming can be decomposed further in parallel programming
+and asynchronous programming. In parallel programming, threads are
+spawned and return results without any communication with the other
+spawned threads. They are parallel in the sense they perform the task in
+jointly independently. Examples include parallel computing the pairwise
+correlation between $N$ variables, running independent runs of
+agent-based models.&lt;/p&gt;
+&lt;p&gt;Asynchronous programming works by dividing the task up in threads in a
+non-blocking manner. That is, the task is subdivided in a thread, and
+the main thread can continue processing code. When called upon, the main
+thread can be &lt;em&gt;blocked&lt;/em&gt; to retrieve the outcome of the thread spawned
+earlier.&lt;/p&gt;
+&lt;p&gt;In this post I will write some notes on how to implement parallel
+programming in Nim. This compared to my other posts are not extensive,
+and form a mere reminder to me on how to do this in the future.&lt;/p&gt;
+&lt;h1 id=&#34;the-problem&#34;&gt;The problem&lt;/h1&gt;
+&lt;p&gt;I have $N$ simulation in which each simulation consists of&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;creating an agent-based simulation with config $C_i, i\in N$&lt;/li&gt;
+&lt;li&gt;Running and storing the results from this result&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;The tasks (including the IO in 2) can run in parallel as the data
+generation process takes longer than dumping the files to disk.&lt;/p&gt;
+&lt;p&gt;Below I will introduce some dummy code, and will not bore you with the
+details of the implementation.&lt;/p&gt;
+&lt;p&gt;In python I would use the `multiprocessing` library to create a pool
+of workers. The library will hide the nitty gritty and nasty details of
+the implementation. In Nim the parallel functionality is at the time of
+writing still hidden in the experimental section. It is fully functional
+for my ends luckily ;-).&lt;/p&gt;
+&lt;p&gt;The major frustration I have is that the documentation on the web was
+not completely clear on how this task can be achieved. On the docs the
+following example is given&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Nim&#34; data-lang=&#34;Nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;std&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;/&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;threadpool&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;processLine&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;line&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;string&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;k&#34;&gt;discard&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;do some heavy lifting here&amp;#34;&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;x&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;lines&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;myinput.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;spawn&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;processLine&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;x&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;n&#34;&gt;sync&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The code defines function and introduces some special keywords
+introduced by the threadpool import.&lt;/p&gt;
+&lt;p&gt;The keyword `spawn` is used to &lt;em&gt;spawn off&lt;/em&gt; (create) a thread. The
+execution flow works as follows. When invoking this script, the main
+thread will spawn off seperate threads to run `processLine`. These
+threads will be spawned and executed at slightly different times. The
+main thread continues for every line in the dummy file until it hits
+`sync`. The `sync` keyword forces the main program to wait until all
+threads are finished. If `sync` was not there, the program would have
+exited, leaving the threads in limbo!&lt;/p&gt;
+&lt;h2 id=&#34;flowvart&#34;&gt;FlowVar[T]&lt;/h2&gt;
+&lt;p&gt;In Nim, a spawned function will return a `FlowVar[T]` variable. The
+variable will be set to nil if the thread has not put any information
+there yet (i.e. it has not been called yet). It effectively tells the
+compiler that there might be a result here when the thread returns a
+value, and allows the main thread to continue.&lt;/p&gt;
+&lt;h1 id=&#34;the-implementation&#34;&gt;The implementation&lt;/h1&gt;
+&lt;p&gt;What we need to achieve is map out what task we want to compute, create
+threads for these tasks, and retrieve the results from the computation
+of these tasks.&lt;/p&gt;
+&lt;p&gt;We first create some dummy code that creates a load on the system. This
+code is necessary as some compilers can optimize out non-functional code
+which creates a faster running program and bypassing the intent of our
+code (running it concurrently).&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-Nim&#34; data-lang=&#34;Nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#file: concurrent.nim&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;threadpool&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;sequtils&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;os&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;experimental&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;s&#34;&gt;&amp;#34;parallel&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;proc &lt;/span&gt;&lt;span class=&#34;nf&#34;&gt;heavyComputation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;):&lt;/span&gt; &lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;{.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;thread&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.}&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;c&#34;&gt;# simulate some arbitrary code&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;result&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;n&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;  &lt;span class=&#34;n&#34;&gt;sleep&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;((&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;n&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;100&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;mod&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;29&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;*&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;7&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first line, makes the keywords available for the multithreading, and
+enables the experimental parallel processing. THe function is given a
+pragma which is a compiler directive that this function will be run on a
+thread. It mainly serves for readibility and ensures that the heap
+memory is managed properly.&lt;/p&gt;
+&lt;p&gt;The task itself is a simlulation of heavy load by giving the task
+different run times. The operations here are arbitrary chosen. For
+identifying when which thread was executed, we return the input `n`
+here.&lt;/p&gt;
+&lt;p&gt;Next, we create the program that runs on the main thread&lt;/p&gt;
+&lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-nim&#34; data-lang=&#34;nim&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;c&#34;&gt;#file: concurrent.nim&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;isMainModule&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c&#34;&gt;# create dummy variables&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;let&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;N&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;10000&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;toCompute&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;mf&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;).&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toseq&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c&#34;&gt;# essentially they have a void conversion here&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;results&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;newSeq&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FlowVarBase&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;parallel&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;for&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt; &lt;span class=&#34;ow&#34;&gt;in&lt;/span&gt; &lt;span class=&#34;mf&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;..&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;&amp;lt;&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;N&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;results&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;spawn&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;heavyComputation&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;toCompute&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;idx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;n&#34;&gt;sync&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;c&#34;&gt;# get output and dump to disk&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fp&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;open&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;s&#34;&gt;&amp;#34;test.txt&amp;#34;&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;fmWrite&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;k&#34;&gt;while&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;results&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;len&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;kd&#34;&gt;var&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jdx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;=&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;results&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;blockUntilAny&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;()&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;if&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;jdx&lt;/span&gt; &lt;span class=&#34;o&#34;&gt;&amp;gt;=&lt;/span&gt; &lt;span class=&#34;mi&#34;&gt;0&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;:&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;fp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;writeline&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(^&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;FlowVar&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;kt&#34;&gt;int&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;results&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;[&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jdx&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;]&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;))&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;            &lt;span class=&#34;n&#34;&gt;results&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;del&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;jdx&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;n&#34;&gt;fp&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;close&lt;/span&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;The first couple of lines creates a simple integer array representing
+our simulations indicated above. Then, we allocate an array `results`
+that will store the result (or status) of the task to be executed
+concurrently. The main thread spawns off the threads and stores a
+`FlowVar` inside `results` and continues executing.&lt;/p&gt;
+&lt;p&gt;Then, we open a file, and scan for a result to be completed. If it is,
+we block the executing of the thread, and write the result to disk. The
+`^` (hat operator) ensures that the `FlowVar` results are ready (not
+nil). The conversion from the `FlowVarBase` to the type is similar to
+a void conversion in c or c++. It is currently and implementation detail
+that is not good programming practice. I wish this was implemented
+differently.&lt;/p&gt;
+&lt;p&gt;We execute the code by&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;nim c -r --threads:on -d:release concurrent.nim
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;and open up the text we can see that the threads returned are not
+(necessarily) in linear order. For example for me the file looks like:&lt;/p&gt;
+&lt;pre&gt;&lt;code&gt;0
+1
+2
+3
+...
+22
+9976
+...
+32
+9965
+&lt;/code&gt;&lt;/pre&gt;
+&lt;p&gt;The order of this sequence can differ.&lt;/p&gt;
+&lt;h1 id=&#34;conclusions&#34;&gt;Conclusions&lt;/h1&gt;
+&lt;p&gt;Concurrent programming can drastically speed up your code. Using
+threadas in languages other than Nim has the advantage of doing more
+advanced things than is possible in higher language interfaces to
+concurrent program as present in (for example Python). Nim has some
+experimental features that can be leveraged to drastically improve the
+runtime of your code. In the future I will do some work on implementing
+parallel code on the GPU.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Post</title>
+      <link>https://cvanelteren.github.io/post/</link>
+      <pubDate>Tue, 03 Oct 2023 17:31:02 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Testing</title>
+      <link>https://cvanelteren.github.io/testing/</link>
+      <pubDate>Tue, 03 Oct 2023 17:30:40 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/testing/</guid>
+      <description></description>
+    </item>
+    
+    <item>
       <title>How can slime molds compute shortest paths?</title>
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;Slime molds are amazing creatures that can solve complex problems
 without a central cognitive unit&lt;/li&gt;
@@ -796,8 +976,6 @@ performant code in the native language.&lt;/li&gt;
 &lt;li&gt;Binding Nim to javascript is easily achieved which opens up lots of
 opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -1221,13 +1399,7 @@ This post is more written for future me;&lt;/p&gt;
       <link>https://cvanelteren.github.io/post/advent17/</link>
       <pubDate>Sat, 30 Apr 2022 21:11:06 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/advent17/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org21acee9&#34;&gt;Introduction&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#org0ab586c&#34;&gt;The problem&lt;/a&gt;&lt;/li&gt;
@@ -1445,8 +1617,6 @@ me and I may come back to  it later and update this post. To
 me,  these exercises  form a  nice  brain tease  and I  will
 slowly work  through them when I  find the time. See  you in
 the next post!&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -1455,13 +1625,7 @@ the next post!&lt;/p&gt;
       <link>https://cvanelteren.github.io/post/cython_pure/</link>
       <pubDate>Tue, 15 Mar 2022 15:27:46 +0100</pubDate>
       <guid>https://cvanelteren.github.io/post/cython_pure/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org47f4632&#34;&gt;What are header files?&lt;/a&gt;&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;#orgb06f8c3&#34;&gt;Cython pure mode&lt;/a&gt;&lt;/li&gt;
@@ -1641,8 +1805,6 @@ preferred way  is to  use cython pyx  files with  pxd header
 files. An alternative is to use cython pure mode to speed up
 existing  python   code.  Pure  mode  allows   for  smoother
 collaboration with numerical experts and python developers.&lt;/p&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -1664,13 +1826,7 @@ collaboration with numerical experts and python developers.&lt;/p&gt;
 &lt;!-- &lt;div id=&#34;output&#34;&gt;&lt;/div&gt; --&gt;
 &lt;!-- &lt;script src=&#34;https://cdn.jsdelivr.net/npm/d3@7&#34;&gt;&lt;/script&gt; --&gt;
 &lt;!-- &lt;script src=&#34;./test.js&#34;&gt;&lt;/script&gt; --&gt;
-&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+ &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org8d7891c&#34;&gt;Introduction&lt;/a&gt;
 &lt;ol&gt;
@@ -2111,8 +2267,6 @@ dashboard.&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://proplot.readthedocs.io/en/latest/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Proplot&lt;/a&gt;: matplotlib but with sensible defaults&lt;/li&gt;
 &lt;li&gt;&lt;a href=&#34;https://seaborn.pydata.org/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Seaborn&lt;/a&gt;: additional functionality on top of matplotlib&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -2139,13 +2293,7 @@ dashboard.&lt;/li&gt;
       <link>https://cvanelteren.github.io/post/kawasaki/</link>
       <pubDate>Mon, 15 Nov 2021 16:07:17 +0100</pubDate>
       <guid>https://cvanelteren.github.io/post/kawasaki/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;p&gt;One of  the traditional  models that come  up time  and time
+      <description> &lt;p&gt;One of  the traditional  models that come  up time  and time
 again  is the  Ising  model. Originally  developed to  study
 ferromagnets, the  model is  considered one of  the simplest
 models that exhibits “complex” behavior and has been applied
@@ -2228,8 +2376,6 @@ potts model in fig. &lt;a href=&#34;#org8fec01e&#34;&gt;2&lt;/a&gt;.&lt;/p&gt;
 Glauber versus Kawasaki dynamics for a 4-state Potts model.
 &lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -2238,13 +2384,7 @@ Glauber versus Kawasaki dynamics for a 4-state Potts model.
       <link>https://cvanelteren.github.io/post/cython_templates/</link>
       <pubDate>Mon, 04 Oct 2021 17:34:47 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/cython_templates/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
+      <description> &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
 &lt;ol&gt;
 &lt;li&gt;&lt;a href=&#34;#org62422b7&#34;&gt;What are templates?&lt;/a&gt;
 &lt;ol&gt;
@@ -2392,8 +2532,6 @@ non-intuitive syntax.&lt;/li&gt;
 &lt;/ul&gt;
 &lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -2402,13 +2540,7 @@ non-intuitive syntax.&lt;/li&gt;
       <link>https://cvanelteren.github.io/post/splitboard/</link>
       <pubDate>Sun, 04 Jul 2021 21:23:54 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/splitboard/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
+      <description> &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
 This post outlines the process.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/logo.svg&#34; width = &#34;100%&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
@@ -3673,8 +3805,6 @@ only once.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Replaced esp-now with ble mesh&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -3683,13 +3813,7 @@ only once.&lt;/p&gt;
       <link>https://cvanelteren.github.io/project/splitboard/</link>
       <pubDate>Sun, 04 Jul 2021 21:23:54 +0200</pubDate>
       <guid>https://cvanelteren.github.io/project/splitboard/</guid>
-      <description>&lt;!DOCTYPE html&gt;
-&lt;html&gt;
-&lt;head&gt;
-  &lt;title&gt;&lt;/title&gt;
-&lt;/head&gt;
-&lt;body&gt;
-   &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
+      <description> &lt;p&gt;&lt;em&gt;TLDR: I wanted a wireless split keyboard, so I made one.
 This post outlines the process.&lt;/em&gt;&lt;/p&gt;
 &lt;p&gt;&lt;img src=&#34;./figures/logo.svg&#34; width = &#34;100%&#34;&gt;&lt;/img&gt;&lt;/p&gt;
 &lt;h1 id=&#34;table-of-contents&#34;&gt;Table of Contents&lt;/h1&gt;
@@ -4954,8 +5078,6 @@ only once.&lt;/p&gt;
 &lt;ul&gt;
 &lt;li&gt;&lt;input checked=&#34;&#34; disabled=&#34;&#34; type=&#34;checkbox&#34;&gt; Replaced esp-now with ble mesh&lt;/li&gt;
 &lt;/ul&gt;
-&lt;/body&gt;
-&lt;/html&gt;
 </description>
     </item>
     
@@ -7055,7 +7177,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-195684372&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-452169837&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7065,7 +7187,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-195684372&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-452169837&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
