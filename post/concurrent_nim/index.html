@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- This site was created with Wowchemy. https://www.wowchemy.com -->
-<!-- Last Published: October 3, 2023 --><html lang="en-us" >
+<!-- Last Published: October 18, 2023 --><html lang="en-us" >
 
 
 <head>
@@ -1028,7 +1028,6 @@ here.</p>
 </span></span><span class="line"><span class="cl">    <span class="n">parallel</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
 </span></span><span class="line"><span class="cl">            <span class="n">results</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span> <span class="o">=</span> <span class="n">spawn</span> <span class="n">heavyComputation</span><span class="p">(</span><span class="n">toCompute</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="p">)</span>
-</span></span><span class="line"><span class="cl">        <span class="n">sync</span><span class="p">()</span>
 </span></span><span class="line"><span class="cl">    <span class="c"># get output and dump to disk</span>
 </span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;test.txt&#34;</span><span class="p">,</span> <span class="n">fmWrite</span><span class="p">)</span>
 </span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">results</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
