@@ -5,12 +5,28 @@
     <link>https://cvanelteren.github.io/publication-type/3/</link>
       <atom:link href="https://cvanelteren.github.io/publication-type/3/index.xml" rel="self" type="application/rss+xml" />
     <description>3</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sun, 07 Apr 2019 00:00:00 +0000</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 15 Nov 2023 13:27:21 +0100</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
       <title>3</title>
       <link>https://cvanelteren.github.io/publication-type/3/</link>
     </image>
+    
+    <item>
+      <title>Unmasking the Shadows: Modeling the formation of criminal organizations</title>
+      <link>https://cvanelteren.github.io/publication/crime_theory/</link>
+      <pubDate>Wed, 15 Nov 2023 13:27:21 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/publication/crime_theory/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>An information theory perspective on tipping points in dynamical networks</title>
+      <link>https://cvanelteren.github.io/publication/metastability2022/</link>
+      <pubDate>Fri, 29 Jul 2022 16:00:36 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/publication/metastability2022/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>The dynamic importance of nodes is poorly predicted by static topological features</title>

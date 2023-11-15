@@ -5,12 +5,20 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Tue, 03 Oct 2023 17:31:24 +0200</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 15 Nov 2023 13:27:21 +0100</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
+    
+    <item>
+      <title>Unmasking the Shadows: Modeling the formation of criminal organizations</title>
+      <link>https://cvanelteren.github.io/publication/crime_theory/</link>
+      <pubDate>Wed, 15 Nov 2023 13:27:21 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/publication/crime_theory/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Intro to concurrent computing (in Nim)</title>
@@ -7168,7 +7176,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-318275649&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-362481597&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7178,7 +7186,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-318275649&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-362481597&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
