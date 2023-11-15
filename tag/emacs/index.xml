@@ -140,7 +140,7 @@ to  insert the  token.  Note that  you  need  to have  a  version that  supports
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;As a final step, we need to setup &lt;code&gt;mu&lt;/code&gt; itself. From your favorite shell write:&lt;/p&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-fallback&#34; data-lang=&#34;fallback&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;mu init --maildir ~/Mail --my-address=&amp;lt;User address&amp;gt; &amp;amp;&amp;amp; mu index
-&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;hellip;and we are done! You can now use mu4e to send and receive emails from emacs, happy hacking 😉!&lt;/p&gt;
+&lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;p&gt;&amp;hellip;and we are done! You can now use mu4e to send and receive emails from emacs, happy hacking &amp;#x1f609;!&lt;/p&gt;
 &lt;!-- # Setting up password manager --&gt;
 &lt;!-- https://avaldes.co/2020/01/28/secret-service-keepassxc.html --&gt;
 &lt;!-- # Using msmtp --&gt;
