@@ -5,12 +5,20 @@
     <link>https://cvanelteren.github.io/</link>
       <atom:link href="https://cvanelteren.github.io/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper van Elteren</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Wed, 15 Nov 2023 13:27:21 +0100</lastBuildDate>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Sat, 09 Dec 2023 13:00:00 +0100</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
       <title>Casper van Elteren</title>
       <link>https://cvanelteren.github.io/</link>
     </image>
+    
+    <item>
+      <title>How to intervene? Criminal organizations exhibit hysteresis, resilience and robustness by balancing security and efficiency</title>
+      <link>https://cvanelteren.github.io/talk/how-to-intervene-criminal-organizations-exhibit-hysteresis-resilience-and-robustness-by-balancing-security-and-efficiency/</link>
+      <pubDate>Sat, 09 Dec 2023 13:00:00 +0100</pubDate>
+      <guid>https://cvanelteren.github.io/talk/how-to-intervene-criminal-organizations-exhibit-hysteresis-resilience-and-robustness-by-balancing-security-and-efficiency/</guid>
+      <description></description>
+    </item>
     
     <item>
       <title>Unmasking the Shadows: Modeling the formation of criminal organizations</title>
@@ -7176,7 +7184,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-362481597&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-648297153&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7186,7 +7194,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-362481597&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-648297153&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
