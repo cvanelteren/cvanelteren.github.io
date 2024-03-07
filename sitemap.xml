@@ -3,7 +3,11 @@
   xmlns:xhtml="http://www.w3.org/1999/xhtml">
   <url>
     <loc>https://cvanelteren.github.io/</loc>
-    <lastmod>2023-12-09T13:00:00+01:00</lastmod>
+    <lastmod>2024-03-07T15:24:21+01:00</lastmod>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://cvanelteren.github.io/test/</loc>
+    <lastmod>2024-03-07T15:24:21+01:00</lastmod>
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://cvanelteren.github.io/talk/how-to-intervene-criminal-organizations-exhibit-hysteresis-resilience-and-robustness-by-balancing-security-and-efficiency/</loc>

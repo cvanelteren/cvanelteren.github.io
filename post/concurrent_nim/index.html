@@ -280,7 +280,7 @@
 
   
 
-<meta name="description" content="" />
+<meta name="description" content="Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)." />
 
 
 
@@ -329,7 +329,7 @@
 <meta property="og:site_name" content="Casper van Elteren" />
 <meta property="og:url" content="https://cvanelteren.github.io/post/concurrent_nim/" />
 <meta property="og:title" content="Intro to concurrent computing (in Nim) | Casper van Elteren" />
-<meta property="og:description" content="" /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:description" content="Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)." /><meta property="og:image" content="https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
@@ -384,7 +384,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": ""
+  "description": "Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)."
 }
 </script>
 
@@ -885,7 +885,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    6 min read
   </span>
   
 
@@ -918,6 +918,174 @@
 
     <div class="article-style">
       
+
+    
+    
+    <p>Modern computing usually concerns multiple compute units. These compute
+units can be in the form of implementing shaders on a graphics card, or
+programming for multiple cores on the <em>central processing unit</em> (CPU).
+Taking advantage of the multiple cores can under optimal circumstances
+yield a $n$ times (= number of cores) increase runtime of your
+computation.</p>
+<p>Implementing a multiple core program, however, is not a trivial task.
+Some programming languages (such as Matlab, python, julia) offer a high
+level abstract interface that would work well for so-called
+<a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel" target="_blank" rel="noopener">embarrasingly parallel
+jobs</a>. Work
+performed in these kinds of jobs offer little effort to implement on
+multiple cores as the computation can happen on each core independently
+of the other cores. Little to no communication occurs between the cores,
+and shared memory is read-only.</p>
+<h1 id="concurrent-computing-in-a-nutshell">Concurrent computing in a nutshell</h1>
+<p>In concurrent computer the programmer harnesses the power of compute
+units accessible to their program. These compute units can be compute
+cores on a single computer, or multiple computers communicating over the
+web or inside a server.</p>
+<p>A concurrent program consists of dividing the task into sub-tasks that
+can independently run on threads (independent tiny programs).</p>
+<p>Concurrent programming can be decomposed further in parallel programming
+and asynchronous programming. In parallel programming, threads are
+spawned and return results without any communication with the other
+spawned threads. They are parallel in the sense they perform the task in
+jointly independently. Examples include parallel computing the pairwise
+correlation between $N$ variables, running independent runs of
+agent-based models.</p>
+<p>Asynchronous programming works by dividing the task up in threads in a
+non-blocking manner. That is, the task is subdivided in a thread, and
+the main thread can continue processing code. When called upon, the main
+thread can be <em>blocked</em> to retrieve the outcome of the thread spawned
+earlier.</p>
+<p>In this post I will write some notes on how to implement parallel
+programming in Nim. This compared to my other posts are not extensive,
+and form a mere reminder to me on how to do this in the future.</p>
+<h1 id="the-problem">The problem</h1>
+<p>I have $N$ simulation in which each simulation consists of</p>
+<ol>
+<li>creating an agent-based simulation with config $C_i, i\in N$</li>
+<li>Running and storing the results from this result</li>
+</ol>
+<p>The tasks (including the IO in 2) can run in parallel as the data
+generation process takes longer than dumping the files to disk.</p>
+<p>Below I will introduce some dummy code, and will not bore you with the
+details of the implementation.</p>
+<p>In python I would use the `multiprocessing` library to create a pool
+of workers. The library will hide the nitty gritty and nasty details of
+the implementation. In Nim the parallel functionality is at the time of
+writing still hidden in the experimental section. It is fully functional
+for my ends luckily ;-).</p>
+<p>The major frustration I have is that the documentation on the web was
+not completely clear on how this task can be achieved. On the docs the
+following example is given</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Nim" data-lang="Nim"><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">std</span><span class="o">/</span><span class="n">threadpool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">processLine</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="kt">string</span><span class="p">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">discard</span> <span class="s">&#34;do some heavy lifting here&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">(</span><span class="s">&#34;myinput.txt&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">spawn</span> <span class="n">processLine</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sync</span><span class="p">()</span>
+</span></span></code></pre></div><p>The code defines function and introduces some special keywords
+introduced by the threadpool import.</p>
+<p>The keyword `spawn` is used to <em>spawn off</em> (create) a thread. The
+execution flow works as follows. When invoking this script, the main
+thread will spawn off seperate threads to run `processLine`. These
+threads will be spawned and executed at slightly different times. The
+main thread continues for every line in the dummy file until it hits
+`sync`. The `sync` keyword forces the main program to wait until all
+threads are finished. If `sync` was not there, the program would have
+exited, leaving the threads in limbo!</p>
+<h2 id="flowvart">FlowVar[T]</h2>
+<p>In Nim, a spawned function will return a `FlowVar[T]` variable. The
+variable will be set to nil if the thread has not put any information
+there yet (i.e. it has not been called yet). It effectively tells the
+compiler that there might be a result here when the thread returns a
+value, and allows the main thread to continue.</p>
+<h1 id="the-implementation">The implementation</h1>
+<p>What we need to achieve is map out what task we want to compute, create
+threads for these tasks, and retrieve the results from the computation
+of these tasks.</p>
+<p>We first create some dummy code that creates a load on the system. This
+code is necessary as some compilers can optimize out non-functional code
+which creates a faster running program and bypassing the intent of our
+code (running it concurrently).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Nim" data-lang="Nim"><span class="line"><span class="cl"><span class="c">#file: concurrent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">threadpool</span><span class="p">,</span> <span class="n">sequtils</span><span class="p">,</span> <span class="n">os</span>
+</span></span><span class="line"><span class="cl"><span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">&#34;parallel&#34;</span><span class="p">.}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">heavyComputation</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">thread</span><span class="p">.}</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># simulate some arbitrary code</span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sleep</span><span class="p">((</span><span class="n">n</span> <span class="o">*</span> <span class="mi">100</span> <span class="ow">mod</span> <span class="mi">29</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
+</span></span></code></pre></div><p>The first line, makes the keywords available for the multithreading, and
+enables the experimental parallel processing. THe function is given a
+pragma which is a compiler directive that this function will be run on a
+thread. It mainly serves for readibility and ensures that the heap
+memory is managed properly.</p>
+<p>The task itself is a simlulation of heavy load by giving the task
+different run times. The operations here are arbitrary chosen. For
+identifying when which thread was executed, we return the input `n`
+here.</p>
+<p>Next, we create the program that runs on the main thread</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c">#file: concurrent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isMainModule</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># create dummy variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">toCompute</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">N</span><span class="p">).</span><span class="n">toseq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># essentially they have a void conversion here</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">results</span> <span class="o">=</span> <span class="n">newSeq</span><span class="o">[</span><span class="n">FlowVarBase</span><span class="o">]</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parallel</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">results</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span> <span class="o">=</span> <span class="n">spawn</span> <span class="n">heavyComputation</span><span class="p">(</span><span class="n">toCompute</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># get output and dump to disk</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;test.txt&#34;</span><span class="p">,</span> <span class="n">fmWrite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">results</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="n">jdx</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="n">blockUntilAny</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">jdx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fp</span><span class="p">.</span><span class="n">writeline</span><span class="p">(^</span><span class="n">FlowVar</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">(</span><span class="n">results</span><span class="o">[</span><span class="n">jdx</span><span class="o">]</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">results</span><span class="p">.</span><span class="n">del</span><span class="p">(</span><span class="n">jdx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp</span><span class="p">.</span><span class="n">close</span>
+</span></span></code></pre></div><p>The first couple of lines creates a simple integer array representing
+our simulations indicated above. Then, we allocate an array `results`
+that will store the result (or status) of the task to be executed
+concurrently. The main thread spawns off the threads and stores a
+`FlowVar` inside `results` and continues executing.</p>
+<p>Then, we open a file, and scan for a result to be completed. If it is,
+we block the executing of the thread, and write the result to disk. The
+`^` (hat operator) ensures that the `FlowVar` results are ready (not
+nil). The conversion from the `FlowVarBase` to the type is similar to
+a void conversion in c or c++. It is currently and implementation detail
+that is not good programming practice. I wish this was implemented
+differently.</p>
+<p>We execute the code by</p>
+<pre><code>nim c -r --threads:on -d:release concurrent.nim
+</code></pre>
+<p>and open up the text we can see that the threads returned are not
+(necessarily) in linear order. For example for me the file looks like:</p>
+<pre><code>0
+1
+2
+3
+...
+22
+9976
+...
+32
+9965
+</code></pre>
+<p>The order of this sequence can differ.</p>
+<h1 id="conclusions">Conclusions</h1>
+<p>Concurrent programming can drastically speed up your code. Using
+threadas in languages other than Nim has the advantage of doing more
+advanced things than is possible in higher language interfaces to
+concurrent program as present in (for example Python). Nim has some
+experimental features that can be leveraged to drastically improve the
+runtime of your code. In the future I will do some work on implementing
+parallel code on the GPU.</p>
+
+
+
+
     </div>
 
     

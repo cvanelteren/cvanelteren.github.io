@@ -885,7 +885,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    0 min read
+    5 min read
   </span>
   
 
@@ -955,6 +955,161 @@
 
     <div class="article-style">
       
+
+    
+    
+    <h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li><a href="#org62422b7">What are templates?</a>
+<ol>
+<li><a href="#org4170cb6">Templates in Cython</a></li>
+</ol>
+</li>
+<li><a href="#orgc1a22ba">Let’s get freaky</a></li>
+<li><a href="#orgad3284d">Summary</a></li>
+</ol>
+<p>Cython offers to write  high performing (compiled) code with
+python  and C++/C  side-by-side.  For  a python  programmer,
+cython  can  be  used   to  replace  functions  with  c-like
+functions.  The   cython  documentation  shows   some  clear
+examples on how a python program could be transformed into a
+statically compiled program. The  docs also highlight how to
+provide templated code. For  simple templates this is clear,
+but I found that some code is more difficult to template.</p>
+<p>This  short  article  may  form as  a  guided  tour  towards
+binding templated code to cython.</p>
+<p><a id="org62422b7"></a></p>
+<h1 id="what-are-templates">What are templates?</h1>
+<p>Python is an interpreted language. This means that when code
+is run, the  interpreted converts the code  to byte compiled
+code. It goes through the code line for line and converts it
+“on the  fly” to something  the computer can  understand. In
+contrast, C/C++  are compiled languages. Prior  to execution
+of the program a compiler  translates the code into a binary
+that  the machine  can  understand. After  which the  binary
+can be executed.  Due to the statically  defined nature, C++
+needs  to deal  with shared  code that  can act  on multiple
+types.  One  way  to   achieve  this  is  through  <em>function
+overloading</em>; functions  with the same name  are written but
+different input (types) such  that calling the function with
+different types will execute the correct function associated
+with those  inputs. This, however becomes  quite tedious and
+obsolete when considering templates.</p>
+<pre><code>// in C++ types need to be considered.
+// Some have implicit casting from one type to another,
+// In general it is better to be more exact.
+int return_square(int x){
+    return x * x;
+}
+// overloading return_square with different input type
+double return_square(double x){
+    return x * x
+}
+</code></pre>
+<p>In C++  template functions  or classes  can be  considered a
+blueprint. This allows  to share the logic  for a particular
+function that may  operate on different types  such as ints,
+floats,  doubles or  some  other  more complicated  abstract
+classes.</p>
+<p>The general format of templated functions looks like</p>
+<pre><code>template &lt;class T&gt;
+T return_square(T x){
+    return x * x;
+}
+</code></pre>
+<p>A  general  (undefined) type  T  is  used  here to  write  a
+template to the  function. When using the  function the type
+can either  be inferred  from the input  by the  compiler or
+explicitly set:</p>
+<pre><code>int main(){
+    int x = 3;
+    int y = return_square&lt;int&gt;(x); // returns 9
+    double k = 3;
+    auto z = return_square(k); // assigned 9.0 to double z
+}
+</code></pre>
+<p><a id="org4170cb6"></a></p>
+<h2 id="templates-in-cython">Templates in Cython</h2>
+<p>In Cython,  template functions work  the same way as  in C++
+with  slightly different  syntax.  The use  of templates  in
+Cython can be  used to wrap C++ only; it  is not possible to
+write templated code directly in cython unless you use fused
+types  which has  some  limitations. I  won’t  go into  this
+further in this post.</p>
+<p>The general form of a Cython
+template is</p>
+<pre><code># inside a pxd or pyx file
+cdef from extern &quot;return_square.h&quot;:
+    T return_square[T](T x)
+</code></pre>
+<p>The `extern` keyword is the same as in C++/C which tells the
+compiler that  there exists  some external function  that is
+not  defined in  the current  source file.  In this  case we
+refer to  a header file “return\_square.h”  that contains our
+C++ template above. The general  type T is defined in square
+brackets and forms the  same function as `template<class T>`
+above. The rest is the same as a template in C++.</p>
+<p><a id="orgc1a22ba"></a></p>
+<h1 id="letrsquos-get-freaky">Let’s get freaky</h1>
+<p>Now the  example above is  sort of  what is avaiable  on the
+cython docs. Where it becomes undocumented for me was when I
+wanted to wrap `std::inserter`  from the standard library in
+C++. For  those of  you not  familiar, `std::inserter`  is a
+wrapper for the  function `std::front_inserter` which allows
+you to insert elements in to an  iterable such as a set or a
+vector. From the C++ docs we read</p>
+<pre><code>//Defined in header &lt;iterator&gt;
+template&lt; class Container &gt;
+std::insert_iterator&lt;Container&gt; inserter( Container&amp; c, typename Container::iterator i );
+</code></pre>
+<p>Wrapping  this   function  only  takes  a   single  template
+parameter  `Container`,  however   the  function  takes  two
+argument   which  introduces   another  template   parameter
+`Container::iterator`.  Initially I  was hoping  that Cython
+would somehow “know” that  providing two templates variables
+would allow the  function to be bound correctly.  That is, I
+started with:</p>
+<pre><code>cdef extern from &quot;&lt;iterator&gt;&quot; namespace &quot;std&quot; nogil:
+   void insert_iterator[Container, Iter](Container &amp;c, Iter i)
+</code></pre>
+<p>this did not  compile however. The compiler  stated that the
+templated function could not be  found, as the header merely
+states that there is only one template parameter.</p>
+<p>Wrapping C++ classes in cython is also possible. Since there
+are not that many options to try, I attempted the following:</p>
+<pre><code>cdef extern from &quot;&lt;iterator&gt;&quot; namespace &quot;std&quot; nogil:
+    cdef cppclass insert_iterator[T]:
+        cppclass iterator[T]:
+            pass
+        insert_iterator(T &amp; c, iterator[T] i)
+</code></pre>
+<p>This compiled perfectly! The magic here, essentially is that
+I  treat  the  function  as  a  class  that  has  additional
+properties defined.  That is,  I convince the  compiler that
+the iterator exists and it  is associated with the templated
+parameter  T. The  wrapping is  a bit  opague as  it is  not
+entirely clear  what this  iterator object is.  Changing the
+name to `mega_zuba_loo` would work equally well. It is up to
+the programmer  to provide  clear indication  as to  what is
+wrapped  and  provide the  correct  inputs  in the  code  in
+addition.</p>
+<p><a id="orgad3284d"></a></p>
+<h1 id="summary">Summary</h1>
+<ul>
+<li>Template functions and classes  allow programmers to share
+logic in C++</li>
+<li>Templated code  can be wrapped  in cython allowing  one to
+capitalize on the power of C/C++
+<ul>
+<li>Wrapping more “complicated”  functions requires some odd
+non-intuitive syntax.</li>
+</ul>
+</li>
+</ul>
+
+
+
+
     </div>
 
     
