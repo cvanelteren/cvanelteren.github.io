@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>visualization | Casper van Elteren</title>
+    <title>Visualization | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/tag/visualization/</link>
       <atom:link href="https://cvanelteren.github.io/tag/visualization/index.xml" rel="self" type="application/rss+xml" />
-    <description>visualization</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 19:38:11 +0200</lastBuildDate>
+    <description>Visualization</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 19:38:11 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
-      <title>visualization</title>
+      <title>Visualization</title>
       <link>https://cvanelteren.github.io/tag/visualization/</link>
     </image>
     

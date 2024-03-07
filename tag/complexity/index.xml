@@ -1,14 +1,14 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>complexity | Casper van Elteren</title>
+    <title>Complexity | Casper van Elteren</title>
     <link>https://cvanelteren.github.io/tag/complexity/</link>
       <atom:link href="https://cvanelteren.github.io/tag/complexity/index.xml" rel="self" type="application/rss+xml" />
-    <description>complexity</description>
-    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 05 Apr 2021 14:57:08 +0200</lastBuildDate>
+    <description>Complexity</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Mon, 05 Apr 2021 14:57:08 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
-      <title>complexity</title>
+      <title>Complexity</title>
       <link>https://cvanelteren.github.io/tag/complexity/</link>
     </image>
     

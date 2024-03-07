@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Scripts | Casper van Elteren</title>
+    <link>https://cvanelteren.github.io/scripts/</link>
+      <atom:link href="https://cvanelteren.github.io/scripts/index.xml" rel="self" type="application/rss+xml" />
+    <description>Scripts</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language>
+    <image>
+      <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>Scripts</title>
+      <link>https://cvanelteren.github.io/scripts/</link>
+    </image>
+    
+    <item>
+      <title></title>
+      <link>https://cvanelteren.github.io/scripts/circles/</link>
+      <pubDate>Mon, 01 Jan 0001 00:00:00 +0000</pubDate>
+      <guid>https://cvanelteren.github.io/scripts/circles/</guid>
+      <description>&lt;!DOCTYPE html&gt;
+&lt;html&gt;
+    &lt;head&gt;
+        &lt;meta charset=&#34;utf-8&#34; /&gt;
+        &lt;title&gt;Webpack App&lt;/title&gt;
+    &lt;script defer src=&#34;main.js&#34;&gt;&lt;/script&gt;&lt;/head&gt;
+    &lt;body&gt;
+        &lt;h1&gt;Hello world!&lt;/h1&gt;
+        &lt;h2&gt;Tip: Check your console&lt;/h2&gt;
+    &lt;/body&gt;
+    
+&lt;/html&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

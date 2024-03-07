@@ -1,6 +1,6 @@
 <!DOCTYPE html>
-<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
-<!-- Last Published: December 5, 2023 --><html lang="en-us" >
+<!-- This site was created with Hugo Blox. https://hugoblox.com -->
+<!-- Last Published: March 7, 2024 --><html lang="en-us" >
 
 
 <head>
@@ -10,7 +10,7 @@
   
   
   
-    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+    <meta name="generator" content="Hugo Blox Builder 5.9.7" />
   
 
   
@@ -73,14 +73,14 @@
 
   
 
-  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+  <link rel="stylesheet" href="/css/vendor-bundle.min.26c458e6907dc03073573976b7f4044e.css" media="print" onload="this.media='all'">
 
   
   
   
     
     
-      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/jpswalsh/academicons@1.9.4/css/academicons.min.css" integrity="sha512-IW0nhlW5MgNydsXJO40En2EoCkTTjZhI3yuODrZIc8cQ4h1XcF53PsqDHa09NqnkXuIe0Oiyyj171BqZFwISBw==" crossorigin="anonymous" media="print" onload="this.media='all'">
     
 
     
@@ -215,12 +215,10 @@
   
   
   
-  <link rel="stylesheet" href="/css/wowchemy.4d5c44e775549a931ece831911e67d73.css" />
+  <link rel="stylesheet" href="/css/wowchemy.bce271627084a70044b558a957d99412.css" />
 
   
   
-  
-    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
   
 
   
@@ -264,6 +262,7 @@
 
 
 
+
   
   
   
@@ -281,7 +280,7 @@
 
   
 
-<meta name="description" content="Table of Contents What are header files? Cython pure mode Benchmarks Summary In coding there is a trade-off between writing abstract code, and high performant code. This trade-off is often embodied in different languages." />
+<meta name="description" content="" />
 
 
 
@@ -320,10 +319,16 @@
   <meta property="twitter:site" content="@wowchemy" />
   <meta property="twitter:creator" content="@wowchemy" />
 <meta property="twitter:image" content="https://cvanelteren.github.io/post/cython_pure/featured.png" />
+
+
+
+  
+
+<meta property="og:type" content="article" />
 <meta property="og:site_name" content="Casper van Elteren" />
 <meta property="og:url" content="https://cvanelteren.github.io/post/cython_pure/" />
 <meta property="og:title" content="Speeding up python code with cython pure | Casper van Elteren" />
-<meta property="og:description" content="Table of Contents What are header files? Cython pure mode Benchmarks Summary In coding there is a trade-off between writing abstract code, and high performant code. This trade-off is often embodied in different languages." /><meta property="og:image" content="https://cvanelteren.github.io/post/cython_pure/featured.png" /><meta property="og:locale" content="en-us" />
+<meta property="og:description" content="" /><meta property="og:image" content="https://cvanelteren.github.io/post/cython_pure/featured.png" /><meta property="og:locale" content="en-us" />
 
   
     <meta
@@ -371,7 +376,7 @@
   
   "author": {
     "@type": "Person",
-    "name": "Casper van Elteren"
+    "name": "Casper Van Elteren"
   },
   
   "publisher": {
@@ -382,7 +387,7 @@
       "url": "https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
     }
   },
-  "description": "Table of Contents What are header files? Cython pure mode Benchmarks Summary In coding there is a trade-off between writing abstract code, and high performant code. This trade-off is often embodied in different languages."
+  "description": ""
 }
 </script>
 
@@ -435,7 +440,7 @@
   
   
   
-  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+  <script src="/js/wowchemy-init.min.4fef3e534144e9903491f0cc6527eccd.js"></script>
 
   
 
@@ -860,6 +865,7 @@
   
 
 
+
 <div class="article-container pt-3">
   <h1>Speeding up python code with cython pure</h1>
 
@@ -880,7 +886,7 @@
     
 
   <span >
-      <a href="/authors/casper-van-elteren/">Casper van Elteren</a></span>
+      <a href="/authors/casper-van-elteren/">Casper Van Elteren</a></span>
   </div>
   
   
@@ -900,7 +906,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    6 min read
+    0 min read
   </span>
   
 
@@ -925,7 +931,7 @@
 
 <div class="article-header article-container featured-image-wrapper mt-4 mb-4" style="max-width: 600px; max-height: 268px;">
   <div style="position: relative">
-    <img src="/post/cython_pure/featured_hud014fc10c660590279135f5588741b7a_9565_720x2500_fit_q75_h2_lanczos_3.webp" width="600" height="268" alt="" class="featured-image">
+    <img src="/post/cython_pure/featured_hud014fc10c660590279135f5588741b7a_9565_4a7830485f557b50639256d185f42c35.webp" width="600" height="268" alt="" class="featured-image">
     
   </div>
 </div>
@@ -935,187 +941,7 @@
   <div class="article-container">
 
     <div class="article-style">
-       <h1 id="table-of-contents">Table of Contents</h1>
-<ol>
-<li><a href="#org47f4632">What are header files?</a></li>
-<li><a href="#orgb06f8c3">Cython pure mode</a></li>
-<li><a href="#orgbcf09bc">Benchmarks</a></li>
-<li><a href="#org9f605fb">Summary</a></li>
-</ol>
-<p>In  coding there  is  a trade-off  between writing  abstract
-code,  and high  performant  code. This  trade-off is  often
-embodied  in different  languages.  For  example, python  is
-considered  to  be an  abstract  language  whereas C++/C  is
-considered a  low level language. Abstract  languages allows
-for rapid  prototyping while hiding away  the implementation
-details in packages or modules.  A key strategy for abstract
-languages is  providing high level interfaces  for low-level
-implementations  allowing  for  a   “best  of  both  worlds”
-scenario,   improving  the   performance  of   the  abstract
-language. However, there are cases in which the code written
-is within  the ecosystem of  the abstract language,  yet the
-performance needs to increase. For  python there are ways to
-improve  the performance  of python  code. For  example, one
-could use  Numba to utilize the  Just-In-Time-Compiler (JIT)
-or  use a  specialized compiled  version of  python such  as
-pyston. Cython  offers yet another way  by compiling special
-“pyx” files into a shared object that can then be interfaced
-with from  python, creating a hybrid  language between C/C++
-and          python          (see          my          prior
-<a href="https://cvanelteren.github.io/post/cython_templates/" target="_blank" rel="noopener">post
-on
-cython templates</a>). Cython has the advantage of leveraging the
-existing  python stack,  and  enhancing it  with faster  run
-time. It works specifically well if the original python code
-contains a  lot of for  loops that cannot be  optimized away
-by other  means. Although the cython  ecosystem has matured
-quite  a lot  in recent  years, it  requires knowledge  from
-other  languages to  implement algorithms  efficiently. This
-creates a  gap for python  developers wanting to have  a bit
-more performance.</p>
-<p>A more recent development  is compiling existing python code
-in “pure” mode in cython. In pure mode, the original code is
-left  untouched (i.e.  the <code>.py</code>  file) and  the performance
-enhancing code is written in a special header file (<code>.pxd</code>).
-This  has the  advantage for  increasing the  performance of
-existing python code while  retaining the compatibility with
-non-cython  users. I  <a href="https://github.com/cvanelteren/networkx/commit/7f7f3b8ff923917f42a6101f7e27e5b7396d2828" target="_blank" rel="noopener">recently</a>  implemented the  forceatlas2
-layout in cython’s pure mode  to gain a 400 percent increase
-over the traditional python code.</p>
-<p>In this  post, I  wish to introduce  the reader  to cython’s
-pure mode and  test some simple benchmarks to  see what kind
-of performance boosts we can have.</p>
-<p><a id="org47f4632"></a></p>
-<h1 id="what-are-header-files">What are header files?</h1>
-<p>In traditional  compiled languages such as  C/C++ the source
-code  is split  into  the implementation  and header  files.
-Header  files can  be  thought of  as the  index  of a  book,
-whereas  the  source files  can  be  thought of  the  actual
-content of a  book’s chapter. The header  file instructs the
-compiler  (and the  programmer) on  what is  present in  the
-implementation and  how external code can  interface with it.
-In python,  the concept of  source and header file  does not
-exist. The closest thing I can think of is showing what kind
-of class properties a class has. Something similar to,</p>
-<pre><code>class Chicken:
-    mass = 0
-    height = 0
-    def __init__(self, name):
-        self.name = name
-<p>Karl = Chicken(&quot;Karl&quot;)
-print(f&quot;My name is {Karl.name} and I weight {Karl.mass} kg&quot;)</p>
-<p>My name is Karl and I weight 0 kg
-</code></pre></p>
-<p>Here, the  variables <code>mass</code> and <code>height</code>  are defined before
-the class is inititalized. It  tells the programmer that the
-class  <code>Chicken</code>   has  two  class  properties   <code>mass</code>  and
-<code>height</code>. A  python programmer would put  these variables in
-the class  constructor as  these are individual  traits. The
-use of init function is general  is not the same as this use
-case. For the init function  may transform the values passed
-to the  object, whereas here  <code>mass</code> and <code>height</code>  are clear
-class traits.</p>
-<p><a id="orgb06f8c3"></a></p>
-<h1 id="cython-pure-mode">Cython pure mode</h1>
-<p>Cython’s  pure  mode  takes  an  existing  python  file  and
-augments it  by an header  file. Often this header  file has
-the  same name  as the  original  python file  but with  the
-extension <code>.pxd</code> (or definition file). Let’s take an example
-function. Assume we want to  implement a matrix dot product.
-A naive implementation will look something like this:</p>
-<pre><code>#file: dot.py
-import numpy as np
-def dot(A: np.ndarray, B: np.ndarray) -&gt;  np.ndarray:
-    m, n = A.shape
-    k = B.shape[1]
-    assert n == B.shape[0], &quot;matrices A and B are not alligned&quot;
-    output = np.zeros((m, k))
-    for idx in range(m):
-        for jdx in range(n):
-            for kdx in range(k):
-                output[idx, kdx] += A[idx, jdx] * B[jdx, kdx]
-    return output
-</code></pre>
-<p>Testing  the code  for speed  we can  confirm that  this dot
-product is quite slow.</p>
-<pre><code>import numpy as np
-A = np.eye(10)
-B = np.eye(10)
-%timeit -n10 -r10 dot(A, B)
-<p>595 µs ± 301 µs per loop (mean ± std. dev. of 10 runs, 10 loops each)
-</code></pre></p>
-<p>In comparison the numpy implementation
-is about 200 times faster</p>
-<pre><code>import numpy as np
-%timeit -n10 -r10 np.dot(A, B)
-<p>The slowest run took 26.21 times longer than the fastest. This could mean that an intermediate result is being cached.
-7.48 µs ± 16 µs per loop (mean ± std. dev. of 10 runs, 10 loops each)
-</code></pre></p>
-<p>Let’s say we really like our dot implementation, but we wish
-the python code  was a bit faster. For cython  pure mode, we
-would need to augment the py  file with pxd file. The header
-file would need to contain</p>
-<ul>
-<li>The functions name</li>
-<li>The functions return type</li>
-<li>The functions input arguments</li>
-</ul>
-<p>We create the file <code>dot.pxd</code> and fill in the header as follows:</p>
-<pre><code># file: dot.pxd
-# distutils: language = c++
-# or c if you want c
-import cython
-@cython.locals(m = size_t, n = size_t, k = size_t,
-               idx = size_t, jdx = size_t, kdx = size_t,
-               output = double[:, ::1])
-cpdef double[:, ::1] dot(double[:, ::1] A, double[:, ::1] B)
-</code></pre>
-<p>What exactly  happened here?  The `cython.locals`  tells the
-compiled  which  variables  are   declared  inside  the  dot
-function in the py file. It tells the compile what the types
-are. The function description is exposed through cython with
-the <code>cpdef</code>  statement. This  exposes the function  to calls
-from  python in  the <code>.so</code>  file.  Next the  return type  is
-given. Here a memoryview is used. These are raw buffers that
-can  be  directly converted  from  numpy.  They have  faster
-access  than normal  the normal  numpy arrays.  Using memory
-views has the disadvantages that  the numpy methods that are
-defined on  the array  are disable.  For example  one cannot
-call <code>A.sum</code>  or <code>A.mean</code> or <code>A.reshape</code>  anymore when using
-memory  views. An alternative  would be  to use  `np.ndarray`
-however these are still considered  to be python objects and
-therefore  do  not  have  increased speed  compared  to  the
-memoryviews.</p>
-<p>We then compile the source code either from a setup file(not
-covered  but  preferred in  modules)  or  directly from  the
-commandline with</p>
-<p><code>cythonize build_ext --inplace dot.py</code></p>
-<p>which produces an .so file. Let’s test the speed!</p>
-<pre><code>from dot import dot as cydot
-%timeit -n10 -r10 cydot(A, B)
-<p>4.11 µs ± 557 ns per loop (mean ± std. dev. of 10 runs, 10 loops each)
-</code></pre></p>
-<p>Which   is  a   nearly  200   percent  increase   in  speed!
-Importantly,  it   is  nearly   on  par  with   the  numpy’s
-implementation!</p>
-<p><a id="orgbcf09bc"></a></p>
-<h1 id="benchmarks">Benchmarks</h1>
-<p>Let’s  benchmark  the  results  to  see  how  the  different
-implementations scale with matrix size.</p>
-<p>
-<figure  >
-  <div class="d-flex justify-content-center">
-    <div class="w-100" ><img src="./pure_performance.png" alt="img" loading="lazy" data-zoomable /></div>
-  </div></figure>
-</p>
-<p><a id="org9f605fb"></a></p>
-<h1 id="summary">Summary</h1>
-<p>Cython can  be used  to speed up  existing python  code. The
-preferred way  is to  use cython pyx  files with  pxd header
-files. An alternative is to use cython pure mode to speed up
-existing  python   code.  Pure  mode  allows   for  smoother
-collaboration with numerical experts and python developers.</p>
-
+      
     </div>
 
     
@@ -1126,13 +952,13 @@ collaboration with numerical experts and python developers.</p>
 
 <div class="article-tags">
   
-  <a class="badge badge-light" href="/tag/coding/">coding</a>
+  <a class="badge badge-light" href="/tag/coding/">Coding</a>
   
-  <a class="badge badge-light" href="/tag/cython/">cython</a>
+  <a class="badge badge-light" href="/tag/cython/">Cython</a>
   
-  <a class="badge badge-light" href="/tag/cpp/">cpp</a>
+  <a class="badge badge-light" href="/tag/cpp/">Cpp</a>
   
-  <a class="badge badge-light" href="/tag/chickens/">chickens</a>
+  <a class="badge badge-light" href="/tag/chickens/">Chickens</a>
   
 </div>
 
@@ -1195,6 +1021,94 @@ collaboration with numerical experts and python developers.</p>
     
 
 
+
+  
+  
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="/authors/casper-van-elteren/"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_hu52a603635ecebd45650b162dadabb4e5_12861_270x270_fill_q75_lanczos_center.jpg" alt="Casper Van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="/authors/casper-van-elteren/">Casper Van Elteren</a></h5>
+      
+      
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://twitter.com/USERNAME" target="_blank" rel="noopener">
+        <i class="fab fa-twitter"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.com/citations?user=PERSON-ID" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/USERNAME" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
 
 
   
@@ -1271,7 +1185,7 @@ collaboration with numerical experts and python developers.</p>
 
   
   <p class="powered-by copyright-license-text">
-    © 2023 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
   </p>
   
 
@@ -1302,7 +1216,7 @@ collaboration with numerical experts and python developers.</p>
       
       
       
-      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+      Published with <a href="https://hugoblox.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Hugo Blox Builder</a> — the free, <a href="https://github.com/HugoBlox/hugo-blox-builder" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
     
   </p>
 </footer>
@@ -1314,7 +1228,7 @@ collaboration with numerical experts and python developers.</p>
   
 
 
-<script src="/js/vendor-bundle.min.938a3a7554cd9f6602290411f64d2617.js"></script>
+<script src="/js/vendor-bundle.min.b2240102cb8b24bcbe037562ce2ea60a.js"></script>
 
 
 
@@ -1407,7 +1321,7 @@ collaboration with numerical experts and python developers.</p>
   
 
 
-<script src="/en/js/wowchemy.min.85070d5fe00d43eaedff44310b81dc2c.js"></script>
+<script src="/en/js/wowchemy.min.7f5ebaff62ae468cff8bb3dd1337bb9b.js"></script>
 
 
 
@@ -1443,7 +1357,7 @@ collaboration with numerical experts and python developers.</p>
 </div>
 
 
-  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+  <script src="/js/wowchemy-publication.9c0e895144aef5a693008b5c5d450147.js" type="module"></script>
 
 
 
