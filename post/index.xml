@@ -17,7 +17,8 @@
       <link>https://cvanelteren.github.io/post/concurrent_nim/</link>
       <pubDate>Tue, 03 Oct 2023 17:31:24 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/concurrent_nim/</guid>
-      <description>
+      <description>&lt;p&gt;D
+
 
     
     
@@ -184,7 +185,7 @@ runtime of your code. In the future I will do some work on implementing
 parallel code on the GPU.&lt;/p&gt;
 
 
-
+&lt;/p&gt;
 </description>
     </item>
     
@@ -5839,7 +5840,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-286314795&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-426153987&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -5849,7 +5850,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-286314795&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-426153987&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

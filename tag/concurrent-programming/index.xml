@@ -17,7 +17,8 @@
       <link>https://cvanelteren.github.io/post/concurrent_nim/</link>
       <pubDate>Tue, 03 Oct 2023 17:31:24 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/concurrent_nim/</guid>
-      <description>
+      <description>&lt;p&gt;D
+
 
     
     
@@ -184,7 +185,7 @@ runtime of your code. In the future I will do some work on implementing
 parallel code on the GPU.&lt;/p&gt;
 
 
-
+&lt;/p&gt;
 </description>
     </item>
     
