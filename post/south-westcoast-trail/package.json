@@ -9,7 +9,7 @@
   "author": "",
   "license": "ISC",
   "dependencies": {
-    "@mapbox/togeojson": "^0.16.0",
+    "@mapbox/togeojson": "^0.16.2",
     "exifr": "^7.1.3"
   }
 }
