@@ -5,7 +5,24 @@
     <link>https://cvanelteren.github.io/authors/casper-van-elteren/</link>
       <atom:link href="https://cvanelteren.github.io/authors/casper-van-elteren/index.xml" rel="self" type="application/rss+xml" />
     <description>Casper Van Elteren</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Wed, 15 Nov 2023 13:27:21 +0100</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Tue, 02 Jul 2024 09:43:57 +0200</lastBuildDate>
+    <item>
+      <title>Complexity science: a Decomposition of Form and Function</title>
+      <link>https://cvanelteren.github.io/publication/three_myths_in_complexity_science/</link>
+      <pubDate>Tue, 02 Jul 2024 09:43:57 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/publication/three_myths_in_complexity_science/</guid>
+      <description>&lt;p&gt;From  bird  flocking  to neural  dynamics,  complex  systems
+generate  fascinating  structures and  correlations.  Often,
+seemingly  simple   dynamics  lead  to   intricate  emergent
+properties. Despite their  visceral appeal, defining complex
+systems  lacks universal  agreement. In  this paper,  I will
+debunk three prevalent myths  in complex systems and propose
+resolutions.   This   work   contributes   by   offering   a
+contemporary interpretation  of complex  systems, presenting
+essential definitions that benefit complexity scientists.&lt;/p&gt;
+</description>
+    </item>
+    
     <item>
       <title>Criminal organizations exhibit hysteresis, resilience, and robustness by balancing security and efficiency</title>
       <link>https://cvanelteren.github.io/publication/crime_theory/</link>
