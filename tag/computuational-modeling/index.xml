@@ -17,7 +17,10 @@
       <link>https://cvanelteren.github.io/post/slimemold/</link>
       <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
       <guid>https://cvanelteren.github.io/post/slimemold/</guid>
-      <description>
+      <description>&lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
+
 
     
     
@@ -828,7 +831,7 @@ without a central cognitive unit&lt;/li&gt;
 &lt;li&gt;I build a simulation from scratch in Nim and visualize it with d3&lt;/li&gt;
 &lt;li&gt;The simulation runs and can be controlled directly from the browser&lt;/li&gt;
 &lt;/ul&gt;
-&lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
+&lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
 &lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
 &lt;h2 id=&#34;things-to-try&#34;&gt;Things to try&lt;/h2&gt;
