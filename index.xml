@@ -47,6 +47,31 @@ essential definitions that benefit complexity scientists.&lt;/p&gt;
     </item>
     
     <item>
+      <title>Why are criminals so succesful?</title>
+      <link>https://cvanelteren.github.io/post/crimecollective/</link>
+      <pubDate>Sat, 15 Jun 2024 17:40:10 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/crimecollective/</guid>
+      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unraveling Organized  Crime&lt;/strong&gt;: Complexity science offers
+a  lens  to  understand   the  intricate  dynamics  of
+organized crime.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insightful  Model&lt;/strong&gt;: Explore Perc and  colleagues&amp;rsquo; model
+revealing the emergence of criminals and their complex
+interactions based on various factors.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interactive Applet:&lt;/strong&gt; Dive into the simulation below and
+witness the spontaneous emergence of criminal behavior
+based   on  cost,   decision  error,   and  punishment
+effectiveness.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src = &#34;../../scripts/crime_collective/bundle.js&#34;&gt; &lt;/script&gt;
+&lt;p&gt;Post will follow soon!&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
       <title>Agent-Based Modeling in Criminal Contexts</title>
       <link>https://cvanelteren.github.io/talk/agent-based-modeling-in-criminal-contexts/</link>
       <pubDate>Wed, 05 Jun 2024 14:22:44 +0200</pubDate>
@@ -1042,31 +1067,6 @@ opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 
 
 
-</description>
-    </item>
-    
-    <item>
-      <title>Why are criminals so succesful?</title>
-      <link>https://cvanelteren.github.io/post/crimecollective/</link>
-      <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/post/crimecollective/</guid>
-      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Unraveling Organized  Crime&lt;/strong&gt;: Complexity science offers
-a  lens  to  understand   the  intricate  dynamics  of
-organized crime.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Insightful  Model&lt;/strong&gt;: Explore Perc and  colleagues&amp;rsquo; model
-revealing the emergence of criminals and their complex
-interactions based on various factors.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Interactive Applet:&lt;/strong&gt; Dive into the simulation below and
-witness the spontaneous emergence of criminal behavior
-based   on  cost,   decision  error,   and  punishment
-effectiveness.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
-&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;module&#34; src = &#34;../../scripts/crime_collective/bundle.js&#34;&gt; &lt;/script&gt;
-&lt;p&gt;Post will follow soon!&lt;/p&gt;
 </description>
     </item>
     
@@ -7529,7 +7529,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-276184953&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-571328946&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7539,7 +7539,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-276184953&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-571328946&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();

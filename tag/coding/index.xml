@@ -5,12 +5,37 @@
     <link>https://cvanelteren.github.io/tag/coding/</link>
       <atom:link href="https://cvanelteren.github.io/tag/coding/index.xml" rel="self" type="application/rss+xml" />
     <description>Coding</description>
-    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Jun 2023 17:40:10 +0200</lastBuildDate>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Sat, 15 Jun 2024 17:40:10 +0200</lastBuildDate>
     <image>
       <url>https://cvanelteren.github.io/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
       <title>Coding</title>
       <link>https://cvanelteren.github.io/tag/coding/</link>
     </image>
+    
+    <item>
+      <title>Why are criminals so succesful?</title>
+      <link>https://cvanelteren.github.io/post/crimecollective/</link>
+      <pubDate>Sat, 15 Jun 2024 17:40:10 +0200</pubDate>
+      <guid>https://cvanelteren.github.io/post/crimecollective/</guid>
+      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
+&lt;ul&gt;
+&lt;li&gt;&lt;strong&gt;Unraveling Organized  Crime&lt;/strong&gt;: Complexity science offers
+a  lens  to  understand   the  intricate  dynamics  of
+organized crime.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Insightful  Model&lt;/strong&gt;: Explore Perc and  colleagues&amp;rsquo; model
+revealing the emergence of criminals and their complex
+interactions based on various factors.&lt;/li&gt;
+&lt;li&gt;&lt;strong&gt;Interactive Applet:&lt;/strong&gt; Dive into the simulation below and
+witness the spontaneous emergence of criminal behavior
+based   on  cost,   decision  error,   and  punishment
+effectiveness.&lt;/li&gt;
+&lt;/ul&gt;
+&lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
+&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
+&lt;script type=&#34;module&#34; src = &#34;../../scripts/crime_collective/bundle.js&#34;&gt; &lt;/script&gt;
+&lt;p&gt;Post will follow soon!&lt;/p&gt;
+</description>
+    </item>
     
     <item>
       <title>How can slime molds compute shortest paths?</title>
@@ -800,31 +825,6 @@ opportunity to combine it with interactive libraries such as D3.&lt;/li&gt;
 
 
 
-</description>
-    </item>
-    
-    <item>
-      <title>Why are criminals so succesful?</title>
-      <link>https://cvanelteren.github.io/post/crimecollective/</link>
-      <pubDate>Thu, 15 Jun 2023 17:40:10 +0200</pubDate>
-      <guid>https://cvanelteren.github.io/post/crimecollective/</guid>
-      <description>&lt;h1 id=&#34;tldr&#34;&gt;TLDR&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;&lt;strong&gt;Unraveling Organized  Crime&lt;/strong&gt;: Complexity science offers
-a  lens  to  understand   the  intricate  dynamics  of
-organized crime.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Insightful  Model&lt;/strong&gt;: Explore Perc and  colleagues&amp;rsquo; model
-revealing the emergence of criminals and their complex
-interactions based on various factors.&lt;/li&gt;
-&lt;li&gt;&lt;strong&gt;Interactive Applet:&lt;/strong&gt; Dive into the simulation below and
-witness the spontaneous emergence of criminal behavior
-based   on  cost,   decision  error,   and  punishment
-effectiveness.&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
-&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;module&#34; src = &#34;../../scripts/crime_collective/bundle.js&#34;&gt; &lt;/script&gt;
-&lt;p&gt;Post will follow soon!&lt;/p&gt;
 </description>
     </item>
     
