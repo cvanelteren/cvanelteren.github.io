@@ -1066,18 +1066,7 @@ effectiveness.&lt;/li&gt;
 &lt;div id =&#34;simulation&#34;&gt;&lt;/div&gt;
 &lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
 &lt;script type=&#34;module&#34; src = &#34;../../scripts/crime_collective/bundle.js&#34;&gt; &lt;/script&gt;
-&lt;h1 id=&#34;tldr-1&#34;&gt;TLDR&lt;/h1&gt;
-&lt;ul&gt;
-&lt;li&gt;Slime molds are amazing creatures that can solve complex problems
-without a central cognitive unit&lt;/li&gt;
-&lt;li&gt;I build a simulation from scratch in Nim and visualize it with d3&lt;/li&gt;
-&lt;li&gt;The simulation runs and can be controlled directly from the browser&lt;/li&gt;
-&lt;/ul&gt;
-&lt;div id =&#34;slimeMold&#34;&gt;&lt;/div&gt;
-&lt;script src=&#34;https://d3js.org/d3.v7.min.js&#34;&gt;&lt;/script&gt;
-&lt;script type=&#34;module&#34; src = &#34;../../scripts/nim_loader/bundle.js&#34;&gt; &lt;/script&gt;
-&lt;h2 id=&#34;things-to-try&#34;&gt;Things to try&lt;/h2&gt;
-&lt;h1 id=&#34;introduction&#34;&gt;Introduction&lt;/h1&gt;
+&lt;p&gt;Post will follow soon!&lt;/p&gt;
 </description>
     </item>
     
@@ -7540,7 +7529,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-785619243&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-276184953&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7550,7 +7539,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-785619243&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-276184953&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
