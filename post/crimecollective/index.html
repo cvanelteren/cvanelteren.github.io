@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- This site was created with Hugo Blox. https://hugoblox.com -->
-<!-- Last Published: July 22, 2024 --><html lang="en-us" >
+<!-- Last Published: July 23, 2024 --><html lang="en-us" >
 
 
 <head>
@@ -889,7 +889,7 @@
   
   <span class="middot-divider"></span>
   <span class="article-reading-time">
-    1 min read
+    7 min read
   </span>
   
 
@@ -933,7 +933,223 @@ effectiveness.</li>
 <div id ="simulation"></div>
 <script src="https://d3js.org/d3.v7.min.js"></script>
 <script type="module" src = "../../scripts/crime_collective/bundle.js"> </script>
-<p>Post will follow soon!</p>
+<p>Crime pays, and it pays very well. The United Nations Office
+on  Drugs and  Crime estimates  that transnational  criminal
+organizations  generate  an  astonishing annual  revenue  of
+approximately  $1.6 trillion,  equivalent to  Canada’s Gross
+Domestic Product.  It prompts the  question: how is  it that
+criminal organizations are so successful?</p>
+<p>It is crucial  to realize that (organized)  crime is nothing
+new. Crime  occurs in wildly different  societies across the
+globe. Furthermore, it  can be tracked back far  and wide in
+recorded history  making it  seem like  crime, if  you will,
+seems like a common occurrence in society.</p>
+<p>However,  the  organized  crime  remains  a  danger  to  our
+societies by  affecting our  rule of law,  social stability,
+and social safety.</p>
+<p>Organized crime sets itself apart  from other forms of crime
+in for  criminal organizations that form  a persistent group
+that  co-offends over  time. These  groups are  difficult to
+combat  as they  often  operate  in different  jurisdictions
+making it harder for law  enforcement to form a joint effort
+to  convict these  individuals. The  “organized”
+part forms a  direct offensive to the ruling  seat of power.
+It creates  a power struggle  for control of  resources (and
+cash flow) that, in the  extreme case, can lead to increased
+violence, creating  potential effects to the  stability of a
+economy,  resulting  in  wealth disparities,  [insert  other
+examples]</p>
+<p>Traditionally,   crime   is   studied  from   an   empirical
+perspective.  The field  of  criminology  is concerned  with
+depicting <em>how</em> crime can change as a function of geographic
+location, demographic  constitution, time  of living  and so
+on.  These  approaches  produce  a  highly  detailed,  often
+anthropocentric  view   of  the  state  of   crime  and  its
+downstream  affects  in   societies.  Over  time  scientists
+constructed  various  different  theories as  to  why  crime
+occurs.</p>
+<p>One  of  the  most  interesting  theories,  is  to  consider
+criminal  organization not  as  a set  of bandits,  scheming
+together to produce mayhem.  Rather, it is more constructive
+to  consider  criminal  actors as  highly  skilled  business
+people. This economic perspective then places the individual
+at its center where he or she may weigh the cost and benefit
+of pursuing a criminal career. Importantly, this perspective
+is  suited to  use  as  a base  to  study the  computational
+conditions under  which criminal organization can  thrive or
+falter.</p>
+<p>The field  of computational  science is  still in  its early
+stages,  with  few  scientists  attempting  to  capture  the
+complex nature of  human-human interactions in computational
+models. These models often  leave out intricate details that
+we  hold dear  to  study a  reduced  problem that  hopefully
+qualitatively capture the dynamics of criminal organizations.</p>
+<p>One  of  the early  approaches  was  performed by  Perc  and
+Colleagues that looked at the interaction between criminals,
+ordinary  people,   and  punishes  (law   enforcement).  The
+introduction of roles is crucial as criminal organizations
+exist  by  virtue  of  the  supply  and  demand  created  by
+non-criminal actors. As  such we could see  crime in society
+as   a  three   way  interaction   between  criminals,   law
+enforcement and ordinary people.</p>
+<p>Perc and  colleagues applied evolutionary game  theory. This
+approach considers a set  of <em>rational</em> agents that consider
+a set  of possible behaviors  depending on the  behaviors of
+other  agents they  interact  with. Applied  to crime,  this
+entails  that  potential individual  can  opt  to choose  to
+become  criminal, join  law enforcement  or remain  a normal
+civilian. The decision  to choose one of  these behaviors is
+determined  by  a  cost-to-benefit analysis  that  an  agent
+performs.  An individual  will  can receive  reward $\beta$  for
+performing  a  criminal  act  while  receiving  a  potential
+punishment from  other individuals, denoted by  $\gamma$, or from
+law enforcement,  denoted by  $\alpha$. This  can be  captured in
+so-called payoff matrix:</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-left" />
+<col  class="org-left" />
+<col  class="org-left" />
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">&#xa0;</th>
+<th scope="col" class="org-left">Ordinary</th>
+<th scope="col" class="org-left">Punisher</th>
+<th scope="col" class="org-left">Criminal</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">Ordinary</td>
+<td class="org-left">0</td>
+<td class="org-left">\(-\beta\)</td>
+<td class="org-left">0</td>
+</tr>
+<tr>
+<td class="org-left">Punisher</td>
+<td class="org-left">\(\beta\)</td>
+<td class="org-left">0</td>
+<td class="org-left">\(\beta - 1\)</td>
+</tr>
+<tr>
+<td class="org-left">Criminal</td>
+<td class="org-left">\(-\alpha\)</td>
+<td class="org-left">\(\gamma - \alpha\)</td>
+<td class="org-left">\(-\alpha\)</td>
+</tr>
+</tbody>
+</table>
+<p>Each entry in  the table shows what the outcome  would be an
+interaction  between two  individuals. For  example when  an
+ordinary   individual   interacts  with   another   ordinary
+individual  it will  receive 0  payoff, whereas  an ordinary
+individual with  a punished  will receive $-\beta$  reward. Perc
+studied the evolution of a system over time as a function of
+these three ($\beta,\gamma,\alpha$) parameters.</p>
+<p>The dynamics of  the system evolve by  considering that each
+decision  will  contain  some   noise.  This  noise  can  be
+interpreted as  the certainty  of an individual  about their
+choice. The transition between  choosing either strategy $a$
+or $b$  will depend on  the <em>expected payoff</em>  an individual
+will have about the outcome  of a random interaction.</p>
+<p>A  commonly used  choice  to model  the  choice between  two
+policies  is  to use  the  logistic  function. The  logistic
+function maps the domain to the  range (0, 1). The domain is
+given by the expected payoff shown in the table above.</p>
+<p>We can implement the model in python as follows</p>
+<details> <summary> python code </summary>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-python" data-lang="python"><span class="line"><span class="cl">    <span class="kn">import</span> <span class="nn">proplot</span> <span class="k">as</span> <span class="nn">plt</span><span class="o">,</span> <span class="nn">cmasher</span> <span class="k">as</span> <span class="nn">cmr</span><span class="o">,</span> <span class="nn">pandas</span> <span class="k">as</span> <span class="nn">pd</span><span class="o">,</span>\
+</span></span><span class="line"><span class="cl">           <span class="n">numpy</span> <span class="k">as</span> <span class="n">np</span><span class="p">,</span> <span class="n">warnings</span><span class="p">,</span>\
+</span></span><span class="line"><span class="cl">           <span class="n">re</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">scipy</span> <span class="kn">import</span> <span class="n">integrate</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">tqdm</span> <span class="kn">import</span> <span class="n">tqdm</span>
+</span></span><span class="line"><span class="cl">    <span class="kn">from</span> <span class="nn">itertools</span> <span class="kn">import</span> <span class="n">product</span>
+</span></span><span class="line"><span class="cl">    <span class="n">warnings</span><span class="o">.</span><span class="n">simplefilter</span><span class="p">(</span><span class="s2">&#34;ignore&#34;</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">update</span><span class="p">(</span><span class="n">t</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">x</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">,</span> <span class="n">k</span><span class="p">:</span> <span class="nb">float</span><span class="p">,</span> <span class="n">P</span><span class="p">:</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">)</span> <span class="o">-&gt;</span> <span class="n">np</span><span class="o">.</span><span class="n">ndarray</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="n">dx</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros_like</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="c1"># Calculate payoff difference for each state transition</span>
+</span></span><span class="line"><span class="cl">        <span class="c1"># The update uses a Fermi transition</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">i</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>  <span class="c1"># 3 states: O, C, P</span>
+</span></span><span class="line"><span class="cl">            <span class="k">for</span> <span class="n">j</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="mi">3</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">                <span class="n">payoff_diff</span> <span class="o">=</span> <span class="n">P</span><span class="p">[</span><span class="n">j</span><span class="p">,</span> <span class="n">i</span><span class="p">]</span> <span class="o">-</span> <span class="n">P</span><span class="p">[</span><span class="n">i</span><span class="p">,</span> <span class="n">j</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p_gain</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="o">-</span><span class="mi">1</span><span class="o">/</span><span class="n">k</span> <span class="o">*</span> <span class="n">payoff_diff</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">p_loss</span> <span class="o">=</span> <span class="mi">1</span> <span class="o">/</span> <span class="p">(</span><span class="mi">1</span> <span class="o">+</span> <span class="n">np</span><span class="o">.</span><span class="n">exp</span><span class="p">(</span><span class="mi">1</span><span class="o">/</span><span class="n">k</span> <span class="o">*</span> <span class="n">payoff_diff</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">                <span class="n">dx</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">+=</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">p_gain</span> <span class="o">-</span> <span class="n">x</span><span class="p">[</span><span class="n">i</span><span class="p">]</span> <span class="o">*</span> <span class="n">x</span><span class="p">[</span><span class="n">j</span><span class="p">]</span> <span class="o">*</span> <span class="n">p_loss</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">dx</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">    <span class="k">def</span> <span class="nf">simulate</span><span class="p">(</span><span class="n">settings</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">        <span class="n">k</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;k&#34;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">alpha</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;alpha&#34;</span><span class="p">,</span> <span class="mf">0.5</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="n">x</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="mf">0.01</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="mi">15</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t_span</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;t_span&#34;</span><span class="p">,</span> <span class="p">(</span><span class="mi">0</span><span class="p">,</span> <span class="mi">100</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">        <span class="n">t</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">linspace</span><span class="p">(</span><span class="o">*</span><span class="n">t_span</span><span class="p">,</span> <span class="mi">100</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">colors</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">zeros</span><span class="p">((</span><span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">,</span> <span class="mi">3</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">        <span class="n">x0</span> <span class="o">=</span> <span class="n">settings</span><span class="o">.</span><span class="n">get</span><span class="p">(</span><span class="s2">&#34;x0&#34;</span><span class="p">,</span> <span class="n">np</span><span class="o">.</span><span class="n">ones</span><span class="p">(</span><span class="mi">3</span><span class="p">)</span> <span class="o">/</span> <span class="mi">3</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="n">df</span> <span class="o">=</span> <span class="p">[{}</span> <span class="k">for</span> <span class="n">_</span> <span class="ow">in</span> <span class="nb">range</span><span class="p">(</span><span class="n">x</span><span class="o">.</span><span class="n">size</span> <span class="o">*</span> <span class="n">x</span><span class="o">.</span><span class="n">size</span><span class="p">)]</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">idx</span><span class="p">,</span> <span class="p">(</span><span class="n">gamma</span><span class="p">,</span> <span class="n">beta</span><span class="p">)</span> <span class="ow">in</span> <span class="n">tqdm</span><span class="p">(</span><span class="nb">enumerate</span><span class="p">(</span><span class="n">product</span><span class="p">(</span><span class="n">x</span><span class="p">,</span> <span class="n">x</span><span class="p">))):</span>
+</span></span><span class="line"><span class="cl">            <span class="n">P</span> <span class="o">=</span> <span class="n">np</span><span class="o">.</span><span class="n">array</span><span class="p">([</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">[</span><span class="mi">0</span><span class="p">,</span> <span class="o">-</span><span class="n">beta</span><span class="p">,</span> <span class="mi">0</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">[</span><span class="n">beta</span><span class="p">,</span> <span class="mi">0</span><span class="p">,</span> <span class="n">beta</span> <span class="o">-</span> <span class="mi">1</span><span class="p">],</span>
+</span></span><span class="line"><span class="cl">                    <span class="p">[</span><span class="o">-</span><span class="n">alpha</span><span class="p">,</span> <span class="n">gamma</span> <span class="o">-</span> <span class="n">alpha</span><span class="p">,</span> <span class="o">-</span><span class="n">alpha</span><span class="p">]</span>
+</span></span><span class="line"><span class="cl">             <span class="p">])</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">            <span class="n">res</span> <span class="o">=</span> <span class="n">integrate</span><span class="o">.</span><span class="n">solve_ivp</span><span class="p">(</span><span class="n">update</span><span class="p">,</span> <span class="n">t_span</span> <span class="o">=</span> <span class="n">t_span</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">y0</span> <span class="o">=</span> <span class="n">x0</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">args</span> <span class="o">=</span> <span class="p">(</span><span class="n">k</span><span class="p">,</span> <span class="n">P</span><span class="p">,),</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">t_eval</span> <span class="o">=</span> <span class="n">t</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                              <span class="n">dense_output</span> <span class="o">=</span> <span class="kc">True</span>
+</span></span><span class="line"><span class="cl">                              <span class="p">)</span>
+</span></span><span class="line"><span class="cl">    
+</span></span><span class="line"><span class="cl">            <span class="n">df</span><span class="p">[</span><span class="n">idx</span><span class="p">]</span> <span class="o">=</span> <span class="nb">dict</span><span class="p">(</span><span class="n">beta</span> <span class="o">=</span> <span class="n">beta</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">gamma</span> <span class="o">=</span> <span class="n">gamma</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">k</span> <span class="o">=</span> <span class="n">k</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">alpha</span> <span class="o">=</span> <span class="n">alpha</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="n">y</span> <span class="o">=</span> <span class="n">res</span><span class="o">.</span><span class="n">y</span><span class="p">,</span>
+</span></span><span class="line"><span class="cl">                       <span class="p">)</span>
+</span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
+</span></span></code></pre></div></details>
+<p>Note  that  this implementation  does  not  use the  nearest
+neighbor  interaction  as shown  in  the  applet above.  The
+applet on  the top of this  post, is the model  how Perc and
+colleagues specified it. Regardless, we can probe the effect
+of the cost-to-benefit by systematically varying $\beta$ and $\gamma$
+and evolving the system over  time, and emulate the original
+results from Perc and colleagues.</p>
+<figure id="fig:phase_fully">
+<img src="./figures/phase_fully.png" style = "scale:0.75" />
+<figcaption>Varying the cost-to-benefit reveals a rich "phase diagram" in which criminals, ordinary people and punishers can co-exist (orange/green) or criminals and punishers remain (purple area) or just criminals exist (blue). Shown are the results for $k=\alpha=0.5$.
+</figcaption>
+</figure>
+<p>The  co-existent phase  reveals the  circular nature  of the
+dynamics  in which  a gain  of  one population  may cause  a
+similar increase in another which then leads to a shift that
+oscillates over time.</p>
+<figure id="fig:oscillations">
+<img src="./figures/cyclic_example.png"/>
+<figcaption>Oscillations can occur in the three populations. Shown are the results for  $\beta = 1, \gamma = 0.25, \alpha = k = 0.5$.
+</figcaption>
+</figure>
+<p>By  examining  organized  crime   through  an  economic  and
+computational  lens,  we  gain  crucial  insights  into  its
+persistence and  societal impact. Viewing  criminal behavior
+as a series of rational, cost-benefit driven decisions helps
+us understand the intricate relationships between criminals,
+law  enforcement,  and  ordinary  citizens.  Although  these
+models are simplified, they provide a powerful framework for
+predicting  and   potentially  mitigating  the   effects  of
+organized  crime. As  computational  science progresses,  it
+will continue to unravel the complexities of human behavior,
+enabling  the development  of more  effective strategies  to
+combat crime and foster safer, more stable societies.</p>
+<p>Be  sure to  try  out  the applet  above.  You  can set  the
+parameters  in  different  values  and observe  how  it  can
+explore the phase space indicated above.</p>
 
     </div>
 
