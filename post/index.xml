@@ -271,7 +271,7 @@ parameters  in  different  values  and observe  how  it  can
 explore the phase space indicated above.&lt;/p&gt;
 &lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
 &lt;ul&gt;
-&lt;li&gt;[1] Matjaž  Perc,  Karsten Donnay,  and  Dirk Hel-  bing.
+&lt;li&gt;[1] Matjaž  Perc,  Karsten Donnay,  and  Dirk Helbing.
 “Understanding Recurrent Crime as System-Immanent Collective
 Behavior”. In: PLOS  ONE 8.10 (Oct. 4,  2013), e76063. issn:
 1932-6203. doi: 10.1371/journal. pone.007606&lt;/li&gt;
@@ -6109,7 +6109,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-724653819&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-184235976&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -6119,7 +6119,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-724653819&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-184235976&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
