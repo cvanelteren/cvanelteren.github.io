@@ -993,7 +993,10 @@ crime,  this means  that  individuals can  decide to  become
 criminals, join law enforcement, or remain normal civilians.
 The  choice  of behavior  is  determined  by a  cost-benefit
 analysis performed by each  agent. An individual can receive
-a reward ββ for committing a criminal act, while facing potential punishment from other individuals, denoted by γγ, or from law enforcement, denoted by αα. This scenario can be represented in a payoff matrix:</p>
+a  reward ββ  for committing  a criminal  act, while  facing
+potential punishment from other  individuals, denoted by γγ,
+or from law enforcement, denoted by αα. This scenario can be
+represented in a payoff matrix:</p>
 <table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
 <colgroup>
 <col  class="org-left" />
@@ -1103,7 +1106,13 @@ shown in the table above.</p>
 </span></span><span class="line"><span class="cl">                       <span class="p">)</span>
 </span></span><span class="line"><span class="cl">        <span class="k">return</span> <span class="n">pd</span><span class="o">.</span><span class="n">DataFrame</span><span class="p">(</span><span class="n">df</span><span class="p">)</span>
 </span></span></code></pre></div></details>
-<p>Note that this implementation does not use the nearest neighbor interaction as shown in the applet above. The applet at the top of this post follows the model specified by Perc and colleagues. Regardless, we can probe the effect of the cost-to-benefit by systematically varying ββ and γγ and evolving the system over time to emulate the original results from Perc and colleagues.</p>
+<p>Note  that  this implementation  does  not  use the  nearest
+neighbor  interaction  as shown  in  the  applet above.  The
+applet at the  top of this post follows  the model specified
+by Perc and colleagues. Regardless,  we can probe the effect
+of the cost-to-benefit by systematically varying $\beta$ and
+$\gamma$ and  evolving the system  over time to  emulate the
+original results from Perc and colleagues.</p>
 <figure id="fig:phase_fully">
 <img src="./figures/phase_fully.png" style = "scale:0.75" />
 <figcaption>Varying the cost-to-benefit reveals a rich "phase diagram" in which criminals, ordinary people and punishers can co-exist (orange/green) or criminals and punishers remain (purple area) or just criminals exist (blue). Shown are the results for $k=\alpha=0.5$.

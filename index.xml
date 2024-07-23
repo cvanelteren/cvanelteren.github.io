@@ -129,7 +129,10 @@ crime,  this means  that  individuals can  decide to  become
 criminals, join law enforcement, or remain normal civilians.
 The  choice  of behavior  is  determined  by a  cost-benefit
 analysis performed by each  agent. An individual can receive
-a reward ββ for committing a criminal act, while facing potential punishment from other individuals, denoted by γγ, or from law enforcement, denoted by αα. This scenario can be represented in a payoff matrix:&lt;/p&gt;
+a  reward ββ  for committing  a criminal  act, while  facing
+potential punishment from other  individuals, denoted by γγ,
+or from law enforcement, denoted by αα. This scenario can be
+represented in a payoff matrix:&lt;/p&gt;
 &lt;table border=&#34;2&#34; cellspacing=&#34;0&#34; cellpadding=&#34;6&#34; rules=&#34;groups&#34; frame=&#34;hsides&#34;&gt;
 &lt;colgroup&gt;
 &lt;col  class=&#34;org-left&#34; /&gt;
@@ -239,7 +242,13 @@ shown in the table above.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;p&gt;Note that this implementation does not use the nearest neighbor interaction as shown in the applet above. The applet at the top of this post follows the model specified by Perc and colleagues. Regardless, we can probe the effect of the cost-to-benefit by systematically varying ββ and γγ and evolving the system over time to emulate the original results from Perc and colleagues.&lt;/p&gt;
+&lt;p&gt;Note  that  this implementation  does  not  use the  nearest
+neighbor  interaction  as shown  in  the  applet above.  The
+applet at the  top of this post follows  the model specified
+by Perc and colleagues. Regardless,  we can probe the effect
+of the cost-to-benefit by systematically varying $\beta$ and
+$\gamma$ and  evolving the system  over time to  emulate the
+original results from Perc and colleagues.&lt;/p&gt;
 &lt;figure id=&#34;fig:phase_fully&#34;&gt;
 &lt;img src=&#34;./figures/phase_fully.png&#34; style = &#34;scale:0.75&#34; /&gt;
 &lt;figcaption&gt;Varying the cost-to-benefit reveals a rich &#34;phase diagram&#34; in which criminals, ordinary people and punishers can co-exist (orange/green) or criminals and punishers remain (purple area) or just criminals exist (blue). Shown are the results for $k=\alpha=0.5$.
@@ -7765,7 +7774,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-264751938&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-542761389&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7775,7 +7784,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-264751938&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-542761389&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
