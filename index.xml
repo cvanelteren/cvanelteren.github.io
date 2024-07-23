@@ -126,19 +126,21 @@ exist  by  virtue  of  the  supply  and  demand  created  by
 non-criminal actors. As  such we could see  crime in society
 as   a  three   way  interaction   between  criminals,   law
 enforcement and ordinary people.&lt;/p&gt;
-&lt;p&gt;Perc and  colleagues applied  evolutionary game  theory [1].
-This  approach considers  a  set of  &lt;em&gt;rational&lt;/em&gt; agents  that
-consider  a  set  of  possible behaviors  depending  on  the
-behaviors  of other  agents they  interact with.  Applied to
-crime,  this entails  that potential  individual can  opt to
-choose to become criminal, join  law enforcement or remain a
-normal  civilian.  The  decision  to  choose  one  of  these
-behaviors is  determined by a cost-to-benefit  analysis that
-an  agent performs.  An individual  will can  receive reward
-$\beta$  for performing  a  criminal act  while receiving  a
-potential  punishment  from  other individuals,  denoted  by
-$\gamma$, or from law enforcement, denoted by $\alpha$. This
-can be captured in so-called payoff matrix:&lt;/p&gt;
+&lt;p&gt;Perc  and colleagues  applied  evolutionary  game theory  to
+study the relation between law enforcement criminals and law
+abiding  citizens  [1]. This  approach  considers  a set  of
+&lt;em&gt;rational&lt;/em&gt; agents that consider  a set of possible behaviors
+depending  on the  behaviors of  other agents  they interact
+with.  Applied   to  crime,  this  entails   that  potential
+individual can  opt to choose  to become criminal,  join law
+enforcement  or remain  a normal  civilian. The  decision to
+choose   one  of   these  behaviors   is  determined   by  a
+cost-to-benefit   analysis  that   an  agent   performs.  An
+individual will can receive  reward $\beta$ for performing a
+criminal  act while  receiving a  potential punishment  from
+other  individuals,   denoted  by  $\gamma$,  or   from  law
+enforcement, denoted  by $\alpha$.  This can be  captured in
+so-called payoff matrix:&lt;/p&gt;
 &lt;table border=&#34;2&#34; cellspacing=&#34;0&#34; cellpadding=&#34;6&#34; rules=&#34;groups&#34; frame=&#34;hsides&#34;&gt;
 &lt;colgroup&gt;
 &lt;col  class=&#34;org-left&#34; /&gt;
@@ -7769,7 +7771,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-168453792&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-724653819&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7779,7 +7781,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-168453792&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-724653819&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
