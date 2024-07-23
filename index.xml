@@ -271,21 +271,32 @@ oscillates over time.&lt;/p&gt;
 &lt;figcaption&gt;Oscillations can occur in the three populations. Shown are the results for  $\beta = 1, \gamma = 0.25, \alpha = k = 0.5$.
 &lt;/figcaption&gt;
 &lt;/figure&gt;
-&lt;p&gt;By  examining  organized  crime   through  an  economic  and
-computational  lens,  we  gain  crucial  insights  into  its
-persistence and  societal impact. Viewing  criminal behavior
-as a series of rational, cost-benefit driven decisions helps
-us understand the intricate relationships between criminals,
-law  enforcement,  and  ordinary  citizens.  Although  these
-models are simplified, they provide a powerful framework for
-predicting  and   potentially  mitigating  the   effects  of
-organized  crime. As  computational  science progresses,  it
-will continue to unravel the complexities of human behavior,
-enabling  the development  of more  effective strategies  to
-combat crime and foster safer, more stable societies.&lt;/p&gt;
-&lt;p&gt;Be  sure to  try  out  the applet  above.  You  can set  the
-parameters  in  different  values  and observe  how  it  can
-explore the phase space indicated above.&lt;/p&gt;
+&lt;p&gt;Criminal  organizations are  so  successful in  part due  to
+their ability to operate  as rational economic actors within
+complex  societal  systems.  By  examining  organized  crime
+through an economic and  computational lens, we gain crucial
+insights into  why these  groups persist and  maintain their
+significant societal impact. Viewing  criminal behavior as a
+series  of  rational,  cost-benefit driven  decisions  helps
+explain the  intricate relationships between  criminals, law
+enforcement, and ordinary citizens  that contribute to their
+success.&lt;/p&gt;
+&lt;p&gt;Although  simplified,  economic  models provide  a  powerful
+framework for predicting and  understanding the factors that
+allow  criminal organizations  to  thrive. As  computational
+science progresses, it continues to unravel the complexities
+of  human  behavior, shedding  light  on  why these  illicit
+groups  are able  to adapt  and prosper  despite efforts  to
+combat them.&lt;/p&gt;
+&lt;p&gt;The  success  of  criminal   organizations  can  be  further
+explored  through interactive  applets that  allow users  to
+adjust  various parameters  and observe  how changes  in the
+environment  affect  the   dynamics  between  criminals  and
+society. By  experimenting with these models,  we can better
+understand  the conditions  that enable  criminal groups  to
+flourish and  potentially develop more  effective strategies
+to counteract  their success  and foster safer,  more stable
+societies.&lt;/p&gt;
 &lt;h1 id=&#34;references&#34;&gt;References&lt;/h1&gt;
 &lt;ul&gt;
 &lt;li&gt;[1] Matjaž  Perc,  Karsten Donnay,  and  Dirk Helbing.
@@ -7754,7 +7765,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-482657391&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-982635471&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7764,7 +7775,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-482657391&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-982635471&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
