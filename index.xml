@@ -71,76 +71,65 @@ effectiveness.&lt;/li&gt;
 on  Drugs and  Crime estimates  that transnational  criminal
 organizations  generate  an  astonishing annual  revenue  of
 approximately  $1.6 trillion,  equivalent to  Canada’s Gross
-Domestic Product.  It prompts the  question: how is  it that
-criminal organizations are so successful?&lt;/p&gt;
-&lt;p&gt;It is crucial  to realize that (organized)  crime is nothing
-new. Crime  occurs in wildly different  societies across the
-globe. Furthermore, it  can be tracked back far  and wide in
-recorded history  making it  seem like  crime, if  you will,
-seems like a common occurrence in society.&lt;/p&gt;
-&lt;p&gt;However,  the  organized  crime  remains  a  danger  to  our
-societies by  affecting our  rule of law,  social stability,
-and social safety.&lt;/p&gt;
+Domestic  Product.  This  prompts   the  question:  how  are
+criminal organizations so successful?&lt;/p&gt;
+&lt;p&gt;It is crucial  to recognize that organized  crime is nothing
+new. Crime  occurs in vastly different  societies across the
+globe and can be traced back far in recorded history, making
+it a common occurrence in society.&lt;/p&gt;
+&lt;p&gt;However, organized crime remains a significant threat to our
+societies by undermining the  rule of law, social stability,
+and public safety.&lt;/p&gt;
 &lt;p&gt;Organized crime sets itself apart  from other forms of crime
-in for  criminal organizations that form  a persistent group
-that  co-offends over  time. These  groups are  difficult to
-combat  as they  often  operate  in different  jurisdictions
-making it harder for law  enforcement to form a joint effort
-to  convict these  individuals. The  “organized”
-part forms a  direct offensive to the ruling  seat of power.
-It creates  a power struggle  for control of  resources (and
-cash flow) that, in the  extreme case, can lead to increased
-violence, creating  potential effects to the  stability of a
-economy,  resulting  in  wealth disparities,  [insert  other
-examples]&lt;/p&gt;
-&lt;p&gt;Traditionally,   crime   is   studied  from   an   empirical
-perspective.  The field  of  criminology  is concerned  with
-depicting &lt;em&gt;how&lt;/em&gt; crime can change as a function of geographic
-location, demographic  constitution, time  of living  and so
-on.  These  approaches  produce  a  highly  detailed,  often
-anthropocentric  view   of  the  state  of   crime  and  its
-downstream  affects  in   societies.  Over  time  scientists
-constructed  various  different  theories as  to  why  crime
-occurs.&lt;/p&gt;
-&lt;p&gt;One  of  the  most  interesting  theories,  is  to  consider
-criminal  organization not  as  a set  of bandits,  scheming
-together to produce mayhem.  Rather, it is more constructive
-to  consider  criminal  actors as  highly  skilled  business
-people. This economic perspective then places the individual
-at its center where he or she may weigh the cost and benefit
-of pursuing a criminal career. Importantly, this perspective
-is  suited to  use  as  a base  to  study the  computational
-conditions under  which criminal organization can  thrive or
-falter &amp;ndash; and shameless plug is the topic of some of my &lt;a href=&#34;https://cvanelteren/publication&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;research&lt;/a&gt;.&lt;/p&gt;
+by forming persistent groups that co-offend over time. These
+groups  are difficult  to combat  as they  often operate  in
+multiple jurisdictions, making it harder for law enforcement
+to  coordinate efforts  to  convict  these individuals.  The
+“organized” aspect  directly challenges  the ruling  seat of
+power, creating  a power  struggle for control  of resources
+and cash flow that, in  extreme cases, can lead to increased
+violence  and  economic  instability,  resulting  in  wealth
+disparities.&lt;/p&gt;
+&lt;p&gt;Traditionally,  crime has  been  studied  from an  empirical
+perspective.  Criminology is  concerned  with depicting  how
+crime  changes   as  a  function  of   geographic  location,
+demographic  composition,  time,  and other  factors.  These
+approaches produce a  highly detailed, often anthropocentric
+view  of crime  and  its effects  on  societies. Over  time,
+scientists have constructed various  theories to explain why
+crime occurs.&lt;/p&gt;
+&lt;p&gt;One of the most interesting theories is to consider criminal
+organizations not  as a set  of bandits scheming  to produce
+mayhem, but  rather as  highly skilled  businesspeople. This
+economic perspective  places the  individual at  the center,
+where they  may weigh the  costs and benefits of  pursuing a
+criminal career.  Importantly, this perspective serves  as a
+basis  to study  the  computational  conditions under  which
+criminal organizations can thrive or falter &amp;ndash; a topic of my
+&lt;a href=&#34;https://cvanelteren/publication&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;research&lt;/a&gt;.&lt;/p&gt;
 &lt;p&gt;The field  of computational  science is  still in  its early
 stages,  with  few  scientists  attempting  to  capture  the
 complex nature of  human-human interactions in computational
-models. These models often  leave out intricate details that
-we  hold dear  to  study a  reduced  problem that  hopefully
-qualitatively capture the dynamics of criminal organizations.&lt;/p&gt;
-&lt;p&gt;One  of  the early  approaches  was  performed by  Perc  and
-Colleagues that looked at the interaction between criminals,
-ordinary  people,   and  punishes  (law   enforcement).  The
-introduction of roles is crucial as criminal organizations
-exist  by  virtue  of  the  supply  and  demand  created  by
-non-criminal actors. As  such we could see  crime in society
-as   a  three   way  interaction   between  criminals,   law
-enforcement and ordinary people.&lt;/p&gt;
+models.  These models  often simplify  intricate details  to
+study  a   reduced  problem  that   hopefully  qualitatively
+captures the dynamics of criminal organizations.&lt;/p&gt;
+&lt;p&gt;An early approach was conducted  by Perc and colleagues, who
+studied the interaction  between criminals, ordinary people,
+and law enforcement. The introduction of roles is crucial as
+criminal  organizations exist  by virtue  of the  supply and
+demand  created by  non-criminal  actors. Thus,  we can  see
+crime  in   society  as  a  three-way   interaction  between
+criminals, law enforcement, and ordinary people.&lt;/p&gt;
 &lt;p&gt;Perc  and colleagues  applied  evolutionary  game theory  to
-study the relation between law enforcement criminals and law
-abiding  citizens  [1]. This  approach  considers  a set  of
-&lt;em&gt;rational&lt;/em&gt; agents that consider  a set of possible behaviors
-depending  on the  behaviors of  other agents  they interact
-with.  Applied   to  crime,  this  entails   that  potential
-individual can  opt to choose  to become criminal,  join law
-enforcement  or remain  a normal  civilian. The  decision to
-choose   one  of   these  behaviors   is  determined   by  a
-cost-to-benefit   analysis  that   an  agent   performs.  An
-individual will can receive  reward $\beta$ for performing a
-criminal  act while  receiving a  potential punishment  from
-other  individuals,   denoted  by  $\gamma$,  or   from  law
-enforcement, denoted  by $\alpha$.  This can be  captured in
-so-called payoff matrix:&lt;/p&gt;
+study the  relationship between law  enforcement, criminals,
+and law-abiding citizens [1].  This approach considers a set
+of rational agents  who choose their behaviors  based on the
+actions of other agents they  interact with. When applied to
+crime,  this means  that  individuals can  decide to  become
+criminals, join law enforcement, or remain normal civilians.
+The  choice  of behavior  is  determined  by a  cost-benefit
+analysis performed by each  agent. An individual can receive
+a reward ββ for committing a criminal act, while facing potential punishment from other individuals, denoted by γγ, or from law enforcement, denoted by αα. This scenario can be represented in a payoff matrix:&lt;/p&gt;
 &lt;table border=&#34;2&#34; cellspacing=&#34;0&#34; cellpadding=&#34;6&#34; rules=&#34;groups&#34; frame=&#34;hsides&#34;&gt;
 &lt;colgroup&gt;
 &lt;col  class=&#34;org-left&#34; /&gt;
@@ -177,24 +166,24 @@ so-called payoff matrix:&lt;/p&gt;
 &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
-&lt;p&gt;Each entry in  the table shows what the outcome  would be an
-interaction  between two  individuals. For  example when  an
-ordinary   individual   interacts  with   another   ordinary
-individual  it will  receive 0  payoff, whereas  an ordinary
-individual with  a punished  will receive $-\beta$  reward. Perc
-studied the evolution of a system over time as a function of
-these three ($\beta,\gamma,\alpha$) parameters.&lt;/p&gt;
+&lt;p&gt;Each entry in the table  shows the outcome of an interaction
+between  two  individuals.  For example,  when  an  ordinary
+individual interacts with  another ordinary individual, they
+receive  a  payoff  of  0, whereas  an  ordinary  individual
+interacting with a  punisher will receive a  reward of −β−β.
+Perc  studied the  evolution  of  a system  over  time as  a
+function of these three (β,γ,αβ,γ,α) parameters.&lt;/p&gt;
 &lt;p&gt;The dynamics of  the system evolve by  considering that each
-decision  will  contain  some   noise.  This  noise  can  be
-interpreted as  the certainty  of an individual  about their
-choice. The transition between  choosing either strategy $a$
-or $b$  will depend on  the &lt;em&gt;expected payoff&lt;/em&gt;  an individual
-will have about the outcome  of a random interaction.&lt;/p&gt;
-&lt;p&gt;A  commonly used  choice  to model  the  choice between  two
-policies  is  to use  the  logistic  function. The  logistic
-function maps the domain to the  range (0, 1). The domain is
-given by the expected payoff shown in the table above.&lt;/p&gt;
-&lt;p&gt;We can implement the model in python as follows&lt;/p&gt;
+decision contains  some noise,  which can be  interpreted as
+the  certainty  of an  individual  about  their choice.  The
+transition between  choosing either  strategy aa or  bb will
+depend on the expected payoff an individual anticipates from
+a random interaction.&lt;/p&gt;
+&lt;p&gt;A commonly  used choice  to model  the decision  between two
+policies is the logistic function,  which maps the domain to
+the range (0, 1). The domain is given by the expected payoff
+shown in the table above.&lt;/p&gt;
+&lt;p&gt;We can implement the model in Python as follows:&lt;/p&gt;
 &lt;details&gt; &lt;summary&gt; python code &lt;/summary&gt;
 &lt;div class=&#34;highlight&#34;&gt;&lt;pre tabindex=&#34;0&#34; class=&#34;chroma&#34;&gt;&lt;code class=&#34;language-python&#34; data-lang=&#34;python&#34;&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;    &lt;span class=&#34;kn&#34;&gt;import&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;proplot&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;plt&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;cmasher&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;cmr&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pandas&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;nn&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;,&lt;/span&gt;\
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;           &lt;span class=&#34;n&#34;&gt;numpy&lt;/span&gt; &lt;span class=&#34;k&#34;&gt;as&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;np&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;warnings&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;,&lt;/span&gt;\
@@ -250,13 +239,7 @@ given by the expected payoff shown in the table above.&lt;/p&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;                       &lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;span class=&#34;line&#34;&gt;&lt;span class=&#34;cl&#34;&gt;        &lt;span class=&#34;k&#34;&gt;return&lt;/span&gt; &lt;span class=&#34;n&#34;&gt;pd&lt;/span&gt;&lt;span class=&#34;o&#34;&gt;.&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;DataFrame&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;(&lt;/span&gt;&lt;span class=&#34;n&#34;&gt;df&lt;/span&gt;&lt;span class=&#34;p&#34;&gt;)&lt;/span&gt;
 &lt;/span&gt;&lt;/span&gt;&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/details&gt;
-&lt;p&gt;Note  that  this implementation  does  not  use the  nearest
-neighbor  interaction  as shown  in  the  applet above.  The
-applet on  the top of this  post, is the model  how Perc and
-colleagues specified it. Regardless, we can probe the effect
-of the cost-to-benefit by systematically varying $\beta$ and $\gamma$
-and evolving the system over  time, and emulate the original
-results from Perc and colleagues.&lt;/p&gt;
+&lt;p&gt;Note that this implementation does not use the nearest neighbor interaction as shown in the applet above. The applet at the top of this post follows the model specified by Perc and colleagues. Regardless, we can probe the effect of the cost-to-benefit by systematically varying ββ and γγ and evolving the system over time to emulate the original results from Perc and colleagues.&lt;/p&gt;
 &lt;figure id=&#34;fig:phase_fully&#34;&gt;
 &lt;img src=&#34;./figures/phase_fully.png&#34; style = &#34;scale:0.75&#34; /&gt;
 &lt;figcaption&gt;Varying the cost-to-benefit reveals a rich &#34;phase diagram&#34; in which criminals, ordinary people and punishers can co-exist (orange/green) or criminals and punishers remain (purple area) or just criminals exist (blue). Shown are the results for $k=\alpha=0.5$.
@@ -7771,7 +7754,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-184235976&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-482657391&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7781,7 +7764,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-184235976&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-482657391&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
