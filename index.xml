@@ -174,7 +174,7 @@ between  two  individuals.  For example,  when  an  ordinary
 individual interacts with  another ordinary individual, they
 receive  a  payoff  of  0, whereas  an  ordinary  individual
 interacting  with  a  punisher  will  receive  a  reward  of
-$-beta$. Perc studied  the evolution of a  system over time
+$-\beta$. Perc studied  the evolution of a  system over time
 as  a  function of  these  three  $(\beta, \gamma,  \alpha)$
 parameters.&lt;/p&gt;
 &lt;p&gt;The dynamics of  the system evolve by  considering that each
@@ -7775,7 +7775,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-491638275&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-312487965&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7785,7 +7785,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-491638275&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-312487965&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
