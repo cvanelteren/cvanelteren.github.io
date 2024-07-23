@@ -129,10 +129,10 @@ crime,  this means  that  individuals can  decide to  become
 criminals, join law enforcement, or remain normal civilians.
 The  choice  of behavior  is  determined  by a  cost-benefit
 analysis performed by each  agent. An individual can receive
-a  reward ββ  for committing  a criminal  act, while  facing
-potential punishment from other  individuals, denoted by γγ,
-or from law enforcement, denoted by αα. This scenario can be
-represented in a payoff matrix:&lt;/p&gt;
+a reward $\beta$ for committing a criminal act, while facing
+potential  punishment  from  other individuals,  denoted  by
+$\gamma$, or from law enforcement, denoted by $\alpha$. This
+scenario can be represented in a payoff matrix:&lt;/p&gt;
 &lt;table border=&#34;2&#34; cellspacing=&#34;0&#34; cellpadding=&#34;6&#34; rules=&#34;groups&#34; frame=&#34;hsides&#34;&gt;
 &lt;colgroup&gt;
 &lt;col  class=&#34;org-left&#34; /&gt;
@@ -7774,7 +7774,7 @@ data.head()
 
 
 
-&lt;div id=&#34;chart-726851493&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
+&lt;div id=&#34;chart-679283154&#34; class=&#34;chart&#34;&gt;&lt;/div&gt;
 &lt;script&gt;
   (function() {
     let a = setInterval( function() {
@@ -7784,7 +7784,7 @@ data.head()
       clearInterval( a );
 
       Plotly.d3.json(&#34;./line-chart.json&#34;, function(chart) {
-        Plotly.plot(&#39;chart-726851493&#39;, chart.data, chart.layout, {responsive: true});
+        Plotly.plot(&#39;chart-679283154&#39;, chart.data, chart.layout, {responsive: true});
       });
     }, 500 );
   })();
