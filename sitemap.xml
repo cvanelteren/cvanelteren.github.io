@@ -412,6 +412,12 @@
     <loc>https://thefriendlyghost.nl/post/test3/</loc>
     <changefreq>weekly</changefreq>
   </url><url>
+    <loc>https://thefriendlyghost.nl/scripts/crawler/jlouvain/readme/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://thefriendlyghost.nl/scripts/crawler/js-colormaps/readme/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
     <loc>https://thefriendlyghost.nl/about/</loc>
     <changefreq>weekly</changefreq>
   </url><url>
@@ -422,6 +428,9 @@
     <changefreq>weekly</changefreq>
   </url><url>
     <loc>https://thefriendlyghost.nl/cv/</loc>
+    <changefreq>weekly</changefreq>
+  </url><url>
+    <loc>https://thefriendlyghost.nl/scripts/</loc>
     <changefreq>weekly</changefreq>
   </url>
 </urlset>
