@@ -1,0 +1,1491 @@
+<!DOCTYPE html>
+<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
+<!-- Last Published: September 11, 2024 --><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.c39391f95677ad80cbdeec5f85c81a73.css" />
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Casper van Elteren" />
+
+
+
+
+
+  
+
+<meta name="description" content="Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)." />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://thefriendlyghost.nl/post/concurrent_nim/" />
+<link rel="canonical" href="https://thefriendlyghost.nl/post/concurrent_nim/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#efebda" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@wowchemy" />
+  <meta property="twitter:creator" content="@wowchemy" />
+<meta property="twitter:image" content="https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" />
+<meta property="og:site_name" content="Casper van Elteren" />
+<meta property="og:url" content="https://thefriendlyghost.nl/post/concurrent_nim/" />
+<meta property="og:title" content="Intro to concurrent computing (in Nim) | Casper van Elteren" />
+<meta property="og:description" content="Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)." /><meta property="og:image" content="https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2023-10-03T17:31:24&#43;02:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2023-10-03T17:31:24&#43;02:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://thefriendlyghost.nl/post/concurrent_nim/"
+  },
+  "headline": "Intro to concurrent computing (in Nim)",
+  
+  "datePublished": "2023-10-03T17:31:24+02:00",
+  "dateModified": "2023-10-03T17:31:24+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Casper van Elteren"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Modern computing usually concerns multiple compute units. These compute units can be in the form of implementing shaders on a graphics card, or programming for multiple cores on the central processing unit (CPU)."
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Intro to concurrent computing (in Nim) | Casper van Elteren</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="1ebe5d54fefa6c820f4d060ddba4db96" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Intro to concurrent computing (in Nim)</h1>
+
+  
+  <p class="page-subtitle">Some notes to get started</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Oct 3, 2023
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    6 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/coding/">Coding</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+          <p>Modern computing usually concerns multiple compute units. These compute
+units can be in the form of implementing shaders on a graphics card, or
+programming for multiple cores on the <em>central processing unit</em> (CPU).
+Taking advantage of the multiple cores can under optimal circumstances
+yield a $n$ times (= number of cores) increase runtime of your
+computation.</p>
+<p>Implementing a multiple core program, however, is not a trivial task.
+Some programming languages (such as Matlab, python, julia) offer a high
+level abstract interface that would work well for so-called
+<a href="https://en.wikipedia.org/wiki/Embarrassingly_parallel" target="_blank" rel="noopener">embarrasingly parallel
+jobs</a>. Work
+performed in these kinds of jobs offer little effort to implement on
+multiple cores as the computation can happen on each core independently
+of the other cores. Little to no communication occurs between the cores,
+and shared memory is read-only.</p>
+<h1 id="concurrent-computing-in-a-nutshell">Concurrent computing in a nutshell</h1>
+<p>In concurrent computer the programmer harnesses the power of compute
+units accessible to their program. These compute units can be compute
+cores on a single computer, or multiple computers communicating over the
+web or inside a server.</p>
+<p>A concurrent program consists of dividing the task into sub-tasks that
+can independently run on threads (independent tiny programs).</p>
+<p>Concurrent programming can be decomposed further in parallel programming
+and asynchronous programming. In parallel programming, threads are
+spawned and return results without any communication with the other
+spawned threads. They are parallel in the sense they perform the task in
+jointly independently. Examples include parallel computing the pairwise
+correlation between $N$ variables, running independent runs of
+agent-based models.</p>
+<p>Asynchronous programming works by dividing the task up in threads in a
+non-blocking manner. That is, the task is subdivided in a thread, and
+the main thread can continue processing code. When called upon, the main
+thread can be <em>blocked</em> to retrieve the outcome of the thread spawned
+earlier.</p>
+<p>In this post I will write some notes on how to implement parallel
+programming in Nim. This compared to my other posts are not extensive,
+and form a mere reminder to me on how to do this in the future.</p>
+<h1 id="the-problem">The problem</h1>
+<p>I have $N$ simulation in which each simulation consists of</p>
+<ol>
+<li>creating an agent-based simulation with config $C_i, i\in N$</li>
+<li>Running and storing the results from this result</li>
+</ol>
+<p>The tasks (including the IO in 2) can run in parallel as the data
+generation process takes longer than dumping the files to disk.</p>
+<p>Below I will introduce some dummy code, and will not bore you with the
+details of the implementation.</p>
+<p>In python I would use the `multiprocessing` library to create a pool
+of workers. The library will hide the nitty gritty and nasty details of
+the implementation. In Nim the parallel functionality is at the time of
+writing still hidden in the experimental section. It is fully functional
+for my ends luckily ;-).</p>
+<p>The major frustration I have is that the documentation on the web was
+not completely clear on how this task can be achieved. On the docs the
+following example is given</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Nim" data-lang="Nim"><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">std</span><span class="o">/</span><span class="n">threadpool</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">processLine</span><span class="p">(</span><span class="n">line</span><span class="p">:</span> <span class="kt">string</span><span class="p">)</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="k">discard</span> <span class="s">&#34;do some heavy lifting here&#34;</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">for</span> <span class="n">x</span> <span class="ow">in</span> <span class="n">lines</span><span class="p">(</span><span class="s">&#34;myinput.txt&#34;</span><span class="p">):</span>
+</span></span><span class="line"><span class="cl">  <span class="n">spawn</span> <span class="n">processLine</span><span class="p">(</span><span class="n">x</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl"><span class="n">sync</span><span class="p">()</span>
+</span></span></code></pre></div><p>The code defines function and introduces some special keywords
+introduced by the threadpool import.</p>
+<p>The keyword `spawn` is used to <em>spawn off</em> (create) a thread. The
+execution flow works as follows. When invoking this script, the main
+thread will spawn off seperate threads to run `processLine`. These
+threads will be spawned and executed at slightly different times. The
+main thread continues for every line in the dummy file until it hits
+`sync`. The `sync` keyword forces the main program to wait until all
+threads are finished. If `sync` was not there, the program would have
+exited, leaving the threads in limbo!</p>
+<h2 id="flowvart">FlowVar[T]</h2>
+<p>In Nim, a spawned function will return a `FlowVar[T]` variable. The
+variable will be set to nil if the thread has not put any information
+there yet (i.e. it has not been called yet). It effectively tells the
+compiler that there might be a result here when the thread returns a
+value, and allows the main thread to continue.</p>
+<h1 id="the-implementation">The implementation</h1>
+<p>What we need to achieve is map out what task we want to compute, create
+threads for these tasks, and retrieve the results from the computation
+of these tasks.</p>
+<p>We first create some dummy code that creates a load on the system. This
+code is necessary as some compilers can optimize out non-functional code
+which creates a faster running program and bypassing the intent of our
+code (running it concurrently).</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-Nim" data-lang="Nim"><span class="line"><span class="cl"><span class="c">#file: concurrent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="kn">import</span> <span class="n">threadpool</span><span class="p">,</span> <span class="n">sequtils</span><span class="p">,</span> <span class="n">os</span>
+</span></span><span class="line"><span class="cl"><span class="p">{.</span><span class="n">experimental</span><span class="p">:</span> <span class="s">&#34;parallel&#34;</span><span class="p">.}</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl"><span class="k">proc </span><span class="nf">heavyComputation</span><span class="p">(</span><span class="n">n</span><span class="p">:</span> <span class="kt">int</span><span class="p">):</span> <span class="kt">int</span> <span class="p">{.</span><span class="n">thread</span><span class="p">.}</span> <span class="o">=</span>
+</span></span><span class="line"><span class="cl">  <span class="c"># simulate some arbitrary code</span>
+</span></span><span class="line"><span class="cl">  <span class="n">result</span> <span class="o">=</span> <span class="n">n</span>
+</span></span><span class="line"><span class="cl">  <span class="n">sleep</span><span class="p">((</span><span class="n">n</span> <span class="o">*</span> <span class="mi">100</span> <span class="ow">mod</span> <span class="mi">29</span><span class="p">)</span> <span class="o">*</span> <span class="mi">7</span><span class="p">)</span>
+</span></span></code></pre></div><p>The first line, makes the keywords available for the multithreading, and
+enables the experimental parallel processing. THe function is given a
+pragma which is a compiler directive that this function will be run on a
+thread. It mainly serves for readibility and ensures that the heap
+memory is managed properly.</p>
+<p>The task itself is a simlulation of heavy load by giving the task
+different run times. The operations here are arbitrary chosen. For
+identifying when which thread was executed, we return the input `n`
+here.</p>
+<p>Next, we create the program that runs on the main thread</p>
+<div class="highlight"><pre tabindex="0" class="chroma"><code class="language-nim" data-lang="nim"><span class="line"><span class="cl"><span class="c">#file: concurrent.nim</span>
+</span></span><span class="line"><span class="cl"><span class="k">if</span> <span class="n">isMainModule</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># create dummy variables</span>
+</span></span><span class="line"><span class="cl">    <span class="k">let</span> <span class="n">N</span> <span class="o">=</span> <span class="mi">10000</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">toCompute</span> <span class="o">=</span> <span class="p">(</span><span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">N</span><span class="p">).</span><span class="n">toseq</span>
+</span></span><span class="line"><span class="cl">
+</span></span><span class="line"><span class="cl">    <span class="c"># essentially they have a void conversion here</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">results</span> <span class="o">=</span> <span class="n">newSeq</span><span class="o">[</span><span class="n">FlowVarBase</span><span class="o">]</span><span class="p">(</span><span class="n">N</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">parallel</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="k">for</span> <span class="n">idx</span> <span class="ow">in</span> <span class="mf">0</span><span class="p">..</span><span class="o">&lt;</span><span class="n">N</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">results</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span> <span class="o">=</span> <span class="n">spawn</span> <span class="n">heavyComputation</span><span class="p">(</span><span class="n">toCompute</span><span class="o">[</span><span class="n">idx</span><span class="o">]</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="c"># get output and dump to disk</span>
+</span></span><span class="line"><span class="cl">    <span class="kd">var</span> <span class="n">fp</span> <span class="o">=</span> <span class="n">open</span><span class="p">(</span><span class="s">&#34;test.txt&#34;</span><span class="p">,</span> <span class="n">fmWrite</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="k">while</span> <span class="n">results</span><span class="p">.</span><span class="n">len</span> <span class="o">&gt;</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">        <span class="kd">var</span> <span class="n">jdx</span> <span class="o">=</span> <span class="n">results</span><span class="p">.</span><span class="n">blockUntilAny</span><span class="p">()</span>
+</span></span><span class="line"><span class="cl">        <span class="k">if</span> <span class="n">jdx</span> <span class="o">&gt;=</span> <span class="mi">0</span><span class="p">:</span>
+</span></span><span class="line"><span class="cl">            <span class="n">fp</span><span class="p">.</span><span class="n">writeline</span><span class="p">(^</span><span class="n">FlowVar</span><span class="o">[</span><span class="kt">int</span><span class="o">]</span><span class="p">(</span><span class="n">results</span><span class="o">[</span><span class="n">jdx</span><span class="o">]</span><span class="p">))</span>
+</span></span><span class="line"><span class="cl">            <span class="n">results</span><span class="p">.</span><span class="n">del</span><span class="p">(</span><span class="n">jdx</span><span class="p">)</span>
+</span></span><span class="line"><span class="cl">    <span class="n">fp</span><span class="p">.</span><span class="n">close</span>
+</span></span></code></pre></div><p>The first couple of lines creates a simple integer array representing
+our simulations indicated above. Then, we allocate an array `results`
+that will store the result (or status) of the task to be executed
+concurrently. The main thread spawns off the threads and stores a
+`FlowVar` inside `results` and continues executing.</p>
+<p>Then, we open a file, and scan for a result to be completed. If it is,
+we block the executing of the thread, and write the result to disk. The
+`^` (hat operator) ensures that the `FlowVar` results are ready (not
+nil). The conversion from the `FlowVarBase` to the type is similar to
+a void conversion in c or c++. It is currently and implementation detail
+that is not good programming practice. I wish this was implemented
+differently.</p>
+<p>We execute the code by</p>
+<pre><code>nim c -r --threads:on -d:release concurrent.nim
+</code></pre>
+<p>and open up the text we can see that the threads returned are not
+(necessarily) in linear order. For example for me the file looks like:</p>
+<pre><code>0
+1
+2
+3
+...
+22
+9976
+...
+32
+9965
+</code></pre>
+<p>The order of this sequence can differ.</p>
+<h1 id="conclusions">Conclusions</h1>
+<p>Concurrent programming can drastically speed up your code. Using
+threadas in languages other than Nim has the advantage of doing more
+advanced things than is possible in higher language interfaces to
+concurrent program as present in (for example Python). Nim has some
+experimental features that can be leveraged to drastically improve the
+runtime of your code. In the future I will do some work on implementing
+parallel code on the GPU.</p>
+ 
+
+
+    </div>
+
+    
+
+
+
+
+
+<div class="article-tags">
+  
+  <a class="badge badge-light" href="/tag/concurrent-programming/">Concurrent programming</a>
+  
+</div>
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Intro%20to%20concurrent%20computing%20%28in%20Nim%29&amp;body=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fconcurrent_nim%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fconcurrent_nim%2F&amp;title=Intro&#43;to&#43;concurrent&#43;computing&#43;%28in&#43;Nim%29" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://thefriendlyghost.nl/"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q75_lanczos_center.jpg" alt="Casper van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://thefriendlyghost.nl/">Casper van Elteren</a></h5>
+      <h6 class="card-subtitle">Computational scientist | Data scientist | Tinkerer</h6>
+      <p class="card-text">I am a computational scientist interested in data analysis, visualization and software engineering.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/cv" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.938a3a7554cd9f6602290411f64d2617.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.2945731fa88332cb0ec33cf47d29879f.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

@@ -1,0 +1,1420 @@
+<!DOCTYPE html>
+<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
+<!-- Last Published: September 11, 2024 --><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.c39391f95677ad80cbdeec5f85c81a73.css" />
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Casper van Elteren" />
+
+
+
+
+
+  
+
+<meta name="description" content="Fixing some annoyances on my website" />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://thefriendlyghost.nl/post/customizing-wowchemy/" />
+<link rel="canonical" href="https://thefriendlyghost.nl/post/customizing-wowchemy/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#efebda" />
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary" />
+
+  <meta property="twitter:site" content="@wowchemy" />
+  <meta property="twitter:creator" content="@wowchemy" />
+<meta property="twitter:image" content="https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" />
+<meta property="og:site_name" content="Casper van Elteren" />
+<meta property="og:url" content="https://thefriendlyghost.nl/post/customizing-wowchemy/" />
+<meta property="og:title" content="Customizing Wowchemy | Casper van Elteren" />
+<meta property="og:description" content="Fixing some annoyances on my website" /><meta property="og:image" content="https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2023-05-19T16:34:44&#43;02:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2023-05-19T16:34:44&#43;02:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://thefriendlyghost.nl/post/customizing-wowchemy/"
+  },
+  "headline": "Customizing Wowchemy",
+  
+  "datePublished": "2023-05-19T16:34:44+02:00",
+  "dateModified": "2023-05-19T16:34:44+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Casper van Elteren"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Fixing some annoyances on my website"
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Customizing Wowchemy | Casper van Elteren</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="2bb97dcb192aaa7ddf2c9c87124341f5" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Customizing Wowchemy</h1>
+
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    May 19, 2023
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    5 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+  <span class="middot-divider"></span>
+  <span class="article-categories">
+    <i class="fas fa-folder mr-1"></i><a href="/category/wowchemy/">Wowchemy</a></span>
+  
+
+</div>
+
+    
+
+
+
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li><a href="#org488dae5">Site 2.0</a>
+<ol>
+<li><a href="#org822527b">Goals</a></li>
+</ol>
+</li>
+<li><a href="#org58bd05a">Customizing a block</a></li>
+<li><a href="#orga0b7b60">Concluding statements</a></li>
+</ol>
+<p>Having a web-pressence is excellent for you to create a portfolio, for people to
+get in contact with your, or share some randoms thoughts on your favorite topic.
+Years ago I was on the journey to create a webpage, but was quickly sucked into
+the endless possibilities of web design. Should I go for Vue.js, REACT, or maybe
+a different web programming language such as svelte or supersets of javascript
+such as typescipt. Possibilities are endless, but for those starting out it is a
+daunting undertaking.</p>
+<p>Enter website generators that take away the initial pain of designing layouts
+for websites. These generators provide a batteries included approach to the web,
+offering you a landing page with some optional widgets that gets you started on
+creating a personalized corner of the web. I too started out in this manner.
+Years ago, I wanted a web page that would help reflect my academic endeavors.
+The portfolio would need to consist of talks, links to slides and or papers.
+Hugo academic  was the generator I used for web design. For
+years Hugo academic work perfectly well. However, as time passed my page began
+to feel stale and I wanted to display something more exciting on my page.
+Websites become more capable of running full fledged apps and more and more
+standalone software was pushed to have a web component. I felt like I was left
+behind. You see, using a generator kicks off the process of getting a website.
+However, it did not gave me insights in <em>how</em> the website was generated. I still
+felt like I was stuck at square one. As such I slowly began to interface with
+the code that was generated. I started first with customization and later on
+created a site navigator with networks in javascript. I was starting to web
+design!</p>
+<p>All things changed, however, when Hugo Academic was re-branded to Wowchemy. The
+change in name was reflected with a change in design. Every now and again when I
+wanted to write a new post, my website would be faced with upgrading issues.
+Especially since my code base originated from Hugo Academic. My need for
+customization grew and grew, but my frustration with the process of wowchemy did
+too. I am currently faced with a dilemma; I either decide to leave the framework
+behind, and create something from scratch <em>or</em> I figure out how to effectively
+interface with wowchemy such that I can work with it more pleasently.</p>
+<p><a id="org488dae5"></a></p>
+<h1 id="site-20">Site 2.0</h1>
+<p>Enter site 2.0; on the surface I does not look any different from my old website
+except some rounded corners here and there. Under the hood, however, I am able
+to more deeply change the feel of the webpages.</p>
+<p><a id="org822527b"></a></p>
+<h2 id="goals">Goals</h2>
+<p>First, I wanted to change the look and feel of some widgets on the web page.
+Wowchemy calls these nowadays “blocks”. The process of changing these pages is a
+bit ill-documented so I am here to outline what my current understanding is of
+how wowchemy blocks can be modified to your hearts desire. I started out by just
+plain googling and found a post by A.J. Campell which was greatly helpful and I
+copied his landing design (<a href="https://www.adam-campbell.com/post/wowchemy-customisations/" target="_blank" rel="noopener">here</a>). But let’s first decide
+on some goals.</p>
+<ol>
+<li>I want to understand <em>how</em> I can modify the look and feel of my website</li>
+<li>I want to be able to control and extend the look and feel of my website</li>
+</ol>
+<p>Note 2 is implied by 1 but is not necessary a consequence of 1.</p>
+<p><a id="org58bd05a"></a></p>
+<h1 id="customizing-a-block">Customizing a block</h1>
+<p>A web page consists of different elements that can be blocked by `divs`.
+Wowchemy organizes a webpage with widgets called blocks. The blocks are
+pre-defined views of content such as a portfolio, landing page, how posts are
+viewed (you get the drift). To customize a block we need to create a new
+directory from the root folder of our site as</p>
+<pre><code>mkdir -p layouts/partials/blocks/v1
+</code></pre>
+<p>I don’t know why they called it v1, but it implies that they are going to change
+this in the future again (and I will probably write a post about it again). Now
+the reasoning is as follows, when you build your site, wowchemy pulls default
+templates from repos and puts them in the public folder which constitutes your
+website. If a local path if present, the local edit will take precedence over
+the default template. You will override the template. In past iterations of
+wowchemy this process was under `./layouts/partials/widgets/`, and the structure
+of the go code inside these folders was also different. At the time over writing
+for version v5.7, the blocks structure is what should be aimed for. One can take
+the
+<a href="https://github.com/wowchemy/wowchemy-hugo-themes/tree/main/modules/wowchemy/layouts/partials/blocks" target="_blank" rel="noopener">default
+templates</a>, and edit the html files to change the look and feel of the
+website, and one can also create new blocks to extend your website: mission accomplished.</p>
+<p><a id="orga0b7b60"></a></p>
+<h1 id="concluding-statements">Concluding statements</h1>
+<p>This is a pretty short post with a seemingly simple statement. However, from the
+user perspective it was a little tricky figuring this out. My website was
+working before with edits using and older version of wowchemy. Every X updates
+it seems like the updates break things that need not have fixing. It would be
+nice if their documentation is edited to walk somebody through building as
+simple block from scratch. I am not too familiar with the go environment and
+therefore reading statements such as `{{ .page.Params.Author }}` intermixed with
+traditional HTML was a bit confusing in how these magic lines were interfacing
+with the website (a veteran in GO is probably laughing hysterically right now).
+This post is more written for future me;</p>
+<ul>
+<li>In the future take your time to read your error statements</li>
+<li>Take care of the low hanging fruit first, before tackling the more difficult problem</li>
+<li>Always use simple test files to test hypotheses why something is not working.</li>
+</ul>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Customizing%20Wowchemy&amp;body=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fcustomizing-wowchemy%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fcustomizing-wowchemy%2F&amp;title=Customizing&#43;Wowchemy" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://thefriendlyghost.nl/"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q75_lanczos_center.jpg" alt="Casper van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://thefriendlyghost.nl/">Casper van Elteren</a></h5>
+      <h6 class="card-subtitle">Computational scientist | Data scientist | Tinkerer</h6>
+      <p class="card-text">I am a computational scientist interested in data analysis, visualization and software engineering.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/cv" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.938a3a7554cd9f6602290411f64d2617.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.2945731fa88332cb0ec33cf47d29879f.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>

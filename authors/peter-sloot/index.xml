@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Peter Sloot | Casper van Elteren</title>
+    <link>https://thefriendlyghost.nl/authors/peter-sloot/</link>
+      <atom:link href="https://thefriendlyghost.nl/authors/peter-sloot/index.xml" rel="self" type="application/rss+xml" />
+    <description>Peter Sloot</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language><lastBuildDate>Fri, 29 Jul 2022 16:00:36 +0200</lastBuildDate>
+    <item>
+      <title>Cascades towards noise-induced transitions on networks revealed using information flows</title>
+      <link>https://thefriendlyghost.nl/publication/metastability2022/</link>
+      <pubDate>Fri, 29 Jul 2022 16:00:36 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/publication/metastability2022/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>The dynamic importance of nodes is poorly predicted by static topological features</title>
+      <link>https://thefriendlyghost.nl/publication/dynamic_importance2019/</link>
+      <pubDate>Sun, 07 Apr 2019 00:00:00 +0000</pubDate>
+      <guid>https://thefriendlyghost.nl/publication/dynamic_importance2019/</guid>
+      <description></description>
+    </item>
+    
+  </channel>
+</rss>

@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>data analysis | Casper van Elteren</title>
+    <link>https://thefriendlyghost.nl/tag/data-analysis/</link>
+      <atom:link href="https://thefriendlyghost.nl/tag/data-analysis/index.xml" rel="self" type="application/rss+xml" />
+    <description>data analysis</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Thu, 15 Apr 2021 19:38:11 +0200</lastBuildDate>
+    <image>
+      <url>https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>data analysis</title>
+      <link>https://thefriendlyghost.nl/tag/data-analysis/</link>
+    </image>
+    
+    <item>
+      <title>Covid dashboard</title>
+      <link>https://thefriendlyghost.nl/project/covid_dashboard/</link>
+      <pubDate>Thu, 15 Apr 2021 19:38:11 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/project/covid_dashboard/</guid>
+      <description>&lt;video playsinline autoplay controls mute loop&gt;
+ &lt;source src = &#34;covid_anim.webm&#34; type = &#34;video/webm&#34;&gt;
+ &lt;source src = &#34;test.mp4&#34; type = &#34;video/mp4&#34;&gt;
+&lt;/video&gt;
+&lt;p&gt;Covid &amp;ldquo;dashboard&amp;rdquo; I made over the winter. Data is sourced from the &lt;a href=&#34;https://coronadashboard.rijksoverheid.nl/&#34; target=&#34;_blank&#34; rel=&#34;noopener&#34;&gt;Dutch national corona dashboard&lt;/a&gt;.&lt;/p&gt;
+&lt;p&gt;In order to reflect the spatio-temporal effects of corona, the data consists of three categories per municipality. Namely, it consists of total cases, number of people hospitalized, and the total number of deceased due to corona at per publication date. I designed a metric which I dubbed &amp;ldquo;relative severity&amp;rdquo; which had the goal to:&lt;/p&gt;
+&lt;ol&gt;
+&lt;li&gt;Reflect the relative contribution to the source vectors at each time point;&lt;/li&gt;
+&lt;li&gt;Include a memory effect of the contribution over time;&lt;/li&gt;
+&lt;li&gt;Take into account the number of people living in that municipality.&lt;/li&gt;
+&lt;/ol&gt;
+&lt;p&gt;For municipality $j$ the  relative severity for source $s_i \in \{\textrm{total reported, hospitalized, deceased}\}$ at time $t$  was computed as&lt;/p&gt;
+&lt;p&gt;$$ R_j(s_{ij}^t) = \frac{1}{Z_j \sum_k R_k(s_i^t)}\sum_{\tau =0}^t s_{ij}^{\tau},$$&lt;/p&gt;
+&lt;p&gt;were $Z_j$ is the number of people living in municipality $j$, and $s_{ij}$ is one of the sources (total cases, hospitalized, deceased) in municipality $j$.
+The percentile of $R_j(s_i^t)$ at each time $t$ is then computed and plotted above.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

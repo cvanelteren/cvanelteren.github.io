@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Recent &amp; Upcoming Talks | Casper van Elteren</title>
+    <link>https://thefriendlyghost.nl/event/</link>
+      <atom:link href="https://thefriendlyghost.nl/event/index.xml" rel="self" type="application/rss+xml" />
+    <description>Recent &amp; Upcoming Talks</description>
+    <generator>Wowchemy (https://wowchemy.com)</generator><language>en-us</language><lastBuildDate>Mon, 09 Sep 2024 14:56:17 +0200</lastBuildDate>
+    <image>
+      <url>https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_512x512_fill_lanczos_center_3.png</url>
+      <title>Recent &amp; Upcoming Talks</title>
+      <link>https://thefriendlyghost.nl/event/</link>
+    </image>
+    
+    <item>
+      <title>Introduction to Computational Science</title>
+      <link>https://thefriendlyghost.nl/talk/introduction-to-computational-science/</link>
+      <pubDate>Mon, 09 Sep 2024 14:56:17 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/introduction-to-computational-science/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How To Flatten The Curve? Modeling Complex Adaptive Systems</title>
+      <link>https://thefriendlyghost.nl/talk/how-to-flatten-the-curve-modeling-complex-adaptive-systems/</link>
+      <pubDate>Fri, 30 Aug 2024 13:30:16 +0330</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/how-to-flatten-the-curve-modeling-complex-adaptive-systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Three Myths in Complexity Science and How to Resolve Them</title>
+      <link>https://thefriendlyghost.nl/talk/three-myths-in-complexity-science-and-how-to-resolve-them/</link>
+      <pubDate>Tue, 02 Jul 2024 09:39:01 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/three-myths-in-complexity-science-and-how-to-resolve-them/</guid>
+      <description>&lt;p&gt;From  bird  flocking  to neural  dynamics,  complex  systems
+generate  fascinating  structures and  correlations.  Often,
+seemingly  simple   dynamics  lead  to   intricate  emergent
+properties. Despite their  visceral appeal, defining complex
+systems  lacks universal  agreement. In  this paper,  I will
+debunk three prevalent myths  in complex systems and propose
+resolutions.   This   work   contributes   by   offering   a
+contemporary interpretation  of complex  systems, presenting
+essential definitions that benefit complexity scientists.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Agent-Based Modeling in Criminal Contexts</title>
+      <link>https://thefriendlyghost.nl/talk/agent-based-modeling-in-criminal-contexts/</link>
+      <pubDate>Wed, 05 Jun 2024 14:22:44 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/agent-based-modeling-in-criminal-contexts/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>How to intervene? Criminal organizations exhibit hysteresis, resilience and robustness by balancing security and efficiency</title>
+      <link>https://thefriendlyghost.nl/talk/how-to-intervene-criminal-organizations-exhibit-hysteresis-resilience-and-robustness-by-balancing-security-and-efficiency/</link>
+      <pubDate>Sat, 09 Dec 2023 13:00:00 +0100</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/how-to-intervene-criminal-organizations-exhibit-hysteresis-resilience-and-robustness-by-balancing-security-and-efficiency/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Walking the Eislek Trail</title>
+      <link>https://thefriendlyghost.nl/talk/walking-the-eislek-trail/</link>
+      <pubDate>Mon, 01 May 2023 09:00:00 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/walking-the-eislek-trail/</guid>
+      <description>&lt;p&gt;A friend and I walked over 100 KM on arguably one of the prettiest walked so far. We walked the trail in reverse starting in La Roche-en-Ardenne (Belgium) moving towards Kautenbach Luxembourg in about 6 days.&lt;/p&gt;
+&lt;iframe src=&#34;https://www.komoot.com/tour/1113965141/embed?profile=1&#34; width=&#34;100%&#34; height=&#34;700&#34; frameborder=&#34;0&#34; scrolling=&#34;no&#34;&gt;&lt;/iframe&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>An introduction to complex systems</title>
+      <link>https://thefriendlyghost.nl/talk/an-introduction-to-complex-systems/</link>
+      <pubDate>Wed, 15 Jun 2022 17:00:00 +0200</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/an-introduction-to-complex-systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Information flows in complex systems</title>
+      <link>https://thefriendlyghost.nl/talk/information-flows-in-complex-systems/</link>
+      <pubDate>Fri, 11 Feb 2022 15:30:00 +0100</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/information-flows-in-complex-systems/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Network geometry of social networks</title>
+      <link>https://thefriendlyghost.nl/talk/network-geometry-of-social-networks/</link>
+      <pubDate>Fri, 28 Jan 2022 10:00:00 +0100</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/network-geometry-of-social-networks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>Through the looking glass</title>
+      <link>https://thefriendlyghost.nl/talk/through-the-looking-glass/</link>
+      <pubDate>Thu, 10 Jun 2021 11:00:00 +0000</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/through-the-looking-glass/</guid>
+      <description>&lt;p&gt;Understanding dynamical systems  is a fundamental problem for  the 21st century.
+Despite the &lt;em&gt;prima facie&lt;/em&gt; differences  and purposes of many real-world networks,
+previous research shows several universal characteristics in networks properties
+such as the small-world phenomenon, fat-tail degree and feedback loops. This has
+lead to  the common but  often implicit assumption  that the connectedness  of a
+node in  the network is proportional  to its dynamic importance.  For example in
+epidemic  research, high  degree nodes  or &amp;ldquo;super-spreaders&amp;rdquo;  are associated  to
+dominant  epidemic  risk and  therefore  deserve  special attention.  Yet  prior
+research shows  that the shared  universality in network characteristics  is not
+shared in the dynamic or functional properties of many real-world systems.&lt;/p&gt;
+&lt;p&gt;In  this  talk I  will  explore  the  relation  between local  interactions  and
+macroscopic properties of  a system through the lens of  statistical physics and
+information theory. In particular, I will  show novel methods on determining the
+so-called driver node  in complex systems, and how tipping  point can be studied
+from an information theoretical perspective.&lt;/p&gt;
+</description>
+    </item>
+    
+    <item>
+      <title>Simulation based science lecture talks</title>
+      <link>https://thefriendlyghost.nl/talk/simulation-based-science-lecture-talks/</link>
+      <pubDate>Fri, 12 Mar 2021 16:00:00 +0100</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/simulation-based-science-lecture-talks/</guid>
+      <description></description>
+    </item>
+    
+    <item>
+      <title>What node is most important?</title>
+      <link>https://thefriendlyghost.nl/talk/what-node-is-most-important/</link>
+      <pubDate>Tue, 02 Apr 2019 16:45:00 +0000</pubDate>
+      <guid>https://thefriendlyghost.nl/talk/what-node-is-most-important/</guid>
+      <description>&lt;p&gt;I was a guest speaker as part of the course Modeling and Data Analysis in Complex Networks.
+Additionally, the same slides were shown at the simulation based science group at the institute
+for advanced studies (IAS) at the university of Amsterdam.
+The talk concerned my research on the identification of driver-nodes in complex dynamical systems.&lt;/p&gt;
+</description>
+    </item>
+    
+  </channel>
+</rss>

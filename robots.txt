@@ -1,0 +1,3 @@
+User-agent: *
+
+Sitemap: https://thefriendlyghost.nl/sitemap.xml

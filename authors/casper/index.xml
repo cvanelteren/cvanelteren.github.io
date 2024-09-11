@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes" ?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Casper van Elteren</title>
+    <link>https://thefriendlyghost.nl/authors/casper/</link>
+      <atom:link href="https://thefriendlyghost.nl/authors/casper/index.xml" rel="self" type="application/rss+xml" />
+    <description>Casper van Elteren</description>
+    <generator>Hugo Blox Builder (https://hugoblox.com)</generator><language>en-us</language>
+  </channel>
+</rss>

@@ -1,0 +1,2633 @@
+<!DOCTYPE html>
+<!-- This site was created with Wowchemy. https://www.wowchemy.com -->
+<!-- Last Published: September 11, 2024 --><html lang="en-us" >
+
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+  
+  
+  
+    <meta name="generator" content="Wowchemy 5.7.0 for Hugo" />
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+  
+  
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  
+
+  
+  
+  
+    
+      
+      <link rel="preload" as="style" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap">
+      <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700&family=Roboto+Mono&family=Roboto:wght@400;700&display=swap" media="print" onload="this.media='all'">
+    
+  
+
+  
+  
+
+  
+  
+
+  
+
+  <link rel="stylesheet" href="/css/vendor-bundle.min.047268c6dd09ad74ba54a0ba71837064.css" media="print" onload="this.media='all'">
+
+  
+  
+  
+    
+    
+      <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/academicons@1.9.2/css/academicons.min.css" integrity="sha512-KlJCpRsLf+KKu2VQa5vmRuClRFjxc5lXO03ixZt82HZUk41+1I0bD8KBSA0fY290ayMfWYI9udIqeOWSu1/uZg==" crossorigin="anonymous" media="print" onload="this.media='all'">
+    
+
+    
+    
+    
+    
+      
+      
+    
+    
+    
+
+    
+    
+    
+
+    
+
+    
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+        
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+      
+      
+
+      
+      
+
+      
+    
+  
+
+  
+  
+  
+  
+  
+  
+  <link rel="stylesheet" href="/css/wowchemy.c39391f95677ad80cbdeec5f85c81a73.css" />
+
+  
+  
+  
+    <link rel="stylesheet" href="/css/wowchemy-blocks.min.9c75b36bbbcfc822506293a1489bf6fc.css" />
+  
+
+  
+  
+  
+  
+  
+  
+  
+    
+    
+    <link rel="stylesheet" href="/css/libs/chroma/github-light.min.css" title="hl-light" media="print" onload="this.media='all'" >
+    <link rel="stylesheet" href="/css/libs/chroma/dracula.min.css" title="hl-dark" media="print" onload="this.media='all'" disabled>
+  
+
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+
+
+
+
+
+  <meta name="author" content="Casper van Elteren" />
+
+
+
+
+
+  
+
+<meta name="description" content="Designing and building a splitkeyboard from hardware to firmware!" />
+
+
+
+<link rel="alternate" hreflang="en-us" href="https://thefriendlyghost.nl/post/splitboard/" />
+<link rel="canonical" href="https://thefriendlyghost.nl/post/splitboard/" />
+
+
+
+  <link rel="manifest" href="/manifest.webmanifest" />
+
+
+
+<link rel="icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_32x32_fill_lanczos_center_3.png" />
+<link rel="apple-touch-icon" type="image/png" href="/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_180x180_fill_lanczos_center_3.png" />
+
+<meta name="theme-color" content="#efebda" />
+
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+<meta property="twitter:card" content="summary_large_image" />
+
+  <meta property="twitter:site" content="@wowchemy" />
+  <meta property="twitter:creator" content="@wowchemy" />
+<meta property="twitter:image" content="https://thefriendlyghost.nl/post/splitboard/featured.png" />
+<meta property="og:site_name" content="Casper van Elteren" />
+<meta property="og:url" content="https://thefriendlyghost.nl/post/splitboard/" />
+<meta property="og:title" content="Splitboard: the bluetooth (split) keyboard | Casper van Elteren" />
+<meta property="og:description" content="Designing and building a splitkeyboard from hardware to firmware!" /><meta property="og:image" content="https://thefriendlyghost.nl/post/splitboard/featured.png" /><meta property="og:locale" content="en-us" />
+
+  
+    <meta
+      property="article:published_time"
+      content="2021-07-04T21:23:54&#43;02:00"
+    />
+  
+  
+    <meta property="article:modified_time" content="2021-07-04T21:23:54&#43;02:00">
+  
+
+
+
+
+
+
+    
+
+
+
+
+
+
+  
+
+
+
+
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "BlogPosting",
+  "mainEntityOfPage": {
+    "@type": "WebPage",
+    "@id": "https://thefriendlyghost.nl/post/splitboard/"
+  },
+  "headline": "Splitboard: the bluetooth (split) keyboard",
+  
+  "image": [
+    "https://thefriendlyghost.nl/post/splitboard/featured.png"
+  ],
+  
+  "datePublished": "2021-07-04T21:23:54+02:00",
+  "dateModified": "2021-07-04T21:23:54+02:00",
+  
+  "author": {
+    "@type": "Person",
+    "name": "Casper van Elteren"
+  },
+  
+  "publisher": {
+    "@type": "Organization",
+    "name": "Casper van Elteren",
+    "logo": {
+      "@type": "ImageObject",
+      "url": "https://thefriendlyghost.nl/media/icon_hu14fe9cd784e8f78598c2a5496e7ffbbf_6207_192x192_fill_lanczos_center_3.png"
+    }
+  },
+  "description": "Designing and building a splitkeyboard from hardware to firmware!"
+}
+</script>
+
+  
+
+  
+
+
+
+
+  
+  
+  
+
+  
+  
+
+  
+
+
+  
+  <title>Splitboard: the bluetooth (split) keyboard | Casper van Elteren</title>
+
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+</head>
+
+
+<body id="top" data-spy="scroll" data-offset="70" data-target="#TableOfContents" class="page-wrapper   " data-wc-page-id="ba260f09495dbac5593863c2b24421af" >
+
+  
+  
+  
+  
+  
+  
+  
+  
+  
+  <script src="/js/wowchemy-init.min.fe8634e7d00f14d07fb33caf14cc8e55.js"></script>
+
+  
+
+
+<aside class="search-modal" id="search">
+  <div class="container">
+    <section class="search-header">
+
+      <div class="row no-gutters justify-content-between mb-3">
+        <div class="col-6">
+          <h1>Search</h1>
+        </div>
+        <div class="col-6 col-search-close">
+          <a class="js-search" href="#" aria-label="Close"><i class="fas fa-times-circle text-muted" aria-hidden="true"></i></a>
+        </div>
+      </div>
+
+      <div id="search-box">
+        
+        <input name="q" id="search-query" placeholder="Search..." autocapitalize="off"
+        autocomplete="off" autocorrect="off" spellcheck="false" type="search" class="form-control"
+        aria-label="Search...">
+        
+      </div>
+
+      
+      
+
+      
+
+    </section>
+    <section class="section-search-results">
+
+      <div id="search-hits">
+        
+      </div>
+
+    </section>
+  </div>
+</aside>
+
+
+
+  <div class="page-header header--fixed">
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+<header>
+  <nav class="navbar navbar-expand-lg navbar-light compensate-for-scrollbar" id="navbar-main">
+    <div class="container-xl">
+
+      
+      <div class="d-none d-lg-inline-flex">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      <button type="button" class="navbar-toggler" data-toggle="collapse"
+              data-target="#navbar-content" aria-controls="navbar-content" aria-expanded="false" aria-label="Toggle navigation">
+      <span><i class="fas fa-bars"></i></span>
+      </button>
+      
+
+      
+      <div class="navbar-brand-mobile-wrapper d-inline-flex d-lg-none">
+        <a class="navbar-brand" href="/">Casper van Elteren</a>
+      </div>
+      
+
+      
+      
+      <div class="navbar-collapse main-menu-item collapse justify-content-start" id="navbar-content">
+
+        
+        <ul class="navbar-nav d-md-inline-flex">
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#about"><span>Home</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#posts"><span>Posts</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#projects"><span>Projects</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#talks"><span>Talks</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#featured"><span>Publications</span></a>
+          </li>
+
+          
+          
+
+          
+
+          
+          
+          
+            
+          
+
+          
+
+          
+          
+          
+          
+
+          
+            
+              
+              
+            
+            
+              
+              
+              
+                
+              
+              
+            
+          
+
+          <li class="nav-item">
+            <a class="nav-link " href="/#contact"><span>Contact</span></a>
+          </li>
+
+          
+          
+
+        
+
+          
+        </ul>
+      </div>
+
+      <ul class="nav-icons navbar-nav flex-row ml-auto d-flex pl-md-2">
+
+        
+        
+          
+        
+          
+        
+
+        
+        
+        
+        <li class="nav-item">
+          <a class="nav-link js-search" href="#" aria-label="Search"><i class="fas fa-search" aria-hidden="true"></i></a>
+        </li>
+        
+
+        
+        
+        
+
+        
+        
+
+      </ul>
+
+    </div>
+  </nav>
+</header>
+
+
+  </div>
+
+  <div class="page-body">
+    
+    
+    
+
+    <article class="article">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  
+  
+  
+<div class="article-container pt-3">
+  <h1>Splitboard: the bluetooth (split) keyboard</h1>
+
+  
+  <p class="page-subtitle">Using ESP32</p>
+  
+
+  
+    
+
+
+<div class="article-metadata">
+
+  
+  
+
+  
+  <span class="article-date">
+    
+    
+      
+    
+    Jul 4, 2021
+  </span>
+  
+
+  
+
+  
+  <span class="middot-divider"></span>
+  <span class="article-reading-time">
+    27 min read
+  </span>
+  
+
+  
+  
+  
+  
+
+  
+  
+
+</div>
+
+    
+
+
+
+
+<div class="btn-links mb-3">
+  
+  
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+  
+  <a class="btn btn-outline-primary btn-page-header" href="/project/splitboard/">
+    Project
+  </a>
+  
+
+
+
+
+
+
+
+
+
+
+
+</div>
+
+
+  
+</div>
+
+
+
+  <div class="article-container">
+
+    <div class="article-style">
+      <!DOCTYPE html>
+<html>
+<head>
+  <title></title>
+</head>
+<body>
+   <p><em>TLDR: I wanted a wireless split keyboard, so I made one.
+This post outlines the process.</em></p>
+<p><img src="./figures/logo.svg" width = "100%"></img></p>
+<h1 id="table-of-contents">Table of Contents</h1>
+<ol>
+<li><a href="#orga56ed27">Introduction</a></li>
+<li><a href="#org07c9ff9">Outline</a></li>
+<li><a href="#org8341c49">ESP32</a></li>
+<li><a href="#org1f8f18e">Matrix scanning</a>
+<ol>
+<li><a href="#org3d9c27c">Ghosting</a></li>
+<li><a href="#orgb6c4bce">Key debouncing</a></li>
+<li><a href="#org1551f4d">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org80acce2">ESP-Now</a>
+<ol>
+<li><a href="#org5d2fa59">Mesh interface class</a></li>
+<li><a href="#org7b6376a">Changes</a></li>
+<li><a href="#org10d9a33">Replacing ESP now with BLE mesh</a></li>
+</ol>
+</li>
+<li><a href="#org5920043">Modifier keys</a>
+<ol>
+<li><a href="#orgaf157bd">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org4196787">Bluetooth</a>
+<ol>
+<li><a href="#orgef9da12">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org4affbc2">Keyboard layers</a>
+<ol>
+<li><a href="#org5c9dfaa">Changes</a></li>
+</ol>
+</li>
+<li><a href="#orgfe759ee">Rotary encoder</a>
+<ol>
+<li><a href="#orgccf6ee7">Taming the KY-040 with decoding</a></li>
+<li><a href="#org30de569">Changes</a></li>
+</ol>
+</li>
+<li><a href="#orgff0649f">LED driver: FastLED</a>
+<ol>
+<li><a href="#org894745e">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org19921c7">OLED Display</a>
+<ol>
+<li><a href="#orgf9d2835">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org1b1a44a">Deep sleep</a>
+<ol>
+<li><a href="#org28fc435">Changes</a></li>
+</ol>
+</li>
+<li><a href="#org6d70429">Battery control</a>
+<ol>
+<li><a href="#org1314ffd">Changes</a></li>
+<li><a href="#org899ac2c">Reference</a></li>
+</ol>
+</li>
+<li><a href="#orgbc724cc">PCB layout design</a>
+<ol>
+<li><a href="#orgf94a89d">Making the layout</a></li>
+<li><a href="#org5365539">Edge cut pcb</a></li>
+</ol>
+</li>
+<li><a href="#org7b992ab">Case design</a></li>
+<li><a href="#org37935b8">Specialized keys</a>
+<ol>
+<li><a href="#orgc6993cf">Layer taps</a></li>
+<li><a href="#org9fe2de3">One shot modifier keys</a></li>
+<li><a href="#orge641ca8">Leader key</a></li>
+</ol>
+</li>
+<li><a href="#org204445e">Replacing esp_now</a>
+<ol>
+<li><a href="#org79d4be3">BLE in a nutshell</a></li>
+<li><a href="#org0ad4064">Integration with BLE keyboard</a></li>
+<li><a href="#orga8c659e">Changes</a></li>
+</ol>
+</li>
+</ol>
+<p><a id="orga56ed27"></a></p>
+<h1 id="introduction">Introduction</h1>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-21 Mon&gt;</span></span>
+Mechanical keyboards  are somewhat  of a dated  concept that
+has  gathered some  speed in  more recent  years. Back  when
+computers were  first coming  out for the  public, keyboards
+had  mechanical connections  that would  allow a  current to
+activate a  switch. Then as  economics got wind,  somehow we
+got used  to membrane  keyboards; virtually every  office in
+the  world   has  these  membrane  keyboards.   Compared  to
+mechanical keyboards, membrane  keyboards feel more “mushy”.
+In contrast,  mechanical keyboards  may have  different feel
+based  on  the  springs  or  whether the  key  switch  has  a
+noticeable  “bump”.   They  can   be  clicky  or   not;  the
+possibility are wild now.</p>
+<p>A  few  years  ago  I started  following  the  subreddit  on
+mechanical keyboards.  Back then,  the community  had little
+options and cherry still had patents on the switches. Cherry
+MX keys were virtually found in every commercial keyboard on
+the market. Now,  the landscape has changed quite  a bit and
+more and more different types of switches are available.</p>
+<p>Why do  I prefer mechanical keyboards?  Mechanical keyboards
+give a “joy” to typing.  Membrane keyboards are fine to type
+on, but  they aren’t fun.  Generally my fingers  get “tired”
+after typing  on membrane keyboards  as the keys feel  a bit
+mushy, i.e.  you get no relief  when pushing down a  key and
+the key press does not feel crisp.</p>
+<p>After  following  / r / mechanicalkeyboards   for  a  while,  I
+decided to  <em>build</em> my  own keyboard. Within  the community,
+there is a wide variety  of switches and shapes of keyboards
+available. The one I wanted, an orthonormal keyboard, wasn’t
+commercially available. Plus I liked the idea of building my
+own keyboard.  In my work,  the keyboard is my  primary tool
+and why not  key a custom version of it  for myself. I ended
+up  building 2  handwired  versions of  65  percent with  85
+switches  in  a  grid  layout.   In  addition,  I  modded  a
+MagSafe-inspired cable to it which allowed it to be nice and
+portable. After  every build I told  myself : “ This  is the
+last one I’ll build”.</p>
+<p>Enter  this blog,  where I  again tell  myself “this  is the
+last  one I  build!”. What  changed? Since  I learned  about
+split-style keyboard,  I always wanted one.  The keyboards I
+had  made   so  far  weren’t.  Split   would  be  completely
+ergonomical,  but  unfortunately,  none (that  I  know  of)
+exists that are both (a) wireless and (b) split. As always
+I aimed to high and wanted to emulate the many features that
+QMK implements. Most importantly, I  wanted to get back into
+writing more low  level languages like c++, and  I take this
+project as  a nice  opportunity to get  into c++  again, and
+work with micro-controllers.</p>
+<p>This post  will serve as  my log for building  the keyboard.
+The post will updated as I work on it.</p>
+<p>Core feature targets</p>
+<ul>
+<li>Split <span class="underline">wireless</span> keyboard</li>
+<li>Hot swappable key sockets</li>
+<li>Portable, not a full keyboard</li>
+<li>Battery control</li>
+<li>OLED display</li>
+<li>Rotary encoders</li>
+</ul>
+<p><a id="org07c9ff9"></a></p>
+<h1 id="outline">Outline</h1>
+<p>The keyboard is split; it has two halves. The right and left
+half will have  most of the same  “base” functionality. Most
+importantly, each  half needs to  scan the matrix  to obtain
+which keys are being pressed. One of the halves will act as a
+server, the other will act as a client. The server will need
+the following capabilities</p>
+<p><strong>Server abilities</strong></p>
+<ul>
+<li>Read matrix</li>
+<li>Setup a bluetooth connection
+<ul>
+<li>HID Device</li>
+<li>Mouse emulation</li>
+</ul>
+</li>
+<li>Setup connection with client
+<ul>
+<li>Merge keys pressed and send to bluetooth controller</li>
+</ul>
+</li>
+<li>Control LEDs on both client and server</li>
+</ul>
+<p><strong>Client abilities</strong></p>
+<ul>
+<li>Read matrix</li>
+<li>Find server and send pressed keys to server</li>
+</ul>
+<p>Due to the heavier load of  the server, I prefer to make the
+role of  who is server and  who is client dynamic.  That is,
+with some heuristic (for example  deep sleep), the roles may
+switch to prolong batter life of both units.</p>
+<p>To give a course overview consider the following picture:</p>
+<p>
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/overview.png" alt="img" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p><a id="org8341c49"></a></p>
+<h1 id="esp32">ESP32</h1>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt;</span></span>-
+I  opted for  a micro-controller  as this  would allow  me to
+prototype without  worrying about my electronic  skills. The
+controller needed  to have  battery control,  bluetooth, and
+preferable an  energy efficient screen;  I ended up  with an
+esp32.</p>
+<p>The esp32 is a hybrid chip that has both Wi-Fi and bluetooth
+capabilities. The esp32 consists  of different versions that
+varies in (mainly) in the number of pins, battery connector,
+and  or screen.  The version  I ended  with (LORA-V2)  had a
+battery connector and a tiny OLED screen.</p>
+<p>The  ecosystem  of  ESP32   is  well-developed  albeit  less
+convenient  than  its  arduino  counterparts.  Luckily,  the
+opensource community has taken it upon themselves to provide
+lots  of  arduino bindings  to  the  libraries by  espressif
+(manufacturer of esp32).</p>
+<p>Especially important  (as it turned  out later) is  that the
+esp32 has the capabilities of using both Wi-Fi and bluetooth
+low  energy simultanaously.  In  addition, through  ESP-NOW,
+different  eps32  modules can  form  a  mesh, which  I  will
+harness to do server-client communication.</p>
+<p>
+<figure  id="figure-pin-out-esp32-lora-v2">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/pinout.jpg" alt="img" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Pin-out ESP32 LORA-V2
+    </figcaption></figure>
+</p>
+<p>For prototype 1, the following pinout was used</p>
+<table border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-right" />
+<col  class="org-left" />
+</colgroup>
+<tbody>
+<tr>
+<td class="org-right">pin</td>
+<td class="org-left">use</td>
+</tr>
+<tr>
+<td class="org-right">13</td>
+<td class="org-left">row 2</td>
+</tr>
+<tr>
+<td class="org-right">12</td>
+<td class="org-left">row 3</td>
+</tr>
+<tr>
+<td class="org-right">14</td>
+<td class="org-left">row 4</td>
+</tr>
+<tr>
+<td class="org-right">27</td>
+<td class="org-left">row 5</td>
+</tr>
+<tr>
+<td class="org-right">26</td>
+<td class="org-left">column 6</td>
+</tr>
+<tr>
+<td class="org-right">25</td>
+<td class="org-left">led input</td>
+</tr>
+<tr>
+<td class="org-right">0</td>
+<td class="org-left">row 1</td>
+</tr>
+<tr>
+<td class="org-right">18</td>
+<td class="org-left">column 1</td>
+</tr>
+<tr>
+<td class="org-right">23</td>
+<td class="org-left">column 2</td>
+</tr>
+<tr>
+<td class="org-right">19</td>
+<td class="org-left">column 3</td>
+</tr>
+<tr>
+<td class="org-right">22</td>
+<td class="org-left">column 4</td>
+</tr>
+<tr>
+<td class="org-right">21</td>
+<td class="org-left">column 5</td>
+</tr>
+<tr>
+<td class="org-right">17</td>
+<td class="org-left">rotary encoder A</td>
+</tr>
+<tr>
+<td class="org-right">5</td>
+<td class="org-left">rotary encoder B</td>
+</tr>
+</tbody>
+</table>
+<p>Pin 4 could still be used as a modulated pin
+for measuring the battery.</p>
+<p><a id="org1f8f18e"></a></p>
+<h1 id="matrix-scanning">Matrix scanning</h1>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-12 Mon&gt; </span></span> A keyboard  matrix scanning circuit is used
+to enhance the  number of keys, while keeping  the number of
+pins low.  A micro-controller uses general  pin input/output
+(GPIO) to  register currents.  If a  singular key  switch is
+wired to  a single pin,  96 pins would  be needed for  a 104
+sized keyboard (full-size). This would be unpractical.</p>
+<p>As an alternative  one could apply matrix  scanning. In this
+method,  the keys  are wired  as  a grid  where each  column
+connects to each  row effectively forming a  “switch”. For a
+total for 100 keys, one would need 10x10 grid. The grid acts
+as a force multiplier for the number of switches. Instead of
+needing 100  separate keys,  we merely need  10 rows  and 10
+columns (20 pins) to wire our 100 switch keyboard.</p>
+<p>The  matrix is  repeatedly  scanned to  determine  if a  row
+column form  an open circuit.  That is,  if a key  switch is
+pressed down, current  can flow between the  row and column.
+The scanning occurs at a high scan rate, making it seemingly
+instantaneous.</p>
+<p><a id="org3d9c27c"></a></p>
+<h2 id="ghosting">Ghosting</h2>
+<p>Matrix  scanning  forms  an excellent  idea  to  efficiently
+represent our electronic  switches. However, merely scanning
+does  not  correctly records  all  key  presses. Under  some
+conditions, a matrix  can record ghost keys,  i.e. keys that
+are  registered  but not  pressed.  This  process is  called
+ghosting.</p>
+<p>Ghosting  occurs  when  current   can  freely  flow  between
+separate  rows or  columns due  to another  row/column being
+open.  For example  consider a  simple two  row, two  column
+keyboard. This board can support 4 keys. When two keys along
+the diagonal  are pressed,  we register  4 keys(!).  This is
+obviously wrong and  needs to be corrected.  The most common
+approach is to put a diode  right after the switch either on
+the columns or rows,  which prevents current from traversing
+and causing ghosting.</p>
+<p>
+<figure  id="figure-ghosting-example-ghosting-occurs-when-current-can-flow-freely-across-columns-and-rows-left-one-key-is-pressed-down-bottom-left-middle-a-key-across-from-the-first-is-activated-which-causes-ghosting-right-current-flows-from-the-second-row-first-column-to-the-second-row-second-column-etc">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/ghosting.png" alt="img" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      Ghosting example. Ghosting occurs when current can flow freely across columns and rows. (Left) one key is pressed down bottom left. (Middle) A key across from the first is activated which causes ghosting (right); current flows from the second row, first column to the second row, second column etc.
+    </figcaption></figure>
+</p>
+<p><a id="orgb6c4bce"></a></p>
+<h2 id="key-debouncing">Key debouncing</h2>
+<p>Key  debounce is  a mechanism  to filter  out erroneous  key
+activity.  When  two metal  plates  come  into contact,  the
+signal does not form a clean  square wave. In order to clean
+up  this  signal, key  debouncing  is  used to  reflect  the
+“press”  of  key switch.  Initially  I  used a  simple  time
+filter, i.e.  ensuring that  the keyswitch was  pressed down
+between  x ms.  This ended  up being  a bit  noisy with  the
+switches I  was using; I  ended up writing a  digital filter
+that worked fairly well.</p>
+<p><a id="org1551f4d"></a></p>
+<h2 id="changes">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Added matrix class
+<ul>
+<li><input checked="" disabled="" type="checkbox"> added matrix scan</li>
+<li><input checked="" disabled="" type="checkbox"> added key debounce</li>
+<li><input checked="" disabled="" type="checkbox"> added (whole) matrix debounce
+<ul>
+<li><input checked="" disabled="" type="checkbox"> filters out erroneous key presses</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a id="org80acce2"></a></p>
+<h1 id="esp-now">ESP-Now</h1>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2021-06-19 Sat&gt;</span></span>
+The two  halves need to  communicate to each other.  There is
+only one half that is connected through bluetooth to another
+device. We call  this the server, and the  other the client.
+Keys pressed on  the client needs to be  communicated to the
+server  which   processes  the  keys,  and   sends  it  over
+bluetooth. Luckily,  ESP-now offers a mesh  interface we can
+utilize for  this purpose.  This is easier  to setup  than a
+bluetooth mesh interface and should be relatively secure for
+foreign attackers. From the website we read:</p>
+<blockquote>
+<p>ESP-NOW is yet another protocol developed by Espressif, which enables multiple devices to communicate with one another without using Wi-Fi. The protocol is similar to the low-power 2.4GHz wireless connectivity that is often deployed in wireless mouses. So, the pairing between devices is needed prior to their communication. After the pairing is done, the connection is secure and peer-to-peer, with no handshake being required.</p>
+</blockquote>
+<p><a id="org5d2fa59"></a></p>
+<h2 id="mesh-interface-class">Mesh interface class</h2>
+<p>The mesh class is responsible for:</p>
+<ul>
+<li>Setup / deinit the ESP-now connection</li>
+<li>Holding a buffer that is sent over the ESP-now connection.
+The buffer holds information that needs to be communicated
+between each  halves.</li>
+</ul>
+<p>At  the moment  of writing,  the mesh  class holds  a static
+buffer   which  holds   `keyswitch_t`.  These   are  structs
+containing when the last time  the pins were read as active.
+In addition, it contains information  on the source and sinc
+pins, and column and row indices. These last two are used to
+index into the final keymap on the server side. This way, no
+actual key information is send, but the server reads the key
+from the  col and row,  then they are combined.  This solves
+the issue of sending ascii shifted codes or media keys.</p>
+<p><a id="org7b6376a"></a></p>
+<h2 id="changes-1">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Implemented mesh interface class</li>
+<li><input checked="" disabled="" type="checkbox"> Added server capabilities to join the keys from both half and communicate through bluetooth</li>
+</ul>
+<p><a id="org10d9a33"></a></p>
+<h2 id="replacing-esp-now-with-ble-mesh">Replacing ESP now with BLE mesh</h2>
+<p>The current consumption  of esp now is too  high to reliable
+use on battery. By replacing ESP now with a BLE alternative,
+the current  consumption can be  reduced by 50  percent. ESP
+offers a novel  BLE mesh functionality which may  serve as a
+replacement for ESP now.</p>
+<ul>
+<li>What functions does BLE mesh have?</li>
+<li>BLE mesh can send 11 octets (88 bits) of information. This
+is significantly less than 250 of esp now(!).</li>
+</ul>
+<p><a id="org5920043"></a></p>
+<h1 id="modifier-keys">Modifier keys</h1>
+<p><span class="timestamp-wrapper"><span class="timestamp">&lt;2021-07-26 Mon&gt;  </span></span>  My  initial implementation  measures  the
+onset of  keys. That is,  debounce worked by  measuring when
+the “square  wave” of the  key was pressed. This  allows for
+fast  and  accurate  detection  detecting  key  press  down.
+Initially my intentions was to merge the other keys together
+such that multiple keys are registered at the same time. For
+example, the shift key needs to register two keys at minimum
+to shift the ascii code around for let’s say `a` to `A`.</p>
+<p>Consequently, I need to both  register the key press down as
+well as the  key release; I modified  the debounce mechanism
+to also detect the key release.</p>
+<p><a id="orgaf157bd"></a></p>
+<h2 id="changes-2">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Change key detection. Register key press and key release</li>
+<li><input checked="" disabled="" type="checkbox"> Mesh buffer management is moved out of the keyboard class.</li>
+<li><input checked="" disabled="" type="checkbox"> Fixed wrong indexing in reading the active keys on the server.</li>
+</ul>
+<p><a id="org4196787"></a></p>
+<h1 id="bluetooth">Bluetooth</h1>
+<p>Bluetooth  is  rather  complicated. The  Bluetooth  Keyboard
+class takes  care of  most of the  heavy lifting.  Key codes
+have an associated  ascii code, these are put  into an ascii
+code map. Note that the over bluetooth (for whatever reason)
+these keycodes are remapped to different numbers.</p>
+<p><a id="orgef9da12"></a></p>
+<h2 id="changes-3">Changes</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Expand  this section with info  on characteristics and
+services.</li>
+<li><input checked="" disabled="" type="checkbox"> Figure out  how  the key  codes  are organized  The
+symbols are organized in a 128 ascii keymap containing the
+hex codes to  a symbol. Hex codes can be  send directly in
+addition to  normal strings  over bluetooth.  The modifier
+keys  in  combination with  some  media  control keys  are
+defined   in  “BleKeyboard.h”,   the  ascii   map  is   in
+“BleKeyboard.cpp”.  I  have  written a  short  wrapper  in
+“key_defintions.hpp”.</li>
+<li><input checked="" disabled="" type="checkbox"> Add functions for  interfacing with bluetooth  to the
+keyboard class
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Pressing down keys</li>
+<li><input checked="" disabled="" type="checkbox"> Releasing keys</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Convert config class  to static class</li>
+<li>[-] Write layer keymap for keyboard
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Wrote qwerty base layer</li>
+<li><input disabled="" type="checkbox"> Add fixed array check to the layers (add to constant
+config class steps)</li>
+</ul>
+</li>
+</ul>
+<p><a id="org4affbc2"></a></p>
+<h1 id="keyboard-layers">Keyboard layers</h1>
+<p>A layer  is implemented as a  2D vector for the  moment, but
+will  likely change  in finalizing  the keyboard.  An active
+layer is set as a pointer  to the current active layer. Each
+keyswitch has  information on  where in  the grid  they fit;
+keys are read by using these indices in the 2D vector. I did
+consider an  unordered_map use the keyswitch  directly as an
+indicator. This could then be combined with pointers to make
+a  layer dynamic,  i.e.  instead of  having  the concept  of
+layers, each key has a different layer that can be accessed.
+This adds  some complexity and  I decided against  this. The
+main reason is that the client side would then need to store
+information  on what  each keyswitch  points to.  This would
+increase communication between each  halves if modifiers are
+used for example. I am  afraid that this added communication
+is not as trivially solved,  i.e. one needs to send modifier
+key across ESP-NOW and then shift all affected keys and when
+activated send this information back. The ESP-NOW channel is
+not designed for high information throughput.</p>
+<p>The keyboard is  not going to be full size.  That is, purely
+based on the number of keys,  this keyboard will not be able
+to have a 1-to-1 mapping  from symbol to keyswitch. Luckily,
+we  can  greatly  increase  the number  of  symbols  on  the
+keyboard by hosting the missing symbols on different layers.
+This means we have to implement a feature that allows one to
+switch  between   different  layers.  For  example   we  may
+implement a layer up and layer  down key, or allow to switch
+directly between different  layers. In QMK is  worked out by
+an `enum struct`.  Layers are stacked on top  of each other.
+This has the  added feature of allowing  a “transparent” key
+to access on a layer below. I wish to emulate this feature.</p>
+<p>I currently host my key layer  as a 2d vector. In finalizing
+my build this  may change to a fixed array  size. As vectors
+can be arbitrary sized, I need to add a check to the vectors
+to not allow uses to  define oddly sized arrays (which would
+lead to  seg faults).  This will be  added to  the finalized
+checks.</p>
+<p>In  QMK layers  are `enum` type, which  means the  layers are
+number  and tracked  through an  int. Here,  I will  have an
+`active_layer`  which points  to the  `layer_t` hosting  the
+current  active keys.  With transparent  keys I  can imagine
+that this approach will not work.</p>
+<p><a id="org5c9dfaa"></a></p>
+<h2 id="changes-4">Changes</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Implement key layers
+<ul>
+<li><input disabled="" type="checkbox"> KC_TRANS accesses key below the current layer
+<ul>
+<li><input disabled="" type="checkbox"> This effect may  stack until a non-transparent key
+is found</li>
+<li><input disabled="" type="checkbox"> Layer switch keys
+<ul>
+<li><input disabled="" type="checkbox"> Up and down</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> Hold  layer switch key: similar  to modifier keys,
+these  keys  temporarily   shift  the  key layer  while
+holding down this key.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a id="orgfe759ee"></a></p>
+<h1 id="rotary-encoder">Rotary encoder</h1>
+<p>The keyboard  has two rotary  encoder (one on  each halves).
+The encoders  I added were mostly  as a gimmick, but  can be
+used as slider controls for volume control and or scrolling.</p>
+<p>
+<figure  id="figure-left-schematic-rotary-encoder-the-a-and-b-pin-are-90-degrees-out-of-phase-and-produce-a-quadrature-signal-right-in-the-rest-state-both-a-and-b-pin-register-0-the-quadrature-encoding-for-the-a-and-b-pin-are-given-in-">
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/encoder.png" alt="img" loading="lazy" data-zoomable /></div>
+  </div><figcaption>
+      (left) Schematic rotary encoder. The A and B pin are 90 degrees out of phase and produce a quadrature signal (right). In the rest state both A and B pin register 0. The quadrature encoding for the A and B pin are given in &lt;encoder_scheme&gt;.
+    </figcaption></figure>
+</p>
+<p>The rotary encoder has two  pins that are shifted 90 degrees
+out  of  phase  (see  figure  <a href="fig:encoder">fig:encoder</a>).  Each  click
+produces a  quadrature signal  that is fixed.  Unknowingly I
+bought encoders that are  extremely noisy (KY-040). When the
+encoder clicks,  contacts are  moved across a  terminal. The
+signal  produced  are  ideally  two  square  offsets  by  90
+degrees.  In  practice  however, the  signal  debounces  and
+produces  more  signal. They  are  three  traditional ways  of
+taming noisy signals</p>
+<ol>
+<li>Hardware filtering</li>
+<li>Digital filtering</li>
+<li>Decoding</li>
+</ol>
+<p>I don’t know  much about the first method or  last method. I
+initially tried  method 2, i.e. measuring  the pins, waiting
+for  some  time and  measure  again.  This however  did  not
+correctly measure the rotations.  I tried multiple libraries
+that used interrupt  routines that did not  end up correctly
+measuring the  clicks of the  encoder. Finally I  found <a href="https://www.best-microcontroller-projects.com/rotary-encoder.html" target="_blank" rel="noopener">this
+blog  post</a> which  highlighted exactly  the problem  with the
+KY-040. The  decoder method  worked like  a charm,  but took
+some  time to  figure out.  Below is  the exploration  I had
+trying to figure out how this code worked.</p>
+<p><a id="orgccf6ee7"></a></p>
+<h2 id="taming-the-ky-040-with-decoding">Taming the KY-040 with decoding</h2>
+<p>The quadrature signal per click  produces a fixed output for
+either clockwise or anti-clockwise rotation. The encoder can
+be thought of  as a fixed state machine  that moves between
+different states (&lt;table_transition&gt;).</p>
+<table id="org02a9d44" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-right" />
+<col  class="org-right" />
+<col  class="org-right" />
+<col  class="org-right" />
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">Current state</th>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-right">New state</th>
+<th scope="col" class="org-right">&#xa0;</th>
+<th scope="col" class="org-left">Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">A pin</td>
+<td class="org-right">B pin</td>
+<td class="org-right">A pin</td>
+<td class="org-right">B pin</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+</tbody>
+<tbody>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-left">clockwise</td>
+</tr>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-left">clockwise</td>
+</tr>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-left">clockwise</td>
+</tr>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">clockwise</td>
+</tr>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-left">anti-clockwise</td>
+</tr>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-right">1</td>
+<td class="org-left">anti-clockwise</td>
+</tr>
+<tr>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">1</td>
+<td class="org-left">anti-clockwise</td>
+</tr>
+<tr>
+<td class="org-right">1</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-right">0</td>
+<td class="org-left">anti-clockwise</td>
+</tr>
+</tbody>
+</table>
+<p>In practice however, a noisy rotary encoder will also output
+some state transitions that are not allowed, e.g. 11-&gt;00. In
+order to  correctly read which direction  the rotary encoder
+was turned in, a digital filter can be used. A simple filter
+would be something like</p>
+<p>$$ signal = (signal &laquo; 1) | digitalRead(A_{pin}) | 0xF000$$</p>
+<p>A signal is  only read if the integer value  reaches the all
+ones state, then resets and  waits again. Trying this method
+did not end well for me.  I ended up using sequence decoder;
+the pattern are listed in &lt;encoder_scheme&gt;.</p>
+<p>We can  group the  current state  and new state  as a  4 bit
+number,  i.e. $\{a,  b, a&rsquo;,  b&rsquo;\}$  where $a$,  $b$ are  the
+current state of the A and B  pin and $a&rsquo;$, $b&rsquo;$ are the new
+state of the A  and B pin. This implies that  2^4 = 16 state
+transitions are possible and we only allow for 8 of these to
+occur (see table &lt;table_transition&gt;).</p>
+<table id="org754597b" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-right" />
+<col  class="org-left" />
+<col  class="org-left" />
+<col  class="org-right" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-right">state (bit mask)</th>
+<th scope="col" class="org-left">Allowed</th>
+<th scope="col" class="org-left">Direction</th>
+<th scope="col" class="org-right">State</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-right">0000</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">0</td>
+</tr>
+<tr>
+<td class="org-right">0001</td>
+<td class="org-left">True</td>
+<td class="org-left">clockwise</td>
+<td class="org-right">1</td>
+</tr>
+<tr>
+<td class="org-right">0010</td>
+<td class="org-left">True</td>
+<td class="org-left">anti-clockwise</td>
+<td class="org-right">2</td>
+</tr>
+<tr>
+<td class="org-right">0011</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">3</td>
+</tr>
+<tr>
+<td class="org-right">0100</td>
+<td class="org-left">True</td>
+<td class="org-left">clockwise</td>
+<td class="org-right">4</td>
+</tr>
+<tr>
+<td class="org-right">0101</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">5</td>
+</tr>
+<tr>
+<td class="org-right">0110</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">6</td>
+</tr>
+<tr>
+<td class="org-right">0111</td>
+<td class="org-left">True</td>
+<td class="org-left">anti-clockwise</td>
+<td class="org-right">7</td>
+</tr>
+<tr>
+<td class="org-right">1000</td>
+<td class="org-left">True</td>
+<td class="org-left">anti-clockwise</td>
+<td class="org-right">8</td>
+</tr>
+<tr>
+<td class="org-right">1001</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">9</td>
+</tr>
+<tr>
+<td class="org-right">1010</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">10</td>
+</tr>
+<tr>
+<td class="org-right">1011</td>
+<td class="org-left">True</td>
+<td class="org-left">clockwise</td>
+<td class="org-right">11</td>
+</tr>
+<tr>
+<td class="org-right">1100</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">12</td>
+</tr>
+<tr>
+<td class="org-right">1101</td>
+<td class="org-left">True</td>
+<td class="org-left">clockwise</td>
+<td class="org-right">13</td>
+</tr>
+<tr>
+<td class="org-right">1110</td>
+<td class="org-left">True</td>
+<td class="org-left">anti-clockwise</td>
+<td class="org-right">14</td>
+</tr>
+<tr>
+<td class="org-right">1111</td>
+<td class="org-left">False</td>
+<td class="org-left">&#xa0;</td>
+<td class="org-right">15</td>
+</tr>
+</tbody>
+</table>
+<table id="orgd83144a" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-left" />
+<col  class="org-right" />
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">Bitmask</th>
+<th scope="col" class="org-right">Hex</th>
+<th scope="col" class="org-left">Direction</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">0001 0111</td>
+<td class="org-right">0x17</td>
+<td class="org-left">clockwise</td>
+</tr>
+<tr>
+<td class="org-left">0010 1011</td>
+<td class="org-right">0x2b</td>
+<td class="org-left">anti-clockwise</td>
+</tr>
+</tbody>
+</table>
+<p><a id="org30de569"></a></p>
+<h2 id="changes-5">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Add rotary encoder to keyboard class</li>
+</ul>
+<p><a id="orgff0649f"></a></p>
+<h1 id="led-driver-fastled">LED driver: FastLED</h1>
+<p>I generally don’t care  for LED under keyboard. However, as  this was a “bigger”
+project, I  decided to play  around with LED  support. Different LEDs  types are
+possible, I  ended up  going with  the SK6812  which offer  RGB support  and are
+generally easier  to hand  solder than the  popular WS2812(B).  After purchasing
+however, I turned out that finding a LED  driver posed to be a bit cumbersome. I
+tried a few different code bases and they  ended up not working out the box. Not
+sure  why.  After  some  searching,  I stumbled  on  the  library  FastLED.  The
+documentation  does not  explicitly  support  the SK6812.  The  git issue  page,
+however, showed  that there  is some support  for it. In  addition, some  of the
+example code had mentions of it. Anyhoozle, after some tweaking around (and some
+ugly soldering) I achieved:</p>
+ <video width="320" height="240" controls>
+  <source src="./figures/leds_cycle.mp4" type="video/mp4">
+Your browser does not support the video tag.
+</video>
+<p>Happy days! The  LED driver was one of  the last parts of the  list, which means
+that the end is  in sight! The coming week I will integrate  the driver with the
+keyboard class and check the box below.</p>
+<p><a id="org894745e"></a></p>
+<h2 id="changes-6">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> LED driver
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Initialize LED driver</li>
+<li><input checked="" disabled="" type="checkbox"> Make LED wrapper in keyboard class</li>
+</ul>
+</li>
+</ul>
+<p><a id="org19921c7"></a></p>
+<h1 id="oled-display">OLED Display</h1>
+<p><a id="orgf9d2835"></a></p>
+<h2 id="changes-7">Changes</h2>
+<ul>
+<li><input disabled="" type="checkbox"> Start creating interface for display management</li>
+<li><input disabled="" type="checkbox"> Find interesting functions to put on the screen
+<ul>
+<li><input disabled="" type="checkbox"> WiFi notifications?</li>
+<li><input disabled="" type="checkbox"> Keyboard status info
+<ul>
+<li><input disabled="" type="checkbox"> Keyboard layer info</li>
+<li><input disabled="" type="checkbox"> Battery level info</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+<p><a id="org1b1a44a"></a></p>
+<h1 id="deep-sleep">Deep sleep</h1>
+<p>When not  in use I  aim to put  the keyboard in  deep sleep.
+Some pins  on the esp32 can  be used to wakeup  the keyboard
+from deep  sleep. The  RTC_GPIO pins and  Touch pins  can be
+used for waking the device from deep sleep. The RTC pins are</p>
+<table id="orge469a35" border="2" cellspacing="0" cellpadding="6" rules="groups" frame="hsides">
+<colgroup>
+<col  class="org-left" />
+<col  class="org-left" />
+<col  class="org-left" />
+</colgroup>
+<thead>
+<tr>
+<th scope="col" class="org-left">RTC Pin</th>
+<th scope="col" class="org-left">GPIO</th>
+<th scope="col" class="org-left">Comment</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td class="org-left">RTC GPIO12</td>
+<td class="org-left">GPIO02</td>
+<td class="org-left">had issues with encoder</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO10</td>
+<td class="org-left">GPIO04</td>
+<td class="org-left">OLED SDA</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO15</td>
+<td class="org-left">GPIO12</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO14</td>
+<td class="org-left">GPIO13</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO16</td>
+<td class="org-left">GPIO14</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO13</td>
+<td class="org-left">GPIO15</td>
+<td class="org-left">OLED SLK</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO09</td>
+<td class="org-left">GPIO32</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO08</td>
+<td class="org-left">GPIO33</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO04</td>
+<td class="org-left">GPIO34</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO05</td>
+<td class="org-left">GPIO35</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO00</td>
+<td class="org-left">GPIO36</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO03</td>
+<td class="org-left">GPIO39</td>
+<td class="org-left">input only</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO06</td>
+<td class="org-left">GPIO25</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO07</td>
+<td class="org-left">GPIO26</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO17</td>
+<td class="org-left">GPIO27</td>
+<td class="org-left">&#xa0;</td>
+</tr>
+<tr>
+<td class="org-left">RTC GPIO11</td>
+<td class="org-left">GPIO00</td>
+<td class="org-left">button pin(?)</td>
+</tr>
+</tbody>
+</table>
+<p>The set  GPIO12/13/14/25/26/27 could form a  set for which
+all the columns or rows will  have a key that is connected
+to  deep sleep;  this would  mean either  the rows  or the
+columns are connected to a pin that is reachable from deep
+sleep. I will  have to run some experiments  if that could
+allow the keyboard to wake up from deep sleep, i.e. if the
+the  column or  row  is not  active I  wonder  if the  the
+current will  be low, i.e. if  the pins are in  deep sleep
+and  a small  current is  tested on  the active  pins (set
+above),   does  the   current   go  from   HIGH  to   LOW?
+Alternatively,  I could  connect the  pins to  the set  3x
+range only for deep sleep mode.</p>
+<p>There are two sleep modes; light sleep and deep sleep. For
+light sleep the internal state of the system is preserved,
+which is not the case for deep sleep. This would mean that
+for deep sleep the keyboard effectively reboots.</p>
+<p>There are 4 ways to wake up from deep sleep:</p>
+<ol>
+<li>External current
+<ol>
+<li>Either through ext0 or ext1 wake up</li>
+</ol>
+</li>
+<li>Touch pins</li>
+<li>Timer</li>
+<li>ULP co-processor.</li>
+</ol>
+<p>I aim  to be able to  wake up the keyboard  from any regular
+key presses. That is, after some time-out, the user need not
+press a  button. Instead, a  control signal will  monitor if
+some current  changed and then  reboot the device.  Method 1
+would  be suitable  if the  pins are  directly connected  to
+ground. With  the matrix  scan setup,  there are  not enough
+pins to measure  a current difference if one of  the keys in
+the matrix would  be pressed. Method 3 is  also not suitable
+as the input to the keyboard does not happen at a fixed time
+interval. Method 4 requires coding for the ULP co-processor.
+This requires knowledge  of assembly which I do  not have. I
+think it is  possible that this would reduce  the deep sleep
+current even more. However, in the end it still utilizes the
+RTC pins.</p>
+<p>Luckily, my  keyboard will  only require  5 +  6 =  11 pins.
+There are  in total 10  touch pins  which would make  this a
+possible target if  they work. Initial testing  shows that a
+touch wake up would work with  a touch threshold of 45. This
+would require either the columns or the rows to be hooked up
+to the  touch sensors. By  monitoring any current  change of
+the rows  or columns would  result in  the board to  wake up
+from sleep (which is ideal).</p>
+<p><a id="org28fc435"></a></p>
+<h2 id="changes-8">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Implement deep sleep
+<ul>
+<li><input checked="" disabled="" type="checkbox"> added deep sleep time-out to config</li>
+<li><input checked="" disabled="" type="checkbox"> Touch pins will be either rows or columns</li>
+<li><input checked="" disabled="" type="checkbox"> Test matrix  scan diodes  with deep  sleep feature,
+i.e.  does  deep  sleep   current  still  register  with
+row2column or reverse connection.</li>
+</ul>
+</li>
+</ul>
+<p><a id="org6d70429"></a></p>
+<h1 id="battery-control">Battery control</h1>
+<p>The ESP32 oled  has an internal charging circuit.  It is not
+known to  me that this circuit  can be read to  retrieve the
+battery  capacity. What  can  be  done is  use  a analog  to
+digital  converter pin  (ADC) to  readout the  state of  the
+battery. In order  to readout the battery  capacity, we need
+to change  the voltage  potential in  a working  range. Each
+ADC pin can  read at most 3.3V. The battery  has a potential
+of 3.7V. By using a voltage  divider, we can readout the pin
+in a  save range. This  works by stepping down  the voltage,
+and  sensing  the state  of  the  battery capacity.  As  the
+battery is used, the voltage capacity changes accordingly.</p>
+<p>I  am  currently using  2x  100  kOhm resistors  which  will
+produce a  voltage difference of  3.7/2 = 1.85 volts  with a
+leak current &lt;20 micro A.</p>
+<p><a id="org1314ffd"></a></p>
+<h2 id="changes-9">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Implement battery control</li>
+<li><del>Add power button to PCB design</del></li>
+</ul>
+<p><a id="org899ac2c"></a></p>
+<h2 id="reference">Reference</h2>
+<ul>
+<li><a href="https://www.pangodream.es/esp32-getting-battery-charging-level" target="_blank" rel="noopener">https://www.pangodream.es/esp32-getting-battery-charging-level</a></li>
+</ul>
+<p><a id="orgbc724cc"></a></p>
+<h1 id="pcb-layout-design">PCB layout design</h1>
+<p>I used  kicad for PCB  design. The  layout of the  keys were
+determined by tracing out my  hand and determining the shift
+in the  columns by  the mount of  “natural bend”  my fingers
+have. I traced  my hand and made a horizontal  line from the
+pinky; this served as my zero line. Columns 1, 2, and 6 were
+determined to lie on this zero line. The remaining 3 columns
+were shifted. upwards sequentially.</p>
+<p>The bottom  row (id 5) contains  merely 3 keys and  they are
+rotated from left to right as  5, 10, 15 degrees. These were
+determined based on  “angle” of my thumb. It  was judge sort
+of by eye (and a ruler).</p>
+<p>Below is  some code I  wrote to determined the  outline. The
+end result is:</p>
+<p>
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/pcb3d.png" alt="img" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<p><a id="orgf94a89d"></a></p>
+<h2 id="making-the-layout">Making the layout</h2>
+<p>The code below are some scripts I wrote to determined the relative position between keys. It is (very) uggly code but worked for this simple purpose. Future me may want to make it look prettier for the outside world.</p>
+<p><a id="org5365539"></a></p>
+<h2 id="edge-cut-pcb">Edge cut pcb</h2>
+<p>Kicad prefers to make edge cuts relatively simple, i.e. straight lines. I attempted to round most corners, but the odd layouts of the bottom keys (K54, K55, K56) made it a bit hard given the odd angle. I put some effort in making it somewhat curved.</p>
+<p><a id="org7b992ab"></a></p>
+<h1 id="case-design">Case design</h1>
+<p>The  case is  going to  be a  sandwich style  case. It  will
+consist at minimum of 3 layers: the bottom plate, the middle
+plate and  the top plate.  The top  plate will host  the key
+switches, reliefs ar cut such that the key top can be opened
+while the  key is  mounted. A  plate in  this design  is not
+necessary but  preferred as  the key  sockets are  not super
+rigid, i.e. you could theoretically  have a lose switch over
+time. A plate fixes the keys in place.</p>
+<p>The  edge cut  layers,  court yards  and  user drawings  are
+combined and exported  from kicad to svg format.  I used the
+keyboard layout editor together  with the codeblock below to
+determine where the  cuts would have to be made  for the top
+plate.</p>
+<p>For the keyswitch  cutouts, I took a shortcut.  By using the
+<a href="https://keyboard-layout-editor.com" target="_blank" rel="noopener">keyboard layout  editor</a> in conjunction with  <a href="https://builder.swillkb.com" target="_blank" rel="noopener">case builder</a>, I
+was  able  to export  the  keyboard  layout and  obtain  the
+correct keyswitch footprint for  the plate. The case builder
+website takes  json as  input which  is compatible  with the
+keyboard  layout  editor. The  output  of  the case  builder
+software allows for automatic screw hole and plate clearance
+for  simple pcb  designs (i.e.  rectangular). Unfortunately,
+this design is not well suited  for this. As such I exported
+the drawings  to svg and  overlayed it with the  export from
+kicad.</p>
+<p>The  top  plate is  nearly  done.  I  am currently  in  the
+progress  of  making the  curves  a  bit smoother  for  the
+outside. I  will work on  the middle and bottom  plate from
+this top plate design.</p>
+<p>
+<figure  >
+  <div class="d-flex justify-content-center">
+    <div class="w-100" ><img src="./figures/elanor_top.png" alt="img" loading="lazy" data-zoomable /></div>
+  </div></figure>
+</p>
+<h3 id="links">Links</h3>
+<ul>
+<li>For case <a href="http://builder.swillkb.com/" target="_blank" rel="noopener">http://builder.swillkb.com/</a></li>
+<li>For layout <a href="http://www.keyboard-layout-editor.com/#/" target="_blank" rel="noopener">http://www.keyboard-layout-editor.com/#/</a></li>
+</ul>
+<h3 id="changes-10">Changes</h3>
+<ul>
+<li>[-] construct plate layer
+<ul>
+<li><input disabled="" type="checkbox"> 4x 5mm screw holes</li>
+<li><input checked="" disabled="" type="checkbox"> 1x diameter (5mm) clearance outside</li>
+<li><input checked="" disabled="" type="checkbox"> add key switch mounting holes</li>
+</ul>
+</li>
+<li><input disabled="" type="checkbox"> construct top layer</li>
+<li><input disabled="" type="checkbox"> construct middle layer</li>
+<li><input disabled="" type="checkbox"> construct bottom layer</li>
+</ul>
+<p><a id="org37935b8"></a></p>
+<h1 id="specialized-keys">Specialized keys</h1>
+<p><a id="orgc6993cf"></a></p>
+<h2 id="layer-taps">Layer taps</h2>
+<p>The keyboard  will have (27  + 1)  * 2 keys  (in principle).
+This is not  enough to emulate a real keyboard.  For this we
+need  to utilize  more “layers”  to create  more degrees  of
+freedom.  In  QMK  there  are  various  different  modes  of
+activating  a different  keycode depending  on how  long you
+press a keycode. For example:</p>
+<pre><code>// L-ayer, T-ap - 256 keycode max, 16 layer max
+#define LT(layer, kc) (kc | QK_LAYER_TAP | ((layer &amp; 0xF) &lt;&lt; 8))
+</code></pre>
+<p>All ascii codes can be encoded  in 255 characters. In QMK 16
+bits are used to encode the symbol. The remaining 8 bits are
+divided  in  two: 4  bits  are  given  to encode  the  layer
+information, 4 bits are given for a “special” range of keys.</p>
+<p>Layer  tap give  you the  ability to  switch to  a different
+layer  by holding  on  to a  key for  a  longer time,  while
+sending  a keycode  when holding  for a  shorter time.  This
+allows for  sacrificing one key  for quickly switching  to a
+layer momentarily while holding  down the designated key. In
+my  opinion this  works better  than a  layer switch  up and
+down. For single  keypresses. In the future I  may look into
+single tap modifier  keys similar to the  leader key concept
+in vim/emacs.</p>
+<h3 id="changes-11">Changes</h3>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Add layer tap keys</li>
+</ul>
+<p><a id="org9fe2de3"></a></p>
+<h2 id="one-shot-modifier-keys">One shot modifier keys</h2>
+<p>A one  shot key allows for  chaining a pair of  keys together
+without holding  both keys  at the  same time.  For example,
+pressing CTLR + V can be  performed by tapping CTLR and then
+tapping V.</p>
+<p><a id="orge641ca8"></a></p>
+<h2 id="leader-key">Leader key</h2>
+<ul>
+<li><input disabled="" type="checkbox"> TODO</li>
+</ul>
+<p><a id="org204445e"></a></p>
+<h1 id="replacing-esp_now">Replacing esp_now</h1>
+<p>ESP now  is a simple service  that uses the WiFi  antenna to
+setup a wireless bridge between two devices. It is simple to
+setup and can  be used for small  form communication between
+devices.  The  fast  development   and  setup  yields  major
+advantages. Adding  the WiFi requirements, however,  has one
+major drawback; it increases  the current draw, rendering it
+problematic  in  use  for   low  energy  devices.  Different
+techniques may  be used to  mitigate the current  draw. For
+example, a power saving scheme  may be applied to reduce the
+current  draw  by  the  antenna.  As  keys  can  be  pressed
+asynchronous and at any time while the board is active, this
+technique is not preferred for  the keyboard. This is mainly
+due to  the fact that  from light  sleep until the  board is
+operational (stable bluetooth connection) takes around 130ms
+from conducted tests.</p>
+<p>Another solution would be to  replace the esp now connection
+and harassing  the already existing bluetooth  connection to
+multiplex the signal. This is  the goal for Splitboard as it
+could reduce the battery consumption by circa 50 percent.</p>
+<p><a id="org79d4be3"></a></p>
+<h2 id="ble-in-a-nutshell">BLE in a nutshell</h2>
+<p>Bluetooth  low energy  communication  consists of  services.
+These  services represent  the type  that other  devices can
+expect. They may be pre-defined according to some spec, e.g.
+a  HID device  such as  a  keyboard or  mouse, or  something
+entirely different  such as a  heartbeat sensor or  a custom
+service. Each  service may  hold 0 or  more characteristics.
+These  characteristics  may  be   though  of  as  “bluetooth
+variables”.   In  addition   to   a   possible  value,   the
+characteristic holds a descriptor of the value.</p>
+<p>For a given low energy bluetooth device, the device can host
+(and  possible advertise)  one server,  and make  up to  $n$
+possible connections. The server  hosts the services and can
+advertise the services. A client  connects to the server and
+interacts  with  one  of the  characteristics.  For  example
+device  $A$ may  advertise service  BAG which  holds several
+characteristics  such as  MONEY,  CANDY  (etc). A  different
+device  $B$ may  connect  with device  $A$  looking for  the
+service BAG and take one CANDY.</p>
+<p><a id="org0ad4064"></a></p>
+<h2 id="integration-with-ble-keyboard">Integration with BLE keyboard</h2>
+<p>One of the major challenges  of replacing esp-now is that it
+requires integration  of the proposed bluetooth  bridge with
+the existing bluetooth interface for the keyboard. As little
+to  no documentation  was available  (other than  the source
+code), quiet  some time was  spent piecing together  how BLE
+communication operates and how the required bluetooth bridge
+can be added  and integrated with existing  packages used in
+the project.</p>
+<p>First, there are different  bluetooth stacks available, e.g.
+bluestack,  NimBLE, arduino-esp32-BLE  and so  on. Recently,
+the BleKeyboard package allowed for  NimBLE to be used which
+improves  upon  the  existing  stack  for  arduino-esp32  by
+reducing its  memory footprint. The interface  was made such
+that  it retains  its  compatibility with  the existing  BLE
+implementation canonically used in arduino-esp32. The NimBLE
+stack  was  targeted in  this  framework.  This narrows  the
+development for  esp32 controllers only. In  the future, the
+conversion to  blue kitchen’s bluestack may  be preferred as
+it targets a wider controller set.</p>
+<p>As a target a bluetooth mesh will need to be implemented. In
+this mesh, there exists one server  that acts as a HID. This
+server itself is a client  that connects to other clients in
+the  mesh which  hosts  their internal  matrix state.  These
+servers   will   have   general   service   that   hosts   a
+characteristic  which  holds a  vector  of  key events.  The
+client is  notified by a  change in the actively  held keys,
+and converts through the keymap in HID inputs.</p>
+<p>The BleKeyboard  is a server in  itself. Each characteristic
+has its  own separate callback  that can be set.  The server
+itself, however, can only  hold one callback. Luckily, these
+don’t  need  to be  set.  Consequently,  the mesh  can  live
+independently from  the BleKeyboard. Care needs  to be taken
+with  antenna  (BLEDevice)  as wrongfully  initializing  may
+cause some unexpected runtime errors. Luckily, this is setup
+only once.</p>
+<p><a id="orga8c659e"></a></p>
+<h2 id="changes-12">Changes</h2>
+<ul>
+<li><input checked="" disabled="" type="checkbox"> Replaced esp-now with ble mesh</li>
+</ul>
+</body>
+</html>
+
+    </div>
+
+    
+
+
+
+
+
+
+
+<div class="share-box">
+  <ul class="share">
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+        
+      
+      <li>
+        <a href="mailto:?subject=Splitboard%3A%20the%20bluetooth%20%28split%29%20keyboard&amp;body=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fsplitboard%2F" target="_blank" rel="noopener" class="share-btn-email" aria-label="envelope">
+          <i class="fas fa-envelope"></i>
+        </a>
+      </li>
+    
+      
+      
+      
+        
+      
+      
+      
+      
+      
+      
+      
+      <li>
+        <a href="https://www.linkedin.com/shareArticle?url=https%3A%2F%2Fthefriendlyghost.nl%2Fpost%2Fsplitboard%2F&amp;title=Splitboard%3A&#43;the&#43;bluetooth&#43;%28split%29&#43;keyboard" target="_blank" rel="noopener" class="share-btn-linkedin" aria-label="linkedin-in">
+          <i class="fab fa-linkedin-in"></i>
+        </a>
+      </li>
+    
+  </ul>
+</div>
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+
+  
+  
+  
+    
+  
+  
+  
+  <div class="media author-card content-widget-hr">
+    
+      
+      <a href="https://thefriendlyghost.nl/"><img class="avatar mr-3 avatar-circle" src="/authors/casper-van-elteren/avatar_huf7a4b9acc98ab48e41d97955884fc455_120959_270x270_fill_q75_lanczos_center.jpg" alt="Casper van Elteren"></a>
+    
+
+    <div class="media-body">
+      <h5 class="card-title"><a href="https://thefriendlyghost.nl/">Casper van Elteren</a></h5>
+      <h6 class="card-subtitle">Computational scientist | Data scientist | Tinkerer</h6>
+      <p class="card-text">I am a computational scientist interested in data analysis, visualization and software engineering.</p>
+      <ul class="network-icon" aria-hidden="true">
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/#contact" >
+        <i class="fas fa-envelope"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://www.linkedin.com/in/casper-van-elteren-07934774/" target="_blank" rel="noopener">
+        <i class="fab fa-linkedin-in"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://scholar.google.nl/citations?user=kbEhuPwAAAAJ&amp;hl=en" target="_blank" rel="noopener">
+        <i class="ai ai-google-scholar"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://github.com/cvanelteren" target="_blank" rel="noopener">
+        <i class="fab fa-github"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+      
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="https://stackoverflow.com/users/7343721/globaltraveler" target="_blank" rel="noopener">
+        <i class="fab fa-stack-overflow"></i>
+      </a>
+    </li>
+  
+    
+    
+    
+    
+    
+    
+    
+      
+    
+    <li>
+      <a href="/cv" >
+        <i class="ai ai-cv"></i>
+      </a>
+    </li>
+  
+</ul>
+
+    </div>
+  </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  </div>
+</article>
+  </div>
+
+  <div class="page-footer">
+    
+    
+    <div class="container">
+      <footer class="site-footer">
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+
+  
+  
+    
+  
+  
+    
+  
+
+  
+
+  
+  <p class="powered-by copyright-license-text">
+    © 2024 Me. This work is licensed under <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank">CC BY NC ND 4.0</a>
+  </p>
+  
+
+  <p class="powered-by footer-license-icons">
+    <a href="https://creativecommons.org/licenses/by-nc-nd/4.0" rel="noopener noreferrer" target="_blank" aria-label="Creative Commons">
+      <i class="fab fa-creative-commons fa-2x" aria-hidden="true"></i>
+      <i class="fab fa-creative-commons-by fa-2x" aria-hidden="true"></i>
+      
+        <i class="fab fa-creative-commons-nc fa-2x" aria-hidden="true"></i>
+      
+      
+        <i class="fab fa-creative-commons-nd fa-2x" aria-hidden="true"></i>
+      
+    </a>
+  </p>
+
+
+
+
+
+  <p class="powered-by">
+    
+    
+    
+      
+      
+      
+      
+      
+      
+      Published with <a href="https://wowchemy.com/?utm_campaign=poweredby" target="_blank" rel="noopener">Wowchemy</a> — the free, <a href="https://github.com/wowchemy/wowchemy-hugo-themes" target="_blank" rel="noopener">open source</a> website builder that empowers creators.
+    
+  </p>
+</footer>
+
+    </div>
+    
+  </div>
+
+  
+
+
+<script src="/js/vendor-bundle.min.938a3a7554cd9f6602290411f64d2617.js"></script>
+
+
+
+
+  
+
+  
+  
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  <script id="search-hit-fuse-template" type="text/x-template">
+    <div class="search-hit" id="summary-{{key}}">
+      <div class="search-hit-content">
+        <div class="search-hit-name">
+          <a href="{{relpermalink}}">{{title}}</a>
+          <div class="article-metadata search-hit-type">{{type}}</div>
+          <p class="search-hit-description">{{snippet}}</p>
+        </div>
+      </div>
+    </div>
+  </script>
+  
+    <script src="https://cdn.jsdelivr.net/gh/krisk/Fuse@v3.2.1/dist/fuse.min.js" integrity="sha512-o38bmzBGX+hD3JHWUFCDA09btWaqrNmoJ3RXLlrysA7PP01Kgs4UlE4MhelE1v5dJR3+cxlR4qQlotsW7jKsnw==" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/gh/julmot/mark.js@8.11.1/dist/jquery.mark.min.js" integrity="sha512-mhbv5DqBMgrWL+32MmsDOt/OAvqr/cHimk6B8y/bx/xS88MVkYGPiVv2ixKVrkywF2qHplNRUvFsAHUdxZ3Krg==" crossorigin="anonymous"></script>
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  
+  
+  
+  
+  
+
+
+
+
+
+
+
+<script id="page-data" type="application/json">{"use_headroom":true}</script>
+
+
+
+  <script src="/js/wowchemy-headroom.db4755770454eb63685f8de785c0a172.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+  
+  
+
+
+<script src="/en/js/wowchemy.min.2945731fa88332cb0ec33cf47d29879f.js"></script>
+
+
+
+
+
+
+
+  
+<div id="modal" class="modal fade" role="dialog">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title">Cite</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        
+        <pre><code></code></pre>
+      </div>
+      <div class="modal-footer">
+        <a class="btn btn-outline-primary my-1 js-copy-cite" href="#" target="_blank">
+          <i class="fas fa-copy"></i> Copy
+        </a>
+        <a class="btn btn-outline-primary my-1 js-download-cite" href="#" target="_blank">
+          <i class="fas fa-download"></i> Download
+        </a>
+        <div id="modal-error"></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+  <script src="/js/wowchemy-publication.68f8d7090562ca65fc6d3cb3f8f2d2cb.js" type="module"></script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+</body>
+</html>
